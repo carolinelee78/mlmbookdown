@@ -20,7 +20,7 @@
   
   
 
-<meta name="author" content="For doing better, for remediation" />
+<meta name="author" content="For doing better, for remediation. Integrating David’s class materials and Hoffman’s (2015) Longitudinal Analysis textbook to learn MLM with both R and SPSS." />
 
 
 <meta name="date" content="2024-01-01" />
@@ -116,15 +116,15 @@
 <h1><span class="header-section-number">Chapter 2</span> What is MLM used for?<a href="what-is-mlm-used-for.html#what-is-mlm-used-for" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <ul>
 <li>When we think of repeated measures, we usually think of change over time as our primary outcome. However, MLM for longitudinal data is used not only to investigate change over Time (i.e., the growth curve of outcome over time) <em>but also</em> to examine the covariation of a variable with an outcome over time (as in a diary study in which you are interested in how 2 variables relate to each other within-individuals over time). These relations over time can be expanded to investigate causal inference as we will see later.</li>
-<li>In the case of growth curve models (change over time), Time is a predictor of outcome and it can be modeled as curvilinear as well as linear. Modeling the “correct” growth curve will be important.</li>
+<li>In the case of growth curve models (change over time), time is a predictor of outcome and it can be modeled as curvilinear as well as linear. Modeling the “correct” growth curve will be important.</li>
 <li>In the “covariation” models, Time may or may not be included in the model depending on whether you think that there may some systematic change in outcome over time. In these models, your predictor is the repeated measurements of your IV (e.g., mood) predicting repeated measurements of your DV (e.g., grades in school).</li>
 </ul>
 <div id="levels-of-analyses-in-mlm" class="section level2 hasAnchor" number="2.1">
 <h2><span class="header-section-number">2.1</span> Levels of analyses in MLM<a href="what-is-mlm-used-for.html#levels-of-analyses-in-mlm" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In MLM, your data is organized at multiple levels.</p>
+<p>In MLM, your data is organized at multiple levels, and we need to distinguish <em>between-person relationships</em> from <em>within-person relationships</em>. The phrase <strong>between-person</strong> simply refers to the existence of <strong>interindividual variation</strong> (i.e., differences between people). The term <strong>between-person relationships</strong> is used to capture how individual differences on one outcome are related to individual differences on another outcome. People can also differ from each other in stable attributes, such as ethnicity or biological sex. People can also differ from each other in attributes like intelligence, personality, or SES that could potentially change over time. But if those attributes are assessed at only a single point in time, then those values obtained at that particular occasion are assumed to be stable and reflective of the person as a whole - in other words, the attributes are considered <strong>time-invariant</strong>. Thus, the phrase <em>between-person</em> refers to relationships among <em>interindividual differences</em> in variables that are <em>time-invariant</em>. Furthermore, in the longitudinal models to be presented, the between-person level of analysis is usually labeled as <strong>level 2</strong>, or the <strong>macro</strong> level of analysis.</p>
 <div id="level-1" class="section level3 hasAnchor" number="2.1.1">
 <h3><span class="header-section-number">2.1.1</span> Level 1<a href="what-is-mlm-used-for.html#level-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The level-1 equation is the equation for the <strong>“within-subject” change over time</strong> (or the within-subject relation between 2 variables over time). This can be the relation between Time and outcome (as in the graph below) or the relation between a predictor and outcome over time.</p>
+<p>The level-1 equation is the equation for the <strong>“within-subject” change over time</strong> (or the within-subject relation between 2 variables over time). This can be the relation between time and outcome (as in the graph below) or the relation between a predictor and outcome over time.</p>
 </div>
 <div id="level-2" class="section level3 hasAnchor" number="2.1.2">
 <h3><span class="header-section-number">2.1.2</span> Level 2<a href="what-is-mlm-used-for.html#level-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -168,8 +168,8 @@ gitbook.start({
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
-"theme": "white",
-"family": "sans",
+"theme": "sepia",
+"family": "serif",
 "size": 2
 },
 "edit": {

@@ -6,6 +6,9 @@ bookdown::gitbook:
         <li><a href="./">MLM Study Guide</a></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+    fontsettings:
+      theme: sepia
+      family: serif
 #     edit: https://github.com/USERNAME/REPO/edit/BRANCH/%s
 #     download: ["pdf", "epub"]
 # bookdown::pdf_book:

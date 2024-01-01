@@ -1,6 +1,6 @@
 --- 
 title: "MLM Study Guide for Caroline, by Caroline"
-author: "For doing better, for remediation"
+author: "For doing better, for remediation. Integrating David's class materials and Hoffman's (2015) Longitudinal Analysis textbook to learn MLM with both R and SPSS."
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
