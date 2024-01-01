@@ -1,7 +1,8 @@
-book_filename: "ds-notes.Rmd"
+book_filename: "MLM-Study-Guide.Rmd"
 delete_merged_file: true
 language:
   ui:
     chapter_name: "Chapter "
 clean: ["packages.bib"]
 rmd_subdir: "chapters"
+rmd_files: ["index.Rmd", "01.Rmd"]

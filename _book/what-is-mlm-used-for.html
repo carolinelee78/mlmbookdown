@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>MLM Study Guide for Caroline, by Caroline</title>
-  <meta name="description" content="MLM Study Guide for Caroline, by Caroline" />
+  <title>Chapter 2 What is MLM used for? | MLM Study Guide for Caroline, by Caroline</title>
+  <meta name="description" content="Chapter 2 What is MLM used for? | MLM Study Guide for Caroline, by Caroline" />
   <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="MLM Study Guide for Caroline, by Caroline" />
+  <meta property="og:title" content="Chapter 2 What is MLM used for? | MLM Study Guide for Caroline, by Caroline" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="MLM Study Guide for Caroline, by Caroline" />
+  <meta name="twitter:title" content="Chapter 2 What is MLM used for? | MLM Study Guide for Caroline, by Caroline" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
+<link rel="prev" href="index.html"/>
 
-<link rel="next" href="what-is-mlm-used-for.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -112,57 +112,28 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">MLM Study Guide for Caroline, by Caroline</h1>
-<p class="author"><em>For doing better, for remediation</em></p>
-<p class="date"><em>2024-01-01</em></p>
-</div>
-<div id="first-why-multilevel-modeling" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Chapter 1</span> First, why multilevel modeling?<a href="index.html#first-why-multilevel-modeling" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Multilevel modeling improves upon disadvantages posed by <strong>repeated measures ANOVA</strong> (RANOVA), simple data imputation such as <strong>last observation carried forward</strong> (LOCF), and <strong>complex imputation</strong> (e.g., multiple imputation).</p>
-<div id="disadvantages-of-ranova" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> Disadvantages of RANOVA<a href="index.html#disadvantages-of-ranova" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="what-is-mlm-used-for" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> What is MLM used for?<a href="what-is-mlm-used-for.html#what-is-mlm-used-for" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <ul>
-<li>Restrictive assumptions (sphericity: the correlation between any 2 asmts are the same) that are not generally met (the r between asmt 1 and asmt 2 is usually much bigger than between asmt 1 and asmt 5).</li>
-<li>Homogeneity of variance across time</li>
-<li>RANOVA requires complete data-otherwise a subject is dropped. Problems with this include:
-<ul>
-<li>Completers may not be representative of the population
-<ul>
-<li>Lose power</li>
-<li>Assumes data missing completely at random (MCAR), which is almost never true.</li>
-</ul></li>
-</ul></li>
+<li>When we think of repeated measures, we usually think of change over time as our primary outcome. However, MLM for longitudinal data is used not only to investigate change over Time (i.e., the growth curve of outcome over time) <em>but also</em> to examine the covariation of a variable with an outcome over time (as in a diary study in which you are interested in how 2 variables relate to each other within-individuals over time). These relations over time can be expanded to investigate causal inference as we will see later.</li>
+<li>In the case of growth curve models (change over time), Time is a predictor of outcome and it can be modeled as curvilinear as well as linear. Modeling the “correct” growth curve will be important.</li>
+<li>In the “covariation” models, Time may or may not be included in the model depending on whether you think that there may some systematic change in outcome over time. In these models, your predictor is the repeated measurements of your IV (e.g., mood) predicting repeated measurements of your DV (e.g., grades in school).</li>
 </ul>
+<div id="levels-of-analyses-in-mlm" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Levels of analyses in MLM<a href="what-is-mlm-used-for.html#levels-of-analyses-in-mlm" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In MLM, your data is organized at multiple levels.</p>
+<div id="level-1" class="section level3 hasAnchor" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Level 1<a href="what-is-mlm-used-for.html#level-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The level-1 equation is the equation for the <strong>“within-subject” change over time</strong> (or the within-subject relation between 2 variables over time). This can be the relation between Time and outcome (as in the graph below) or the relation between a predictor and outcome over time.</p>
 </div>
-<div id="disadvantages-of-locf" class="section level2 hasAnchor" number="1.2">
-<h2><span class="header-section-number">1.2</span> Disadvantages of LOCF<a href="index.html#disadvantages-of-locf" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li>Solves the power and generalizability issues by including all subjects</li>
-<li>But tends to underestimate group differences if one group is changing more than the other.<br />
-</li>
-<li>It also may have unpredictable effects on group differences if reasons for dropout are not random (e.g., some may drop out because they are doing poorly, while others may drop out because they are doing well, and these reasons may vary between groups).</li>
-</ul>
+<div id="level-2" class="section level3 hasAnchor" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Level 2<a href="what-is-mlm-used-for.html#level-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="disadvantages-of-complex-imputation-e.g.-multiple-imputation" class="section level2 hasAnchor" number="1.3">
-<h2><span class="header-section-number">1.3</span> Disadvantages of complex imputation (e.g., multiple imputation)<a href="index.html#disadvantages-of-complex-imputation-e.g.-multiple-imputation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li>Must create multiple data sets</li>
-<li>“Pooling” of statistical tests results in low power</li>
-<li>Still have problems with RANOVA in terms of sphericity/homogeneity of variance</li>
-</ul>
-</div>
-<div id="advantages-of-mlm" class="section level2 hasAnchor" number="1.4">
-<h2><span class="header-section-number">1.4</span> Advantages of MLM<a href="index.html#advantages-of-mlm" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li>MLM uses all obtained data from all subjects even if they drop out, improving generalizability and accuracy</li>
-<li>Less restrictive assumptions than RANOVA (sphericity, homogeneity of variance not assumed).</li>
-<li>More accurate estimates than LOCF (which tends to underestimate effects) and RANOVA (which is biased by dropouts)</li>
-<li>More powerful than multiple imputation</li>
-<li>Because estimates from MLM use all the data from each subject, these estimates have lower variance and greater reliability than “point” estimates (like in ANCOVA).</li>
-<li>Assumes data missing at random (MAR), not the more restrictive MCAR.</li>
-</ul>
+<div id="an-unnumbered-section" class="section level3 unnumbered hasAnchor">
+<h3>An unnumbered section<a href="what-is-mlm-used-for.html#an-unnumbered-section" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Chapters and sections are numbered by default. To un-number a heading, add a <code>{.unnumbered}</code> or the shorter <code>{-}</code> at the end of the heading, like in this section.</p>
 
+</div>
 </div>
 </div>
             </section>
@@ -170,8 +141,8 @@
           </div>
         </div>
       </div>
+<a href="index.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="what-is-mlm-used-for.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -1,60 +1,45 @@
 --- 
-title: "A Minimal Book Example"
-author: "John Doe"
+title: "MLM Study Guide for Caroline, by Caroline"
+author: "For doing better, for remediation"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
-# url: your book url like https://bookdown.org/yihui/bookdown
-# cover-image: path to the social sharing image like images/cover.jpg
-description: |
-  This is a minimal example of using the bookdown package to write a book.
-  The HTML output format for this example is bookdown::gitbook,
-  set in the _output.yml file.
-link-citations: yes
-github-repo: rstudio/bookdown-demo
 ---
 
-# About
+# First, why multilevel modeling?
 
-This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports; for example, a math equation $a^2 + b^2 = c^2$.
+Multilevel modeling improves upon disadvantages posed by **repeated measures ANOVA** (RANOVA), simple data imputation such as **last observation carried forward** (LOCF), and **complex imputation** (e.g., multiple imputation). 
 
-## Usage 
+## Disadvantages of RANOVA 
 
-Each **bookdown** chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter *must* start with a first-level heading: `# A good chapter`, and can contain one (and only one) first-level heading.
+- Restrictive assumptions (sphericity: the correlation between any 2 asmts are the same) that are not generally met (the r between asmt 1 and asmt 2 is usually much bigger than between asmt 1 and asmt 5).
+- Homogeneity of variance across time
+- RANOVA requires complete data-otherwise a subject is dropped. Problems with this include:
+    - Completers may not be representative of the population
+		- Lose power
+		- Assumes data missing completely at random (MCAR), which is almost never true.
 
-Use second-level and higher headings within chapters like: `## A short section` or `### An even shorter section`.
+## Disadvantages of LOCF
 
-The `index.Rmd` file is required, and is also your first book chapter. It will be the homepage when you render the book.
+- Solves the power and generalizability issues by including all subjects
+- But tends to underestimate group differences if one group is changing more than the other.  
+- It also may have unpredictable effects on group differences if reasons for dropout are not random (e.g., some may drop out because they are doing poorly, while others may drop out because they are doing well, and these reasons may vary between groups).
 
-## Render book
+## Disadvantages of complex imputation (e.g., multiple imputation)
 
-You can render the HTML version of this example book without changing anything:
+- Must create multiple data sets 
+- "Pooling" of statistical tests results in low power
+- Still have problems with RANOVA in terms of sphericity/homogeneity of variance 
 
-1. Find the **Build** pane in the RStudio IDE, and
+## Advantages of MLM 
 
-1. Click on **Build Book**, then select your output format, or select "All formats" if you'd like to use multiple formats from the same book source files.
-
-Or build the book from the R console:
-
-```{r, eval=FALSE}
-bookdown::render_book()
-```
-
-To render this example to PDF as a `bookdown::pdf_book`, you'll need to install XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <https://yihui.org/tinytex/>.
-
-## Preview book
-
-As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in "Preview book", or from the R console:
-
-```{r eval=FALSE}
-bookdown::serve_book()
-```
+- MLM uses all obtained data from all subjects even if they drop out, improving generalizability and accuracy
+- Less restrictive assumptions than RANOVA (sphericity, homogeneity of variance not assumed).
+- More accurate estimates than LOCF (which tends to underestimate effects) and RANOVA (which is biased by dropouts)
+- More powerful than multiple imputation
+- Because estimates from MLM use all the data from each subject, these estimates have lower variance and greater reliability than “point” estimates (like in ANCOVA).
+- Assumes data missing at random (MAR), not the more restrictive MCAR.
 
 
-```{r include=FALSE}
-# automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
-```
+ 

@@ -1,0 +1,20 @@
+# What is MLM used for? 
+
+- When we think of repeated measures, we usually think of change over time as our primary outcome. However, MLM for longitudinal data is used not only to investigate change over Time (i.e., the growth curve of outcome over time) _but also_ to examine the covariation of a variable with an outcome over time (as in a diary study in which you are interested in how 2 variables relate to each other within-individuals over time). These relations over time can be expanded to investigate causal inference as we will see later.
+- In the case of growth curve models (change over time), Time is a predictor of outcome and it can be modeled as curvilinear as well as linear. Modeling the “correct” growth curve will be important.
+- In the “covariation” models, Time may or may not be included in the model depending on whether you think that there may some systematic change in outcome over time. In these models, your predictor is the repeated measurements of your IV (e.g., mood) predicting repeated measurements of your DV (e.g., grades in school).
+
+## Levels of analyses in MLM 
+
+In MLM, your data is organized at multiple levels. 
+
+### Level 1
+
+The level-1 equation is the equation for the **“within-subject” change over time** (or the within-subject relation between 2 variables over time). This can be the relation between Time and outcome (as in the graph below) or the relation between a predictor and outcome over time.
+
+### Level 2
+
+
+### An unnumbered section {-}
+
+Chapters and sections are numbered by default. To un-number a heading, add a `{.unnumbered}` or the shorter `{-}` at the end of the heading, like in this section.
