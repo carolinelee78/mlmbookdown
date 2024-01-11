@@ -10,11 +10,18 @@ In MLM, your data is organized at multiple levels, and we need to distinguish _b
 
 ### Level 1
 
-The level-1 equation is the equation for the **“within-subject” change over time** (or the within-subject relation between 2 variables over time). This can be the relation between time and outcome (as in the graph below) or the relation between a predictor and outcome over time.
+The level-1 equation is the equation for the **“within-subject” change over time** (or the within-subject relation between 2 variables over time). This can be the relation between time and outcome (as in the graph below) or the relation between a predictor and outcome over time. In the case of linear time predicting outcome, the regression equation for each person is: 
+$$ Y_j = b_0 + b_1 * T_j + \epsilon_j $$
+where $Y_j$ is the outcome of assessment $j$, $T_j$ is TIme at assessment $j$ (often coded as 0-$k$, where $k$ is the number of weeks since baseline), $epsilon_j$ is the error in predicting the outcome at assessment $j$, $b_0$ is the intercept, and $b_11$ is the slope of outcome over time. 
 
+In MLM, the parameters in this model (e.g., the intercept and slope) are calculated for each individual in the study and can be different for each individual. If $i$ represents the different individuals in your study, equation 1 can be written for **_all_** the individuals as: 
+$$ Y_{ij} = b_{0i} + b_{1i}*T_{ij} + \epsilon_{ij} $$
+So, each individual has a different intercept and a different slope. Each person has their _own_ growth curve that best fits their own data. The value of the intercept depends on how time is coded since the intercept is the expected value of the outcome when all other variables in the equation are 0. Thus, if time is coded 0, 1, 2, 3, the intercept is the expected value of $Y$ at “baseline” (the first assessment). If time is coded 1,2,3,4, the intercept is still the expected value when time=0, but in this case, it would be meaningless.
+
+The error in the level-1 model is the error in predicting each data point for each person. Each person has an error at each time point, so these errors can be considered variables $e_1 ... e_k$, if there are $k$ assessments. The variance of the error at each time point is referred to as $\sigma_{j}^2$. The error variance is assumed to be equal at each time point in most simple MLM analyses, but the error covariance matrix can be specified in a more complex manner. The $\epsilon_{ij}$ are assumed to be normally distributed.
+
+This same kind of model can be used to calculate the relation between 2 variables over time (e.g., the relation between mood and lung function each day in a diary study). Time is often not included in these models when one does not have a treatment or there is no reason to believe that the variables will change systematically over time (like in a short term diary study). However, time can be included as an additional predictor of outcome if the study covers some developmental phases of life so that the outcome is expected to change. The model examining whether mood affects lung function over a 30 day diary study would be:
+
+$$ {FEV}_{ij} = b_{0i} + b_{1i}*{Mood}_{ij} + \epsilon_{ij}$$
 ### Level 2
 
-
-### An unnumbered section {-}
-
-Chapters and sections are numbered by default. To un-number a heading, add a `{.unnumbered}` or the shorter `{-}` at the end of the heading, like in this section.
