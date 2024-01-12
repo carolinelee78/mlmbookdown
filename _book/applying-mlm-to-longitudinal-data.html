@@ -123,7 +123,8 @@
 <p>Getting the “right” growth curve is critical since it can lead to misleading results if it is incorrect. So, graph the outcome data and make sure you understand the “growth curve” for individuals. Use “Plots” in “Univariate ANOVA” to look at what the growth curve looks like.</p>
 <p>Also, MLM assumes multivariate normality, so we want to be sure that our data approaches normality (robust standard errors are available in Generalized Linear mixed models, which we will talk about later in the semester). They are robust to violations of multivariate normality. Also check for outliers. Use scatterplots and frequencies to look for outliers, skewness, normality.</p>
 <p>Level-2 equations predict between person differences in the level-1 parameters (e.g., intercept and slope) in the level-1 growth curve model:</p>
-<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG5_Sepia.jpg" /><!-- --></p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG5.png" /><!-- --></p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG6.png" /><!-- --></p>
 <p>Thus, the level-2 equations can be used to test if individual characteristics (e.g., treatment condition, demographic information, personality traits, etc.) predict these level-1 (within person) relations, answering questions like: is treatment condition significantly related to slope of change over time (b1).</p>
 <ul>
 <li>If you have a priori hypotheses (like a treatment condition effect that you want to test), you can go directly to testing that.</li>
@@ -131,10 +132,11 @@
 <li>How do you test for variability in the slope? You can test the significance of <span class="math inline">\(\mu_{1i}\)</span>.</li>
 </ul>
 <p>When you substitute the level 2 equations into the level 1 model, you get the composite model that is estimated using maximum likelihood (ML) estimation.</p>
-<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG6_Sepia.jpg" /><!-- --></p>
 <div id="example" class="section level3 hasAnchor" number="3.1.1">
 <h3><span class="header-section-number">3.1.1</span> Example<a href="applying-mlm-to-longitudinal-data.html#example" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The level-2 equations with predictors of the intercepts and slope could look something like this:</p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG7.png" /><!-- --></p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG8.png" /><!-- --></p>
 
 </div>
 </div>

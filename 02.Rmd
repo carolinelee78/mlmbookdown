@@ -9,7 +9,11 @@ Also, MLM assumes multivariate normality, so we want to be sure that our data ap
 Level-2 equations predict between person differences in the level-1 parameters (e.g., intercept and slope) in the level-1 growth curve model:
 
 ```{r, echo = FALSE}
-knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG5_Sepia.jpg")
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG5.png")
+```
+
+```{r, echo = FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG6.png")
 ```
 
 Thus, the level-2 equations can be used to test if individual characteristics (e.g., treatment condition, demographic information, personality traits, etc.) predict these level-1 (within person) relations, answering questions like: is treatment condition significantly related to slope of change over time (b1).
@@ -20,13 +24,12 @@ Thus, the level-2 equations can be used to test if individual characteristics (e
 
 When you substitute the level 2 equations into the level 1 model, you get the composite model that is estimated using maximum likelihood (ML) estimation. 
 
-```{r, echo = FALSE}
-knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG6_Sepia.jpg")
-```
-
 ### Example 
 
-The level-2 equations with predictors of the intercepts and slope could look something like this:
+```{r, echo = FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG7.png")
+```
 
-
-
+```{r, echo = FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG8.png")
+```
