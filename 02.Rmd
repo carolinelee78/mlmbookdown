@@ -1,0 +1,32 @@
+# Applying MLM to Longitudinal Data 
+
+## Overview 
+
+Getting the “right” growth curve is critical since it can lead to misleading results if it is incorrect. So, graph the outcome data and make sure you understand the “growth curve” for individuals. Use “Plots” in “Univariate ANOVA” to look at what the growth curve looks like. 
+
+Also, MLM assumes multivariate normality, so we want to be sure that our data approaches normality (robust standard errors are available in Generalized Linear mixed models, which we will talk about later in the semester). They are robust to violations of multivariate normality. Also check for outliers. Use scatterplots and frequencies to look for outliers, skewness, normality.
+
+Level-2 equations predict between person differences in the level-1 parameters (e.g., intercept and slope) in the level-1 growth curve model:
+
+```{r, echo = FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG5_Sepia.jpg")
+```
+
+Thus, the level-2 equations can be used to test if individual characteristics (e.g., treatment condition, demographic information, personality traits, etc.) predict these level-1 (within person) relations, answering questions like: is treatment condition significantly related to slope of change over time (b1).
+
+ - If you have a priori hypotheses (like a treatment condition effect that you want to test), you can go directly to testing that.
+ - If you do not have a priori hypotheses, you usually look at the variance of the random effect for the slope, and if it is significant, then that means that there is significant variability in the slope between different people, so it is worthwhile to investigate predictors of that variability.
+ - How do you test for variability in the slope? You can test the significance of $\mu_{1i}$.
+
+When you substitute the level 2 equations into the level 1 model, you get the composite model that is estimated using maximum likelihood (ML) estimation. 
+
+```{r, echo = FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG6_Sepia.jpg")
+```
+
+### Example 
+
+The level-2 equations with predictors of the intercepts and slope could look something like this:
+
+
+

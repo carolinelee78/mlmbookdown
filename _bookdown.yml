@@ -5,4 +5,4 @@ language:
     chapter_name: "Chapter "
 clean: ["packages.bib"]
 rmd_subdir: "chapters"
-rmd_files: ["index.Rmd", "01.Rmd"]
+rmd_files: ["index.Rmd", "01.Rmd", "02.Rmd"]

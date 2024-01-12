@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | MLM Study Guide for Caroline, by Caroline</title>
-  <meta name="description" content="Page not found | MLM Study Guide for Caroline, by Caroline" />
+  <title>Chapter 3 Applying MLM to Longitudinal Data | MLM Study Guide for Caroline, by Caroline</title>
+  <meta name="description" content="Chapter 3 Applying MLM to Longitudinal Data | MLM Study Guide for Caroline, by Caroline" />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | MLM Study Guide for Caroline, by Caroline" />
+  <meta property="og:title" content="Chapter 3 Applying MLM to Longitudinal Data | MLM Study Guide for Caroline, by Caroline" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | MLM Study Guide for Caroline, by Caroline" />
+  <meta name="twitter:title" content="Chapter 3 Applying MLM to Longitudinal Data | MLM Study Guide for Caroline, by Caroline" />
   
   
   
@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
+<link rel="prev" href="what-is-mlm-used-for.html"/>
 
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -116,18 +116,35 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="page-not-found" class="section level1">
-<h1>Page not found</h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<div id="applying-mlm-to-longitudinal-data" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Applying MLM to Longitudinal Data<a href="applying-mlm-to-longitudinal-data.html#applying-mlm-to-longitudinal-data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="overview" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Overview<a href="applying-mlm-to-longitudinal-data.html#overview" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Getting the “right” growth curve is critical since it can lead to misleading results if it is incorrect. So, graph the outcome data and make sure you understand the “growth curve” for individuals. Use “Plots” in “Univariate ANOVA” to look at what the growth curve looks like.</p>
+<p>Also, MLM assumes multivariate normality, so we want to be sure that our data approaches normality (robust standard errors are available in Generalized Linear mixed models, which we will talk about later in the semester). They are robust to violations of multivariate normality. Also check for outliers. Use scatterplots and frequencies to look for outliers, skewness, normality.</p>
+<p>Level-2 equations predict between person differences in the level-1 parameters (e.g., intercept and slope) in the level-1 growth curve model:</p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG5_Sepia.jpg" /><!-- --></p>
+<p>Thus, the level-2 equations can be used to test if individual characteristics (e.g., treatment condition, demographic information, personality traits, etc.) predict these level-1 (within person) relations, answering questions like: is treatment condition significantly related to slope of change over time (b1).</p>
+<ul>
+<li>If you have a priori hypotheses (like a treatment condition effect that you want to test), you can go directly to testing that.</li>
+<li>If you do not have a priori hypotheses, you usually look at the variance of the random effect for the slope, and if it is significant, then that means that there is significant variability in the slope between different people, so it is worthwhile to investigate predictors of that variability.</li>
+<li>How do you test for variability in the slope? You can test the significance of <span class="math inline">\(\mu_{1i}\)</span>.</li>
+</ul>
+<p>When you substitute the level 2 equations into the level 1 model, you get the composite model that is estimated using maximum likelihood (ML) estimation.</p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG6_Sepia.jpg" /><!-- --></p>
+<div id="example" class="section level3 hasAnchor" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Example<a href="applying-mlm-to-longitudinal-data.html#example" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The level-2 equations with predictors of the intercepts and slope could look something like this:</p>
+
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
+<a href="what-is-mlm-used-for.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>

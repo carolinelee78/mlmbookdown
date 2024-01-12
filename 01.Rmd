@@ -59,7 +59,14 @@ Data in the data file must be “restructured” (i.e., changed into a stacked/l
 
 ### Summary
 
+The purpose of this section was to introduce some of the recurring themes in longitudinal analysis. In terms of levels of analysis, longitudinal data provide information, about _between-person_ relationships (i.e., level-2, time-invariant relationships for attributes measured only once, or for their average values over time), as well as about _within-person_ relationships (i.e., level-1, time-varying relationships for attributes measured repeatedly that vary over time). Longitudinal data can be organized along a continuum ranging from _within-person fluctuation_, which is often the goal of short-term studies (e.g., daily diary or ecological momentary assessment studies), to _within-person change_, which is often the goal of longer-term studies (e.g., data collected over multiple years in order to observe systematic change). In reality, however, these distinctions may not always be so obvious and will need to be examined empirically. Then, we turned to the statistical aspects of longitudinal data, beginning by describing the two-sided lens through which we can view any statistical model. On one side is its _model for the means_ (i.e., fixed effects), which is how the predictors combine to create an expected outcome for each observation. 
 
+Basically, in longitudinal models: 
+  - Level 1: describes the within-person relationships 
+    * Predictors explain occasion-to-occasion variation for individuals with respect to their own level 
+  - Level 2: describes the between-person relationships
+    * Average levels of the predictors explain average levels of the outcome for each individual 
+    
 ### Homework 1 - 08/29
 
 Restructure the OCD mediation file, which is structured as a wide, flat file, with one line per subject. There are 2 DVs: `YBOC` (a measure of OCD symptoms) and `BDI` (Beck Depression Inventory). There are 5 assessments of each, at pre, week 4, week 16, week 26, and week 52. Restructure the file so that there is one line per assessment (5 lines per subject).
@@ -93,14 +100,16 @@ MIXED YBOC WITH Index1 condition
   /REPEATED=Index1 | SUBJECT(Subject#) COVTYPE(ID). 
 ```
 
+```{r, echo = FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG4.png")
+```
+
 ```{r}
 library(haven)
 library(lme4)
 
 DF1 <- read_sav("Restructured_OCDMediationYBOCSBDI1inS.sav")
-
 model1 <- lmer(YBOC ~ Index1 + condition + Index1*condition + (1 | Index1), data = DF1)
-
 summary(model1)
 ```
 
