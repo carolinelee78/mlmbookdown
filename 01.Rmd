@@ -93,8 +93,15 @@ MIXED YBOC WITH Index1 condition
   /REPEATED=Index1 | SUBJECT(Subject#) COVTYPE(ID). 
 ```
 
-```{r, echo = FALSE, results='hide'}
+```{r}
 library(haven)
+library(lme4)
+
+DF1 <- read_sav("Restructured_OCDMediationYBOCSBDI1inS.sav")
+
+model1 <- lmer(YBOC ~ Index1 + condition + Index1*condition + (1 | Index1), data = DF1)
+
+summary(model1)
 ```
 
 
