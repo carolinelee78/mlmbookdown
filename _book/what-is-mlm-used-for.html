@@ -85,6 +85,8 @@
 <ul>
 <li class="chapter" data-level="2.1.1" data-path="what-is-mlm-used-for.html"><a href="what-is-mlm-used-for.html#level-1"><i class="fa fa-check"></i><b>2.1.1</b> Level 1</a></li>
 <li class="chapter" data-level="2.1.2" data-path="what-is-mlm-used-for.html"><a href="what-is-mlm-used-for.html#level-2"><i class="fa fa-check"></i><b>2.1.2</b> Level 2</a></li>
+<li class="chapter" data-level="2.1.3" data-path="what-is-mlm-used-for.html"><a href="what-is-mlm-used-for.html#summary"><i class="fa fa-check"></i><b>2.1.3</b> Summary</a></li>
+<li class="chapter" data-level="2.1.4" data-path="what-is-mlm-used-for.html"><a href="what-is-mlm-used-for.html#homework-1---0829"><i class="fa fa-check"></i><b>2.1.4</b> Homework 1 - 08/29</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -124,11 +126,57 @@
 where <span class="math inline">\(Y_j\)</span> is the outcome of assessment <span class="math inline">\(j\)</span>, <span class="math inline">\(T_j\)</span> is TIme at assessment <span class="math inline">\(j\)</span> (often coded as 0-<span class="math inline">\(k\)</span>, where <span class="math inline">\(k\)</span> is the number of weeks since baseline), <span class="math inline">\(epsilon_j\)</span> is the error in predicting the outcome at assessment <span class="math inline">\(j\)</span>, <span class="math inline">\(b_0\)</span> is the intercept, and <span class="math inline">\(b_11\)</span> is the slope of outcome over time.</p>
 <p>In MLM, the parameters in this model (e.g., the intercept and slope) are calculated for each individual in the study and can be different for each individual. If <span class="math inline">\(i\)</span> represents the different individuals in your study, equation 1 can be written for <strong><em>all</em></strong> the individuals as:
 <span class="math display">\[ Y_{ij} = b_{0i} + b_{1i}*T_{ij} + \epsilon_{ij} \]</span>
-So, each individual has a different intercept and a different slope. Each person has their <em>own</em> growth curve that best fits their own data. The value of the intercept depends on how time is coded since the intercept is the expected value of the outcome when all other variables in the equation are 0. Thus, if time is coded 0, 1, 2, 3, the intercept is the expected value of <span class="math inline">\(Y\)</span> at “baseline” (the first assessment). If time is coded 1,2,3,4, the intercept is still the expected value when time=0, but in this case, it would be meaningless.</p>
+So, each individual has a different intercept and a different slope. Each person has their <em>own</em> growth curve that best fits their own data.
+<img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG1.png" /><!-- --></p>
+<p>The value of the intercept depends on how time is coded since the intercept is the expected value of the outcome when all other variables in the equation are 0. Thus, if time is coded 0, 1, 2, 3, the intercept is the expected value of <span class="math inline">\(Y\)</span> at “baseline” (the first assessment). If time is coded 1,2,3,4, the intercept is still the expected value when time=0, but in this case, it would be meaningless.</p>
 <p>The error in the level-1 model is the error in predicting each data point for each person. Each person has an error at each time point, so these errors can be considered variables <span class="math inline">\(e_1 ... e_k\)</span>, if there are <span class="math inline">\(k\)</span> assessments. The variance of the error at each time point is referred to as <span class="math inline">\(\sigma_{j}^2\)</span>. The error variance is assumed to be equal at each time point in most simple MLM analyses, but the error covariance matrix can be specified in a more complex manner. The <span class="math inline">\(\epsilon_{ij}\)</span> are assumed to be normally distributed.</p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG2.png" /><!-- -->
+This same kind of model can be used to calculate the relation between 2 variables over time (e.g., the relation between mood and lung function each day in a diary study). Time is often not included in these models when one does not have a treatment or there is no reason to believe that the variables will change systematically over time (like in a short term diary study). However, time can be included as an additional predictor of outcome if the study covers some developmental phases of life so that the outcome is expected to change. The model examining whether mood affects lung function over a 30 day diary study would be:</p>
+<p><span class="math display">\[ {FEV}_{ij} = b_{0i} + b_{1i}*{Mood}_{ij} + \epsilon_{ij}\]</span>
+where <span class="math inline">\({FEV}_{ij}\)</span> is lung function for individual <span class="math inline">\(i\)</span> at assessment <span class="math inline">\(j\)</span>, <span class="math inline">\(Mood_{ij}\)</span> is the mood for individual <span class="math inline">\(i\)</span> at assessment <span class="math inline">\(j\)</span>, <span class="math inline">\(b_{0i}\)</span> is the intercept for individual <span class="math inline">\(i\)</span>, and <span class="math inline">\(b_{1i}\)</span> is the relation between <span class="math inline">\(Mood\)</span> and <span class="math inline">\(FEV\)</span> for individual <span class="math inline">\(i\)</span> over time.</p>
+<p>These basic equations all model the relation between predictors and outcome within-subjects over time. These equations that model the repeated measures within-subjects over time is called the level-1 model.</p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG3.png" /><!-- --></p>
 </div>
 <div id="level-2" class="section level3 hasAnchor" number="2.1.2">
 <h3><span class="header-section-number">2.1.2</span> Level 2<a href="what-is-mlm-used-for.html#level-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>There is a level-2 equation (level-2 being the level of the individual) for each parameter in the level-1 equation (e.g., the intercept (<span class="math inline">\(b_0\)</span>) and the slope (<span class="math inline">\(b_1\)</span>) and any other predictors). So we have a slope and intercept for each level-2 person (each individual). The level-2 equations each have an error term, which represents the difference between each person’s slope (or intercept) and the “average” slope (or intercept). These error terms are called the <em>random effects</em>! Random effects are assumed to be normally distributed, and are assumed to be uncorrelated with the level 1 error variance (<span class="math inline">\(\epsilon_{ij}\)</span>). But they can be correlated with each other. These level 2 equations have an <span class="math inline">\(N\)</span> equal to the number of subjects. The level-1 equation has an N equal to the number of total data points (number of subjects times number of assessments per subject). Examples of simple level 2 equations are:</p>
+<p><span class="math display">\[b_{0i} = \gamma_{00} + \mu_{0i}\]</span>
+<span class="math display">\[b_{1i} = \gamma_{10} + \mu_{1i}\]</span></p>
+<p>In this model, <span class="math inline">\(\gamma_{00}\)</span> is the average intercept for the sample (across individuals) and <span class="math inline">\(\gamma_{10}\)</span> is the average slope across individuals. These are called the <em>fixed effects</em>, and their significance can be tested, thereby telling you if the intercept is significant, and if there is a significant relation between Time and outcome over the whole sample.</p>
+<p>The variance of the error terms (<span class="math inline">\(\mu_{0i}\)</span> and <span class="math inline">\(\mu_{1i}\)</span>) can be tested for significance. If the variance for the slopes is significant, that means that there is significant variability between individuals in their slopes of change over time. Notice, this way of analyzing the data breaks the error variance down into 2 components: between subjects variations and within-subjects variation.</p>
+<p>A combined model can be created by substituting the level-2 equations into the level-1 model. In this case, the combined model (also called composite model) is:</p>
+<p><span class="math display">\[ Y_{ij} = b_{0i} + b_{1i}*T_{ij} + \epsilon_{ij} \]</span>
+<span class="math display">\[=(\gamma_{00}+\mu_{0i})+(\gamma_{10}+\mu_{1i})*T_{ij}+\epsilon_{ij} \]</span>
+<span class="math display">\[ =\gamma_{00} + \gamma_{10}*T_{ij}+\mu_{0i}+\mu_{1i}*T_{ij} + \epsilon_{ij} \]</span>
+Data in the data file must be “restructured” (i.e., changed into a stacked/long format) so that there is one line per asmt in the data file. To fit a typical regression line to data (not using MLM), you have each data point on a different line. Thus, for MLM, each data point for each person is on a separate line, and each individual is stacked below each other. Go to the “Data” dropdown menu, select “restructure”, and proceed.</p>
+</div>
+<div id="summary" class="section level3 hasAnchor" number="2.1.3">
+<h3><span class="header-section-number">2.1.3</span> Summary<a href="what-is-mlm-used-for.html#summary" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="homework-1---0829" class="section level3 hasAnchor" number="2.1.4">
+<h3><span class="header-section-number">2.1.4</span> Homework 1 - 08/29<a href="what-is-mlm-used-for.html#homework-1---0829" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Restructure the OCD mediation file, which is structured as a wide, flat file, with one line per subject. There are 2 DVs: <code>YBOC</code> (a measure of OCD symptoms) and <code>BDI</code> (Beck Depression Inventory). There are 5 assessments of each, at pre, week 4, week 16, week 26, and week 52. Restructure the file so that there is one line per assessment (5 lines per subject).</p>
+<p>Then, make an attempt to run a simple MLM. DV should be <code>YBOC</code>. The covariates should be <code>index1</code> and <code>condition</code> (just like in class). The only random effect should be the intercept.</p>
+<p>Chapter 2 in Heck includes instructions on restructuring, and Chapter 3 has instructions on simple MLM. Since we are using scaled identity as our covariance type, you can follow the example in Heck and ignore the “repeated measures” box and the covariance type. I used these inputs in my example because we will be using it most of the time in the future. But scaled identity is the default value for the covariance, so you don’t need to put it in.</p>
+<pre><code>* STEP 1. Restructure dataset.
+
+/VARSTOCASES 
+  /MAKE YBOC FROM YBOCpre YBOC4 YBOC16 YBOC52
+  /MAKE BDI FROM BDIpre BDI4 BDI16 BDI52
+  /INDEX=index1(5)
+  /KEEP=Subject# Age condition HAMTOT Male0
+  /NULL=KEEP</code></pre>
+<pre><code>* STEP 2. Run Simple MLM with DV as YBOC and covariates as index1 and condition, and with
+random effect for the intercept only. 
+
+MIXED YBOC WITH condition index1c5
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE)                PCONVERGE(0, ABSOLUTE)
+  /FIXED=condition index1c5 condition*index1c5 | SSTYPE(3)
+  /METHOD=REML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT | SUBJECT(Subject#) COVTYPE(UN)
+  /REPEATED=Index1 | SUBJECT(Subject#) COVTYPE(ID).</code></pre>
 
 </div>
 </div>
