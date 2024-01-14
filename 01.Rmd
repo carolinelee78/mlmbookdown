@@ -67,7 +67,7 @@ Basically, in longitudinal models:
   - Level 2: describes the between-person relationships
     * Average levels of the predictors explain average levels of the outcome for each individual 
     
-### Homework 1 - 08/29
+## Homework 1 - 08/29
 
 Restructure the OCD mediation file, which is structured as a wide, flat file, with one line per subject. There are 2 DVs: `YBOC` (a measure of OCD symptoms) and `BDI` (Beck Depression Inventory). There are 5 assessments of each, at pre, week 4, week 16, week 26, and week 52. Restructure the file so that there is one line per assessment (5 lines per subject).
  
@@ -79,8 +79,8 @@ Chapter 2 in Heck includes instructions on restructuring, and Chapter 3 has inst
 * STEP 1. Restructure dataset.
 
 /VARSTOCASES 
-  /MAKE YBOC FROM YBOCpre YBOC4 YBOC16 YBOC52
-  /MAKE BDI FROM BDIpre BDI4 BDI16 BDI52
+  /MAKE YBOC FROM YBOCpre YBOC4 YBOC16 YBOC26 YBOC52
+  /MAKE BDI FROM BDIpre BDI4 BDI16 BDI26 BDI52
   /INDEX=index1(5)
   /KEEP=Subject# Age condition HAMTOT Male0
   /NULL=KEEP

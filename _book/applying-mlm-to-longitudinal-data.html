@@ -23,7 +23,7 @@
 <meta name="author" content="For doing better, for remediation. Integrating David’s class materials and Hoffman’s (2015) Longitudinal Analysis textbook to learn MLM with both R and SPSS." />
 
 
-<meta name="date" content="2024-01-12" />
+<meta name="date" content="2024-01-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -86,15 +86,19 @@
 <li class="chapter" data-level="2.1.1" data-path="what-is-mlm-used-for.html"><a href="what-is-mlm-used-for.html#level-1"><i class="fa fa-check"></i><b>2.1.1</b> Level 1</a></li>
 <li class="chapter" data-level="2.1.2" data-path="what-is-mlm-used-for.html"><a href="what-is-mlm-used-for.html#level-2"><i class="fa fa-check"></i><b>2.1.2</b> Level 2</a></li>
 <li class="chapter" data-level="2.1.3" data-path="what-is-mlm-used-for.html"><a href="what-is-mlm-used-for.html#summary"><i class="fa fa-check"></i><b>2.1.3</b> Summary</a></li>
-<li class="chapter" data-level="2.1.4" data-path="what-is-mlm-used-for.html"><a href="what-is-mlm-used-for.html#homework-1---0829"><i class="fa fa-check"></i><b>2.1.4</b> Homework 1 - 08/29</a></li>
 </ul></li>
+<li class="chapter" data-level="2.2" data-path="what-is-mlm-used-for.html"><a href="what-is-mlm-used-for.html#homework-1---0829"><i class="fa fa-check"></i><b>2.2</b> Homework 1 - 08/29</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html"><i class="fa fa-check"></i><b>3</b> Applying MLM to Longitudinal Data</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#overview"><i class="fa fa-check"></i><b>3.1</b> Overview</a>
+<li class="chapter" data-level="3.1" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#overview"><i class="fa fa-check"></i><b>3.1</b> Overview</a></li>
+<li class="chapter" data-level="3.2" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#homework-2---0831"><i class="fa fa-check"></i><b>3.2</b> Homework 2 - 08/31</a></li>
+<li class="chapter" data-level="3.3" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#quadratic-growth-curve-models"><i class="fa fa-check"></i><b>3.3</b> Quadratic Growth Curve Models</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#example"><i class="fa fa-check"></i><b>3.1.1</b> Example</a></li>
+<li class="chapter" data-level="3.3.1" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#meaning-of-the-linear-vs.-quadratic-terms"><i class="fa fa-check"></i><b>3.3.1</b> Meaning of the Linear vs. Quadratic Terms</a></li>
 </ul></li>
+<li class="chapter" data-level="3.4" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#homework-3---0905"><i class="fa fa-check"></i><b>3.4</b> Homework 3 - 09/05</a></li>
+<li class="chapter" data-level="3.5" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#nested-models"><i class="fa fa-check"></i><b>3.5</b> Nested Models</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -122,23 +126,70 @@
 <h2><span class="header-section-number">3.1</span> Overview<a href="applying-mlm-to-longitudinal-data.html#overview" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Getting the “right” growth curve is critical since it can lead to misleading results if it is incorrect. So, graph the outcome data and make sure you understand the “growth curve” for individuals. Use “Plots” in “Univariate ANOVA” to look at what the growth curve looks like.</p>
 <p>Also, MLM assumes multivariate normality, so we want to be sure that our data approaches normality (robust standard errors are available in Generalized Linear mixed models, which we will talk about later in the semester). They are robust to violations of multivariate normality. Also check for outliers. Use scatterplots and frequencies to look for outliers, skewness, normality.</p>
-<p>Level-2 equations predict between person differences in the level-1 parameters (e.g., intercept and slope) in the level-1 growth curve model:</p>
-<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG5.png" /><!-- --></p>
-<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG6.png" /><!-- --></p>
-<p>Thus, the level-2 equations can be used to test if individual characteristics (e.g., treatment condition, demographic information, personality traits, etc.) predict these level-1 (within person) relations, answering questions like: is treatment condition significantly related to slope of change over time (b1).</p>
+<p>Level-2 equations predict between person differences in the level-1 parameters (e.g., intercept and slope) in the level-1 growth curve model. Thus, the level-2 equations can be used to test if individual characteristics (e.g., treatment condition, demographic information, personality traits, etc.) predict these level-1 (within person) relations, answering questions like: is treatment condition significantly related to slope of change over time (b1).</p>
 <ul>
 <li>If you have a priori hypotheses (like a treatment condition effect that you want to test), you can go directly to testing that.</li>
 <li>If you do not have a priori hypotheses, you usually look at the variance of the random effect for the slope, and if it is significant, then that means that there is significant variability in the slope between different people, so it is worthwhile to investigate predictors of that variability.</li>
 <li>How do you test for variability in the slope? You can test the significance of <span class="math inline">\(\mu_{1i}\)</span>.</li>
 </ul>
 <p>When you substitute the level 2 equations into the level 1 model, you get the composite model that is estimated using maximum likelihood (ML) estimation.</p>
-<div id="example" class="section level3 hasAnchor" number="3.1.1">
-<h3><span class="header-section-number">3.1.1</span> Example<a href="applying-mlm-to-longitudinal-data.html#example" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The level-2 equations with predictors of the intercepts and slope could look something like this:</p>
-<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG7.png" /><!-- --></p>
-<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG8.png" /><!-- --></p>
-
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG5.jpg" /><!-- --></p>
+<p>Note that since there is an interaction between Time and Condition, the main effects for Time and Condition do not reflect the “average” effect of Time or Condition, but rather the effect of one when the other is 0. Thus, if Time is “centered” at assessment 1 (baseline), then Timec1=0 is the baseline assessment and the effect of condition is thus the Condition effect at baseline, which you hope to be non-significant. The effect of Time in this model is the slope for those in Condition=0 (hopefully you do not code condition =1 or 2, since then the slope of Time (the main effect) is nonsensical).</p>
+<p>One often runs the model twice, once for each treatment condition equaling 0, to get the slope (and significance) of Time for both treatment conditions. You can also run the model with treatment condition coded -.5, .5 to get the “average” effect of Time across both treatment conditions. This latter coding is not often done when treatment condition is the level 2 variable, since researchers rarely want to know about the average of placebo and treatment. It is more frequently done when the level 2 predictor of slope is a variable like gender, when you want to get the average slope across genders.</p>
+<p>One also often runs the model with Time centered at various assessments to obtain the significance of treatment condition at the various assessments. Thus, if the variable Index1 codes the 4 assessments as 1,2,3,4, one might run the model alternately with Time centered at baseline (Timec1=Index1-1), at post-treatment (Timec3=Index1-3), and at FU (Timec4=Index1-4).</p>
+<p>Proof that using Timec4 will give you condition differences at follow-up:</p>
+<p><span class="math display">\[ Y = b_0 + b_1*Cond + b_2*Timec4 + b_3*Cond*Timec4 \]</span>
+<span class="math display">\[ Y (Timec4 = 0) = b_0 + b_1*Cond + b_2*0 + b_3*Cond*0\]</span>
+<span class="math display">\[= b_0 + b_1*Cond\]</span>
+So the main effect for condition when time is centered at assessment 4 is the effect of condition at assessment 4 (FU; follow-up). Note the difference between that and the prediction of Y (using this same coding of time) at time 3:</p>
+<p><span class="math display">\[ Y(Timec4 = 1) = b_0 + b_1*Cond + b_2*(-1) + b_3*(-1)*Cond \]</span>
+<span class="math display">\[ = (b_0-b_2)+(b_1-b_3)*Cond \]</span></p>
 </div>
+<div id="homework-2---0831" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Homework 2 - 08/31<a href="applying-mlm-to-longitudinal-data.html#homework-2---0831" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Use the restructured OCD data file to rerun the analysis, using week (weeks from pre) as the time variable instead of index1. Use either a series of “computes” or use a “recode” to create the week variable. The “pre” assessment (index1=1) should be coded week=0. The week4 assessment (index1=2) should be coded week=4, etc. Then use condition, week, and condition x week as the fixed effects, and include a random effect for the intercept and for week (always use an unstructured covariance matrix for the random effects). Compare the results from this model to the results from the model we did in class.</p>
+</div>
+<div id="quadratic-growth-curve-models" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Quadratic Growth Curve Models<a href="applying-mlm-to-longitudinal-data.html#quadratic-growth-curve-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A <strong>quadratic model of change</strong> includes a quadratic effect of time (i.e., as <span class="math inline">\(time^2\)</span>, otherwise known as the <em>quadratic rate of change</em>, or the <em>quadratic slope for time</em>) in addition to an intercept and a linear effect of time (i.e., as <span class="math inline">\(time^1\)</span>, otherwise known as the <em>linear rate of change</em>, or the <em>linear slope for time</em>). A quadratic effect of time implies a <em>change</em> in the linear rate of change over time, such that the linear time slope either <em>accelerates</em> (speeds up) or <em>decelerates</em> (slows down) over time.</p>
+<p>The figure below illustrates how positive or negative linear or quadratic effects of time can work together to create many possible patterns of nonlinear change. First, the top left shows how a <em>positive</em> linear effect of time and a <em>positive</em> quadratic effect of time create an <strong>accelerating positive function</strong>, or a mean trajectory in which the rate of increase speeds up over time. Second, the top right shows how a <em>positive</em> linear effect of time and a <em>negative</em> quadratic effect of time create a <strong>decelerating positive function</strong>, or a mean trajectory in which the rate of increase slows down over time instead. Third, the bottom left shows how a <em>negative</em> linear effect of time and a <em>positive</em> quadratic effect of time create a <strong>decelerating negative function</strong>, or a mean trajectory in which the rate of decrease slows down over time. Finally, the bottom right shows how a <em>negative</em> linear effect of time and a <em>negative</em> quadratic effect of time create an <strong>accelerating negative function</strong>, or a mean trajectory in which the rate of decrease speeds over time. We cannot determine just from its sign if a quadratic effect creates acceleration or deceleration. A <em>positive</em> quadratic effect of time can make a positive linear effect of time <em>more positive</em> (acceleration), or it can make a negative linear effect of time <em>less negative</em> (deceleration). Similarly, a <em>negative</em> quadratic effect of time can make a negative linear effect of time <em>more negative</em> (acceleration).</p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG7.jpg" /><!-- --></p>
+<p>Typically, in a treatment outcome study, the improvement in outcome over time levels off. Hence, we need to be able to model growth as curvilinear. We can do this by looking at the pattern of means across time, within condition, to get an idea of what the change in the means over time looks like.
+- Remember that this is the pattern of means for the non-missing data, so it may not reflect MLM growth curves.</p>
+<p>We can test for a quadratic curve by adding a “time squared” term to the level-1 MLM model. Note that we have a level-2 equation for every level 1 parameter, so with a quadratic growth curve, you will have 3 level-2 equations, adding the level-2 equation for the timesq term. The level 2 equation for the quadratic term does not HAVE to have the same predictors that the linear time term has, but if it does have predictors, they must be included as predictors of linear time and the intercept. This is necessary to have all subcomponents of the interaction included in the model.</p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG6.jpg" /><!-- -->
+Be sure that the squared term uses the exact linear term, squared. Don’t use timec1 for the linear term and timec5-squared for the squared term. Otherwise, the meaning of the some of the coefficients (e.g., main effects) can become problematic. Even higher level terms (e.g., cubic, quartic, etc.) can also be added if needed.</p>
+<div id="meaning-of-the-linear-vs.-quadratic-terms" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Meaning of the Linear vs. Quadratic Terms<a href="applying-mlm-to-longitudinal-data.html#meaning-of-the-linear-vs.-quadratic-terms" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>When using a quadratic growth curve model, the regression coefficient for the linear term is the tangent to the curve at Time=0.</li>
+<li>This makes sense when you think of the quadratic term as the interaction of time with time. Then, as in all interactions, the coefficient for the main effect for Time will be its relation with outcome when the other variable in the interaction (i.e., Time) is 0.</li>
+<li>Thus, the regression coefficient for linear Time changes depending on where you center the time and timesq terms. Often, you will want to center these Time terms at the mean of Time. If you center Time at its average value, the regression coefficient for the linear time term will be the AVERAGE linear change over time.</li>
+<li>You may also often want to center time at the last FU to compare groups at the last time point. In this case, the main effect for time will reflect the slope at that last time point.</li>
+</ul>
+</div>
+</div>
+<div id="homework-3---0905" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Homework 3 - 09/05<a href="applying-mlm-to-longitudinal-data.html#homework-3---0905" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Run the quadratic growth curve model using “weeks” as the time variable. Center at week 52. Include condition as a moderator of week and weeksq. Include a random effect (RE) for the intercept, week, and weeksq, but drop the RE for weeksq if the model won’t run. Drop the condition x weeksq interaction if it is not significant. Then compare the model fit (using AIC) to the model we ran in class using index1c5 as the time variable.</p>
+<p>Now try to graph the model using index1c5. Graph 2 models: the one WITH the condition x index1c5sq included, and the one WITHOUT condition x index1c5sq. Remember the trick you have to use to graph when the time variable is a transformed variable (you have to use the TRANSFORMED variable in the excel spreadsheet, not the raw 1,2,3,4,5 variable).</p>
+</div>
+<div id="nested-models" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Nested Models<a href="applying-mlm-to-longitudinal-data.html#nested-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A smaller model (one with fewer parameters) is nested within a larger model if the larger model has ALL the parameters included in the smaller model, plus at least 1 additional parameter. Or, a smaller model is nested within a larger model if you can derive the smaller model by putting 1 or more restrictions on the larger model.</p>
+<ul>
+<li>“Parameters” includes both fixed effects and random effects (variance components).</li>
+<li>You can <strong>statistically</strong> compare <strong>nested</strong> models for relative “goodness of fit” using the difference in the -2LL.</li>
+<li>The difference in the -2LL of the 2 models is a chi-square whose degrees of freedom is the difference in the number of parameters estimated by the 2 models.</li>
+<li>Note that ML estimation must be used if your comparisons between models involve ANY differences in fixed effects (in your predictors/covariates) including differences in fixed effects and variance components</li>
+<li>However, if your models involve different fixed effects (except additional effects in the full model, since the full model by definition has fixed effects that are not in the nested model), you cannot compare them with -2LL. You must use AIC/BIC.</li>
+</ul>
+<p>REML can be used to compare models that differ <em>only</em> on variance components (e.g., random effects and covariances). However, these models can also be tested using ML, so you can just default to using ML for all comparisons.</p>
+<ul>
+<li>For all likelihood ratio tests (i.e., tests using the difference in the -2LL), regardless of using ML or REML, the 2-tailed p-value should be divided by 2 (i.e., use a 1 tailed test) to obtain the correct p-value (Berkhof &amp; Snijders, 2001), basically because the -2LL of the restricted model is always larger than the -2LL of the fuller model (i.e., it is a unidirectional test).</li>
+<li>This website can perform one tailed <span class="math inline">\(\chi^2\)</span> tests so that we don’t need to divide by 2:</li>
+</ul>
+
 </div>
 </div>
             </section>

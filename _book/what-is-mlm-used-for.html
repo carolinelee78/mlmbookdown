@@ -150,8 +150,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1.1" data-path="what-is-mlm-used-for.html"><a href="what-is-mlm-used-for.html#level-1"><i class="fa fa-check"></i><b>2.1.1</b> Level 1</a></li>
 <li class="chapter" data-level="2.1.2" data-path="what-is-mlm-used-for.html"><a href="what-is-mlm-used-for.html#level-2"><i class="fa fa-check"></i><b>2.1.2</b> Level 2</a></li>
 <li class="chapter" data-level="2.1.3" data-path="what-is-mlm-used-for.html"><a href="what-is-mlm-used-for.html#summary"><i class="fa fa-check"></i><b>2.1.3</b> Summary</a></li>
-<li class="chapter" data-level="2.1.4" data-path="what-is-mlm-used-for.html"><a href="what-is-mlm-used-for.html#homework-1---0829"><i class="fa fa-check"></i><b>2.1.4</b> Homework 1 - 08/29</a></li>
 </ul></li>
+<li class="chapter" data-level="2.2" data-path="what-is-mlm-used-for.html"><a href="what-is-mlm-used-for.html#homework-1---0829"><i class="fa fa-check"></i><b>2.2</b> Homework 1 - 08/29</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html"><i class="fa fa-check"></i><b>3</b> Applying MLM to Longitudinal Data</a>
 <ul>
@@ -159,6 +159,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.1.1" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#example"><i class="fa fa-check"></i><b>3.1.1</b> Example</a></li>
 </ul></li>
+<li class="chapter" data-level="3.2" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#homework-2---0831"><i class="fa fa-check"></i><b>3.2</b> Homework 2 - 08/31</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -198,15 +199,15 @@ where <span class="math inline">\(Y_j\)</span> is the outcome of assessment <spa
 <p>In MLM, the parameters in this model (e.g., the intercept and slope) are calculated for each individual in the study and can be different for each individual. If <span class="math inline">\(i\)</span> represents the different individuals in your study, equation 1 can be written for <strong><em>all</em></strong> the individuals as:
 <span class="math display">\[ Y_{ij} = b_{0i} + b_{1i}*T_{ij} + \epsilon_{ij} \]</span>
 So, each individual has a different intercept and a different slope. Each person has their <em>own</em> growth curve that best fits their own data.
-<img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG1.png?token=GHSAT0AAAAAACLVSUVUQA7MQWELJDNRKPFWZNA4R7Q" /><!-- --></p>
+<img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG1.png" /><!-- --></p>
 <p>The value of the intercept depends on how time is coded since the intercept is the expected value of the outcome when all other variables in the equation are 0. Thus, if time is coded 0, 1, 2, 3, the intercept is the expected value of <span class="math inline">\(Y\)</span> at “baseline” (the first assessment). If time is coded 1,2,3,4, the intercept is still the expected value when time=0, but in this case, it would be meaningless.</p>
 <p>The error in the level-1 model is the error in predicting each data point for each person. Each person has an error at each time point, so these errors can be considered variables <span class="math inline">\(e_1 ... e_k\)</span>, if there are <span class="math inline">\(k\)</span> assessments. The variance of the error at each time point is referred to as <span class="math inline">\(\sigma_{j}^2\)</span>. The error variance is assumed to be equal at each time point in most simple MLM analyses, but the error covariance matrix can be specified in a more complex manner. The <span class="math inline">\(\epsilon_{ij}\)</span> are assumed to be normally distributed.</p>
-<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG2.png?token=GHSAT0AAAAAACLVSUVVTPHPSPQS2QCZ3ZIUZNA4SOA" /><!-- -->
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG2.png" /><!-- -->
 This same kind of model can be used to calculate the relation between 2 variables over time (e.g., the relation between mood and lung function each day in a diary study). Time is often not included in these models when one does not have a treatment or there is no reason to believe that the variables will change systematically over time (like in a short term diary study). However, time can be included as an additional predictor of outcome if the study covers some developmental phases of life so that the outcome is expected to change. The model examining whether mood affects lung function over a 30 day diary study would be:</p>
 <p><span class="math display">\[ {FEV}_{ij} = b_{0i} + b_{1i}*{Mood}_{ij} + \epsilon_{ij}\]</span>
 where <span class="math inline">\({FEV}_{ij}\)</span> is lung function for individual <span class="math inline">\(i\)</span> at assessment <span class="math inline">\(j\)</span>, <span class="math inline">\(Mood_{ij}\)</span> is the mood for individual <span class="math inline">\(i\)</span> at assessment <span class="math inline">\(j\)</span>, <span class="math inline">\(b_{0i}\)</span> is the intercept for individual <span class="math inline">\(i\)</span>, and <span class="math inline">\(b_{1i}\)</span> is the relation between <span class="math inline">\(Mood\)</span> and <span class="math inline">\(FEV\)</span> for individual <span class="math inline">\(i\)</span> over time.</p>
 <p>These basic equations all model the relation between predictors and outcome within-subjects over time. These equations that model the repeated measures within-subjects over time is called the level-1 model.</p>
-<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG3.png?token=GHSAT0AAAAAACLVSUVUYPEIBFT3G63QQUK2ZNA4SZQ" /><!-- --></p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG3.png" /><!-- --></p>
 </div>
 <div id="level-2" class="section level3 hasAnchor" number="2.1.2">
 <h3><span class="header-section-number">2.1.2</span> Level 2<a href="what-is-mlm-used-for.html#level-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -223,15 +224,16 @@ Data in the data file must be “restructured” (i.e., changed into a stacked/l
 </div>
 <div id="summary" class="section level3 hasAnchor" number="2.1.3">
 <h3><span class="header-section-number">2.1.3</span> Summary<a href="what-is-mlm-used-for.html#summary" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The purpose of this section was to introduce some of the recurring themes in longitudinal analysis. In terms of levels of analysis, longitudinal data provide information, about <em>between-person</em> relationships (i.e., level-2, time-invariant relationships for attributes measured only once, or for their average values over time), as well as about <em>within-person</em> relationships (i.e., level-1, time-varying relationships for attributes measured repeatedly that vary over time). Longitudinal data can be organized along a continuum ranging from <em>within-person fluctuation</em>, which is often the goal of short-term studies (e.g., daily diary or ecological momentary assessment studies), to <em>within-person change</em>, which is often the goal of longer-term studies (e.g., data collected over multiple years in order to observe systematic change). In reality, however, these distinctions may not always be so obvious and will need to be examined empirically. Then, we turned to the statistical aspects of longitudinal data, beginning by describing the two-sided lens through which we can view any statistical model. On one side is its <em>model for the means</em> (i.e., fixed effects), which is how the predictors combine to create an expected outcome for each observation.</p>
+<p>The purpose of this section was to introduce some of the recurring themes in longitudinal analysis. In terms of levels of analysis, longitudinal data provide information, about <em>between-person</em> relationships (i.e., level-2, time-invariant relationships for attributes measured only once, or for their average values over time), as well as about <em>within-person</em> relationships (i.e., level-1, time-varying relationships for attributes measured repeatedly that vary over time). Longitudinal data can be organized along a continuum ranging from <em>within-person fluctuation</em>, which is often the goal of short-term studies (e.g., daily diary or ecological momentary assessment studies), to <em>within-person change</em>, which is often the goal of longer-term studies (e.g., data collected over multiple years in order to observe systematic change). In reality, however, these distinctions may not always be so obvious and will need to be examined empirically. Then, we turned to the statistical aspects of longitudinal data, beginning by describing the two-sided lens through which we can view any statistical model. On one side is its <em>model for the means</em> (i.e., fixed effects), which is how the predictors combine to create an expected outcome for each observation. The longitudinal models to be presented differ froom general linear models primarily in their model for the variance, for which we will now make choices, rather than assumptions. Longitudinal models scan generally be estimated as multilevel models (used predominantly thorughout the text, and which require a stacked or long data format) or as structural equation models (used for assessing mediation and changes in latent variables, and which generally require a multivariate or wide data format).</p>
 <p>Basically, in longitudinal models:
 - Level 1: describes the within-person relationships
 * Predictors explain occasion-to-occasion variation for individuals with respect to their own level
 - Level 2: describes the between-person relationships
 * Average levels of the predictors explain average levels of the outcome for each individual</p>
 </div>
-<div id="homework-1---0829" class="section level3 hasAnchor" number="2.1.4">
-<h3><span class="header-section-number">2.1.4</span> Homework 1 - 08/29<a href="what-is-mlm-used-for.html#homework-1---0829" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="homework-1---0829" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Homework 1 - 08/29<a href="what-is-mlm-used-for.html#homework-1---0829" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Restructure the OCD mediation file, which is structured as a wide, flat file, with one line per subject. There are 2 DVs: <code>YBOC</code> (a measure of OCD symptoms) and <code>BDI</code> (Beck Depression Inventory). There are 5 assessments of each, at pre, week 4, week 16, week 26, and week 52. Restructure the file so that there is one line per assessment (5 lines per subject).</p>
 <p>Then, make an attempt to run a simple MLM. DV should be <code>YBOC</code>. The covariates should be <code>index1</code> and <code>condition</code> (just like in class). The only random effect should be the intercept.</p>
 <p>Chapter 2 in Heck includes instructions on restructuring, and Chapter 3 has instructions on simple MLM. Since we are using scaled identity as our covariance type, you can follow the example in Heck and ignore the “repeated measures” box and the covariance type. I used these inputs in my example because we will be using it most of the time in the future. But scaled identity is the default value for the covariance, so you don’t need to put it in.</p>
@@ -254,7 +256,7 @@ MIXED YBOC WITH Index1 condition
   /METHOD=REML   /PRINT=SOLUTION TESTCOV  
   /RANDOM=INTERCEPT | SUBJECT(Subject#) COVTYPE(VC)   
   /REPEATED=Index1 | SUBJECT(Subject#) COVTYPE(ID). </code></pre>
-<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG4.png?token=GHSAT0AAAAAACLVSUVVARKZAIKCIVBBGNE2ZNA4QQQ" /><!-- --></p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG4.png" /><!-- --></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="what-is-mlm-used-for.html#cb3-1" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
 <span id="cb3-2"><a href="what-is-mlm-used-for.html#cb3-2" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code></pre></div>
 <pre><code>## Loading required package: Matrix</code></pre>
@@ -290,7 +292,6 @@ MIXED YBOC WITH Index1 condition
 ## condition   -0.643  0.582       
 ## Indx1:cndtn  0.585 -0.657 -0.900</code></pre>
 
-</div>
 </div>
 </div>
             </section>

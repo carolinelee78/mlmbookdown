@@ -12,3 +12,8 @@ summary
 applying-mlm-to-longitudinal-data
 overview
 example
+homework-2---0831
+quadratic-growth-curve-models
+homework-3---0905
+meaning-of-the-linear-vs.-quadratic-terms
+nested-models
