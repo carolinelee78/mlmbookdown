@@ -23,7 +23,7 @@
 <meta name="author" content="For doing better, for remediation. Integrating David’s class materials and Hoffman’s (2015) Longitudinal Analysis textbook to learn MLM with both R and SPSS." />
 
 
-<meta name="date" content="2024-01-12" />
+<meta name="date" content="2024-01-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -155,11 +155,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html"><i class="fa fa-check"></i><b>3</b> Applying MLM to Longitudinal Data</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#overview"><i class="fa fa-check"></i><b>3.1</b> Overview</a>
-<ul>
-<li class="chapter" data-level="3.1.1" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#example"><i class="fa fa-check"></i><b>3.1.1</b> Example</a></li>
-</ul></li>
+<li class="chapter" data-level="3.1" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#overview"><i class="fa fa-check"></i><b>3.1</b> Overview</a></li>
 <li class="chapter" data-level="3.2" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#homework-2---0831"><i class="fa fa-check"></i><b>3.2</b> Homework 2 - 08/31</a></li>
+<li class="chapter" data-level="3.3" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#quadratic-growth-curve-models"><i class="fa fa-check"></i><b>3.3</b> Quadratic Growth Curve Models</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#meaning-of-the-linear-vs.-quadratic-terms"><i class="fa fa-check"></i><b>3.3.1</b> Meaning of the Linear vs. Quadratic Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#homework-3---0905"><i class="fa fa-check"></i><b>3.4</b> Homework 3 - 09/05</a></li>
+<li class="chapter" data-level="3.5" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#nested-models"><i class="fa fa-check"></i><b>3.5</b> Nested Models</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html"><i class="fa fa-check"></i><b>4</b> Treating Time More Flexibly</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html#homework-4---0912"><i class="fa fa-check"></i><b>4.1</b> Homework 4 - 09/12</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -199,15 +206,15 @@ where <span class="math inline">\(Y_j\)</span> is the outcome of assessment <spa
 <p>In MLM, the parameters in this model (e.g., the intercept and slope) are calculated for each individual in the study and can be different for each individual. If <span class="math inline">\(i\)</span> represents the different individuals in your study, equation 1 can be written for <strong><em>all</em></strong> the individuals as:
 <span class="math display">\[ Y_{ij} = b_{0i} + b_{1i}*T_{ij} + \epsilon_{ij} \]</span>
 So, each individual has a different intercept and a different slope. Each person has their <em>own</em> growth curve that best fits their own data.
-<img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG1.png" /><!-- --></p>
+<img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG1.png" width="50%" style="display: block; margin: auto;" /></p>
 <p>The value of the intercept depends on how time is coded since the intercept is the expected value of the outcome when all other variables in the equation are 0. Thus, if time is coded 0, 1, 2, 3, the intercept is the expected value of <span class="math inline">\(Y\)</span> at “baseline” (the first assessment). If time is coded 1,2,3,4, the intercept is still the expected value when time=0, but in this case, it would be meaningless.</p>
 <p>The error in the level-1 model is the error in predicting each data point for each person. Each person has an error at each time point, so these errors can be considered variables <span class="math inline">\(e_1 ... e_k\)</span>, if there are <span class="math inline">\(k\)</span> assessments. The variance of the error at each time point is referred to as <span class="math inline">\(\sigma_{j}^2\)</span>. The error variance is assumed to be equal at each time point in most simple MLM analyses, but the error covariance matrix can be specified in a more complex manner. The <span class="math inline">\(\epsilon_{ij}\)</span> are assumed to be normally distributed.</p>
-<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG2.png" /><!-- -->
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG2.png" width="50%" style="display: block; margin: auto;" />
 This same kind of model can be used to calculate the relation between 2 variables over time (e.g., the relation between mood and lung function each day in a diary study). Time is often not included in these models when one does not have a treatment or there is no reason to believe that the variables will change systematically over time (like in a short term diary study). However, time can be included as an additional predictor of outcome if the study covers some developmental phases of life so that the outcome is expected to change. The model examining whether mood affects lung function over a 30 day diary study would be:</p>
 <p><span class="math display">\[ {FEV}_{ij} = b_{0i} + b_{1i}*{Mood}_{ij} + \epsilon_{ij}\]</span>
 where <span class="math inline">\({FEV}_{ij}\)</span> is lung function for individual <span class="math inline">\(i\)</span> at assessment <span class="math inline">\(j\)</span>, <span class="math inline">\(Mood_{ij}\)</span> is the mood for individual <span class="math inline">\(i\)</span> at assessment <span class="math inline">\(j\)</span>, <span class="math inline">\(b_{0i}\)</span> is the intercept for individual <span class="math inline">\(i\)</span>, and <span class="math inline">\(b_{1i}\)</span> is the relation between <span class="math inline">\(Mood\)</span> and <span class="math inline">\(FEV\)</span> for individual <span class="math inline">\(i\)</span> over time.</p>
 <p>These basic equations all model the relation between predictors and outcome within-subjects over time. These equations that model the repeated measures within-subjects over time is called the level-1 model.</p>
-<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG3.png" /><!-- --></p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG3.png" width="50%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="level-2" class="section level3 hasAnchor" number="2.1.2">
 <h3><span class="header-section-number">2.1.2</span> Level 2<a href="what-is-mlm-used-for.html#level-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -240,8 +247,8 @@ Data in the data file must be “restructured” (i.e., changed into a stacked/l
 <pre><code>* STEP 1. Restructure dataset.
 
 /VARSTOCASES 
-  /MAKE YBOC FROM YBOCpre YBOC4 YBOC16 YBOC52
-  /MAKE BDI FROM BDIpre BDI4 BDI16 BDI52
+  /MAKE YBOC FROM YBOCpre YBOC4 YBOC16 YBOC26 YBOC52
+  /MAKE BDI FROM BDIpre BDI4 BDI16 BDI26 BDI52
   /INDEX=index1(5)
   /KEEP=Subject# Age condition HAMTOT Male0
   /NULL=KEEP</code></pre>
@@ -256,7 +263,7 @@ MIXED YBOC WITH Index1 condition
   /METHOD=REML   /PRINT=SOLUTION TESTCOV  
   /RANDOM=INTERCEPT | SUBJECT(Subject#) COVTYPE(VC)   
   /REPEATED=Index1 | SUBJECT(Subject#) COVTYPE(ID). </code></pre>
-<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG4.png" /><!-- --></p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG4.png" width="50%" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="what-is-mlm-used-for.html#cb3-1" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
 <span id="cb3-2"><a href="what-is-mlm-used-for.html#cb3-2" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code></pre></div>
 <pre><code>## Loading required package: Matrix</code></pre>

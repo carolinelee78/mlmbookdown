@@ -23,7 +23,7 @@
 <meta name="author" content="For doing better, for remediation. Integrating David’s class materials and Hoffman’s (2015) Longitudinal Analysis textbook to learn MLM with both R and SPSS." />
 
 
-<meta name="date" content="2024-01-13" />
+<meta name="date" content="2024-01-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="what-is-mlm-used-for.html"/>
-
+<link rel="next" href="treating-time-more-flexibly.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -54,6 +54,70 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -99,6 +163,10 @@
 </ul></li>
 <li class="chapter" data-level="3.4" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#homework-3---0905"><i class="fa fa-check"></i><b>3.4</b> Homework 3 - 09/05</a></li>
 <li class="chapter" data-level="3.5" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#nested-models"><i class="fa fa-check"></i><b>3.5</b> Nested Models</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html"><i class="fa fa-check"></i><b>4</b> Treating Time More Flexibly</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html#homework-4---0912"><i class="fa fa-check"></i><b>4.1</b> Homework 4 - 09/12</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -148,15 +216,92 @@ So the main effect for condition when time is centered at assessment 4 is the ef
 <div id="homework-2---0831" class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> Homework 2 - 08/31<a href="applying-mlm-to-longitudinal-data.html#homework-2---0831" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Use the restructured OCD data file to rerun the analysis, using week (weeks from pre) as the time variable instead of index1. Use either a series of “computes” or use a “recode” to create the week variable. The “pre” assessment (index1=1) should be coded week=0. The week4 assessment (index1=2) should be coded week=4, etc. Then use condition, week, and condition x week as the fixed effects, and include a random effect for the intercept and for week (always use an unstructured covariance matrix for the random effects). Compare the results from this model to the results from the model we did in class.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="applying-mlm-to-longitudinal-data.html#cb1-1" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb1-2"><a href="applying-mlm-to-longitudinal-data.html#cb1-2" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code></pre></div>
+<pre><code>## Loading required package: Matrix</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="applying-mlm-to-longitudinal-data.html#cb3-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="applying-mlm-to-longitudinal-data.html#cb7-1" tabindex="-1"></a>DF1 <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="st">&quot;Restructured_OCDMediationYBOCSBDI1inS.sav&quot;</span>)</span>
+<span id="cb7-2"><a href="applying-mlm-to-longitudinal-data.html#cb7-2" tabindex="-1"></a>DF1<span class="sc">$</span>week <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">recode</span>(DF1<span class="sc">$</span>Index1, <span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">0</span>,</span>
+<span id="cb7-3"><a href="applying-mlm-to-longitudinal-data.html#cb7-3" tabindex="-1"></a>                                      <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">4</span>,</span>
+<span id="cb7-4"><a href="applying-mlm-to-longitudinal-data.html#cb7-4" tabindex="-1"></a>                                      <span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">16</span>,</span>
+<span id="cb7-5"><a href="applying-mlm-to-longitudinal-data.html#cb7-5" tabindex="-1"></a>                                      <span class="st">`</span><span class="at">4</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">26</span>, </span>
+<span id="cb7-6"><a href="applying-mlm-to-longitudinal-data.html#cb7-6" tabindex="-1"></a>                                      <span class="st">`</span><span class="at">5</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">52</span>)</span>
+<span id="cb7-7"><a href="applying-mlm-to-longitudinal-data.html#cb7-7" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="applying-mlm-to-longitudinal-data.html#cb7-8" tabindex="-1"></a>DF1<span class="sc">$</span>Subject <span class="ot">&lt;-</span> DF1<span class="sc">$</span><span class="st">`</span><span class="at">Subject#</span><span class="st">`</span></span>
+<span id="cb7-9"><a href="applying-mlm-to-longitudinal-data.html#cb7-9" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="applying-mlm-to-longitudinal-data.html#cb7-10" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(YBOC <span class="sc">~</span> week <span class="sc">+</span> condition <span class="sc">+</span> week<span class="sc">*</span>condition <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> week <span class="sc">||</span> Subject), <span class="at">data =</span> DF1)</span>
+<span id="cb7-11"><a href="applying-mlm-to-longitudinal-data.html#cb7-11" tabindex="-1"></a><span class="fu">summary</span>(model1, <span class="at">corr =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
+## Formula: YBOC ~ week + condition + week * condition + ((1 | Subject) +  
+##     (0 + week | Subject))
+##    Data: DF1
+## 
+## REML criterion at convergence: 490.6
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -4.5446 -0.3930  0.1628  0.5887  2.2159 
+## 
+## Random effects:
+##  Groups    Name        Variance  Std.Dev.
+##  Subject   (Intercept) 0.0337444 0.18370 
+##  Subject.1 week        0.0002014 0.01419 
+##  Residual              0.2130124 0.46153 
+## Number of obs: 285, groups:  Subject, 62
+## 
+## Fixed effects:
+##                 Estimate Std. Error t value
+## (Intercept)     3.137797   0.063427  49.471
+## week           -0.022771   0.003600  -6.324
+## condition      -0.035821   0.090712  -0.395
+## week:condition  0.010222   0.005009   2.041
+## optimizer (nloptwrap) convergence code: 0 (OK)
+## Model failed to converge with max|grad| = 0.00478976 (tol = 0.002, component 1)</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="applying-mlm-to-longitudinal-data.html#cb9-1" tabindex="-1"></a>DF1<span class="sc">$</span>week52 <span class="ot">&lt;-</span> DF1<span class="sc">$</span>week <span class="sc">-</span> <span class="dv">52</span> </span>
+<span id="cb9-2"><a href="applying-mlm-to-longitudinal-data.html#cb9-2" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="applying-mlm-to-longitudinal-data.html#cb9-3" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(YBOC <span class="sc">~</span> week52 <span class="sc">+</span> condition <span class="sc">+</span> week52<span class="sc">*</span>condition <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> week52), <span class="at">data =</span> DF1)</span>
+<span id="cb9-4"><a href="applying-mlm-to-longitudinal-data.html#cb9-4" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="applying-mlm-to-longitudinal-data.html#cb9-5" tabindex="-1"></a><span class="fu">summary</span>(model2, <span class="at">corr =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
+## Formula: YBOC ~ week52 + condition + week52 * condition + (1 | week52)
+##    Data: DF1
+## 
+## REML criterion at convergence: 545.4
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -3.9121 -0.3962  0.1036  0.5959  2.4953 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  week52   (Intercept) 0.04556  0.2135  
+##  Residual             0.35655  0.5971  
+## Number of obs: 285, groups:  week52, 5
+## 
+## Fixed effects:
+##                   Estimate Std. Error t value
+## (Intercept)       1.903341   0.221039   8.611
+## week52           -0.023607   0.005856  -4.031
+## condition         0.519826   0.152557   3.407
+## week52:condition  0.010576   0.003954   2.675</code></pre>
 </div>
 <div id="quadratic-growth-curve-models" class="section level2 hasAnchor" number="3.3">
 <h2><span class="header-section-number">3.3</span> Quadratic Growth Curve Models<a href="applying-mlm-to-longitudinal-data.html#quadratic-growth-curve-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>A <strong>quadratic model of change</strong> includes a quadratic effect of time (i.e., as <span class="math inline">\(time^2\)</span>, otherwise known as the <em>quadratic rate of change</em>, or the <em>quadratic slope for time</em>) in addition to an intercept and a linear effect of time (i.e., as <span class="math inline">\(time^1\)</span>, otherwise known as the <em>linear rate of change</em>, or the <em>linear slope for time</em>). A quadratic effect of time implies a <em>change</em> in the linear rate of change over time, such that the linear time slope either <em>accelerates</em> (speeds up) or <em>decelerates</em> (slows down) over time.</p>
 <p>The figure below illustrates how positive or negative linear or quadratic effects of time can work together to create many possible patterns of nonlinear change. First, the top left shows how a <em>positive</em> linear effect of time and a <em>positive</em> quadratic effect of time create an <strong>accelerating positive function</strong>, or a mean trajectory in which the rate of increase speeds up over time. Second, the top right shows how a <em>positive</em> linear effect of time and a <em>negative</em> quadratic effect of time create a <strong>decelerating positive function</strong>, or a mean trajectory in which the rate of increase slows down over time instead. Third, the bottom left shows how a <em>negative</em> linear effect of time and a <em>positive</em> quadratic effect of time create a <strong>decelerating negative function</strong>, or a mean trajectory in which the rate of decrease slows down over time. Finally, the bottom right shows how a <em>negative</em> linear effect of time and a <em>negative</em> quadratic effect of time create an <strong>accelerating negative function</strong>, or a mean trajectory in which the rate of decrease speeds over time. We cannot determine just from its sign if a quadratic effect creates acceleration or deceleration. A <em>positive</em> quadratic effect of time can make a positive linear effect of time <em>more positive</em> (acceleration), or it can make a negative linear effect of time <em>less negative</em> (deceleration). Similarly, a <em>negative</em> quadratic effect of time can make a negative linear effect of time <em>more negative</em> (acceleration).</p>
-<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG7.jpg" /><!-- --></p>
+<p>Furthermore, just like any other predictor that varies over time, a quadratic effect of time can have both a fixed effect and a random effect. That is, a <strong>fixed quadratic effect of time</strong> in the model for the means implies a change in the linear rate of change <em>on average</em>. More specifically,
+<img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG7.jpg" /><!-- --></p>
 <p>Typically, in a treatment outcome study, the improvement in outcome over time levels off. Hence, we need to be able to model growth as curvilinear. We can do this by looking at the pattern of means across time, within condition, to get an idea of what the change in the means over time looks like.
 - Remember that this is the pattern of means for the non-missing data, so it may not reflect MLM growth curves.</p>
-<p>We can test for a quadratic curve by adding a “time squared” term to the level-1 MLM model. Note that we have a level-2 equation for every level 1 parameter, so with a quadratic growth curve, you will have 3 level-2 equations, adding the level-2 equation for the timesq term. The level 2 equation for the quadratic term does not HAVE to have the same predictors that the linear time term has, but if it does have predictors, they must be included as predictors of linear time and the intercept. This is necessary to have all subcomponents of the interaction included in the model.</p>
+<p>We can test for a quadratic curve by adding a “time squared” term to the level-1 MLM model. Note that we have a level-2 equation for every level 1 parameter, so with a quadratic growth curve, you will have 3 level-2 equations, adding the level-2 equation for the timesq term. The level 2 equation for the quadratic term does not <em>have</em> to have the same predictors that the linear time term has, but if it does have predictors, they must be included as predictors of linear time and the intercept. This is necessary to have all subcomponents of the interaction included in the model.</p>
 <p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG6.jpg" /><!-- -->
 Be sure that the squared term uses the exact linear term, squared. Don’t use timec1 for the linear term and timec5-squared for the squared term. Otherwise, the meaning of the some of the coefficients (e.g., main effects) can become problematic. Even higher level terms (e.g., cubic, quartic, etc.) can also be added if needed.</p>
 <div id="meaning-of-the-linear-vs.-quadratic-terms" class="section level3 hasAnchor" number="3.3.1">
@@ -187,7 +332,7 @@ Be sure that the squared term uses the exact linear term, squared. Don’t use t
 <p>REML can be used to compare models that differ <em>only</em> on variance components (e.g., random effects and covariances). However, these models can also be tested using ML, so you can just default to using ML for all comparisons.</p>
 <ul>
 <li>For all likelihood ratio tests (i.e., tests using the difference in the -2LL), regardless of using ML or REML, the 2-tailed p-value should be divided by 2 (i.e., use a 1 tailed test) to obtain the correct p-value (Berkhof &amp; Snijders, 2001), basically because the -2LL of the restricted model is always larger than the -2LL of the fuller model (i.e., it is a unidirectional test).</li>
-<li>This website can perform one tailed <span class="math inline">\(\chi^2\)</span> tests so that we don’t need to divide by 2:</li>
+<li>This website can perform one tailed <span class="math inline">\(\chi^2\)</span> tests so that we don’t need to divide by 2: <a href="https://www.danielsoper.com/statcalc/calculator.aspx?id=11">Daniel Soper One-Tailed <span class="math inline">\(\chi^2\)</span> Test Calculator</a></li>
 </ul>
 
 </div>
@@ -197,8 +342,8 @@ Be sure that the squared term uses the exact linear term, squared. Don’t use t
           </div>
         </div>
       </div>
-<a href="what-is-mlm-used-for.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="what-is-mlm-used-for.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="treating-time-more-flexibly.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

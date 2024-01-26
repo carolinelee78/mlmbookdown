@@ -17,3 +17,5 @@ quadratic-growth-curve-models
 homework-3---0905
 meaning-of-the-linear-vs.-quadratic-terms
 nested-models
+treating-time-more-flexibly
+homework-4---0912

@@ -112,7 +112,7 @@ A smaller model (one with fewer parameters) is nested within a larger model if t
 REML can be used to compare models that differ *only* on variance components (e.g., random effects and covariances). However, these models can also be tested using ML, so you can just default to using ML for all comparisons. 
 
  - For all likelihood ratio tests (i.e., tests using the difference in the -2LL), regardless of using ML or REML, the 2-tailed p-value should be divided by 2 (i.e., use a 1 tailed test) to obtain the correct p-value (Berkhof & Snijders, 2001), basically because the -2LL of the restricted model is always larger than the -2LL of the fuller model (i.e., it is a unidirectional test).
- - This website can perform one tailed $\chi^2$ tests so that we don't need to divide by 2:
+ - This website can perform one tailed $\chi^2$ tests so that we don't need to divide by 2: [Daniel Soper One-Tailed $\chi^2$ Test Calculator](https://www.danielsoper.com/statcalc/calculator.aspx?id=11)
 
 
 

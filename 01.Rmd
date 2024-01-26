@@ -17,7 +17,7 @@ where $Y_j$ is the outcome of assessment $j$, $T_j$ is TIme at assessment $j$ (o
 In MLM, the parameters in this model (e.g., the intercept and slope) are calculated for each individual in the study and can be different for each individual. If $i$ represents the different individuals in your study, equation 1 can be written for **_all_** the individuals as: 
 $$ Y_{ij} = b_{0i} + b_{1i}*T_{ij} + \epsilon_{ij} $$
 So, each individual has a different intercept and a different slope. Each person has their _own_ growth curve that best fits their own data. 
-```{r, echo = FALSE}
+```{r, echo = FALSE, out.width="50%", fig.align = 'center'}
 knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG1.png")
 ```
 
@@ -25,7 +25,7 @@ The value of the intercept depends on how time is coded since the intercept is t
 
 The error in the level-1 model is the error in predicting each data point for each person. Each person has an error at each time point, so these errors can be considered variables $e_1 ... e_k$, if there are $k$ assessments. The variance of the error at each time point is referred to as $\sigma_{j}^2$. The error variance is assumed to be equal at each time point in most simple MLM analyses, but the error covariance matrix can be specified in a more complex manner. The $\epsilon_{ij}$ are assumed to be normally distributed.
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, out.width="50%", fig.align = 'center'}
 knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG2.png")
 ```
 This same kind of model can be used to calculate the relation between 2 variables over time (e.g., the relation between mood and lung function each day in a diary study). Time is often not included in these models when one does not have a treatment or there is no reason to believe that the variables will change systematically over time (like in a short term diary study). However, time can be included as an additional predictor of outcome if the study covers some developmental phases of life so that the outcome is expected to change. The model examining whether mood affects lung function over a 30 day diary study would be:
@@ -35,7 +35,7 @@ where ${FEV}_{ij}$ is lung function for individual $i$ at assessment $j$, $Mood_
 
 These basic equations all model the relation between predictors and outcome within-subjects over time. These equations that model the repeated measures within-subjects over time is called the level-1 model.
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, out.width="50%", fig.align = 'center'}
 knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG3.png")
 ```
 
@@ -87,8 +87,7 @@ Chapter 2 in Heck includes instructions on restructuring, and Chapter 3 has inst
 ```
 
 ```
-* STEP 2. Run Simple MLM with DV as YBOC and covariates as index1 and condition, and with
-random effect for the intercept only. 
+* STEP 2. Run Simple MLM with DV as YBOC and covariates as index1 and condition, and with random effect for the intercept only. 
 
 MIXED YBOC WITH Index1 condition   
   /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1)    
@@ -100,7 +99,7 @@ MIXED YBOC WITH Index1 condition
   /REPEATED=Index1 | SUBJECT(Subject#) COVTYPE(ID). 
 ```
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, out.width="50%", fig.align = 'center'}
 knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG4.png")
 ```
 
@@ -109,7 +108,7 @@ library(haven)
 library(lme4)
 
 DF1 <- read_sav("Restructured_OCDMediationYBOCSBDI1inS.sav")
-model1 <- lmer(YBOC ~ Index1 + condition + Index1*condition + (1 | Index1), data = DF1)
+model1 <- lmer(YBOC ~ Index1 + condition + Index1*condition + (1 | Index1), data = DF1, na.action = na.exclude)
 summary(model1)
 ```
 
