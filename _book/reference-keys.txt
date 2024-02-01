@@ -25,3 +25,4 @@ how-do-we-use-ml-methods-to-fit-a-multilevel-model-and-how-does-it-work
 which-way-should-you-code-time
 ml-vs.-reml
 aic-vs.-bic
+weekc52-weekc52sq-condition-weekc52condition-weekc52sqcondition

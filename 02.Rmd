@@ -113,15 +113,9 @@ DF1$week <- dplyr::recode(DF1$Index1, `1` = 0,
 
 DF1$Subject <- DF1$`Subject#`
 
-model1 <- lmer(YBOC ~ week + condition + week*condition + (1 + week || Subject), data = DF1)
-summary(model1, corr = FALSE)
- 
-```
-
-```{r}
 DF1$week52 <- DF1$week - 52 
 
-model2 <- lmer(YBOC ~ week52 + condition + week52*condition + (1 | week52), data = DF1)
+model2 <- lmer(YBOC ~ week52 + condition + week52*condition + (1 + week52 | Subject), data = DF1)
 
 summary(model2, corr = FALSE)
 ```
@@ -277,25 +271,32 @@ DF1$week <- dplyr::recode(DF1$Index1, `1` = 0,
 
 DF1$Subject <- DF1$`Subject#`
 
-model1 <- lmer(YBOC ~ week + condition + week*condition + (1 + week || Subject), data = DF1)
-summary(model1, corr = FALSE)
- 
-```
-
-# weekc52 weekc52sq condition weekc52*condition weekc52sq*condition 
-
-
-```{r}
 DF1$week52 <- DF1$week - 52 
 
 DF1$week52sq <- DF1$week52^2
 
-model3 <- lmer(YBOC ~ week52 + week52sq + condition + week52*condition + week52sq*condition + (1 | week52), data = DF1)
+model3 <- lmer(YBOC ~ week52 + (week52^2) + condition + week52*condition + (1 + week52 | Subject), data = DF1)
 
 summary(model3, corr = FALSE)
 ```
 
 Now try to graph the model using index1c5. Graph 2 models: the one WITH the condition x index1c5sq included, and the one WITHOUT condition x index1c5sq. Remember the trick you have to use to graph when the time variable is a transformed variable (you have to use the TRANSFORMED variable in the excel spreadsheet, not the raw 1,2,3,4,5 variable).
+
+**Excel**
+
+Model 1 (with condition*index1c5sq)
+
+```{r, echo = FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG14.png")
+```
+
+Model 2 (without condition*index1c5sq)
+
+```{r, echo = FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG15.png")
+```
+
+**R**
 
 ## Nested Models
 

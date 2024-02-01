@@ -23,7 +23,7 @@
 <meta name="author" content="For doing better, for remediation. Integrating David’s class materials and Hoffman’s (2015) Longitudinal Analysis textbook to learn MLM with both R and SPSS." />
 
 
-<meta name="date" content="2024-01-31" />
+<meta name="date" content="2024-02-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -166,7 +166,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html"><i class="fa fa-check"></i><b>4</b> Treating Time More Flexibly</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html#homework-4---0912"><i class="fa fa-check"></i><b>4.1</b> Homework 4 - 09/12</a></li>
+<li class="chapter" data-level="4.1" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html#ml-vs.-reml"><i class="fa fa-check"></i><b>4.1</b> ML vs. REML</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html#how-do-we-use-ml-methods-to-fit-a-multilevel-model-and-how-does-it-work"><i class="fa fa-check"></i><b>4.1.1</b> How do we use ML methods to fit a multilevel model, and how does it work?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html#aic-vs.-bic"><i class="fa fa-check"></i><b>4.2</b> AIC vs. BIC</a></li>
+<li class="chapter" data-level="4.3" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html#homework-4---0912"><i class="fa fa-check"></i><b>4.3</b> Homework 4 - 09/12</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -277,36 +282,39 @@ MIXED YBOC WITH Index1 condition
 <span id="cb3-2"><a href="what-is-mlm-used-for.html#cb3-2" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code></pre></div>
 <pre><code>## Loading required package: Matrix</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="what-is-mlm-used-for.html#cb5-1" tabindex="-1"></a>DF1 <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="st">&quot;Restructured_OCDMediationYBOCSBDI1inS.sav&quot;</span>)</span>
-<span id="cb5-2"><a href="what-is-mlm-used-for.html#cb5-2" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(YBOC <span class="sc">~</span> Index1 <span class="sc">+</span> condition <span class="sc">+</span> Index1<span class="sc">:</span>condition <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Index1), <span class="at">data =</span> DF1, <span class="at">na.action =</span> na.exclude)</span>
-<span id="cb5-3"><a href="what-is-mlm-used-for.html#cb5-3" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code></pre></div>
+<span id="cb5-2"><a href="what-is-mlm-used-for.html#cb5-2" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="what-is-mlm-used-for.html#cb5-3" tabindex="-1"></a>DF1<span class="sc">$</span>Subject <span class="ot">&lt;-</span> DF1<span class="sc">$</span><span class="st">`</span><span class="at">Subject#</span><span class="st">`</span></span>
+<span id="cb5-4"><a href="what-is-mlm-used-for.html#cb5-4" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="what-is-mlm-used-for.html#cb5-5" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(YBOC <span class="sc">~</span> Index1 <span class="sc">+</span> condition <span class="sc">+</span> Index1<span class="sc">:</span>condition <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Subject), <span class="at">data =</span> DF1, <span class="at">na.action =</span> na.exclude)</span>
+<span id="cb5-6"><a href="what-is-mlm-used-for.html#cb5-6" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
-## Formula: YBOC ~ Index1 + condition + Index1:condition + (1 | Index1)
+## Formula: YBOC ~ Index1 + condition + Index1:condition + (1 | Subject)
 ##    Data: DF1
 ## 
-## REML criterion at convergence: 530.6
+## REML criterion at convergence: 488
 ## 
 ## Scaled residuals: 
 ##     Min      1Q  Median      3Q     Max 
-## -3.8798 -0.4172  0.1014  0.5666  2.5108 
+## -4.0408 -0.3692  0.0714  0.5247  2.2471 
 ## 
 ## Random effects:
 ##  Groups   Name        Variance Std.Dev.
-##  Index1   (Intercept) 0.002204 0.04694 
-##  Residual             0.357684 0.59807 
-## Number of obs: 285, groups:  Index1, 5
+##  Subject  (Intercept) 0.1196   0.3459  
+##  Residual             0.2396   0.4894  
+## Number of obs: 285, groups:  Subject, 62
 ## 
 ## Fixed effects:
 ##                  Estimate Std. Error t value
-## (Intercept)       3.66539    0.12416  29.521
-## Index1           -0.33276    0.03917  -8.496
-## condition        -0.21143    0.16269  -1.300
-## Index1:condition  0.12901    0.05103   2.528
+## (Intercept)       3.64548    0.11198  32.556
+## Index1           -0.32034    0.03037 -10.548
+## condition        -0.20394    0.16002  -1.274
+## Index1:condition  0.12381    0.04247   2.916
 ## 
 ## Correlation of Fixed Effects:
 ##             (Intr) Index1 condtn
-## Index1      -0.899              
-## condition   -0.643  0.582       
-## Indx1:cndtn  0.585 -0.657 -0.900</code></pre>
+## Index1      -0.749              
+## condition   -0.700  0.524       
+## Indx1:cndtn  0.536 -0.715 -0.750</code></pre>
 
 </div>
 </div>

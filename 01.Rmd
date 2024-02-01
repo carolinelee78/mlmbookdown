@@ -120,8 +120,6 @@ The effect of condition on YBOCS when index1=0, this is meaningless because of h
 
 Repeated measures is the variance of ($\epsilon_{ij}$ for level 1 – error at level 1. How far off each actual data point is from the line). We are more interested in the intercept variable, which is the random effect (the composite model ($\mu$s are called random effects in a level 2 equation, the variability between people of whatever that parameter is). Variability in each line for each person, basically the start point. If intercept is at the end, it's the variability of the end scores. If it’s at the beginning, it’s the variability of the baseline. 
 
---- 
-
 **R**
 
 ```{r}
@@ -129,7 +127,10 @@ library(haven)
 library(lme4)
 
 DF1 <- read_sav("Restructured_OCDMediationYBOCSBDI1inS.sav")
-model1 <- lmer(YBOC ~ Index1 + condition + Index1:condition + (1 | Index1), data = DF1, na.action = na.exclude)
+
+DF1$Subject <- DF1$`Subject#`
+
+model1 <- lmer(YBOC ~ Index1 + condition + Index1:condition + (1 | Subject), data = DF1, na.action = na.exclude)
 summary(model1)
 ```
 

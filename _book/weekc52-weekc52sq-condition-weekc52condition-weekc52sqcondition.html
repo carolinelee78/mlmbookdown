@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 weekc52 weekc52sq condition weekc52condition weekc52sqcondition | MLM Study Guide for Caroline, by Caroline</title>
+  <meta name="description" content="Chapter 4 weekc52 weekc52sq condition weekc52condition weekc52sqcondition | MLM Study Guide for Caroline, by Caroline" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 weekc52 weekc52sq condition weekc52condition weekc52sqcondition | MLM Study Guide for Caroline, by Caroline" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 weekc52 weekc52sq condition weekc52condition weekc52sqcondition | MLM Study Guide for Caroline, by Caroline" />
+  
+  
+  
+
+<meta name="author" content="For doing better, for remediation. Integrating David’s class materials and Hoffman’s (2015) Longitudinal Analysis textbook to learn MLM with both R and SPSS." />
+
+
+<meta name="date" content="2024-02-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="applying-mlm-to-longitudinal-data.html"/>
+<link rel="next" href="treating-time-more-flexibly.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">MLM Study Guide</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> First, why multilevel modeling?</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#disadvantages-of-ranova"><i class="fa fa-check"></i><b>1.1</b> Disadvantages of RANOVA</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#disadvantages-of-locf"><i class="fa fa-check"></i><b>1.2</b> Disadvantages of LOCF</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#disadvantages-of-complex-imputation-e.g.-multiple-imputation"><i class="fa fa-check"></i><b>1.3</b> Disadvantages of complex imputation (e.g., multiple imputation)</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#advantages-of-mlm"><i class="fa fa-check"></i><b>1.4</b> Advantages of MLM</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="what-is-mlm-used-for.html"><a href="what-is-mlm-used-for.html"><i class="fa fa-check"></i><b>2</b> What is MLM used for?</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="what-is-mlm-used-for.html"><a href="what-is-mlm-used-for.html#levels-of-analyses-in-mlm"><i class="fa fa-check"></i><b>2.1</b> Levels of analyses in MLM</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="what-is-mlm-used-for.html"><a href="what-is-mlm-used-for.html#level-1"><i class="fa fa-check"></i><b>2.1.1</b> Level 1</a></li>
+<li class="chapter" data-level="2.1.2" data-path="what-is-mlm-used-for.html"><a href="what-is-mlm-used-for.html#level-2"><i class="fa fa-check"></i><b>2.1.2</b> Level 2</a></li>
+<li class="chapter" data-level="2.1.3" data-path="what-is-mlm-used-for.html"><a href="what-is-mlm-used-for.html#summary"><i class="fa fa-check"></i><b>2.1.3</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="what-is-mlm-used-for.html"><a href="what-is-mlm-used-for.html#homework-1---0829"><i class="fa fa-check"></i><b>2.2</b> Homework 1 - 08/29</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html"><i class="fa fa-check"></i><b>3</b> Applying MLM to Longitudinal Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#overview"><i class="fa fa-check"></i><b>3.1</b> Overview</a></li>
+<li class="chapter" data-level="3.2" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#homework-2---0831"><i class="fa fa-check"></i><b>3.2</b> Homework 2 - 08/31</a></li>
+<li class="chapter" data-level="3.3" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#quadratic-growth-curve-models"><i class="fa fa-check"></i><b>3.3</b> Quadratic Growth Curve Models</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#meaning-of-the-linear-vs.-quadratic-terms"><i class="fa fa-check"></i><b>3.3.1</b> Meaning of the Linear vs. Quadratic Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#homework-3---0905"><i class="fa fa-check"></i><b>3.4</b> Homework 3 - 09/05</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="weekc52-weekc52sq-condition-weekc52condition-weekc52sqcondition.html"><a href="weekc52-weekc52sq-condition-weekc52condition-weekc52sqcondition.html"><i class="fa fa-check"></i><b>4</b> weekc52 weekc52sq condition weekc52<em>condition weekc52sq</em>condition</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="weekc52-weekc52sq-condition-weekc52condition-weekc52sqcondition.html"><a href="weekc52-weekc52sq-condition-weekc52condition-weekc52sqcondition.html#nested-models"><i class="fa fa-check"></i><b>4.1</b> Nested Models</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html"><i class="fa fa-check"></i><b>5</b> Treating Time More Flexibly</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html#ml-vs.-reml"><i class="fa fa-check"></i><b>5.1</b> ML vs. REML</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html#how-do-we-use-ml-methods-to-fit-a-multilevel-model-and-how-does-it-work"><i class="fa fa-check"></i><b>5.1.1</b> How do we use ML methods to fit a multilevel model, and how does it work?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html#aic-vs.-bic"><i class="fa fa-check"></i><b>5.2</b> AIC vs. BIC</a></li>
+<li class="chapter" data-level="5.3" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html#homework-4---0912"><i class="fa fa-check"></i><b>5.3</b> Homework 4 - 09/12</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">MLM Study Guide for Caroline, by Caroline</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="weekc52-weekc52sq-condition-weekc52condition-weekc52sqcondition" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> weekc52 weekc52sq condition weekc52<em>condition weekc52sq</em>condition<a href="weekc52-weekc52sq-condition-weekc52condition-weekc52sqcondition.html#weekc52-weekc52sq-condition-weekc52condition-weekc52sqcondition" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="weekc52-weekc52sq-condition-weekc52condition-weekc52sqcondition.html#cb25-1" tabindex="-1"></a>DF1<span class="sc">$</span>week52 <span class="ot">&lt;-</span> DF1<span class="sc">$</span>week <span class="sc">-</span> <span class="dv">52</span> </span>
+<span id="cb25-2"><a href="weekc52-weekc52sq-condition-weekc52condition-weekc52sqcondition.html#cb25-2" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="weekc52-weekc52sq-condition-weekc52condition-weekc52sqcondition.html#cb25-3" tabindex="-1"></a>DF1<span class="sc">$</span>week52sq <span class="ot">&lt;-</span> DF1<span class="sc">$</span>week52<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb25-4"><a href="weekc52-weekc52sq-condition-weekc52condition-weekc52sqcondition.html#cb25-4" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="weekc52-weekc52sq-condition-weekc52condition-weekc52sqcondition.html#cb25-5" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(YBOC <span class="sc">~</span> week52 <span class="sc">+</span> week52sq <span class="sc">+</span> condition <span class="sc">+</span> week52<span class="sc">*</span>condition <span class="sc">+</span> week52sq<span class="sc">*</span>condition <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> week52) <span class="sc">+</span> (<span class="dv">1</span> ), <span class="at">data =</span> DF1)</span></code></pre></div>
+<pre><code>## Warning: Some predictor variables are on very different scales: consider
+## rescaling</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="weekc52-weekc52sq-condition-weekc52condition-weekc52sqcondition.html#cb27-1" tabindex="-1"></a><span class="fu">summary</span>(model3, <span class="at">corr =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
+## Formula: 
+## YBOC ~ week52 + week52sq + condition + week52 * condition + week52sq *  
+##     condition + (1 | week52) + (1)
+##    Data: DF1
+## 
+## REML criterion at convergence: 570.1
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -3.8752 -0.3814  0.0759  0.5854  2.4724 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  week52   (Intercept) 0.005749 0.07582 
+##  Residual             0.357620 0.59801 
+## Number of obs: 285, groups:  week52, 5
+## 
+## Fixed effects:
+##                     Estimate Std. Error t value
+## (Intercept)        2.050e+00  1.452e-01  14.119
+## week52             3.799e-03  1.181e-02   0.322
+## week52sq           5.305e-04  2.156e-04   2.461
+## condition          5.459e-01  1.719e-01   3.175
+## week52:condition   1.499e-02  1.385e-02   1.083
+## week52sq:condition 8.446e-05  2.517e-04   0.336
+## fit warnings:
+## Some predictor variables are on very different scales: consider rescaling</code></pre>
+<p>Now try to graph the model using index1c5. Graph 2 models: the one WITH the condition x index1c5sq included, and the one WITHOUT condition x index1c5sq. Remember the trick you have to use to graph when the time variable is a transformed variable (you have to use the TRANSFORMED variable in the excel spreadsheet, not the raw 1,2,3,4,5 variable).</p>
+<div id="nested-models" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Nested Models<a href="weekc52-weekc52sq-condition-weekc52condition-weekc52sqcondition.html#nested-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A smaller model (one with fewer parameters) is nested within a larger model if the larger model has ALL the parameters included in the smaller model, plus at least 1 additional parameter. Or, a smaller model is nested within a larger model if you can derive the smaller model by putting 1 or more restrictions on the larger model.</p>
+<ul>
+<li>“Parameters” includes both fixed effects and random effects (variance components).</li>
+<li>You can <strong>statistically</strong> compare <strong>nested</strong> models for relative “goodness of fit” using the difference in the -2LL.</li>
+<li>The difference in the -2LL of the 2 models is a chi-square whose degrees of freedom is the difference in the number of parameters estimated by the 2 models.</li>
+<li>Note that ML estimation must be used if your comparisons between models involve ANY differences in fixed effects (in your predictors/covariates) including differences in fixed effects and variance components</li>
+<li>However, if your models involve different fixed effects (except additional effects in the full model, since the full model by definition has fixed effects that are not in the nested model), you cannot compare them with -2LL. You must use AIC/BIC.</li>
+</ul>
+<p>REML can be used to compare models that differ <em>only</em> on variance components (e.g., random effects and covariances). However, these models can also be tested using ML, so you can just default to using ML for all comparisons.</p>
+<ul>
+<li>For all likelihood ratio tests (i.e., tests using the difference in the -2LL), regardless of using ML or REML, the 2-tailed p-value should be divided by 2 (i.e., use a 1 tailed test) to obtain the correct p-value (Berkhof &amp; Snijders, 2001), basically because the -2LL of the restricted model is always larger than the -2LL of the fuller model (i.e., it is a unidirectional test).</li>
+<li>This website can perform one tailed <span class="math inline">\(\chi^2\)</span> tests so that we don’t need to divide by 2: <a href="https://www.danielsoper.com/statcalc/calculator.aspx?id=11">Daniel Soper One-Tailed <span class="math inline">\(\chi^2\)</span> Test Calculator</a></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="applying-mlm-to-longitudinal-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="treating-time-more-flexibly.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "sepia",
+"family": "serif",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

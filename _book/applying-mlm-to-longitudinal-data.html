@@ -166,7 +166,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html"><i class="fa fa-check"></i><b>4</b> Treating Time More Flexibly</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html#homework-4---0912"><i class="fa fa-check"></i><b>4.1</b> Homework 4 - 09/12</a></li>
+<li class="chapter" data-level="4.1" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html#ml-vs.-reml"><i class="fa fa-check"></i><b>4.1</b> ML vs. REML</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html#how-do-we-use-ml-methods-to-fit-a-multilevel-model-and-how-does-it-work"><i class="fa fa-check"></i><b>4.1.1</b> How do we use ML methods to fit a multilevel model, and how does it work?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html#aic-vs.-bic"><i class="fa fa-check"></i><b>4.2</b> AIC vs. BIC</a></li>
+<li class="chapter" data-level="4.3" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html#homework-4---0912"><i class="fa fa-check"></i><b>4.3</b> Homework 4 - 09/12</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -249,6 +254,7 @@ MIXED YBOC WITH condition week52
 <li>An individual’s average slope does not vary around the average slope (UN2.2 – slope random effect – within each condition. Deviation for the average slope).</li>
 <li>The higher the slope, the higher the intercept for each individual on average as this is a positive value for (UN2.1 - covariance).</li>
 </ul>
+<hr />
 <p><strong>R</strong></p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="applying-mlm-to-longitudinal-data.html#cb4-1" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
 <span id="cb4-2"><a href="applying-mlm-to-longitudinal-data.html#cb4-2" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code></pre></div>
@@ -271,63 +277,37 @@ MIXED YBOC WITH condition week52
 <span id="cb10-7"><a href="applying-mlm-to-longitudinal-data.html#cb10-7" tabindex="-1"></a></span>
 <span id="cb10-8"><a href="applying-mlm-to-longitudinal-data.html#cb10-8" tabindex="-1"></a>DF1<span class="sc">$</span>Subject <span class="ot">&lt;-</span> DF1<span class="sc">$</span><span class="st">`</span><span class="at">Subject#</span><span class="st">`</span></span>
 <span id="cb10-9"><a href="applying-mlm-to-longitudinal-data.html#cb10-9" tabindex="-1"></a></span>
-<span id="cb10-10"><a href="applying-mlm-to-longitudinal-data.html#cb10-10" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(YBOC <span class="sc">~</span> week <span class="sc">+</span> condition <span class="sc">+</span> week<span class="sc">*</span>condition <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> week <span class="sc">||</span> Subject), <span class="at">data =</span> DF1)</span></code></pre></div>
-<pre><code>## Warning in checkConv(attr(opt, &quot;derivs&quot;), opt$par, ctrl = control$checkConv, :
-## Model failed to converge with max|grad| = 0.00478976 (tol = 0.002, component 1)</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="applying-mlm-to-longitudinal-data.html#cb12-1" tabindex="-1"></a><span class="fu">summary</span>(model1, <span class="at">corr =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<span id="cb10-10"><a href="applying-mlm-to-longitudinal-data.html#cb10-10" tabindex="-1"></a>DF1<span class="sc">$</span>week52 <span class="ot">&lt;-</span> DF1<span class="sc">$</span>week <span class="sc">-</span> <span class="dv">52</span> </span>
+<span id="cb10-11"><a href="applying-mlm-to-longitudinal-data.html#cb10-11" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="applying-mlm-to-longitudinal-data.html#cb10-12" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(YBOC <span class="sc">~</span> week52 <span class="sc">+</span> condition <span class="sc">+</span> week52<span class="sc">*</span>condition <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> week52 <span class="sc">|</span> Subject), <span class="at">data =</span> DF1)</span></code></pre></div>
+<pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="applying-mlm-to-longitudinal-data.html#cb12-1" tabindex="-1"></a><span class="fu">summary</span>(model2, <span class="at">corr =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
-## Formula: YBOC ~ week + condition + week * condition + ((1 | Subject) +  
-##     (0 + week | Subject))
+## Formula: YBOC ~ week52 + condition + week52 * condition + (1 + week52 |  
+##     Subject)
 ##    Data: DF1
 ## 
-## REML criterion at convergence: 490.6
+## REML criterion at convergence: 483.6
 ## 
 ## Scaled residuals: 
 ##     Min      1Q  Median      3Q     Max 
-## -4.5446 -0.3930  0.1628  0.5887  2.2159 
+## -4.5887 -0.3930  0.1551  0.5829  2.4698 
 ## 
 ## Random effects:
-##  Groups    Name        Variance  Std.Dev.
-##  Subject   (Intercept) 0.0337444 0.18370 
-##  Subject.1 week        0.0002014 0.01419 
-##  Residual              0.2130124 0.46153 
+##  Groups   Name        Variance  Std.Dev. Corr
+##  Subject  (Intercept) 0.5907514 0.76860      
+##           week52      0.0001433 0.01197  1.00
+##  Residual             0.2134546 0.46201      
 ## Number of obs: 285, groups:  Subject, 62
 ## 
 ## Fixed effects:
-##                 Estimate Std. Error t value
-## (Intercept)     3.137797   0.063427  49.471
-## week           -0.022771   0.003600  -6.324
-## condition      -0.035821   0.090712  -0.395
-## week:condition  0.010222   0.005009   2.041
-## optimizer (nloptwrap) convergence code: 0 (OK)
-## Model failed to converge with max|grad| = 0.00478976 (tol = 0.002, component 1)</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="applying-mlm-to-longitudinal-data.html#cb14-1" tabindex="-1"></a>DF1<span class="sc">$</span>week52 <span class="ot">&lt;-</span> DF1<span class="sc">$</span>week <span class="sc">-</span> <span class="dv">52</span> </span>
-<span id="cb14-2"><a href="applying-mlm-to-longitudinal-data.html#cb14-2" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="applying-mlm-to-longitudinal-data.html#cb14-3" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(YBOC <span class="sc">~</span> week52 <span class="sc">+</span> condition <span class="sc">+</span> week52<span class="sc">*</span>condition <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> week52), <span class="at">data =</span> DF1)</span>
-<span id="cb14-4"><a href="applying-mlm-to-longitudinal-data.html#cb14-4" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="applying-mlm-to-longitudinal-data.html#cb14-5" tabindex="-1"></a><span class="fu">summary</span>(model2, <span class="at">corr =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
-## Formula: YBOC ~ week52 + condition + week52 * condition + (1 | week52)
-##    Data: DF1
-## 
-## REML criterion at convergence: 545.4
-## 
-## Scaled residuals: 
-##     Min      1Q  Median      3Q     Max 
-## -3.9121 -0.3962  0.1036  0.5959  2.4953 
-## 
-## Random effects:
-##  Groups   Name        Variance Std.Dev.
-##  week52   (Intercept) 0.04556  0.2135  
-##  Residual             0.35655  0.5971  
-## Number of obs: 285, groups:  week52, 5
-## 
-## Fixed effects:
 ##                   Estimate Std. Error t value
-## (Intercept)       1.903341   0.221039   8.611
-## week52           -0.023607   0.005856  -4.031
-## condition         0.519826   0.152557   3.407
-## week52:condition  0.010576   0.003954   2.675</code></pre>
+## (Intercept)       1.993824   0.171175  11.648
+## week52           -0.021916   0.003283  -6.676
+## condition         0.477315   0.238725   1.999
+## week52:condition  0.009844   0.004559   2.159
+## optimizer (nloptwrap) convergence code: 0 (OK)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
 </div>
 <div id="quadratic-growth-curve-models" class="section level2 hasAnchor" number="3.3">
 <h2><span class="header-section-number">3.3</span> Quadratic Growth Curve Models<a href="applying-mlm-to-longitudinal-data.html#quadratic-growth-curve-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -407,8 +387,8 @@ MIXED YBOCS WITH weekc52 weekc52sq condition
   /PRINT=SOLUTION TESTCOV
   /RANDOM=INTERCEPT weekc52 | SUBJECT(Subject#) COVTYPE(UN)
   /REPEATED=weekc52 | SUBJECT(Subject#) COVTYPE(ID).</code></pre>
-<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG13.png" /><!-- -->
-<strong>Interpretation of</strong> <em><strong>weekc52</strong></em> <strong>Main Effect</strong></p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG13.png" /><!-- --></p>
+<p><strong>Interpretation of</strong> <em><strong>weekc52</strong></em> <strong>Main Effect</strong></p>
 <p>The linear decrease in YBOCS in condition 0 at week 52 is not significant.</p>
 <p><strong>Interpretation of</strong> <em><strong>weekc52sq</strong></em> <strong>Main Effect</strong></p>
 <p>There is a significant curvilinear change in YBOCS in condition 0 at week 52.</p>
@@ -416,8 +396,65 @@ MIXED YBOCS WITH weekc52 weekc52sq condition
 <p>Difference in YBOCS across conditions at week 52 is not significant.</p>
 <p><strong>Interpretation of</strong> <em><strong>week52</strong></em> <span class="math inline">\(\times\)</span> <em><strong>YBOCS</strong></em> <strong>Interaction Effect</strong></p>
 <p>The change in differences across conditions in terms of YBOCS over time is significant.</p>
+<hr />
 <p><strong>R</strong></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="applying-mlm-to-longitudinal-data.html#cb20-1" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb20-2"><a href="applying-mlm-to-longitudinal-data.html#cb20-2" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb20-3"><a href="applying-mlm-to-longitudinal-data.html#cb20-3" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="applying-mlm-to-longitudinal-data.html#cb21-1" tabindex="-1"></a>DF1 <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="st">&quot;Restructured_OCDMediationYBOCSBDI1inS.sav&quot;</span>)</span>
+<span id="cb21-2"><a href="applying-mlm-to-longitudinal-data.html#cb21-2" tabindex="-1"></a>DF1<span class="sc">$</span>week <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">recode</span>(DF1<span class="sc">$</span>Index1, <span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">0</span>,</span>
+<span id="cb21-3"><a href="applying-mlm-to-longitudinal-data.html#cb21-3" tabindex="-1"></a>                                      <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">4</span>,</span>
+<span id="cb21-4"><a href="applying-mlm-to-longitudinal-data.html#cb21-4" tabindex="-1"></a>                                      <span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">16</span>,</span>
+<span id="cb21-5"><a href="applying-mlm-to-longitudinal-data.html#cb21-5" tabindex="-1"></a>                                      <span class="st">`</span><span class="at">4</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">26</span>, </span>
+<span id="cb21-6"><a href="applying-mlm-to-longitudinal-data.html#cb21-6" tabindex="-1"></a>                                      <span class="st">`</span><span class="at">5</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">52</span>)</span>
+<span id="cb21-7"><a href="applying-mlm-to-longitudinal-data.html#cb21-7" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="applying-mlm-to-longitudinal-data.html#cb21-8" tabindex="-1"></a>DF1<span class="sc">$</span>Subject <span class="ot">&lt;-</span> DF1<span class="sc">$</span><span class="st">`</span><span class="at">Subject#</span><span class="st">`</span></span>
+<span id="cb21-9"><a href="applying-mlm-to-longitudinal-data.html#cb21-9" tabindex="-1"></a></span>
+<span id="cb21-10"><a href="applying-mlm-to-longitudinal-data.html#cb21-10" tabindex="-1"></a>DF1<span class="sc">$</span>week52 <span class="ot">&lt;-</span> DF1<span class="sc">$</span>week <span class="sc">-</span> <span class="dv">52</span> </span>
+<span id="cb21-11"><a href="applying-mlm-to-longitudinal-data.html#cb21-11" tabindex="-1"></a></span>
+<span id="cb21-12"><a href="applying-mlm-to-longitudinal-data.html#cb21-12" tabindex="-1"></a>DF1<span class="sc">$</span>week52sq <span class="ot">&lt;-</span> DF1<span class="sc">$</span>week52<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb21-13"><a href="applying-mlm-to-longitudinal-data.html#cb21-13" tabindex="-1"></a></span>
+<span id="cb21-14"><a href="applying-mlm-to-longitudinal-data.html#cb21-14" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(YBOC <span class="sc">~</span> week52 <span class="sc">+</span> week52sq <span class="sc">+</span> condition <span class="sc">+</span> week52<span class="sc">*</span>condition <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> week52 <span class="sc">|</span> Subject), <span class="at">data =</span> DF1)</span></code></pre></div>
+<pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="applying-mlm-to-longitudinal-data.html#cb23-1" tabindex="-1"></a><span class="fu">summary</span>(model3, <span class="at">corr =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
+## Formula: YBOC ~ week52 + week52sq + condition + week52 * condition + (1 +  
+##     week52 | Subject)
+##    Data: DF1
+## 
+## REML criterion at convergence: 458.1
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -4.5322 -0.3423  0.1100  0.4976  3.1384 
+## 
+## Random effects:
+##  Groups   Name        Variance  Std.Dev. Corr
+##  Subject  (Intercept) 0.5370330 0.73283      
+##           week52      0.0001284 0.01133  1.00
+##  Residual             0.1820994 0.42673      
+## Number of obs: 285, groups:  Subject, 62
+## 
+## Fixed effects:
+##                   Estimate Std. Error t value
+## (Intercept)      2.207e+00  1.645e-01  13.416
+## week52           1.099e-02  5.746e-03   1.912
+## week52sq         6.130e-04  9.076e-05   6.754
+## condition        4.735e-01  2.255e-01   2.100
+## week52:condition 9.559e-03  4.262e-03   2.243
+## optimizer (nloptwrap) convergence code: 0 (OK)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
 <p>Now try to graph the model using index1c5. Graph 2 models: the one WITH the condition x index1c5sq included, and the one WITHOUT condition x index1c5sq. Remember the trick you have to use to graph when the time variable is a transformed variable (you have to use the TRANSFORMED variable in the excel spreadsheet, not the raw 1,2,3,4,5 variable).</p>
+<p><strong>Excel</strong></p>
+<p>_Model 1 (with condition*index1c5sq)_</p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG14.png" /><!-- --></p>
+<p>_Model 2 (without condition*index1c5sq)_</p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG15.png" /><!-- --></p>
+<p><strong>R</strong></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="applying-mlm-to-longitudinal-data.html#cb25-1" tabindex="-1"></a><span class="fu">library</span>(sjPlot)</span>
+<span id="cb25-2"><a href="applying-mlm-to-longitudinal-data.html#cb25-2" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="applying-mlm-to-longitudinal-data.html#cb25-3" tabindex="-1"></a><span class="fu">plot_model</span>(model3)</span></code></pre></div>
+<p><img src="MLM-Study-Guide_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 </div>
 <div id="nested-models" class="section level2 hasAnchor" number="3.5">
 <h2><span class="header-section-number">3.5</span> Nested Models<a href="applying-mlm-to-longitudinal-data.html#nested-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
