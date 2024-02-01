@@ -90,7 +90,7 @@ knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbook
 **Interpretation of Covariance Parameters** 
 
 - .563 is the variability of the individual scores around the estimated average of their conditions at the last time point (UN1.1).
-- An individual’s average slope does not vary around the average slope (UN2.2 – slope random effect – within each condition. Deviation for the average slope).
+- An individual’s average slope does vary around the average slope (UN2.2 – slope random effect – within each condition. Deviation for the average slope).
 - The higher the slope, the higher the intercept for each individual on average as this is a positive value for (UN2.1 - covariance).
 
 --- 
@@ -237,7 +237,11 @@ knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbook
 
 **Interpretation of** _**weekc52**_ **Main Effect** 
 
-The linear decrease in YBOCS in condition 0 at week 52 is not significant. 
+The linear decrease in YBOCS in condition 0 at week 52 is not significant. Why would this be? Because the linear tangent to the quadratic change at week 52 would be a flat line, not a significant decrease. 
+
+```{r, echo = FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/quadratic.gif")
+```
 
 **Interpretation of** _**weekc52sq**_ **Main Effect** 
 

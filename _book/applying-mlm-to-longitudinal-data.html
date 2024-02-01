@@ -251,7 +251,7 @@ MIXED YBOC WITH condition week52
 <p><strong>Interpretation of Covariance Parameters</strong></p>
 <ul>
 <li>.563 is the variability of the individual scores around the estimated average of their conditions at the last time point (UN1.1).</li>
-<li>An individual’s average slope does not vary around the average slope (UN2.2 – slope random effect – within each condition. Deviation for the average slope).</li>
+<li>An individual’s average slope does vary around the average slope (UN2.2 – slope random effect – within each condition. Deviation for the average slope).</li>
 <li>The higher the slope, the higher the intercept for each individual on average as this is a positive value for (UN2.1 - covariance).</li>
 </ul>
 <hr />
@@ -389,7 +389,8 @@ MIXED YBOCS WITH weekc52 weekc52sq condition
   /REPEATED=weekc52 | SUBJECT(Subject#) COVTYPE(ID).</code></pre>
 <p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG13.png" /><!-- --></p>
 <p><strong>Interpretation of</strong> <em><strong>weekc52</strong></em> <strong>Main Effect</strong></p>
-<p>The linear decrease in YBOCS in condition 0 at week 52 is not significant.</p>
+<p>The linear decrease in YBOCS in condition 0 at week 52 is not significant. Why would this be? Because the linear tangent to the quadratic change at week 52 would be a flat line, not a significant decrease.</p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/quadratic.gif" /><!-- --></p>
 <p><strong>Interpretation of</strong> <em><strong>weekc52sq</strong></em> <strong>Main Effect</strong></p>
 <p>There is a significant curvilinear change in YBOCS in condition 0 at week 52.</p>
 <p><strong>Interpretation of</strong> <em><strong>condition</strong></em> <strong>Main Effect</strong></p>
@@ -414,47 +415,42 @@ MIXED YBOCS WITH weekc52 weekc52sq condition
 <span id="cb21-11"><a href="applying-mlm-to-longitudinal-data.html#cb21-11" tabindex="-1"></a></span>
 <span id="cb21-12"><a href="applying-mlm-to-longitudinal-data.html#cb21-12" tabindex="-1"></a>DF1<span class="sc">$</span>week52sq <span class="ot">&lt;-</span> DF1<span class="sc">$</span>week52<span class="sc">^</span><span class="dv">2</span></span>
 <span id="cb21-13"><a href="applying-mlm-to-longitudinal-data.html#cb21-13" tabindex="-1"></a></span>
-<span id="cb21-14"><a href="applying-mlm-to-longitudinal-data.html#cb21-14" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(YBOC <span class="sc">~</span> week52 <span class="sc">+</span> week52sq <span class="sc">+</span> condition <span class="sc">+</span> week52<span class="sc">*</span>condition <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> week52 <span class="sc">|</span> Subject), <span class="at">data =</span> DF1)</span></code></pre></div>
+<span id="cb21-14"><a href="applying-mlm-to-longitudinal-data.html#cb21-14" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(YBOC <span class="sc">~</span> week52 <span class="sc">+</span> (week52<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> condition <span class="sc">+</span> week52<span class="sc">*</span>condition <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> week52 <span class="sc">|</span> Subject), <span class="at">data =</span> DF1)</span></code></pre></div>
 <pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="applying-mlm-to-longitudinal-data.html#cb23-1" tabindex="-1"></a><span class="fu">summary</span>(model3, <span class="at">corr =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
-## Formula: YBOC ~ week52 + week52sq + condition + week52 * condition + (1 +  
-##     week52 | Subject)
+## Formula: YBOC ~ week52 + (week52^2) + condition + week52 * condition +  
+##     (1 + week52 | Subject)
 ##    Data: DF1
 ## 
-## REML criterion at convergence: 458.1
+## REML criterion at convergence: 483.6
 ## 
 ## Scaled residuals: 
 ##     Min      1Q  Median      3Q     Max 
-## -4.5322 -0.3423  0.1100  0.4976  3.1384 
+## -4.5887 -0.3930  0.1551  0.5829  2.4698 
 ## 
 ## Random effects:
 ##  Groups   Name        Variance  Std.Dev. Corr
-##  Subject  (Intercept) 0.5370330 0.73283      
-##           week52      0.0001284 0.01133  1.00
-##  Residual             0.1820994 0.42673      
+##  Subject  (Intercept) 0.5907514 0.76860      
+##           week52      0.0001433 0.01197  1.00
+##  Residual             0.2134546 0.46201      
 ## Number of obs: 285, groups:  Subject, 62
 ## 
 ## Fixed effects:
 ##                   Estimate Std. Error t value
-## (Intercept)      2.207e+00  1.645e-01  13.416
-## week52           1.099e-02  5.746e-03   1.912
-## week52sq         6.130e-04  9.076e-05   6.754
-## condition        4.735e-01  2.255e-01   2.100
-## week52:condition 9.559e-03  4.262e-03   2.243
+## (Intercept)       1.993824   0.171175  11.648
+## week52           -0.021916   0.003283  -6.676
+## condition         0.477315   0.238725   1.999
+## week52:condition  0.009844   0.004559   2.159
 ## optimizer (nloptwrap) convergence code: 0 (OK)
 ## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
 <p>Now try to graph the model using index1c5. Graph 2 models: the one WITH the condition x index1c5sq included, and the one WITHOUT condition x index1c5sq. Remember the trick you have to use to graph when the time variable is a transformed variable (you have to use the TRANSFORMED variable in the excel spreadsheet, not the raw 1,2,3,4,5 variable).</p>
 <p><strong>Excel</strong></p>
-<p>_Model 1 (with condition*index1c5sq)_</p>
+<p>Model 1 (with condition*index1c5sq)</p>
 <p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG14.png" /><!-- --></p>
-<p>_Model 2 (without condition*index1c5sq)_</p>
+<p>Model 2 (without condition*index1c5sq)</p>
 <p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG15.png" /><!-- --></p>
 <p><strong>R</strong></p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="applying-mlm-to-longitudinal-data.html#cb25-1" tabindex="-1"></a><span class="fu">library</span>(sjPlot)</span>
-<span id="cb25-2"><a href="applying-mlm-to-longitudinal-data.html#cb25-2" tabindex="-1"></a></span>
-<span id="cb25-3"><a href="applying-mlm-to-longitudinal-data.html#cb25-3" tabindex="-1"></a><span class="fu">plot_model</span>(model3)</span></code></pre></div>
-<p><img src="MLM-Study-Guide_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 </div>
 <div id="nested-models" class="section level2 hasAnchor" number="3.5">
 <h2><span class="header-section-number">3.5</span> Nested Models<a href="applying-mlm-to-longitudinal-data.html#nested-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
