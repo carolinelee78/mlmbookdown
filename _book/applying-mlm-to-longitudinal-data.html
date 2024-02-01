@@ -23,7 +23,7 @@
 <meta name="author" content="For doing better, for remediation. Integrating David’s class materials and Hoffman’s (2015) Longitudinal Analysis textbook to learn MLM with both R and SPSS." />
 
 
-<meta name="date" content="2024-01-31" />
+<meta name="date" content="2024-02-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -241,7 +241,7 @@ MIXED YBOC WITH condition week52
 <p><strong>Interpretation of</strong> <em><strong>condition</strong></em> <strong>Main Effect</strong></p>
 <p>Centering at assessment 52, there’s no significant effect of condition.</p>
 <p><strong>Interpretation of the Interaction Effect</strong></p>
-<p>Double check video.</p>
+<p>The change in differences across conditions in terms of YBOCS over time is significant.</p>
 <p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG9.png" /><!-- --></p>
 <p><strong>Interpretation of Covariance Parameters</strong></p>
 <ul>
@@ -353,6 +353,70 @@ Be sure that the squared term uses the exact linear term, squared. Don’t use t
 <div id="homework-3---0905" class="section level2 hasAnchor" number="3.4">
 <h2><span class="header-section-number">3.4</span> Homework 3 - 09/05<a href="applying-mlm-to-longitudinal-data.html#homework-3---0905" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Run the quadratic growth curve model using “weeks” as the time variable. Center at week 52. Include condition as a moderator of week and weeksq. Include a random effect (RE) for the intercept, week, and weeksq, but drop the RE for weeksq if the model won’t run. Drop the condition x weeksq interaction if it is not significant. Then compare the model fit (using AIC) to the model we ran in class using index1c5 as the time variable.</p>
+<p><strong>SPSS</strong></p>
+<pre><code>* STEP 1. Restructure dataset. 
+
+VARSTOCASES
+  /MAKE YBOCS FROM YBOCpre YBOC4 YBOC16 YBOC26 YBOC52
+  /MAKE BDI FROM BDIpre BDI4 BDI16 BDI26 BDI52
+  /INDEX=Index1(5)
+  /KEEP=Subject# Age condition HAMTOT Male0
+  /NULL=KEEP.</code></pre>
+<pre><code>* STEP 2. Recode Index1 into Week. 
+
+RECODE Index1 (MISSING=SYSMIS) (1=0) (2=4) (3=16) (4=26) (5=52) INTO week.
+EXECUTE.</code></pre>
+<pre><code>* STEP 3. Center week at last assessment and create quadratic term. 
+COMPUTE weekc52=week-52.
+EXECUTE.
+
+COMPUTE weekc52sq=weekc52 ** 2.
+EXECUTE.</code></pre>
+<pre><code>* STEP 4. Run model... but final Hessian matrix is not positive definite! 
+
+MIXED YBOCS WITH weekc52 weekc52sq condition
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1)
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0,
+    ABSOLUTE)
+  /FIXED=weekc52 weekc52sq condition weekc52*condition weekc52sq*condition | SSTYPE(3)
+  /METHOD=REML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT weekc52 weekc52sq | SUBJECT(Subject#) COVTYPE(UN)
+  /REPEATED=weekc52 | SUBJECT(Subject#) COVTYPE(ID).</code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG11.png" /><!-- --></p>
+<pre><code>* STEP 5. Drop highest order random effect as final Hessian matrix was not positive definite. Remember that you can&#39;t drop lower order terms; if you&#39;re going to drop, you drop from the highest order down; also, don&#39;t drop terms that are part of your hypothsis. 
+
+MIXED YBOCS WITH weekc52 weekc52sq condition
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1)
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0,
+    ABSOLUTE)
+  /FIXED=weekc52 weekc52sq condition weekc52*condition weekc52sq*condition | SSTYPE(3)
+  /METHOD=REML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT weekc52 | SUBJECT(Subject#) COVTYPE(UN) * Note that we dropped random effect for weekc52sq
+  /REPEATED=weekc52 | SUBJECT(Subject#) COVTYPE(ID).</code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG12.png" /><!-- --></p>
+<pre><code>* STEP 6. Drop condition*weekssq as it is not significant. 
+
+MIXED YBOCS WITH weekc52 weekc52sq condition
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1)
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0,
+    ABSOLUTE)
+  /FIXED=weekc52 weekc52sq condition weekc52*condition | SSTYPE(3) * Note that we dropped fixed effect for condition*weekssq interaction 
+  /METHOD=REML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT weekc52 | SUBJECT(Subject#) COVTYPE(UN)
+  /REPEATED=weekc52 | SUBJECT(Subject#) COVTYPE(ID).</code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG13.png" /><!-- -->
+<strong>Interpretation of</strong> <em><strong>weekc52</strong></em> <strong>Main Effect</strong></p>
+<p>The linear decrease in YBOCS in condition 0 at week 52 is not significant.</p>
+<p><strong>Interpretation of</strong> <em><strong>weekc52sq</strong></em> <strong>Main Effect</strong></p>
+<p>There is a significant curvilinear change in YBOCS in condition 0 at week 52.</p>
+<p><strong>Interpretation of</strong> <em><strong>condition</strong></em> <strong>Main Effect</strong></p>
+<p>Difference in YBOCS across conditions at week 52 is not significant.</p>
+<p><strong>Interpretation of</strong> <em><strong>week52</strong></em> <span class="math inline">\(\times\)</span> <em><strong>YBOCS</strong></em> <strong>Interaction Effect</strong></p>
+<p>The change in differences across conditions in terms of YBOCS over time is significant.</p>
+<p><strong>R</strong></p>
 <p>Now try to graph the model using index1c5. Graph 2 models: the one WITH the condition x index1c5sq included, and the one WITHOUT condition x index1c5sq. Remember the trick you have to use to graph when the time variable is a transformed variable (you have to use the TRANSFORMED variable in the excel spreadsheet, not the raw 1,2,3,4,5 variable).</p>
 </div>
 <div id="nested-models" class="section level2 hasAnchor" number="3.5">

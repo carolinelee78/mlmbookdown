@@ -81,7 +81,7 @@ Centering at assessment 52, there’s no significant effect of condition.
 
 **Interpretation of the Interaction Effect** 
 
-Double check video. 
+The change in differences across conditions in terms of YBOCS over time is significant. 
 
 ```{r, echo = FALSE}
 knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG9.png")
@@ -155,6 +155,112 @@ Be sure that the squared term uses the exact linear term, squared. Don’t use t
 ## Homework 3 - 09/05
 
 Run the quadratic growth curve model using “weeks” as the time variable. Center at week 52. Include condition as a moderator of week and weeksq. Include a random effect (RE) for the intercept, week, and weeksq, but drop the RE for weeksq if the model won't run. Drop the condition x weeksq interaction if it is not significant. Then compare the model fit (using AIC) to the model we ran in class using index1c5 as the time variable.
+
+**SPSS**
+
+```
+* STEP 1. Restructure dataset. 
+
+VARSTOCASES
+  /MAKE YBOCS FROM YBOCpre YBOC4 YBOC16 YBOC26 YBOC52
+  /MAKE BDI FROM BDIpre BDI4 BDI16 BDI26 BDI52
+  /INDEX=Index1(5)
+  /KEEP=Subject# Age condition HAMTOT Male0
+  /NULL=KEEP.
+```
+
+```
+* STEP 2. Recode Index1 into Week. 
+
+RECODE Index1 (MISSING=SYSMIS) (1=0) (2=4) (3=16) (4=26) (5=52) INTO week.
+EXECUTE.
+```
+
+```
+* STEP 3. Center week at last assessment and create quadratic term. 
+COMPUTE weekc52=week-52.
+EXECUTE.
+
+COMPUTE weekc52sq=weekc52 ** 2.
+EXECUTE.
+```
+
+```
+* STEP 4. Run model... but final Hessian matrix is not positive definite! 
+
+MIXED YBOCS WITH weekc52 weekc52sq condition
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1)
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0,
+    ABSOLUTE)
+  /FIXED=weekc52 weekc52sq condition weekc52*condition weekc52sq*condition | SSTYPE(3)
+  /METHOD=REML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT weekc52 weekc52sq | SUBJECT(Subject#) COVTYPE(UN)
+  /REPEATED=weekc52 | SUBJECT(Subject#) COVTYPE(ID).
+```
+
+```{r, echo = FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG11.png")
+```
+
+```
+* STEP 5. Drop highest order random effect as final Hessian matrix was not positive definite. Remember that you can't drop lower order terms; if you're going to drop, you drop from the highest order down; also, don't drop terms that are part of your hypothsis. 
+
+MIXED YBOCS WITH weekc52 weekc52sq condition
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1)
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0,
+    ABSOLUTE)
+  /FIXED=weekc52 weekc52sq condition weekc52*condition weekc52sq*condition | SSTYPE(3)
+  /METHOD=REML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT weekc52 | SUBJECT(Subject#) COVTYPE(UN) * Note that we dropped random effect for weekc52sq
+  /REPEATED=weekc52 | SUBJECT(Subject#) COVTYPE(ID).
+```
+
+```{r, echo = FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG12.png")
+```
+
+```
+* STEP 6. Drop condition*weekssq as it is not significant. 
+
+MIXED YBOCS WITH weekc52 weekc52sq condition
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1)
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0,
+    ABSOLUTE)
+  /FIXED=weekc52 weekc52sq condition weekc52*condition | SSTYPE(3) * Note that we dropped fixed effect for condition*weekssq interaction 
+  /METHOD=REML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT weekc52 | SUBJECT(Subject#) COVTYPE(UN)
+  /REPEATED=weekc52 | SUBJECT(Subject#) COVTYPE(ID).
+```
+
+```{r, echo = FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG13.png")
+```
+**Interpretation of** _**weekc52**_ **Main Effect** 
+
+The linear decrease in YBOCS in condition 0 at week 52 is not significant. 
+
+**Interpretation of** _**weekc52sq**_ **Main Effect** 
+
+There is a significant curvilinear change in YBOCS in condition 0 at week 52. 
+
+**Interpretation of** _**condition**_ **Main Effect** 
+
+Difference in YBOCS across conditions at week 52 is not significant. 
+
+**Interpretation of** _**week52**_ $\times$ _**YBOCS**_ **Interaction Effect** 
+
+The change in differences across conditions in terms of YBOCS over time is significant. 
+
+**R**
+
+
+
+
+
+
 
 Now try to graph the model using index1c5. Graph 2 models: the one WITH the condition x index1c5sq included, and the one WITHOUT condition x index1c5sq. Remember the trick you have to use to graph when the time variable is a transformed variable (you have to use the TRANSFORMED variable in the excel spreadsheet, not the raw 1,2,3,4,5 variable).
 
