@@ -73,8 +73,11 @@ Restructure the OCD mediation file, which is structured as a wide, flat file, wi
  
 Then, make an attempt to run a simple MLM. DV should be `YBOC`. The covariates should be `index1` and `condition` (just like in class). The only random effect should be the intercept.
  
-Chapter 2 in Heck includes instructions on restructuring, and Chapter 3 has instructions on simple MLM. Since we are using scaled identity as our covariance type, you can follow the example in Heck and ignore the “repeated measures” box and the covariance type. I used these inputs in my example because we will be using it most of the time in the future. But scaled identity is the default value for the covariance, so you don’t need to put it in.
+Chapter 2 in Heck includes instructions on restructuring, and Chapter 3 has instructions on simple MLM. Since we are using scaled identity as our covariance type, you can follow the example in Heck and ignore the "repeated measures" box and the covariance type. I used these inputs in my example because we will be using it most of the time in the future. But scaled identity is the default value for the covariance, so you don’t need to put it in.
 
+>> ### **Before Centering**
+
+**SPSS**
 ```
 * STEP 1. Restructure dataset.
 
@@ -99,20 +102,40 @@ MIXED YBOC WITH Index1 condition
   /REPEATED=Index1 | SUBJECT(Subject#) COVTYPE(ID). 
 ```
 
-```{r, echo = FALSE, out.width="50%", fig.align = 'center'}
-knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG4.png")
-```
+**R**
 
 ```{r}
 library(haven)
 library(lme4)
 
 DF1 <- read_sav("Restructured_OCDMediationYBOCSBDI1inS.sav")
-model1 <- lmer(YBOC ~ Index1 + condition + Index1*condition + (1 | Index1), data = DF1, na.action = na.exclude)
+model1 <- lmer(YBOC ~ Index1 + condition + Index1:condition + (1 | Index1), data = DF1, na.action = na.exclude)
 summary(model1)
 ```
 
+**Interpretation of** _**Index1**_ $\times$ _**Condition**_ **Interaction**
 
+There’s a significant difference in the effect of time (Index1) on YBOCS. condition moderates the effect of time (Index1) on YBOCS.
+
+**Interpretation of** _**Index1**_ **Main Effect**
+
+Because there is an interaction between time (Index1) and condition, -.320 is the change over time (Index1) in YBOCS scores in people with condition coded 0. This is the decrease in YBOC over time for people in behavioral therapy. .32 decrease for each unit change, where units are assessments.
+
+**Interpretation of** _**condition**_ **Main Effect**
+
+The effect of condition on YBOCS when index1=0, this is meaningless because of how it’s coded. Need to recode index to start at 0 (Index1-1 because 1-5) and then re-run SPSS model with new index variable. The only thing that will change is the condition estimate. 
+
+**Interpretation of Covariance Parameters**
+
+Repeated measures is the variance of ($\epsilon_{ij}$ for level 1 – error at level 1. How far off each actual data point is from the line). We are more interested in the intercept variable, which is the random effect (the composite model ($\mu$s are called random effects in a level 2 equation, the variability between people of whatever that parameter is). Variability in each line for each person, basically the start point. If intercept is at the end, it's the variability of the end scores. If it’s at the beginning, it’s the variability of the baseline. 
+
+>> ### **After Centering**
+
+**Note**. Not part of the homework, discussed during class.
+
+```{r, echo = FALSE, out.width="50%", fig.align = 'center'}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG4.png")
+```
 
 
 
