@@ -23,7 +23,7 @@
 <meta name="author" content="For doing better, for remediation. Integrating David’s class materials and Hoffman’s (2015) Longitudinal Analysis textbook to learn MLM with both R and SPSS." />
 
 
-<meta name="date" content="2024-01-25" />
+<meta name="date" content="2024-01-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -216,10 +216,44 @@ So the main effect for condition when time is centered at assessment 4 is the ef
 <div id="homework-2---0831" class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> Homework 2 - 08/31<a href="applying-mlm-to-longitudinal-data.html#homework-2---0831" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Use the restructured OCD data file to rerun the analysis, using week (weeks from pre) as the time variable instead of index1. Use either a series of “computes” or use a “recode” to create the week variable. The “pre” assessment (index1=1) should be coded week=0. The week4 assessment (index1=2) should be coded week=4, etc. Then use condition, week, and condition x week as the fixed effects, and include a random effect for the intercept and for week (always use an unstructured covariance matrix for the random effects). Compare the results from this model to the results from the model we did in class.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="applying-mlm-to-longitudinal-data.html#cb1-1" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
-<span id="cb1-2"><a href="applying-mlm-to-longitudinal-data.html#cb1-2" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code></pre></div>
+<p><strong>SPSS</strong></p>
+<pre><code>*STEP 1. Recode index1 into week as the time variable. 
+
+RECODE Index1 (1=0) (2=4) (3=16) (4=26) (5=52) (MISSING=SYSMIS) INTO week.
+EXECUTE.</code></pre>
+<pre><code>* STEP 2. Center week at week52.
+
+COMPUTE week52=week-52.</code></pre>
+<pre><code>* STEP 3. Run model. 
+
+MIXED YBOC WITH condition week52
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1)
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0,
+    ABSOLUTE)
+  /FIXED=condition week52 condition*week52 | SSTYPE(3)
+  /METHOD=REML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT week52 | SUBJECT(Subject#) COVTYPE(UN)
+  /REPEATED=week | SUBJECT(Subject#) COVTYPE(ID).</code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG8.png" /><!-- --></p>
+<p><strong>Interpretation of</strong> <em><strong>week52</strong></em> <strong>Main Effect</strong></p>
+<p>There is a significant difference on the effect of time on YBOC (decline for when condition = 0).</p>
+<p><strong>Interpretation of</strong> <em><strong>condition</strong></em> <strong>Main Effect</strong></p>
+<p>Centering at assessment 52, there’s no significant effect of condition.</p>
+<p><strong>Interpretation of the Interaction Effect</strong></p>
+<p>Double check video.</p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG9.png" /><!-- --></p>
+<p><strong>Interpretation of Covariance Parameters</strong></p>
+<ul>
+<li>.563 is the variability of the individual scores around the estimated average of their conditions at the last time point (UN1.1).</li>
+<li>An individual’s average slope does not vary around the average slope (UN2.2 – slope random effect – within each condition. Deviation for the average slope).</li>
+<li>The higher the slope, the higher the intercept for each individual on average as this is a positive value for (UN2.1 - covariance).</li>
+</ul>
+<p><strong>R</strong></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="applying-mlm-to-longitudinal-data.html#cb4-1" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb4-2"><a href="applying-mlm-to-longitudinal-data.html#cb4-2" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code></pre></div>
 <pre><code>## Loading required package: Matrix</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="applying-mlm-to-longitudinal-data.html#cb3-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="applying-mlm-to-longitudinal-data.html#cb6-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
 <pre><code>## 
 ## Attaching package: &#39;dplyr&#39;</code></pre>
 <pre><code>## The following objects are masked from &#39;package:stats&#39;:
@@ -228,17 +262,19 @@ So the main effect for condition when time is centered at assessment 4 is the ef
 <pre><code>## The following objects are masked from &#39;package:base&#39;:
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="applying-mlm-to-longitudinal-data.html#cb7-1" tabindex="-1"></a>DF1 <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="st">&quot;Restructured_OCDMediationYBOCSBDI1inS.sav&quot;</span>)</span>
-<span id="cb7-2"><a href="applying-mlm-to-longitudinal-data.html#cb7-2" tabindex="-1"></a>DF1<span class="sc">$</span>week <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">recode</span>(DF1<span class="sc">$</span>Index1, <span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">0</span>,</span>
-<span id="cb7-3"><a href="applying-mlm-to-longitudinal-data.html#cb7-3" tabindex="-1"></a>                                      <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">4</span>,</span>
-<span id="cb7-4"><a href="applying-mlm-to-longitudinal-data.html#cb7-4" tabindex="-1"></a>                                      <span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">16</span>,</span>
-<span id="cb7-5"><a href="applying-mlm-to-longitudinal-data.html#cb7-5" tabindex="-1"></a>                                      <span class="st">`</span><span class="at">4</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">26</span>, </span>
-<span id="cb7-6"><a href="applying-mlm-to-longitudinal-data.html#cb7-6" tabindex="-1"></a>                                      <span class="st">`</span><span class="at">5</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">52</span>)</span>
-<span id="cb7-7"><a href="applying-mlm-to-longitudinal-data.html#cb7-7" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="applying-mlm-to-longitudinal-data.html#cb7-8" tabindex="-1"></a>DF1<span class="sc">$</span>Subject <span class="ot">&lt;-</span> DF1<span class="sc">$</span><span class="st">`</span><span class="at">Subject#</span><span class="st">`</span></span>
-<span id="cb7-9"><a href="applying-mlm-to-longitudinal-data.html#cb7-9" tabindex="-1"></a></span>
-<span id="cb7-10"><a href="applying-mlm-to-longitudinal-data.html#cb7-10" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(YBOC <span class="sc">~</span> week <span class="sc">+</span> condition <span class="sc">+</span> week<span class="sc">*</span>condition <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> week <span class="sc">||</span> Subject), <span class="at">data =</span> DF1)</span>
-<span id="cb7-11"><a href="applying-mlm-to-longitudinal-data.html#cb7-11" tabindex="-1"></a><span class="fu">summary</span>(model1, <span class="at">corr =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="applying-mlm-to-longitudinal-data.html#cb10-1" tabindex="-1"></a>DF1 <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="st">&quot;Restructured_OCDMediationYBOCSBDI1inS.sav&quot;</span>)</span>
+<span id="cb10-2"><a href="applying-mlm-to-longitudinal-data.html#cb10-2" tabindex="-1"></a>DF1<span class="sc">$</span>week <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">recode</span>(DF1<span class="sc">$</span>Index1, <span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">0</span>,</span>
+<span id="cb10-3"><a href="applying-mlm-to-longitudinal-data.html#cb10-3" tabindex="-1"></a>                                      <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">4</span>,</span>
+<span id="cb10-4"><a href="applying-mlm-to-longitudinal-data.html#cb10-4" tabindex="-1"></a>                                      <span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">16</span>,</span>
+<span id="cb10-5"><a href="applying-mlm-to-longitudinal-data.html#cb10-5" tabindex="-1"></a>                                      <span class="st">`</span><span class="at">4</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">26</span>, </span>
+<span id="cb10-6"><a href="applying-mlm-to-longitudinal-data.html#cb10-6" tabindex="-1"></a>                                      <span class="st">`</span><span class="at">5</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">52</span>)</span>
+<span id="cb10-7"><a href="applying-mlm-to-longitudinal-data.html#cb10-7" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="applying-mlm-to-longitudinal-data.html#cb10-8" tabindex="-1"></a>DF1<span class="sc">$</span>Subject <span class="ot">&lt;-</span> DF1<span class="sc">$</span><span class="st">`</span><span class="at">Subject#</span><span class="st">`</span></span>
+<span id="cb10-9"><a href="applying-mlm-to-longitudinal-data.html#cb10-9" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="applying-mlm-to-longitudinal-data.html#cb10-10" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(YBOC <span class="sc">~</span> week <span class="sc">+</span> condition <span class="sc">+</span> week<span class="sc">*</span>condition <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> week <span class="sc">||</span> Subject), <span class="at">data =</span> DF1)</span></code></pre></div>
+<pre><code>## Warning in checkConv(attr(opt, &quot;derivs&quot;), opt$par, ctrl = control$checkConv, :
+## Model failed to converge with max|grad| = 0.00478976 (tol = 0.002, component 1)</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="applying-mlm-to-longitudinal-data.html#cb12-1" tabindex="-1"></a><span class="fu">summary</span>(model1, <span class="at">corr =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
 ## Formula: YBOC ~ week + condition + week * condition + ((1 | Subject) +  
 ##     (0 + week | Subject))
@@ -265,11 +301,11 @@ So the main effect for condition when time is centered at assessment 4 is the ef
 ## week:condition  0.010222   0.005009   2.041
 ## optimizer (nloptwrap) convergence code: 0 (OK)
 ## Model failed to converge with max|grad| = 0.00478976 (tol = 0.002, component 1)</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="applying-mlm-to-longitudinal-data.html#cb9-1" tabindex="-1"></a>DF1<span class="sc">$</span>week52 <span class="ot">&lt;-</span> DF1<span class="sc">$</span>week <span class="sc">-</span> <span class="dv">52</span> </span>
-<span id="cb9-2"><a href="applying-mlm-to-longitudinal-data.html#cb9-2" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="applying-mlm-to-longitudinal-data.html#cb9-3" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(YBOC <span class="sc">~</span> week52 <span class="sc">+</span> condition <span class="sc">+</span> week52<span class="sc">*</span>condition <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> week52), <span class="at">data =</span> DF1)</span>
-<span id="cb9-4"><a href="applying-mlm-to-longitudinal-data.html#cb9-4" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="applying-mlm-to-longitudinal-data.html#cb9-5" tabindex="-1"></a><span class="fu">summary</span>(model2, <span class="at">corr =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="applying-mlm-to-longitudinal-data.html#cb14-1" tabindex="-1"></a>DF1<span class="sc">$</span>week52 <span class="ot">&lt;-</span> DF1<span class="sc">$</span>week <span class="sc">-</span> <span class="dv">52</span> </span>
+<span id="cb14-2"><a href="applying-mlm-to-longitudinal-data.html#cb14-2" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="applying-mlm-to-longitudinal-data.html#cb14-3" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(YBOC <span class="sc">~</span> week52 <span class="sc">+</span> condition <span class="sc">+</span> week52<span class="sc">*</span>condition <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> week52), <span class="at">data =</span> DF1)</span>
+<span id="cb14-4"><a href="applying-mlm-to-longitudinal-data.html#cb14-4" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="applying-mlm-to-longitudinal-data.html#cb14-5" tabindex="-1"></a><span class="fu">summary</span>(model2, <span class="at">corr =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
 ## Formula: YBOC ~ week52 + condition + week52 * condition + (1 | week52)
 ##    Data: DF1

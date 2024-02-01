@@ -23,7 +23,7 @@
 <meta name="author" content="For doing better, for remediation. Integrating David’s class materials and Hoffman’s (2015) Longitudinal Analysis textbook to learn MLM with both R and SPSS." />
 
 
-<meta name="date" content="2024-01-25" />
+<meta name="date" content="2024-01-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -244,11 +244,6 @@ Data in the data file must be “restructured” (i.e., changed into a stacked/l
 <p>Restructure the OCD mediation file, which is structured as a wide, flat file, with one line per subject. There are 2 DVs: <code>YBOC</code> (a measure of OCD symptoms) and <code>BDI</code> (Beck Depression Inventory). There are 5 assessments of each, at pre, week 4, week 16, week 26, and week 52. Restructure the file so that there is one line per assessment (5 lines per subject).</p>
 <p>Then, make an attempt to run a simple MLM. DV should be <code>YBOC</code>. The covariates should be <code>index1</code> and <code>condition</code> (just like in class). The only random effect should be the intercept.</p>
 <p>Chapter 2 in Heck includes instructions on restructuring, and Chapter 3 has instructions on simple MLM. Since we are using scaled identity as our covariance type, you can follow the example in Heck and ignore the “repeated measures” box and the covariance type. I used these inputs in my example because we will be using it most of the time in the future. But scaled identity is the default value for the covariance, so you don’t need to put it in.</p>
-<blockquote>
-<blockquote>
-<h3 id="before-centering" class="hasAnchor"><strong>Before Centering</strong><a href="what-is-mlm-used-for.html#before-centering" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-</blockquote>
-</blockquote>
 <p><strong>SPSS</strong></p>
 <pre><code>* STEP 1. Restructure dataset.
 
@@ -268,6 +263,15 @@ MIXED YBOC WITH Index1 condition
   /METHOD=REML   /PRINT=SOLUTION TESTCOV  
   /RANDOM=INTERCEPT | SUBJECT(Subject#) COVTYPE(VC)   
   /REPEATED=Index1 | SUBJECT(Subject#) COVTYPE(ID). </code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG10.png" /><!-- --></p>
+<p><strong>Interpretation of</strong> <em><strong>Index1</strong></em> <span class="math inline">\(\times\)</span> <em><strong>Condition</strong></em> <strong>Interaction</strong></p>
+<p>There’s a significant difference in the effect of time (Index1) on YBOCS. condition moderates the effect of time (Index1) on YBOCS.</p>
+<p><strong>Interpretation of</strong> <em><strong>Index1</strong></em> <strong>Main Effect</strong></p>
+<p>Because there is an interaction between time (Index1) and condition, -.320 is the change over time (Index1) in YBOCS scores in people with condition coded 0. This is the decrease in YBOC over time for people in behavioral therapy. .32 decrease for each unit change, where units are assessments.</p>
+<p><strong>Interpretation of</strong> <em><strong>condition</strong></em> <strong>Main Effect</strong></p>
+<p>The effect of condition on YBOCS when index1=0, this is meaningless because of how it’s coded. Need to recode index to start at 0 (Index1-1 because 1-5) and then re-run SPSS model with new index variable. The only thing that will change is the condition estimate.</p>
+<p><strong>Interpretation of Covariance Parameters</strong></p>
+<p>Repeated measures is the variance of (<span class="math inline">\(\epsilon_{ij}\)</span> for level 1 – error at level 1. How far off each actual data point is from the line). We are more interested in the intercept variable, which is the random effect (the composite model (<span class="math inline">\(\mu\)</span>s are called random effects in a level 2 equation, the variability between people of whatever that parameter is). Variability in each line for each person, basically the start point. If intercept is at the end, it’s the variability of the end scores. If it’s at the beginning, it’s the variability of the baseline.</p>
 <p><strong>R</strong></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="what-is-mlm-used-for.html#cb3-1" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
 <span id="cb3-2"><a href="what-is-mlm-used-for.html#cb3-2" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code></pre></div>
@@ -303,21 +307,6 @@ MIXED YBOC WITH Index1 condition
 ## Index1      -0.899              
 ## condition   -0.643  0.582       
 ## Indx1:cndtn  0.585 -0.657 -0.900</code></pre>
-<p><strong>Interpretation of</strong> <em><strong>Index1</strong></em> <span class="math inline">\(\times\)</span> <em><strong>Condition</strong></em> <strong>Interaction</strong></p>
-<p>There’s a significant difference in the effect of time (Index1) on YBOCS. condition moderates the effect of time (Index1) on YBOCS.</p>
-<p><strong>Interpretation of</strong> <em><strong>Index1</strong></em> <strong>Main Effect</strong></p>
-<p>Because there is an interaction between time (Index1) and condition, -.320 is the change over time (Index1) in YBOCS scores in people with condition coded 0. This is the decrease in YBOC over time for people in behavioral therapy. .32 decrease for each unit change, where units are assessments.</p>
-<p><strong>Interpretation of</strong> <em><strong>condition</strong></em> <strong>Main Effect</strong></p>
-<p>The effect of condition on YBOCS when index1=0, this is meaningless because of how it’s coded. Need to recode index to start at 0 (Index1-1 because 1-5) and then re-run SPSS model with new index variable. The only thing that will change is the condition estimate.</p>
-<p><strong>Interpretation of Covariance Parameters</strong></p>
-<p>Repeated measures is the variance of (<span class="math inline">\(\epsilon_{ij}\)</span> for level 1 – error at level 1. How far off each actual data point is from the line). We are more interested in the intercept variable, which is the random effect (the composite model (<span class="math inline">\(\mu\)</span>s are called random effects in a level 2 equation, the variability between people of whatever that parameter is). Variability in each line for each person, basically the start point. If intercept is at the end, it’s the variability of the end scores. If it’s at the beginning, it’s the variability of the baseline.</p>
-<blockquote>
-<blockquote>
-<h3 id="after-centering" class="hasAnchor"><strong>After Centering</strong><a href="what-is-mlm-used-for.html#after-centering" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-</blockquote>
-</blockquote>
-<p><strong>Note</strong>. Not part of the homework, discussed during class.</p>
-<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG4.png" width="50%" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>

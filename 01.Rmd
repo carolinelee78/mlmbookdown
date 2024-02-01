@@ -75,8 +75,6 @@ Then, make an attempt to run a simple MLM. DV should be `YBOC`. The covariates s
  
 Chapter 2 in Heck includes instructions on restructuring, and Chapter 3 has instructions on simple MLM. Since we are using scaled identity as our covariance type, you can follow the example in Heck and ignore the "repeated measures" box and the covariance type. I used these inputs in my example because we will be using it most of the time in the future. But scaled identity is the default value for the covariance, so you don’t need to put it in.
 
->> ### **Before Centering**
-
 **SPSS**
 ```
 * STEP 1. Restructure dataset.
@@ -102,15 +100,8 @@ MIXED YBOC WITH Index1 condition
   /REPEATED=Index1 | SUBJECT(Subject#) COVTYPE(ID). 
 ```
 
-**R**
-
-```{r}
-library(haven)
-library(lme4)
-
-DF1 <- read_sav("Restructured_OCDMediationYBOCSBDI1inS.sav")
-model1 <- lmer(YBOC ~ Index1 + condition + Index1:condition + (1 | Index1), data = DF1, na.action = na.exclude)
-summary(model1)
+```{r, echo = FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG10.png")
 ```
 
 **Interpretation of** _**Index1**_ $\times$ _**Condition**_ **Interaction**
@@ -129,13 +120,17 @@ The effect of condition on YBOCS when index1=0, this is meaningless because of h
 
 Repeated measures is the variance of ($\epsilon_{ij}$ for level 1 – error at level 1. How far off each actual data point is from the line). We are more interested in the intercept variable, which is the random effect (the composite model ($\mu$s are called random effects in a level 2 equation, the variability between people of whatever that parameter is). Variability in each line for each person, basically the start point. If intercept is at the end, it's the variability of the end scores. If it’s at the beginning, it’s the variability of the baseline. 
 
->> ### **After Centering**
+**R**
 
-**Note**. Not part of the homework, discussed during class.
+```{r}
+library(haven)
+library(lme4)
 
-```{r, echo = FALSE, out.width="50%", fig.align = 'center'}
-knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG4.png")
+DF1 <- read_sav("Restructured_OCDMediationYBOCSBDI1inS.sav")
+model1 <- lmer(YBOC ~ Index1 + condition + Index1:condition + (1 | Index1), data = DF1, na.action = na.exclude)
+summary(model1)
 ```
+
 
 
 

@@ -38,11 +38,70 @@ $$ = (b_0-b_2)+(b_1-b_3)*Cond $$
 
 Use the restructured OCD data file to rerun the analysis, using week (weeks from pre) as the time variable instead of index1. Use either a series of "computes" or use a "recode" to create the week variable. The "pre" assessment (index1=1) should be coded week=0. The week4 assessment (index1=2) should be coded week=4, etc. Then use condition, week, and condition x week as the fixed effects, and include a random effect for the intercept and for week (always use an unstructured covariance matrix for the random effects). Compare the results from this model to the results from the model we did in class.
 
-```{r, warning = FALSE}
+**SPSS**
+
+```
+*STEP 1. Recode index1 into week as the time variable. 
+
+RECODE Index1 (1=0) (2=4) (3=16) (4=26) (5=52) (MISSING=SYSMIS) INTO week.
+EXECUTE.
+```
+
+```
+* STEP 2. Center week at week52.
+
+COMPUTE week52=week-52.
+```
+
+```
+* STEP 3. Run model. 
+
+MIXED YBOC WITH condition week52
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1)
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0,
+    ABSOLUTE)
+  /FIXED=condition week52 condition*week52 | SSTYPE(3)
+  /METHOD=REML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT week52 | SUBJECT(Subject#) COVTYPE(UN)
+  /REPEATED=week | SUBJECT(Subject#) COVTYPE(ID).
+```
+  
+```{r, echo = FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG8.png")
+```
+
+**Interpretation of** _**week52**_ **Main Effect** 
+
+There is a significant difference on the effect of time on YBOC (decline for when condition = 0).
+
+**Interpretation of** _**condition**_ **Main Effect**
+
+Centering at assessment 52, there’s no significant effect of condition. 
+
+**Interpretation of the Interaction Effect** 
+
+Double check video. 
+
+```{r, echo = FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG9.png")
+```
+
+**Interpretation of Covariance Parameters** 
+
+- .563 is the variability of the individual scores around the estimated average of their conditions at the last time point (UN1.1).
+- An individual’s average slope does not vary around the average slope (UN2.2 – slope random effect – within each condition. Deviation for the average slope).
+- The higher the slope, the higher the intercept for each individual on average as this is a positive value for (UN2.1 - covariance).
+
+
+**R**
+```{r, warning = FALSE, results= 'hide'}
 library(haven)
 library(lme4)
 library(dplyr)
+```
 
+```{r}
 DF1 <- read_sav("Restructured_OCDMediationYBOCSBDI1inS.sav")
 DF1$week <- dplyr::recode(DF1$Index1, `1` = 0,
                                       `2` = 4,

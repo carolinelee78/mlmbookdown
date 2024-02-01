@@ -1,6 +1,5 @@
 # Treating Time More Flexibly
 
-
 ## Homework 4 - 09/12
 
-The attached data set are results comparing 2 treatments for PTSD (coded in the variable innovatively named `condition`; person centered therapy=0, prolonged exposure=1). The outcome is `CPSSIE`, which measures PTSD severity. Use `week` as your time variable. Do a quadratic, LN, and a hyperbolic time model. Center time at the last assessment (`week`=66), which is the 1 year follow-up. Which model fits the data best? Are there treatment condition differences at the last assessment in the best fitting model? For simplicity, only use a random effect for the intercept. Do not use a random effect for the slope(s).
+The attached data set are results comparing 2 treatments for PTSD (coded in the variable innovatively named condition; person centered therapy=0, prolonged exposure=1). The outcome is CPSSIE, which measures PTSD severity. Use week as your time variable. Do a quadratic, LN, and a hyperbolic time model. Center time at the last assessment (week=66), which is the 1 year follow-up. Which model fits the data best? Are there treatment condition differences at the last assessment in the best fitting model? For simplicity, only use a random effect for the intercept. Do not use a random effect for the slope(s).
