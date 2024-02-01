@@ -23,7 +23,7 @@
 <meta name="author" content="For doing better, for remediation. Integrating David’s class materials and Hoffman’s (2015) Longitudinal Analysis textbook to learn MLM with both R and SPSS." />
 
 
-<meta name="date" content="2024-01-31" />
+<meta name="date" content="2024-02-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -102,7 +102,12 @@
 </ul></li>
 <li class="chapter" data-level="4" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html"><i class="fa fa-check"></i><b>4</b> Treating Time More Flexibly</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html#homework-4---0912"><i class="fa fa-check"></i><b>4.1</b> Homework 4 - 09/12</a></li>
+<li class="chapter" data-level="4.1" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html#ml-vs.-reml"><i class="fa fa-check"></i><b>4.1</b> ML vs. REML</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html#how-do-we-use-ml-methods-to-fit-a-multilevel-model-and-how-does-it-work"><i class="fa fa-check"></i><b>4.1.1</b> How do we use ML methods to fit a multilevel model, and how does it work?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html#aic-vs.-bic"><i class="fa fa-check"></i><b>4.2</b> AIC vs. BIC</a></li>
+<li class="chapter" data-level="4.3" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html#homework-4---0912"><i class="fa fa-check"></i><b>4.3</b> Homework 4 - 09/12</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -126,9 +131,50 @@
             <section class="normal" id="section-">
 <div id="treating-time-more-flexibly" class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Treating Time More Flexibly<a href="treating-time-more-flexibly.html#treating-time-more-flexibly" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="homework-4---0912" class="section level2 hasAnchor" number="4.1">
-<h2><span class="header-section-number">4.1</span> Homework 4 - 09/12<a href="treating-time-more-flexibly.html#homework-4---0912" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Time can be coded in many different ways! For example, time may be coded in terms of the number of weeks since baseline, or in terms of assessment number. In other words, the “longitudinal variables” don’t have to be time per se, but whatever longitudinal factor is creating repeated measures.</p>
+<ul>
+<li>For the OCD data, initially we coded time to represent “asmt #” (index1), e.g., assessment (asmt) 1, 2, 3, 4, 5. But assessments may not be equally spaced apart, so this coding may be misleading.</li>
+<li>In the case of the OCD data set, Time in weeks since baseline is really 0, 4, 16, 26, 52. So you can code time in weeks since baseline. In other cases, assessments may be on a variable schedule, so one could record the date of each assessment and code time at each assessment as the number of days since baseline. In long-term developmental studies, time may be coded to reflect the child’s age at the assessment, perhaps in months or in years.</li>
+</ul>
+<div id="ml-vs.-reml" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> ML vs. REML<a href="treating-time-more-flexibly.html#ml-vs.-reml" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Parameters in MLM models are estimated using <strong>Maximum Likelihood</strong> estimation (ML) or <strong>Restricted Maximum Likelihood</strong> estimation (REML). The method of ML is currently the mosts popular approach to statistical estimation. Its popularity results, in part, from its excellent performance in large random samples from well-defined target populations. As sample size increases, ML estimates have desirable properties:</p>
+<ol style="list-style-type: decimal">
+<li>They are <em>asymptotically unbiased (consistent)</em>, meaning they converge on the unknown true values of population parameters.</li>
+<li>They are <em>asymptotically normally distributed</em>, meaning their sampling distributioons are approximately normal with known variance.</li>
+<li>They are <em>asymptotically efficient</em>, meaning their standard errors are smaller than thoses derived by other methods.</li>
+<li>Any function of ML estimamtes is also an ML estimate, meaning that predicted growth trajectoories (coonstructed fromo ML estimates of initial status and rates of change) are ML estimates of the true trajectories.</li>
+</ol>
+<p>All else being equal, statisticians prefer estimates that are consistent and efficient, that make use of well-establisshed normal theory, and that can generate decennt estimates of more complex quantities. Hence the appeal of ML methods.</p>
+<div id="how-do-we-use-ml-methods-to-fit-a-multilevel-model-and-how-does-it-work" class="section level3 hasAnchor" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> How do we use ML methods to fit a multilevel model, and how does it work?<a href="treating-time-more-flexibly.html#how-do-we-use-ml-methods-to-fit-a-multilevel-model-and-how-does-it-work" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Conceptually, ML estimates the values of the unknown population parameters that maximize the probability of observing a particular sample of data.</p>
+<ul>
+<li>For each subject, one can calculate the probability that their DV comes from their IVs given the particular intercept and regression coefficients in the model.</li>
+<li>ML calculates the probability for each subject and multiplies them together to get the probability that the whole set of DVs (across all subjects) would come from the set of IVs.
+<ul>
+<li>In other words, ML calculates the probability of observing the sample data as a function of the model’s unknown parameters. As longitudinal data consist oof several observations, one per measurement occasion, each person contributes several terms as there are records in the person-period data set.</li>
+</ul></li>
+<li>These probabilities are VERY small (close to 0), so they are converted to a more logical number by taking their log (log of a number less than 1 is a negative number) and multiplying that by -2 (hence -2 log Likelihood, or -2LL). The -2LL is distributed like a chi square.</li>
+</ul>
+<p>For ML, number of parameters = number of predictors + number of variance components in the model. When using ML estimation, <span class="math inline">\(p\)</span> is total number of parameters.</p>
+<p>REML is very similar to ML, except it only uses the variance components (and not the fixed effects) in calculating the fit. For RML, <span class="math inline">\(n\)</span> of parameters=number of variance components in the model. When using RML, <span class="math inline">\(p\)</span> is the number of variance components (<span class="math inline">\(\sigma^2\)</span> + the variances and covariance of the REs).</p>
+</div>
+</div>
+<div id="aic-vs.-bic" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> AIC vs. BIC<a href="treating-time-more-flexibly.html#aic-vs.-bic" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>You can compare the model fit of the various coding approaches to time by comparing the <strong>Akaike Information Criterion</strong> (AIC) and <strong>Bayesian Information Criterion</strong> from the models (when comparing models using AIC and BIC, you must use (for now) maximum likelihood estimation not RML).</p>
+<ul>
+<li>Both AIC and BIC are based on the -2 times the log likelihood (-2LL), which is also referred to as the deviance. Larger numbers mean more deviance (a lower likelihood for the fit of the model).</li>
+<li>AIC = -2LL + <span class="math inline">\(2*p\)</span>, where p=number of parameters, whereas BIC = -2LL + <span class="math inline">\(ln(n)*p\)</span>, where n=number of subjects or number of data points (calculated differently in different programs).</li>
+<li>BIC has a bigger penalty for models with more parameters when compared with AIC.</li>
+</ul>
+</div>
+<div id="homework-4---0912" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Homework 4 - 09/12<a href="treating-time-more-flexibly.html#homework-4---0912" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The attached data set are results comparing 2 treatments for PTSD (coded in the variable innovatively named condition; person centered therapy=0, prolonged exposure=1). The outcome is CPSSIE, which measures PTSD severity. Use week as your time variable. Do a quadratic, LN, and a hyperbolic time model. Center time at the last assessment (week=66), which is the 1 year follow-up. Which model fits the data best? Are there treatment condition differences at the last assessment in the best fitting model? For simplicity, only use a random effect for the intercept. Do not use a random effect for the slope(s).</p>
+<p><strong>SPSS</strong></p>
+<p><strong>R</strong></p>
 
 </div>
 </div>
@@ -192,6 +238,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

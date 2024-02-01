@@ -19,3 +19,9 @@ meaning-of-the-linear-vs.-quadratic-terms
 nested-models
 treating-time-more-flexibly
 homework-4---0912
+maximum-likelihood-estimation-ml
+maximum-likelihood-estimation-ml-vs.-restricted-maximum-likelihood-reml
+how-do-we-use-ml-methods-to-fit-a-multilevel-model-and-how-does-it-work
+which-way-should-you-code-time
+ml-vs.-reml
+aic-vs.-bic

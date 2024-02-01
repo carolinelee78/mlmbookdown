@@ -1,5 +1,48 @@
 # Treating Time More Flexibly
 
+Time can be coded in many different ways! For example, time may be coded in terms of the number of weeks since baseline, or in terms of assessment number. In other words, the "longitudinal variables" don't have to be time per se, but whatever longitudinal factor is creating repeated measures. 
+
+- For the OCD data, initially we coded time to represent “asmt #” (index1), e.g., assessment (asmt) 1, 2, 3, 4, 5. But assessments may not be equally spaced apart, so this coding may be misleading. 
+- In the case of the OCD data set, Time in weeks since baseline is really 0, 4, 16, 26, 52. So you can code time in weeks since baseline. In other cases, assessments may be on a variable schedule, so one could record the date of each assessment and code time at each assessment as the number of days since baseline. In long-term developmental studies, time may be coded to reflect the child’s age at the assessment, perhaps in months or in years. 
+
+## ML vs. REML
+
+Parameters in MLM models are estimated using **Maximum Likelihood** estimation (ML) or **Restricted Maximum Likelihood** estimation (REML). The method of ML is currently the mosts popular approach to statistical estimation. Its popularity results, in part, from its excellent performance in large random samples from well-defined target populations. As sample size increases, ML estimates have desirable properties: 
+
+1. They are _asymptotically unbiased (consistent)_, meaning they converge on the unknown true values of population parameters. 
+2. They are _asymptotically normally distributed_, meaning their sampling distributioons are approximately normal with known variance. 
+3. They are _asymptotically efficient_, meaning their standard errors are smaller than thoses derived by other methods. 
+4. Any function of ML estimamtes is also an ML estimate, meaning that predicted growth trajectoories (coonstructed fromo ML estimates of initial status and rates of change) are ML estimates of the true trajectories. 
+
+All else being equal, statisticians prefer estimates that are consistent and efficient, that make use of well-establisshed normal theory, and that can generate decennt estimates of more complex quantities. Hence the appeal of ML methods. 
+
+### How do we use ML methods to fit a multilevel model, and how does it work? 
+
+Conceptually, ML estimates the values of the unknown population parameters that maximize the probability of observing a particular sample of data. 
+
+- For each subject, one can calculate the probability that their DV comes from their IVs given the particular intercept and regression coefficients in the model. 
+- ML calculates the probability for each subject and multiplies them together to get the probability that the whole set of DVs (across all subjects) would come from the set of IVs. 
+  * In other words, ML calculates the probability of observing the sample data as a function of the model's unknown parameters. As longitudinal data consist oof several observations, one per measurement occasion, each person contributes several terms as there are records in the person-period data set. 
+- These probabilities are VERY small (close to 0), so they are converted to a more logical number by taking their log (log of a number less than 1 is a negative number) and multiplying that by -2 (hence -2 log Likelihood, or -2LL). The -2LL is distributed like a chi square.
+
+For ML, number of parameters = number of predictors + number of variance components in the model. When using ML estimation, $p$ is total number of parameters.
+
+REML is very similar to ML, except it only uses the variance components (and not the fixed effects) in calculating the fit. For RML, $n$ of parameters=number of variance components in the model. When using RML, $p$ is the number of variance components ($\sigma^2$ + the variances and covariance of the REs).
+
+## AIC vs. BIC
+
+You can compare the model fit of the various coding approaches to time by comparing the **Akaike Information Criterion** (AIC) and **Bayesian Information Criterion** from the models (when comparing models using AIC and BIC, you must use (for now) maximum likelihood estimation not RML).  
+
+- Both AIC and BIC are based on the -2 times the log likelihood (-2LL), which is also referred to as the deviance. Larger numbers mean more deviance (a lower likelihood for the fit of the model). 
+- AIC = -2LL + $2*p$, where p=number of parameters, whereas BIC = -2LL + $ln(n)*p$, where n=number of subjects or number of data points (calculated differently in different programs). 
+- BIC has a bigger penalty for models with more parameters when compared with AIC. 
+
 ## Homework 4 - 09/12
 
 The attached data set are results comparing 2 treatments for PTSD (coded in the variable innovatively named condition; person centered therapy=0, prolonged exposure=1). The outcome is CPSSIE, which measures PTSD severity. Use week as your time variable. Do a quadratic, LN, and a hyperbolic time model. Center time at the last assessment (week=66), which is the 1 year follow-up. Which model fits the data best? Are there treatment condition differences at the last assessment in the best fitting model? For simplicity, only use a random effect for the intercept. Do not use a random effect for the slope(s).
+
+**SPSS**
+
+
+**R**
+

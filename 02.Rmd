@@ -93,8 +93,10 @@ knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbook
 - An individual’s average slope does not vary around the average slope (UN2.2 – slope random effect – within each condition. Deviation for the average slope).
 - The higher the slope, the higher the intercept for each individual on average as this is a positive value for (UN2.1 - covariance).
 
+--- 
 
 **R**
+
 ```{r, warning = FALSE, results= 'hide'}
 library(haven)
 library(lme4)
@@ -238,6 +240,7 @@ MIXED YBOCS WITH weekc52 weekc52sq condition
 ```{r, echo = FALSE}
 knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG13.png")
 ```
+
 **Interpretation of** _**weekc52**_ **Main Effect** 
 
 The linear decrease in YBOCS in condition 0 at week 52 is not significant. 
@@ -254,13 +257,43 @@ Difference in YBOCS across conditions at week 52 is not significant.
 
 The change in differences across conditions in terms of YBOCS over time is significant. 
 
+--- 
+
 **R**
 
+```{r, warning = FALSE, results= 'hide'}
+library(haven)
+library(lme4)
+library(dplyr)
+```
+
+```{r}
+DF1 <- read_sav("Restructured_OCDMediationYBOCSBDI1inS.sav")
+DF1$week <- dplyr::recode(DF1$Index1, `1` = 0,
+                                      `2` = 4,
+                                      `3` = 16,
+                                      `4` = 26, 
+                                      `5` = 52)
+
+DF1$Subject <- DF1$`Subject#`
+
+model1 <- lmer(YBOC ~ week + condition + week*condition + (1 + week || Subject), data = DF1)
+summary(model1, corr = FALSE)
+ 
+```
+
+# weekc52 weekc52sq condition weekc52*condition weekc52sq*condition 
 
 
+```{r}
+DF1$week52 <- DF1$week - 52 
 
+DF1$week52sq <- DF1$week52^2
 
+model3 <- lmer(YBOC ~ week52 + week52sq + condition + week52*condition + week52sq*condition + (1 | week52), data = DF1)
 
+summary(model3, corr = FALSE)
+```
 
 Now try to graph the model using index1c5. Graph 2 models: the one WITH the condition x index1c5sq included, and the one WITHOUT condition x index1c5sq. Remember the trick you have to use to graph when the time variable is a transformed variable (you have to use the TRANSFORMED variable in the excel spreadsheet, not the raw 1,2,3,4,5 variable).
 
