@@ -26,3 +26,15 @@ which-way-should-you-code-time
 ml-vs.-reml
 aic-vs.-bic
 weekc52-weekc52sq-condition-weekc52condition-weekc52sqcondition
+homework-3.5---0215
+degrees-of-freedom
+non-linear-time
+when-quadratic-models-dont-fit-well
+logarithmic-models
+hyperbolic-models
+further-notes-on-nonlinear-growth-curves
+logarithmic-growth-curve-models
+hyperbolic-growth-curve-models
+piecewise-growth-curve-models
+how-to-code-piecewise-models---jump-or-no-jump
+graphing-piecewise-growth-curve-models

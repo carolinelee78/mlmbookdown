@@ -37,12 +37,14 @@ You can compare the model fit of the various coding approaches to time by compar
 - AIC = -2LL + $2*p$, where p=number of parameters, whereas BIC = -2LL + $ln(n)*p$, where n=number of subjects or number of data points (calculated differently in different programs). 
 - BIC has a bigger penalty for models with more parameters when compared with AIC. 
 
-## Homework 4 - 09/12
+## Degrees of Freedom 
 
-The attached data set are results comparing 2 treatments for PTSD (coded in the variable innovatively named condition; person centered therapy=0, prolonged exposure=1). The outcome is CPSSIE, which measures PTSD severity. Use week as your time variable. Do a quadratic, LN, and a hyperbolic time model. Center time at the last assessment (week=66), which is the 1 year follow-up. Which model fits the data best? Are there treatment condition differences at the last assessment in the best fitting model? For simplicity, only use a random effect for the intercept. Do not use a random effect for the slope(s).
+The MLM field is not unanimous on how to calculate the degrees of freedom for the statistical tests of regression coefficients in the models. There are 3 widely used methods, with each having pros and cons. SPSS allows you to chose between these methods on the Estimation tab, with Satterthwaite being the default.
 
-**SPSS**
+	1. **Satterthwaite approximation**: This method has been around a long time. It takes into account the covariance of the predictors in calculating the dfs for each, and calculates exact dfs, that are generally fractional numbers (not whole numbers). This is a generally accepted approach that is conservative, but not too conservative.
+	2. **Residual method**: This method has also been around for a long time, and generally produces whole numbers for estimated dfs. It estimates higher dfs than Satterthwaite, so it yields more power, but may not be conservative enough.
+	3. **Kenward-Rogers approximation**: This is a newer method. It is generally the most conservative of the 3 methods. When paired with Restricted Maximum Likelihood Estimation, it is the recommended method for studies with small samples (under 50). It is not available with Maximum likelihood Estimation.
 
 
-**R**
+
 

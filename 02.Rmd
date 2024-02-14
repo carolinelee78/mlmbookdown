@@ -147,6 +147,7 @@ Be sure that the squared term uses the exact linear term, squared. Don’t use t
 - This makes sense when you think of the quadratic term as the interaction of time with time. Then, as in all interactions, the coefficient for the main effect for Time will be its relation with outcome when the other variable in the interaction (i.e., Time) is 0.
 - Thus, the regression coefficient for linear Time changes depending on where you center the time and timesq terms. Often, you will want to center these Time terms at the mean of Time. If you center Time at its average value, the regression coefficient for the linear time term will be the AVERAGE linear change over time. 
 - You may also often want to center time at the last FU to compare groups at the last time point. In this case, the main effect for time will reflect the slope at that last time point.
+- Centering is just as important in quadratic models as in linear models. Be sure to use the same variable for the linear and quadratic terms (centered at the same time point). Then, the “condition” effect is the effect of treatment condition when Time equals 0.
  
 ## Homework 3 - 09/05
 
@@ -255,8 +256,6 @@ Difference in YBOCS across conditions at week 52 is not significant.
 
 The change in differences across conditions in terms of YBOCS over time is significant. 
 
---- 
-
 **R**
 
 ```{r, warning = FALSE, results= 'hide'}
@@ -300,7 +299,9 @@ Model 2 (without condition*index1c5sq)
 knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG15.png")
 ```
 
-**R**
+## Homework 3.5 - 02/15
+
+
 
 ## Nested Models
 
