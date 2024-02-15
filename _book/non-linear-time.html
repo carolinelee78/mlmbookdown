@@ -23,7 +23,7 @@
 <meta name="author" content="For doing better, for remediation. Integrating David’s class materials and Hoffman’s (2015) Longitudinal Analysis textbook to learn MLM with both R and SPSS." />
 
 
-<meta name="date" content="2024-02-14" />
+<meta name="date" content="2024-02-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -198,7 +198,74 @@ d. The second time variable would code time as 0 during the first phase of the 
 <h2><span class="header-section-number">5.6</span> Homework 4 - 09/12<a href="non-linear-time.html#homework-4---0912" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The attached data set are results comparing 2 treatments for PTSD (coded in the variable innovatively named condition; person centered therapy=0, prolonged exposure=1). The outcome is CPSSIE, which measures PTSD severity. Use week as your time variable. Do a quadratic, LN, and a hyperbolic time model. Center time at the last assessment (week=66), which is the 1 year follow-up. Which model fits the data best? Are there treatment condition differences at the last assessment in the best fitting model? For simplicity, only use a random effect for the intercept. Do not use a random effect for the slope(s).</p>
 <p><strong>SPSS</strong></p>
-<p><strong>R</strong></p>
+<pre><code>* STEP 1. Run quadratic model. 
+
+COMPUTE weekc66=week - 66.
+EXECUTE.
+
+COMPUTE weekc66sq=weekc66 ** 2.
+EXECUTE.
+
+MIXED CPSSIE WITH weekc66 weekc66sq Condition
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0, ABSOLUTE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0.000001, ABSOLUTE)    
+  /FIXED=weekc66 weekc66sq Condition weekc66*Condition weekc66sq*Condition | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=  SOLUTION TESTCOV
+  /RANDOM=INTERCEPT | SUBJECT(SubjectID) COVTYPE(UN)
+  /REPEATED=weekc66 | SUBJECT(SubjectID) COVTYPE(UN).
+  
+* STEP 1.5. Removed weekc66sq*condition as it is not significant. 
+
+MIXED CPSSIE WITH weekc66 weekc66sq Condition
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0, ABSOLUTE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0.000001, ABSOLUTE)    
+  /FIXED=weekc66 weekc66sq Condition weekc66*Condition weekc66sq*Condition | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=  SOLUTION TESTCOV
+  /RANDOM=INTERCEPT | SUBJECT(SubjectID) COVTYPE(UN)
+  /REPEATED=weekc66 | SUBJECT(SubjectID) COVTYPE(UN).</code></pre>
+<p>-2LL: 1533.531
+AIC: 1547.531</p>
+<pre><code>* STEP 2. Run LN model. 
+
+COMPUTE weekLN=LN(week+1).
+EXECUTE.
+
+COMPUTE weekLNc4.2=LN(week+1)-4.2.
+EXECUTE.
+MIXED CPSSIE WITH Condition weekLNc4.2
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=Condition weekLNc4.2 Condition*weekLNc4.2 | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT | SUBJECT(SubjectID) COVTYPE(UN)
+  /REPEATED=week | SUBJECT(SubjectID) COVTYPE(ID).</code></pre>
+<p>-2LL: 1521.443
+AIC: 1537.443</p>
+<pre><code>* STEP 3. Run hyperbolic model. 
+
+COMPUTE weekhyper=1-(1/(week+1)).
+EXECUTE.
+
+COMPUTE weekhyperc.99=1-(1/(week+1))-.99.
+EXECUTE.
+
+MIXED CPSSIE WITH Condition weekhyperc.99
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=Condition weekhyperc.99 Condition*weekhyperc.99 | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT | SUBJECT(SubjectID) COVTYPE(UN)
+  /REPEATED=week | SUBJECT(SubjectID) COVTYPE(ID).</code></pre>
+<p>-2LL: 1521.038
+AIC: 1537.038</p>
+<p>Overall, the hyperbolic model seemed to fit the best in terms of -2 log likelihood and AIC. In the best performing model, condition has a significance of &lt;.001, meaning there are significant differences in treatment conditions at the last assessment.</p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG22.png" /><!-- --></p>
 
 </div>
 </div>
