@@ -23,7 +23,7 @@
 <meta name="author" content="For doing better, for remediation. Integrating David’s class materials and Hoffman’s (2015) Longitudinal Analysis textbook to learn MLM with both R and SPSS." />
 
 
-<meta name="date" content="2024-02-14" />
+<meta name="date" content="2024-02-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -162,7 +162,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.3.1" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#meaning-of-the-linear-vs.-quadratic-terms"><i class="fa fa-check"></i><b>3.3.1</b> Meaning of the Linear vs. Quadratic Terms</a></li>
 </ul></li>
 <li class="chapter" data-level="3.4" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#homework-3---0905"><i class="fa fa-check"></i><b>3.4</b> Homework 3 - 09/05</a></li>
-<li class="chapter" data-level="3.5" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#nested-models"><i class="fa fa-check"></i><b>3.5</b> Nested Models</a></li>
+<li class="chapter" data-level="3.5" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#homework-3.5---0215"><i class="fa fa-check"></i><b>3.5</b> Homework 3.5 - 02/15</a></li>
+<li class="chapter" data-level="3.6" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#nested-models"><i class="fa fa-check"></i><b>3.6</b> Nested Models</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html"><i class="fa fa-check"></i><b>4</b> Treating Time More Flexibly</a>
 <ul>
@@ -171,7 +172,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1.1" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html#how-do-we-use-ml-methods-to-fit-a-multilevel-model-and-how-does-it-work"><i class="fa fa-check"></i><b>4.1.1</b> How do we use ML methods to fit a multilevel model, and how does it work?</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html#aic-vs.-bic"><i class="fa fa-check"></i><b>4.2</b> AIC vs. BIC</a></li>
-<li class="chapter" data-level="4.3" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html#homework-4---0912"><i class="fa fa-check"></i><b>4.3</b> Homework 4 - 09/12</a></li>
+<li class="chapter" data-level="4.3" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html#degrees-of-freedom"><i class="fa fa-check"></i><b>4.3</b> Degrees of Freedom</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="non-linear-time.html"><a href="non-linear-time.html"><i class="fa fa-check"></i><b>5</b> Non-linear Time</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="non-linear-time.html"><a href="non-linear-time.html#when-quadratic-models-dont-fit-well"><i class="fa fa-check"></i><b>5.1</b> When Quadratic Models Don’t Fit Well</a></li>
+<li class="chapter" data-level="5.2" data-path="non-linear-time.html"><a href="non-linear-time.html#logarithmic-growth-curve-models"><i class="fa fa-check"></i><b>5.2</b> Logarithmic Growth Curve Models</a></li>
+<li class="chapter" data-level="5.3" data-path="non-linear-time.html"><a href="non-linear-time.html#hyperbolic-growth-curve-models"><i class="fa fa-check"></i><b>5.3</b> Hyperbolic Growth Curve Models</a></li>
+<li class="chapter" data-level="5.4" data-path="non-linear-time.html"><a href="non-linear-time.html#piecewise-growth-curve-models"><i class="fa fa-check"></i><b>5.4</b> Piecewise Growth Curve Models</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="non-linear-time.html"><a href="non-linear-time.html#how-to-code-piecewise-models---jump-or-no-jump"><i class="fa fa-check"></i><b>5.4.1</b> How to Code Piecewise Models - Jump or No Jump?</a></li>
+<li class="chapter" data-level="5.4.2" data-path="non-linear-time.html"><a href="non-linear-time.html#graphing-piecewise-growth-curve-models"><i class="fa fa-check"></i><b>5.4.2</b> Graphing Piecewise Growth Curve Models</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="non-linear-time.html"><a href="non-linear-time.html#further-notes-on-nonlinear-growth-curves"><i class="fa fa-check"></i><b>5.5</b> Further notes on nonlinear growth curves</a></li>
+<li class="chapter" data-level="5.6" data-path="non-linear-time.html"><a href="non-linear-time.html#homework-4---0912"><i class="fa fa-check"></i><b>5.6</b> Homework 4 - 09/12</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -327,6 +341,7 @@ Be sure that the squared term uses the exact linear term, squared. Don’t use t
 <li>This makes sense when you think of the quadratic term as the interaction of time with time. Then, as in all interactions, the coefficient for the main effect for Time will be its relation with outcome when the other variable in the interaction (i.e., Time) is 0.</li>
 <li>Thus, the regression coefficient for linear Time changes depending on where you center the time and timesq terms. Often, you will want to center these Time terms at the mean of Time. If you center Time at its average value, the regression coefficient for the linear time term will be the AVERAGE linear change over time.</li>
 <li>You may also often want to center time at the last FU to compare groups at the last time point. In this case, the main effect for time will reflect the slope at that last time point.</li>
+<li>Centering is just as important in quadratic models as in linear models. Be sure to use the same variable for the linear and quadratic terms (centered at the same time point). Then, the “condition” effect is the effect of treatment condition when Time equals 0.</li>
 </ul>
 </div>
 </div>
@@ -390,14 +405,12 @@ MIXED YBOCS WITH weekc52 weekc52sq condition
 <p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG13.png" /><!-- --></p>
 <p><strong>Interpretation of</strong> <em><strong>weekc52</strong></em> <strong>Main Effect</strong></p>
 <p>The linear decrease in YBOCS in condition 0 at week 52 is not significant. Why would this be? Because the linear tangent to the quadratic change at week 52 would be a flat line, not a significant decrease.</p>
-<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/quadratic.gif" /><!-- --></p>
 <p><strong>Interpretation of</strong> <em><strong>weekc52sq</strong></em> <strong>Main Effect</strong></p>
 <p>There is a significant curvilinear change in YBOCS in condition 0 at week 52.</p>
 <p><strong>Interpretation of</strong> <em><strong>condition</strong></em> <strong>Main Effect</strong></p>
 <p>Difference in YBOCS across conditions at week 52 is not significant.</p>
 <p><strong>Interpretation of</strong> <em><strong>week52</strong></em> <span class="math inline">\(\times\)</span> <em><strong>YBOCS</strong></em> <strong>Interaction Effect</strong></p>
 <p>The change in differences across conditions in terms of YBOCS over time is significant.</p>
-<hr />
 <p><strong>R</strong></p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="applying-mlm-to-longitudinal-data.html#cb20-1" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
 <span id="cb20-2"><a href="applying-mlm-to-longitudinal-data.html#cb20-2" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
@@ -450,10 +463,84 @@ MIXED YBOCS WITH weekc52 weekc52sq condition
 <p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG14.png" /><!-- --></p>
 <p>Model 2 (without condition*index1c5sq)</p>
 <p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG15.png" /><!-- --></p>
-<p><strong>R</strong></p>
 </div>
-<div id="nested-models" class="section level2 hasAnchor" number="3.5">
-<h2><span class="header-section-number">3.5</span> Nested Models<a href="applying-mlm-to-longitudinal-data.html#nested-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="homework-3.5---0215" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Homework 3.5 - 02/15<a href="applying-mlm-to-longitudinal-data.html#homework-3.5---0215" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Here is the description of the attached file: This is data from a 2 group study (Prolonged exposure (PE, coded PE0=0)) vs. control (coded PE0=1)) on PTSD symptoms (CPSSIE, which is the DV). Use Index1 as your time variable. Model a quadratic growth curve. Are there treatment condition differences in CPSSIE at the last assessment? Graph the model. What is the average linear decrease (slope) in symptoms per Unit of index1 for those in the PE condition?</p>
+<p><strong>SPSS</strong></p>
+<pre><code>* STEP 1. Create centered variable and quadratic term.
+
+COMPUTE Index1c23=Index1 - 23.
+EXECUTE.
+
+COMPUTE Index1c23sq=Index1c23 ** 2.
+EXECUTE.</code></pre>
+<pre><code>* STEP 2. Run model with unstructured.
+
+MIXED CPSSIE WITH Index1c23 Index1c23sq pe0
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0, ABSOLUTE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0.000001, ABSOLUTE)    
+  /FIXED=Index1c23 Index1c23sq pe0 Index1c23*pe0 Index1c23sq*pe0 | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT Index1c23 Index1c23sq | SUBJECT(SubjectID) COVTYPE(UN)
+  /REPEATED=Index1c23 | SUBJECT(SubjectID) COVTYPE(UN).</code></pre>
+<pre><code>* STEP 3. Did not converge, so going down the list of Model Selection Table. 
+
+* Toeplitz - Heterogeneous - did not converge. 
+ 
+* Toeplitz - did not converge. 
+
+* AR1 Heterogeneous - did not converge. 
+
+* AR1 - converged! 
+  
+ MIXED CPSSIE WITH Index1c23 Index1c23sq pe0
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0, ABSOLUTE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0.000001, ABSOLUTE)    
+  /FIXED=Index1c23 Index1c23sq pe0 Index1c23*pe0 Index1c23sq*pe0 | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT Index1c23 Index1c23sq | SUBJECT(SubjectID) COVTYPE(UN)
+  /REPEATED=Index1c23 | SUBJECT(SubjectID) COVTYPE(AR1).</code></pre>
+<p><strong>Are there treatment condition differences in CPSSIE at the last assessment? Graph the model. </strong></p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG16.png" /><!-- --></p>
+<p>The main effect for pe0 indicates that the difference in CPSSIE across conditions at the last assessment is significant.</p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG18.png" /><!-- --></p>
+<p><strong>What is the average linear decrease (slope) in symptoms per Unit of index1 for those in the PE condition?</strong></p>
+<pre><code>* STEP 1. Centering time (index1) at its average value, the regression coefficient for the linear time term will be the AVERAGE linear change over time. 
+
+DESCRIPTIVES VARIABLES=Index1
+  /STATISTICS=MEAN.
+
+* Average is 13.35, so centering linear and quadratic terms at 13.35. 
+
+COMPUTE Index1c13.35=Index1 - 13.35.
+EXECUTE.
+
+COMPUTE Index1c13.35sq= Index1c13.35 ** 2.
+EXECUTE.</code></pre>
+<pre><code>* STEP 2. Run model. 
+
+* Did not converge with unstructured, going down the list. 
+
+* Converged with AR1. 
+
+MIXED CPSSIE WITH Index1c13.35 Index1c13.35sq pe0
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0, ABSOLUTE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0.000001, ABSOLUTE)    
+  /FIXED=Index1c13.35 Index1c13.35sq pe0 Index1c13.35*pe0 Index1c13.35sq*pe0 | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT Index1c13.35 Index1c13.35sq | SUBJECT(SubjectID) COVTYPE(UN)
+  /REPEATED=Index1c13.35 | SUBJECT(SubjectID) COVTYPE(AR1).
+</code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG17.png" /><!-- --></p>
+<p>The average linear decrease in CPSSIE for those in the PE condition (pe0 = 0) is significant. This is because the linear tangent to the quadratic change on average shows a significant negative linear trend.</p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/quadratic.gif" /><!-- --></p>
+</div>
+<div id="nested-models" class="section level2 hasAnchor" number="3.6">
+<h2><span class="header-section-number">3.6</span> Nested Models<a href="applying-mlm-to-longitudinal-data.html#nested-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>A smaller model (one with fewer parameters) is nested within a larger model if the larger model has ALL the parameters included in the smaller model, plus at least 1 additional parameter. Or, a smaller model is nested within a larger model if you can derive the smaller model by putting 1 or more restrictions on the larger model.</p>
 <ul>
 <li>“Parameters” includes both fixed effects and random effects (variance components).</li>

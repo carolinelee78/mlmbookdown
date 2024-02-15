@@ -240,10 +240,6 @@ knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbook
 
 The linear decrease in YBOCS in condition 0 at week 52 is not significant. Why would this be? Because the linear tangent to the quadratic change at week 52 would be a flat line, not a significant decrease. 
 
-```{r, echo = FALSE}
-knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/quadratic.gif")
-```
-
 **Interpretation of** _**weekc52sq**_ **Main Effect** 
 
 There is a significant curvilinear change in YBOCS in condition 0 at week 52. 
@@ -301,7 +297,109 @@ knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbook
 
 ## Homework 3.5 - 02/15
 
+Here is the description of the attached file: This is data from a 2 group study (Prolonged exposure (PE, coded PE0=0)) vs. control (coded PE0=1)) on PTSD symptoms (CPSSIE, which is the DV). Use Index1 as your time variable. Model a quadratic growth curve. Are there treatment condition differences in CPSSIE at the last assessment? Graph the model. What is the average linear decrease (slope) in symptoms per Unit of index1 for those in the PE condition?
 
+**SPSS**
+
+```
+* STEP 1. Create centered variable and quadratic term.
+
+COMPUTE Index1c23=Index1 - 23.
+EXECUTE.
+
+COMPUTE Index1c23sq=Index1c23 ** 2.
+EXECUTE.
+```
+
+```
+* STEP 2. Run model with unstructured.
+
+MIXED CPSSIE WITH Index1c23 Index1c23sq pe0
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0, ABSOLUTE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0.000001, ABSOLUTE)    
+  /FIXED=Index1c23 Index1c23sq pe0 Index1c23*pe0 Index1c23sq*pe0 | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT Index1c23 Index1c23sq | SUBJECT(SubjectID) COVTYPE(UN)
+  /REPEATED=Index1c23 | SUBJECT(SubjectID) COVTYPE(UN).
+```
+
+```
+* STEP 3. Did not converge, so going down the list of Model Selection Table. 
+
+* Toeplitz - Heterogeneous - did not converge. 
+ 
+* Toeplitz - did not converge. 
+
+* AR1 Heterogeneous - did not converge. 
+
+* AR1 - converged! 
+  
+ MIXED CPSSIE WITH Index1c23 Index1c23sq pe0
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0, ABSOLUTE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0.000001, ABSOLUTE)    
+  /FIXED=Index1c23 Index1c23sq pe0 Index1c23*pe0 Index1c23sq*pe0 | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT Index1c23 Index1c23sq | SUBJECT(SubjectID) COVTYPE(UN)
+  /REPEATED=Index1c23 | SUBJECT(SubjectID) COVTYPE(AR1).
+```
+
+**Are there treatment condition differences in CPSSIE at the last assessment? Graph the model. **
+
+```{r, echo = FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG16.png")
+```
+
+The main effect for pe0 indicates that the difference in CPSSIE across conditions at the last assessment is significant. 
+
+```{r, echo = FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG18.png")
+```
+
+**What is the average linear decrease (slope) in symptoms per Unit of index1 for those in the PE condition?**
+
+```
+* STEP 1. Centering time (index1) at its average value, the regression coefficient for the linear time term will be the AVERAGE linear change over time. 
+
+DESCRIPTIVES VARIABLES=Index1
+  /STATISTICS=MEAN.
+
+* Average is 13.35, so centering linear and quadratic terms at 13.35. 
+
+COMPUTE Index1c13.35=Index1 - 13.35.
+EXECUTE.
+
+COMPUTE Index1c13.35sq= Index1c13.35 ** 2.
+EXECUTE.
+```
+
+```
+* STEP 2. Run model. 
+
+* Did not converge with unstructured, going down the list. 
+
+* Converged with AR1. 
+
+MIXED CPSSIE WITH Index1c13.35 Index1c13.35sq pe0
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0, ABSOLUTE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0.000001, ABSOLUTE)    
+  /FIXED=Index1c13.35 Index1c13.35sq pe0 Index1c13.35*pe0 Index1c13.35sq*pe0 | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT Index1c13.35 Index1c13.35sq | SUBJECT(SubjectID) COVTYPE(UN)
+  /REPEATED=Index1c13.35 | SUBJECT(SubjectID) COVTYPE(AR1).
+
+```
+```{r, echo = FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG17.png")
+```
+
+The average linear decrease in CPSSIE for those in the PE condition (pe0 = 0) is significant. This is because the linear tangent to the quadratic change on average shows a significant negative linear trend.  
+
+```{r, echo = FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/quadratic.gif")
+```
 
 ## Nested Models
 
