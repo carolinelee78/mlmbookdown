@@ -38,3 +38,12 @@ hyperbolic-growth-curve-models
 piecewise-growth-curve-models
 how-to-code-piecewise-models---jump-or-no-jump
 graphing-piecewise-growth-curve-models
+homework-5---0914
+specifying-the-error-covariance-matrix
+why-care-about-error-covariance
+incorrect-assumptions-about-error-covariance
+random-effects-and-error-covariance
+covariance-matrices
+ecms-and-growth-curve-models
+random-effects-and-ecms
+comparing-ecms-how-to-select-the-best-ecm

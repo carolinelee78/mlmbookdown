@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | MLM Study Guide for Caroline, by Caroline</title>
-  <meta name="description" content="Page not found | MLM Study Guide for Caroline, by Caroline" />
+  <title>Chapter 6 Specifying the Error Covariance Matrix | MLM Study Guide for Caroline, by Caroline</title>
+  <meta name="description" content="Chapter 6 Specifying the Error Covariance Matrix | MLM Study Guide for Caroline, by Caroline" />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | MLM Study Guide for Caroline, by Caroline" />
+  <meta property="og:title" content="Chapter 6 Specifying the Error Covariance Matrix | MLM Study Guide for Caroline, by Caroline" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | MLM Study Guide for Caroline, by Caroline" />
+  <meta name="twitter:title" content="Chapter 6 Specifying the Error Covariance Matrix | MLM Study Guide for Caroline, by Caroline" />
   
   
   
@@ -23,14 +23,14 @@
 <meta name="author" content="For doing better, for remediation. Integrating David’s class materials and Hoffman’s (2015) Longitudinal Analysis textbook to learn MLM with both R and SPSS." />
 
 
-<meta name="date" content="2024-02-29" />
+<meta name="date" content="2024-02-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
+<link rel="prev" href="non-linear-time.html"/>
 
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -153,18 +153,156 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="page-not-found" class="section level1">
-<h1>Page not found</h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<div id="specifying-the-error-covariance-matrix" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Chapter 6</span> Specifying the Error Covariance Matrix<a href="specifying-the-error-covariance-matrix.html#specifying-the-error-covariance-matrix" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="why-care-about-error-covariance" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Why care about error covariance?<a href="specifying-the-error-covariance-matrix.html#why-care-about-error-covariance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li>Research indicates that failure to properly specify the error covariance matrix (the matrix of variance and covariances of the errors in predicting outcome at each time point) of the repeated measures can lead to misleading and/or inaccurate results.</li>
+<li>Typically, the regression coefficients are relatively accurately estimated, but the SD of the regression coefficients may not be correct, and the random effects may be wrong. Thus, we want to estimate it correctly.</li>
+</ol>
+</div>
+<div id="incorrect-assumptions-about-error-covariance" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Incorrect Assumptions About Error Covariance<a href="specifying-the-error-covariance-matrix.html#incorrect-assumptions-about-error-covariance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Failing to specify a “repeated measures” variable in SPSS by default leads to SPSS assuming a Diagonal error covariance matrix (ECM), which assumes that the errors at the various assessments are unrelated. This is generally not true with repeated measures, unless the time between assessments is very long.</p>
+<p>Scaled identity also assumes that the error variances at each time point are equal. Again, this too is often untrue. Thus, with repeated measures, we need to accurately specify the ECM. Despite this, most MLM programs default to Scaled Identity for the covariance of the errors of the repeated measures.</p>
+</div>
+<div id="random-effects-and-error-covariance" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Random Effects and Error Covariance<a href="specifying-the-error-covariance-matrix.html#random-effects-and-error-covariance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>When random effects are used, the errors in the error covariance matrix are AFTER accounting for the random effects.</li>
+<li>However, Hoffman (2015) has shown that random effects themselves actually model correlations between errors, such that a random intercept actually models compound symmetry (homogeneous) of the errors.
+<ul>
+<li>Adding additional random effects create even more complex, but very specific, models of the error covariance matrix.</li>
+<li>We will want to choose whether these random effects models are better than the other possible structures for the error covariance</li>
+</ul></li>
+</ul>
+</div>
+<div id="covariance-matrices" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Covariance Matrices<a href="specifying-the-error-covariance-matrix.html#covariance-matrices" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Unstructured Error Covariance Matrix (ECM)</strong></p>
+<ul>
+<li>The most general specification for the ECM is “unstructured”, which makes no assumptions about the ECM and just calculates each variance and covariance in the ECM from the data.</li>
+</ul>
+<p><strong>Other ECMs</strong></p>
+<ul>
+<li>Although one might assume that this is the most accurate (and indeed it is the most accurate, in that no other model will fit the data better), in some cases, another ECM specification may actually fit the data almost as well (i.e., not significantly worse).</li>
+<li>Also, if you use unstructured, you will not have any dfs left over to calculate the random effects, so the regression coefficients are constrained to be equal for all subjects.</li>
+<li>Overall, a better specification may, in some cases, be a simplified covariance matrix and a more complex model (including REs).</li>
+<li>Hence we test different logical covariance structures and models to see if we can find a simpler model that still accurately fits the data.</li>
+<li>The other models for the ECM that we typically examine are: Toeplitz, AR(1),Compound symmetry, and diagonal (see pp. 189-191 in HTT).</li>
+<li>For each of these, we should examine both heterogeneous variances (allowing the variances at each assessment to differ) and homogeneous variances (constraining all the variances at the different assessments to be equal).</li>
+</ul>
+<p><strong>Toeplitz and Autoregressive ECMs</strong></p>
+<ul>
+<li>Toeplitz
+<ul>
+<li>This ECM assumes that the covariance between errors that are 1 assessment apart are the same, whether it is asmt 1 with asmt2, or asmt4 with asmt5, or any other asmts that are 1 asmt apart.</li>
+<li>It also assumes that the covariances for the asmts that are 2 units apart are the same, etc.</li>
+</ul></li>
+<li>AR(1)
+<ul>
+<li>AR(1) assumes that the covariances between the errors decrease proportionately as the asmts get farther apart.</li>
+<li>It calculates a rho (correlation) that represents the correlation between errors that are 1 asmt apart, and assumes that asmts that are more than 1 asmt apart have correlations that are proportionate to rho.</li>
+</ul></li>
+<li>So, asmts that are 2 units apart are correlated <span class="math inline">\(\rho*\rho\)</span>, and those 3 units apart are correlated <span class="math inline">\(\rho*\rho*\rho\)</span>, etc. In AR(1), asmts farther apart are necessarily less and less related. In Toeplitz, this is not assumed.</li>
+</ul>
+<p><strong>Compound Symmetry and Diagonal Covariance ECMs</strong></p>
+<ul>
+<li>Compound symmetry
+<ul>
+<li>CS assumes that ALL the off-diagonal covariances are equal. So, the covariance between asmt 1 and asmt 2 is the same as between asmt 2 and asmt 5, etc.</li>
+<li>This is the assumption used in normal repeated measures ANOVA (referred to as sphericity). It is the same as having a random effect for the intercept.</li>
+</ul></li>
+<li>Diagonal
+<ul>
+<li>This is the heterogeneous variant of Scaled Identity. The covariances between asmts are assumed to be 0, but the variances of the errors at different asmts can differ.</li>
+</ul></li>
+</ul>
+<p><strong>ECM Specifications</strong></p>
+<p>Each of these ECMs can assume either heterogeneous variances at the different time points, or homogeneous variances at the different time points.</p>
+<p>Below are how different covariance matrices would look for 3 timepoints:</p>
+<p><em>Unstructured</em></p>
+<p><span class="math display">\[
+\begin{align*}
+&amp; \; \; \; \; \; e_1 \; \; \; \; \; e_2 \; \; \; \; \; e_3 \\
+&amp; e_1 \; \; \sigma_{11} \; \; \; \sigma_{12} \; \; \; \sigma_{13}\\
+&amp; e_2 \; \; \sigma_{21} \; \; \; \sigma_{22} \; \; \; \sigma_{23}\\
+&amp; e_3 \; \; \sigma_{31} \; \; \; \sigma_{32} \; \; \; \sigma_{33}
+\end{align*}
+\]</span></p>
+<p><em>Scaled Identity</em></p>
+<p><span class="math display">\[
+\begin{align*}
+&amp; \; \; \; \; \; e_1 \; \; \; \; \; e_2 \; \; \; \; \; e_3 \\
+&amp; e_1 \; \; \sigma \; \; \; \, \; \; \,0 \; \; \;  \; \; \, \; 0\\
+&amp; e_2 \; \;  0 \; \; \; \, \; \; \; \sigma \; \; \, \; \; \,\; 0\\
+&amp; e_3 \; \;  0 \; \; \; \, \; \; \; 0 \; \; \; \, \; \; \; \sigma
+\end{align*}
+\]</span>
+<em>Toeplitz Homogeneous</em></p>
+<p><span class="math display">\[
+\begin{align*}
+&amp; \; \; \; \; \; e_1 \; \; \; \; \; e_2 \; \; \; \; \; e_3 \\
+&amp; e_1 \; \; \sigma \; \; \;  \; \; \; \rho_1 \; \; \; \, \; \rho_2 \\
+&amp; e_2 \; \;  0 \; \; \; \, \; \; \; \sigma \; \; \; \, \; \, \rho_1\\
+&amp; e_3 \; \;  0 \; \; \; \, \; \; \; 0 \; \; \; \, \; \; \, \sigma
+\end{align*}
+\]</span>
+<em>AR(1) Heterogeneous</em></p>
+<p><span class="math display">\[
+\begin{align*}
+&amp; \; \; \; \; \; e_1 \; \; \; \; \; e_2 \; \; \; \; \; e_3 \\
+&amp; e_1 \; \; \sigma_1 \; \; \;  \; \; \rho \; \; \; \, \; \rho*\rho\\
+&amp; e_2 \; \;  0 \; \; \; \, \; \; \; \sigma_2 \; \; \; \, \; \, \rho\\
+&amp; e_3 \; \;  0 \; \; \; \, \; \; \; 0 \; \; \; \, \; \; \, \sigma_3
+\end{align*}
+\]</span>
+<em>Compound Symmetry Heterogeneous</em></p>
+<p><span class="math display">\[
+\begin{align*}
+&amp; \; \; \; \; \; e_1 \; \; \; \; \; e_2 \; \; \; \; \; e_3 \\
+&amp; e_1 \; \; \sigma_1 \; \; \; \; \; \rho \; \; \; \, \; \; \; \rho\\
+&amp; e_2 \; \;  0 \; \; \; \, \; \; \; \sigma_2 \; \; \; \, \; \, \rho\\
+&amp; e_3 \; \;  0 \; \; \; \, \; \; \; 0 \; \; \; \, \; \; \, \sigma_3
+\end{align*}
+\]</span></p>
+</div>
+<div id="comparing-ecms-how-to-select-the-best-ecm" class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> Comparing ECMs – How to select the best ECM<a href="specifying-the-error-covariance-matrix.html#comparing-ecms-how-to-select-the-best-ecm" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Each of these ECM models are nested within the unstructured model (because they involve constraints to UN), so we can compare the -2LL of the models. But only if the more restrictive ECMs do not have random effects.</li>
+<li>We select the model that is has the fewest parameters but whose -2LL is not different from the unstructured ECM.</li>
+<li>We can use REML or ML since the models differ only on variance components. In this class, we will always use ML.</li>
+</ul>
+</div>
+<div id="ecms-and-growth-curve-models" class="section level2 hasAnchor" number="6.6">
+<h2><span class="header-section-number">6.6</span> ECMs and Growth Curve Models<a href="specifying-the-error-covariance-matrix.html#ecms-and-growth-curve-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>It is important for both the ECM to be correct and for the model itself (growth curve formulation including both the correct fixed effects and random effects) to be correct for you to obtain the most accurate results.</li>
+<li>Since the errors are going to be related to the growth curve model (GCM), one can’t really accurately select the ECM if the GCM is wrong.</li>
+<li>Thus, for this class, we will start out with the unstructured ECM and decide on our GCM (linear, quadratic, log…) and then, when we have the model, we will select the ECM.</li>
+<li>Remember, the regression coefficients in MLM are relatively robust to the specification of the ECM, but the variance components are not (and the SE’s of the regression coefficients are not robust to errors in the specification of the ECM).</li>
+<li>Since the SE’s are not robust, the significance tests may be inaccurate if you use the wrong ECM.</li>
+</ul>
+</div>
+<div id="random-effects-and-ecms" class="section level2 hasAnchor" number="6.7">
+<h2><span class="header-section-number">6.7</span> Random Effects and ECMs<a href="specifying-the-error-covariance-matrix.html#random-effects-and-ecms" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>What do we do with the REs? We cannot have REs in the unstructured ECM, but we can in the restricted models (although rarely can they be calculated in the Toeplitz heterogeneous model).</li>
+<li>Thus, when selecting the ECM, you can add REs to the more restricted ECMs and compare these ECMs with REs to the unstructured model.</li>
+<li>Since differences between models (which don’t have REs) involve only variance components, you can compare models using -2LL using REML. But for this class, we will always use ML.</li>
+<li>Models with REs are not nested within the unstructured covariance matrix, so these models must be compared to the unstructured ECM model using AIC and BIC.</li>
+</ul>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
+<a href="non-linear-time.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>

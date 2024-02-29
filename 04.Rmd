@@ -42,7 +42,6 @@ $Y = b0 +b1*Timec5p1 + b2*Timec5p2 + b3*Phase10$
 
 The phase dummy variable should be coded 0 at the assessment at which the time variables are centered (where they are 0).
 
-### Graphing Piecewise Growth Curve Models 
 
 ## Further notes on nonlinear growth curves 
 
@@ -139,9 +138,46 @@ Overall, the hyperbolic model seemed to fit the best in terms of -2 log likeliho
 knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG22.png")
 ```
 
+## Homework 5 - 09/14
 
- 
+Using the data from the homework that we went over today, do a piecewise growth
+curve model, with the discontinuity at week 26. I copy the previous description of the
+data set below. Center time at week 66. Include the treatment x time interaction for
+time during phase 1 and for time during phase 2. Include as many random effects as will
+converge. Then repeat the analysis using a hyperbolic growth curve with as many
+random effects as will converge. Which fits the data better, piecewise or hyperbolic? Be ready to interpret the results of both models. 
 
+**Hyperbolic Model**  
 
+Interpretations of Fixed Effects
 
+  - `condition`: The difference between the two conditions in terms of CPSSIE at week 66 is significant. 
+  - `weekhyperc.99`: The effect of time on CPSSIE is significant for participants in condition 0 (PCT). The slope of improvement in CPSSIE for people in condition 0 (-14 which means they’re improving a lot).
+  - `condition*weekhyperc.99` interaction: Also the change in CPSSIE over time is different between the two conditions, since this term is significant. The rate of decrease in symptoms is more negative in condition 1 than in 0 over time.
+  
+Interpretations of Covariance Parameters
 
+- Intercept (UN1,1): There is significant variability in the intercepts of the individual CPSSIE scores around the estimated average of their conditions at the last time point. 
+- Covariance (UN2,1): The higher the slope, the higher the intercept for each individual on average as this is a positive value for.
+- Slope (UN2,2): An individual’s average slope does significantly vary around the average slope. 
+
+**Piecewise Model**
+
+Interpretations of Fixed Effects
+
+- `condition`: The effect of condition on CPSSIE is significant. In other words, the difference between the two conditions in terms of CPSSIE is significant at week 66 and only at week 66.  
+- `Weekc66ph1`: The effect of time on CPSSIE is significant for participants in condition 0 (PCT) during the first phase. The slope of improvement in CPSSIE for people in condition 0 (negative which means they’re improving a lot). The slope of decrease in symptoms are significant during phase 1.
+- `Weekc66ph2`: The effect of time on CPSSIE is not significant for participants in condition 0 (PCT) during the second phase.  The slope of improvement in CPSSIE for people in condition 0 (0 which means they’re not improving a lot). The change in symptoms over time is not significant over time, collapsed over the two conditions.
+- `Weekc66ph1*condition` interaction: The change in CPSSIE over time is different between the two conditions, since this term is significant. There is a significant change in CPSSIE over time between the two conditions for the first phase of the study. The rate of decrease in symptoms is more negative in condition 1 than in 0 for phase 1
+- `Weekc66ph2*condition` interaction: There is not a significant change in CPSSIE over time between the two conditions for the second phase of the study.
+
+Interpretations of Covariance Parameters 
+
+- Intercept (UN1,1): There is significant variability of the individual CPSSIE scores around the estimated average of their conditions at the last time point for phase 1.
+- Covariance (UN2,1): The higher the slope, the higher the intercept for each individual on average as this is a positive value for phase 1.  
+- Slope (UN2,2): An individual’s average slope does significantly vary around the average slope for phase 1. 
+- Intercept (UN3,1): There is significant variability of the individual CPSSIE scores around the estimated average of their conditions at the last time point for phase 2. 
+- Covariance (UN3,2): However, there is not a significant relationship between the slope and intercept for each individual for CPSSIE scores for phase 2.
+- Slope (UN3,3): An individual’s average slope does significantly vary around the average slope for phase 1.
+
+**Piecewise fits best because AIC is lower!**

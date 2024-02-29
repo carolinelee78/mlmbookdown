@@ -23,7 +23,7 @@
 <meta name="author" content="For doing better, for remediation. Integrating David’s class materials and Hoffman’s (2015) Longitudinal Analysis textbook to learn MLM with both R and SPSS." />
 
 
-<meta name="date" content="2024-02-15" />
+<meta name="date" content="2024-02-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="treating-time-more-flexibly.html"/>
-
+<link rel="next" href="specifying-the-error-covariance-matrix.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -118,10 +118,20 @@
 <li class="chapter" data-level="5.4" data-path="non-linear-time.html"><a href="non-linear-time.html#piecewise-growth-curve-models"><i class="fa fa-check"></i><b>5.4</b> Piecewise Growth Curve Models</a>
 <ul>
 <li class="chapter" data-level="5.4.1" data-path="non-linear-time.html"><a href="non-linear-time.html#how-to-code-piecewise-models---jump-or-no-jump"><i class="fa fa-check"></i><b>5.4.1</b> How to Code Piecewise Models - Jump or No Jump?</a></li>
-<li class="chapter" data-level="5.4.2" data-path="non-linear-time.html"><a href="non-linear-time.html#graphing-piecewise-growth-curve-models"><i class="fa fa-check"></i><b>5.4.2</b> Graphing Piecewise Growth Curve Models</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="non-linear-time.html"><a href="non-linear-time.html#further-notes-on-nonlinear-growth-curves"><i class="fa fa-check"></i><b>5.5</b> Further notes on nonlinear growth curves</a></li>
 <li class="chapter" data-level="5.6" data-path="non-linear-time.html"><a href="non-linear-time.html#homework-4---0912"><i class="fa fa-check"></i><b>5.6</b> Homework 4 - 09/12</a></li>
+<li class="chapter" data-level="5.7" data-path="non-linear-time.html"><a href="non-linear-time.html#homework-5---0914"><i class="fa fa-check"></i><b>5.7</b> Homework 5 - 09/14</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="specifying-the-error-covariance-matrix.html"><a href="specifying-the-error-covariance-matrix.html"><i class="fa fa-check"></i><b>6</b> Specifying the Error Covariance Matrix</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="specifying-the-error-covariance-matrix.html"><a href="specifying-the-error-covariance-matrix.html#why-care-about-error-covariance"><i class="fa fa-check"></i><b>6.1</b> Why care about error covariance?</a></li>
+<li class="chapter" data-level="6.2" data-path="specifying-the-error-covariance-matrix.html"><a href="specifying-the-error-covariance-matrix.html#incorrect-assumptions-about-error-covariance"><i class="fa fa-check"></i><b>6.2</b> Incorrect Assumptions About Error Covariance</a></li>
+<li class="chapter" data-level="6.3" data-path="specifying-the-error-covariance-matrix.html"><a href="specifying-the-error-covariance-matrix.html#random-effects-and-error-covariance"><i class="fa fa-check"></i><b>6.3</b> Random Effects and Error Covariance</a></li>
+<li class="chapter" data-level="6.4" data-path="specifying-the-error-covariance-matrix.html"><a href="specifying-the-error-covariance-matrix.html#covariance-matrices"><i class="fa fa-check"></i><b>6.4</b> Covariance Matrices</a></li>
+<li class="chapter" data-level="6.5" data-path="specifying-the-error-covariance-matrix.html"><a href="specifying-the-error-covariance-matrix.html#comparing-ecms-how-to-select-the-best-ecm"><i class="fa fa-check"></i><b>6.5</b> Comparing ECMs – How to select the best ECM</a></li>
+<li class="chapter" data-level="6.6" data-path="specifying-the-error-covariance-matrix.html"><a href="specifying-the-error-covariance-matrix.html#ecms-and-growth-curve-models"><i class="fa fa-check"></i><b>6.6</b> ECMs and Growth Curve Models</a></li>
+<li class="chapter" data-level="6.7" data-path="specifying-the-error-covariance-matrix.html"><a href="specifying-the-error-covariance-matrix.html#random-effects-and-ecms"><i class="fa fa-check"></i><b>6.7</b> Random Effects and ECMs</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -178,9 +188,6 @@ d. The second time variable would code time as 0 during the first phase of the 
 <p>The models for a jump are similar to the models above, with the addition of a “phase” dummy variable (typically coded phase10=0 for phase 1, and phase10=1 for phase 2).</p>
 <p><span class="math inline">\(Y = b0 +b1*Timec5p1 + b2*Timec5p2 + b3*Phase10\)</span></p>
 <p>The phase dummy variable should be coded 0 at the assessment at which the time variables are centered (where they are 0).</p>
-</div>
-<div id="graphing-piecewise-growth-curve-models" class="section level3 hasAnchor" number="5.4.2">
-<h3><span class="header-section-number">5.4.2</span> Graphing Piecewise Growth Curve Models<a href="non-linear-time.html#graphing-piecewise-growth-curve-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
 </div>
 <div id="further-notes-on-nonlinear-growth-curves" class="section level2 hasAnchor" number="5.5">
@@ -266,6 +273,49 @@ MIXED CPSSIE WITH Condition weekhyperc.99
 AIC: 1537.038</p>
 <p>Overall, the hyperbolic model seemed to fit the best in terms of -2 log likelihood and AIC. In the best performing model, condition has a significance of &lt;.001, meaning there are significant differences in treatment conditions at the last assessment.</p>
 <p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG22.png" /><!-- --></p>
+</div>
+<div id="homework-5---0914" class="section level2 hasAnchor" number="5.7">
+<h2><span class="header-section-number">5.7</span> Homework 5 - 09/14<a href="non-linear-time.html#homework-5---0914" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Using the data from the homework that we went over today, do a piecewise growth
+curve model, with the discontinuity at week 26. I copy the previous description of the
+data set below. Center time at week 66. Include the treatment x time interaction for
+time during phase 1 and for time during phase 2. Include as many random effects as will
+converge. Then repeat the analysis using a hyperbolic growth curve with as many
+random effects as will converge. Which fits the data better, piecewise or hyperbolic? Be ready to interpret the results of both models.</p>
+<p><strong>Hyperbolic Model</strong></p>
+<p>Interpretations of Fixed Effects</p>
+<ul>
+<li><code>condition</code>: The difference between the two conditions in terms of CPSSIE at week 66 is significant.</li>
+<li><code>weekhyperc.99</code>: The effect of time on CPSSIE is significant for participants in condition 0 (PCT). The slope of improvement in CPSSIE for people in condition 0 (-14 which means they’re improving a lot).</li>
+<li><code>condition*weekhyperc.99</code> interaction: Also the change in CPSSIE over time is different between the two conditions, since this term is significant. The rate of decrease in symptoms is more negative in condition 1 than in 0 over time.</li>
+</ul>
+<p>Interpretations of Covariance Parameters</p>
+<ul>
+<li>Intercept (UN1,1): There is significant variability in the intercepts of the individual CPSSIE scores around the estimated average of their conditions at the last time point.</li>
+<li>Covariance (UN2,1): The higher the slope, the higher the intercept for each individual on average as this is a positive value for.</li>
+<li>Slope (UN2,2): An individual’s average slope does significantly vary around the average slope.</li>
+</ul>
+<p><strong>Piecewise Model</strong></p>
+<p>Interpretations of Fixed Effects</p>
+<ul>
+<li><code>condition</code>: The effect of condition on CPSSIE is significant. In other words, the difference between the two conditions in terms of CPSSIE is significant at week 66 and only at week 66.<br />
+</li>
+<li><code>Weekc66ph1</code>: The effect of time on CPSSIE is significant for participants in condition 0 (PCT) during the first phase. The slope of improvement in CPSSIE for people in condition 0 (negative which means they’re improving a lot). The slope of decrease in symptoms are significant during phase 1.</li>
+<li><code>Weekc66ph2</code>: The effect of time on CPSSIE is not significant for participants in condition 0 (PCT) during the second phase. The slope of improvement in CPSSIE for people in condition 0 (0 which means they’re not improving a lot). The change in symptoms over time is not significant over time, collapsed over the two conditions.</li>
+<li><code>Weekc66ph1*condition</code> interaction: The change in CPSSIE over time is different between the two conditions, since this term is significant. There is a significant change in CPSSIE over time between the two conditions for the first phase of the study. The rate of decrease in symptoms is more negative in condition 1 than in 0 for phase 1</li>
+<li><code>Weekc66ph2*condition</code> interaction: There is not a significant change in CPSSIE over time between the two conditions for the second phase of the study.</li>
+</ul>
+<p>Interpretations of Covariance Parameters</p>
+<ul>
+<li>Intercept (UN1,1): There is significant variability of the individual CPSSIE scores around the estimated average of their conditions at the last time point for phase 1.</li>
+<li>Covariance (UN2,1): The higher the slope, the higher the intercept for each individual on average as this is a positive value for phase 1.<br />
+</li>
+<li>Slope (UN2,2): An individual’s average slope does significantly vary around the average slope for phase 1.</li>
+<li>Intercept (UN3,1): There is significant variability of the individual CPSSIE scores around the estimated average of their conditions at the last time point for phase 2.</li>
+<li>Covariance (UN3,2): However, there is not a significant relationship between the slope and intercept for each individual for CPSSIE scores for phase 2.</li>
+<li>Slope (UN3,3): An individual’s average slope does significantly vary around the average slope for phase 1.</li>
+</ul>
+<p><strong>Piecewise fits best because AIC is lower!</strong></p>
 
 </div>
 </div>
@@ -274,8 +324,8 @@ AIC: 1537.038</p>
           </div>
         </div>
       </div>
-<a href="treating-time-more-flexibly.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="treating-time-more-flexibly.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="specifying-the-error-covariance-matrix.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

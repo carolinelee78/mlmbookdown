@@ -1,0 +1,137 @@
+# Specifying the Error Covariance Matrix 
+
+## Why care about error covariance? 
+
+1. Research indicates that failure to properly specify the error covariance matrix (the matrix of variance and covariances of the errors in predicting outcome at each time point) of the repeated measures can lead to misleading and/or inaccurate results.
+2. Typically, the regression coefficients are relatively accurately estimated, but the SD of the regression coefficients may not be correct, and the random effects may be wrong. Thus, we want to estimate it correctly.
+
+## Incorrect Assumptions About Error Covariance 
+
+Failing to specify a “repeated measures” variable in SPSS by default leads to SPSS assuming a Diagonal error covariance matrix (ECM), which assumes that the errors at the various assessments are unrelated. This is generally not true with repeated measures, unless the time between assessments is very long. 
+
+Scaled identity also assumes that the error variances at each time point are equal. Again, this too is often untrue. Thus, with repeated measures, we need to accurately specify the ECM. Despite this, most MLM programs default to Scaled Identity for the covariance of the errors of the repeated measures.
+
+## Random Effects and Error Covariance
+
+- When random effects are used, the errors in the error covariance matrix are AFTER accounting for the random effects. 
+- However, Hoffman (2015) has shown that random effects themselves actually model correlations between errors, such that a random intercept actually models compound symmetry (homogeneous) of the errors.
+    * Adding additional random effects create even more complex, but very specific, models of the error covariance matrix.
+    * We will want to choose whether these random effects models are better than the other possible structures for the error covariance 
+
+## Covariance Matrices 
+
+**Unstructured Error Covariance Matrix (ECM)**
+
+- The most general specification for the ECM is “unstructured”, which makes no assumptions about the ECM and just calculates each variance and covariance in the ECM from the data.
+
+**Other ECMs**
+
+- Although one might assume that this is the most accurate (and indeed it is the most accurate, in that no other model will fit the data better), in some cases, another ECM specification may actually fit the data almost as well (i.e., not significantly worse). 
+- Also, if you use unstructured, you will not have any dfs left over to calculate the random effects, so the regression coefficients are constrained to be equal for all subjects. 
+- Overall, a better specification may, in some cases, be a simplified covariance matrix and a more complex model (including REs).
+- Hence we test different logical covariance structures and models to see if we can find a simpler model that still accurately fits the data. 
+- The other models for the ECM that we typically examine are: Toeplitz, AR(1),Compound symmetry, and diagonal (see pp. 189-191 in HTT). 
+- For each of these, we should examine both heterogeneous variances (allowing the variances at each assessment to differ) and homogeneous variances (constraining all the variances at the different assessments to be equal).
+
+**Toeplitz and Autoregressive ECMs**
+
+- Toeplitz
+  * This ECM assumes that the covariance between errors that are 1 assessment apart are the same, whether it is asmt 1 with asmt2, or asmt4 with asmt5, or any other asmts that are 1 asmt apart. 
+  * It also assumes that the covariances for the asmts that are 2 units apart are the same, etc.
+- AR(1)
+  * AR(1) assumes that the covariances between the errors decrease proportionately as the asmts get farther apart. 
+  * It calculates a rho (correlation) that represents the correlation between errors that are 1 asmt apart, and assumes that asmts that are more than 1 asmt apart have correlations that are proportionate to rho. 
+- So, asmts that are 2 units apart are correlated $\rho*\rho$, and those 3 units apart are correlated $\rho*\rho*\rho$, etc. In AR(1), asmts farther apart are necessarily less and less related. In Toeplitz, this is not assumed.
+
+**Compound Symmetry and Diagonal Covariance ECMs**
+
+- Compound symmetry 
+  * CS assumes that ALL the off-diagonal covariances are equal. So, the covariance between asmt 1 and asmt 2 is the same as between asmt 2 and asmt 5, etc. 
+  * This is the assumption used in normal repeated measures ANOVA (referred to as sphericity). It is the same as having a random effect for the intercept.
+- Diagonal
+  * This is the heterogeneous variant of Scaled Identity. The covariances between asmts are assumed to be 0, but the variances of the errors at different asmts can differ.
+
+**ECM Specifications**
+
+Each of these ECMs can assume either heterogeneous variances at the different time points, or homogeneous variances at the different time points.
+
+Below are how different covariance matrices would look for 3 timepoints: 
+
+_Unstructured_
+
+$$
+\begin{align*}
+ & \; \; \; \; \; e_1 \; \; \; \; \; e_2 \; \; \; \; \; e_3 \\ 
+ & e_1 \; \; \sigma_{11} \; \; \; \sigma_{12} \; \; \; \sigma_{13}\\
+ & e_2 \; \; \sigma_{21} \; \; \; \sigma_{22} \; \; \; \sigma_{23}\\
+ & e_3 \; \; \sigma_{31} \; \; \; \sigma_{32} \; \; \; \sigma_{33}
+\end{align*}
+$$
+
+_Scaled Identity_
+
+$$
+\begin{align*}
+ & \; \; \; \; \; e_1 \; \; \; \; \; e_2 \; \; \; \; \; e_3 \\ 
+ & e_1 \; \; \sigma \; \; \; \, \; \; \,0 \; \; \;  \; \; \, \; 0\\
+ & e_2 \; \;  0 \; \; \; \, \; \; \; \sigma \; \; \, \; \; \,\; 0\\
+ & e_3 \; \;  0 \; \; \; \, \; \; \; 0 \; \; \; \, \; \; \; \sigma
+\end{align*}
+$$
+_Toeplitz Homogeneous_
+
+$$
+\begin{align*}
+ & \; \; \; \; \; e_1 \; \; \; \; \; e_2 \; \; \; \; \; e_3 \\ 
+ & e_1 \; \; \sigma \; \; \;  \; \; \; \rho_1 \; \; \; \, \; \rho_2 \\
+ & e_2 \; \;  0 \; \; \; \, \; \; \; \sigma \; \; \; \, \; \, \rho_1\\
+ & e_3 \; \;  0 \; \; \; \, \; \; \; 0 \; \; \; \, \; \; \, \sigma
+\end{align*}
+$$
+_AR(1) Heterogeneous_
+
+$$
+\begin{align*}
+ & \; \; \; \; \; e_1 \; \; \; \; \; e_2 \; \; \; \; \; e_3 \\ 
+ & e_1 \; \; \sigma_1 \; \; \;  \; \; \rho \; \; \; \, \; \rho*\rho\\
+ & e_2 \; \;  0 \; \; \; \, \; \; \; \sigma_2 \; \; \; \, \; \, \rho\\
+ & e_3 \; \;  0 \; \; \; \, \; \; \; 0 \; \; \; \, \; \; \, \sigma_3
+\end{align*}
+$$
+_Compound Symmetry Heterogeneous_
+
+$$
+\begin{align*}
+ & \; \; \; \; \; e_1 \; \; \; \; \; e_2 \; \; \; \; \; e_3 \\ 
+ & e_1 \; \; \sigma_1 \; \; \; \; \; \rho \; \; \; \, \; \; \; \rho\\
+ & e_2 \; \;  0 \; \; \; \, \; \; \; \sigma_2 \; \; \; \, \; \, \rho\\
+ & e_3 \; \;  0 \; \; \; \, \; \; \; 0 \; \; \; \, \; \; \, \sigma_3
+\end{align*}
+$$
+
+## Comparing ECMs – How to select the best ECM
+
+- Each of these ECM models are nested within the unstructured model (because they involve constraints to UN), so we can compare the -2LL of the models. But only if the more restrictive ECMs do not have random effects. 
+- We select the model that is has the fewest parameters but whose -2LL is not different from the unstructured ECM. 
+- We can use REML or ML since the models differ only on variance components. In this class, we will always use ML.
+
+## ECMs and Growth Curve Models 
+
+- It is important for both the ECM to be correct and for the model itself (growth curve formulation including both the correct fixed effects and random effects) to be correct for you to obtain the most accurate results. 
+- Since the errors are going to be related to the growth curve model (GCM), one can’t really accurately select the ECM if the GCM is wrong. 
+- Thus, for this class, we will start out with the unstructured ECM and decide on our GCM (linear, quadratic, log…) and then, when we have the model, we will select the ECM.
+- Remember, the regression coefficients in MLM are relatively robust to the specification of the ECM, but the variance components are not (and the SE’s of the regression coefficients are not robust to errors in the specification of the ECM). 
+- Since the SE’s are not robust, the significance tests may be inaccurate if you use the wrong ECM.
+
+## Random Effects and ECMs
+
+- What do we do with the REs? We cannot have REs in the unstructured ECM, but we can in the restricted models (although rarely can they be calculated in the Toeplitz heterogeneous model). 
+- Thus, when selecting the ECM, you can add REs to the more restricted ECMs and compare these ECMs with REs to the unstructured model. 
+- Since differences between models (which don’t have REs) involve only variance components, you can compare models using -2LL using REML. But for this class, we will always use ML.
+- Models with REs are not nested within the unstructured covariance matrix, so these models must be compared to the unstructured ECM model using AIC and BIC.
+
+
+
+
+
+
