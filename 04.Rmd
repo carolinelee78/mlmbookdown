@@ -167,7 +167,7 @@ Interpretations of Fixed Effects
 
 - `condition`: The effect of condition on CPSSIE is significant. In other words, the difference between the two conditions in terms of CPSSIE is significant at week 66 and only at week 66.  
 - `Weekc66ph1`: The effect of time on CPSSIE is significant for participants in condition 0 (PCT) during the first phase. The slope of improvement in CPSSIE for people in condition 0 (negative which means they’re improving a lot). The slope of decrease in symptoms are significant during phase 1.
-- `Weekc66ph2`: The effect of time on CPSSIE is not significant for participants in condition 0 (PCT) during the second phase.  The slope of improvement in CPSSIE for people in condition 0 (0 which means they’re not improving a lot). The change in symptoms over time is not significant over time, collapsed over the two conditions.
+- `Weekc66ph2`: The effect of time on CPSSIE is not significant for participants in condition 0 (PCT) during the second phase.  The slope of improvement in CPSSIE for people in condition 0 (0 which means they’re not improving a lot). The change in symptoms over time is not significant over time for PCT.
 - `Weekc66ph1*condition` interaction: The change in CPSSIE over time is different between the two conditions, since this term is significant. There is a significant change in CPSSIE over time between the two conditions for the first phase of the study. The rate of decrease in symptoms is more negative in condition 1 than in 0 for phase 1
 - `Weekc66ph2*condition` interaction: There is not a significant change in CPSSIE over time between the two conditions for the second phase of the study.
 
