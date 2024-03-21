@@ -23,7 +23,7 @@
 <meta name="author" content="For doing better, for remediation. Integrating David’s class materials and Hoffman’s (2015) Longitudinal Analysis textbook to learn MLM with both R and SPSS." />
 
 
-<meta name="date" content="2024-02-29" />
+<meta name="date" content="2024-03-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -272,7 +272,6 @@ MIXED CPSSIE WITH Condition weekhyperc.99
 <p>-2LL: 1521.038
 AIC: 1537.038</p>
 <p>Overall, the hyperbolic model seemed to fit the best in terms of -2 log likelihood and AIC. In the best performing model, condition has a significance of &lt;.001, meaning there are significant differences in treatment conditions at the last assessment.</p>
-<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG22.png" /><!-- --></p>
 </div>
 <div id="homework-5---0914" class="section level2 hasAnchor" number="5.7">
 <h2><span class="header-section-number">5.7</span> Homework 5 - 09/14<a href="non-linear-time.html#homework-5---0914" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -283,7 +282,6 @@ time during phase 1 and for time during phase 2. Include as many random effects 
 converge. Then repeat the analysis using a hyperbolic growth curve with as many
 random effects as will converge. Which fits the data better, piecewise or hyperbolic? Be ready to interpret the results of both models.</p>
 <p><strong>Hyperbolic Model</strong></p>
-<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG23.png" /><!-- --></p>
 <p>Interpretations of Fixed Effects</p>
 <ul>
 <li><code>condition</code>: The difference between the two conditions in terms of CPSSIE at week 66 is significant.</li>
@@ -297,13 +295,12 @@ random effects as will converge. Which fits the data better, piecewise or hyperb
 <li>Slope (UN2,2): An individual’s average slope does significantly vary around the average slope.</li>
 </ul>
 <p><strong>Piecewise Model</strong></p>
-<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG24.png" /><!-- --></p>
 <p>Interpretations of Fixed Effects</p>
 <ul>
 <li><code>condition</code>: The effect of condition on CPSSIE is significant. In other words, the difference between the two conditions in terms of CPSSIE is significant at week 66 and only at week 66.<br />
 </li>
 <li><code>Weekc66ph1</code>: The effect of time on CPSSIE is significant for participants in condition 0 (PCT) during the first phase. The slope of improvement in CPSSIE for people in condition 0 (negative which means they’re improving a lot). The slope of decrease in symptoms are significant during phase 1.</li>
-<li><code>Weekc66ph2</code>: The effect of time on CPSSIE is not significant for participants in condition 0 (PCT) during the second phase. The slope of improvement in CPSSIE for people in condition 0 (0 which means they’re not improving a lot). The change in symptoms over time is not significant over time, collapsed over the two conditions.</li>
+<li><code>Weekc66ph2</code>: The effect of time on CPSSIE is not significant for participants in condition 0 (PCT) during the second phase. The slope of improvement in CPSSIE for people in condition 0 (0 which means they’re not improving a lot). The change in symptoms over time is not significant over time for PCT.</li>
 <li><code>Weekc66ph1*condition</code> interaction: The change in CPSSIE over time is different between the two conditions, since this term is significant. There is a significant change in CPSSIE over time between the two conditions for the first phase of the study. The rate of decrease in symptoms is more negative in condition 1 than in 0 for phase 1</li>
 <li><code>Weekc66ph2*condition</code> interaction: There is not a significant change in CPSSIE over time between the two conditions for the second phase of the study.</li>
 </ul>

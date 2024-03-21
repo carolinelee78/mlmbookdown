@@ -134,10 +134,6 @@ AIC: 1537.038
 
 Overall, the hyperbolic model seemed to fit the best in terms of -2 log likelihood and AIC. In the best performing model, condition has a significance of <.001, meaning there are significant differences in treatment conditions at the last assessment.
 
-```{r, echo = FALSE}
-knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG22.png")
-```
-
 ## Homework 5 - 09/14
 
 Using the data from the homework that we went over today, do a piecewise growth
