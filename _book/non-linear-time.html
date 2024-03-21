@@ -275,26 +275,32 @@ AIC: 1537.038</p>
 </div>
 <div id="homework-5---0914" class="section level2 hasAnchor" number="5.7">
 <h2><span class="header-section-number">5.7</span> Homework 5 - 09/14<a href="non-linear-time.html#homework-5---0914" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Using the data from the homework that we went over today, do a piecewise growth
-curve model, with the discontinuity at week 26. I copy the previous description of the
-data set below. Center time at week 66. Include the treatment x time interaction for
-time during phase 1 and for time during phase 2. Include as many random effects as will
-converge. Then repeat the analysis using a hyperbolic growth curve with as many
-random effects as will converge. Which fits the data better, piecewise or hyperbolic? Be ready to interpret the results of both models.</p>
-<p><strong>Hyperbolic Model</strong></p>
-<p>Interpretations of Fixed Effects</p>
-<ul>
-<li><code>condition</code>: The difference between the two conditions in terms of CPSSIE at week 66 is significant.</li>
-<li><code>weekhyperc.99</code>: The effect of time on CPSSIE is significant for participants in condition 0 (PCT). The slope of improvement in CPSSIE for people in condition 0 (-14 which means they’re improving a lot).</li>
-<li><code>condition*weekhyperc.99</code> interaction: Also the change in CPSSIE over time is different between the two conditions, since this term is significant. The rate of decrease in symptoms is more negative in condition 1 than in 0 over time.</li>
-</ul>
-<p>Interpretations of Covariance Parameters</p>
-<ul>
-<li>Intercept (UN1,1): There is significant variability in the intercepts of the individual CPSSIE scores around the estimated average of their conditions at the last time point.</li>
-<li>Covariance (UN2,1): The higher the slope, the higher the intercept for each individual on average as this is a positive value for.</li>
-<li>Slope (UN2,2): An individual’s average slope does significantly vary around the average slope.</li>
-</ul>
+<p>Using the data from the homework that we went over today, do a piecewise growth curve model, with the discontinuity at week 26. I copy the previous description of the data set below. Center time at week 66. Include the treatment x time interaction for time during phase 1 and for time during phase 2. Include as many random effects as will converge. Then repeat the analysis using a hyperbolic growth curve with as many random effects as will converge. Which fits the data better, piecewise or hyperbolic? Be ready to interpret the results of both models.</p>
 <p><strong>Piecewise Model</strong></p>
+<pre><code>STEP 1. Run piecewise growth curve model with discontinuity at week 26.
+
+COMPUTE weekc66=week-66.
+EXECUTE.
+IF  (week &lt;= 26) weekc66p1=week-26.
+EXECUTE.
+DATASET ACTIVATE DataSet1.
+IF  (week &gt; 26) weekc66p1=0.
+EXECUTE.
+IF  (week  &lt;=  26) weekc66p2=-40.
+EXECUTE.
+IF  (week  &gt;  26) weekc66p2=week-66.
+EXECUTE.
+
+MIXED CPSSIE WITH weekc66p1 weekc66p2 Condition
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1)
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0,
+    ABSOLUTE)
+  /FIXED=weekc66p1 weekc66p2 Condition weekc66p1*Condition weekc66p2*Condition | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT weekc66p1 weekc66p2 | SUBJECT(SubjectID) COVTYPE(UN)
+  /REPEATED=week | SUBJECT(SubjectID) COVTYPE(ID).</code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG20.png" /><!-- --></p>
 <p>Interpretations of Fixed Effects</p>
 <ul>
 <li><code>condition</code>: The effect of condition on CPSSIE is significant. In other words, the difference between the two conditions in terms of CPSSIE is significant at week 66 and only at week 66.<br />
@@ -313,6 +319,31 @@ random effects as will converge. Which fits the data better, piecewise or hyperb
 <li>Intercept (UN3,1): There is significant variability of the individual CPSSIE scores around the estimated average of their conditions at the last time point for phase 2.</li>
 <li>Covariance (UN3,2): However, there is not a significant relationship between the slope and intercept for each individual for CPSSIE scores for phase 2.</li>
 <li>Slope (UN3,3): An individual’s average slope does significantly vary around the average slope for phase 1.</li>
+</ul>
+<p><strong>Hyperbolic Model</strong></p>
+<pre><code>COMPUTE weekc66hyper=1-(1/(week+1))-.99.
+EXECUTE.
+MIXED CPSSIE WITH Condition weekc66hyper
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1)
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0,
+    ABSOLUTE)
+  /FIXED=Condition weekc66hyper Condition*weekc66hyper | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT weekc66hyper | SUBJECT(SubjectID) COVTYPE(UN)
+  /REPEATED=week | SUBJECT(SubjectID) COVTYPE(ID).</code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG21.png" /><!-- --></p>
+<p>Interpretations of Fixed Effects</p>
+<ul>
+<li><code>condition</code>: The difference between the two conditions in terms of CPSSIE at week 66 is significant.</li>
+<li><code>weekhyperc.99</code>: The effect of time on CPSSIE is significant for participants in condition 0 (PCT). The slope of improvement in CPSSIE for people in condition 0 (-14 which means they’re improving a lot).</li>
+<li><code>condition*weekhyperc.99</code> interaction: Also the change in CPSSIE over time is different between the two conditions, since this term is significant. The rate of decrease in symptoms is more negative in condition 1 than in 0 over time.</li>
+</ul>
+<p>Interpretations of Covariance Parameters</p>
+<ul>
+<li>Intercept (UN1,1): There is significant variability in the intercepts of the individual CPSSIE scores around the estimated average of their conditions at the last time point.</li>
+<li>Covariance (UN2,1): The higher the slope, the higher the intercept for each individual on average as this is a positive value for.</li>
+<li>Slope (UN2,2): An individual’s average slope does significantly vary around the average slope.</li>
 </ul>
 <p><strong>Piecewise fits best because AIC is lower!</strong></p>
 

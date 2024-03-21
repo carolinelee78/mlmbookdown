@@ -130,8 +130,364 @@ $$
 - Since differences between models (which don’t have REs) involve only variance components, you can compare models using -2LL using REML. But for this class, we will always use ML.
 - Models with REs are not nested within the unstructured covariance matrix, so these models must be compared to the unstructured ECM model using AIC and BIC.
 
+## Homework 6 - 09/19 
 
+In this OCD treatment file that we have analyzed before, run linear, quadratic, LN, hyperbolic, and piecewise GCMs, using week as the time variable and centering at week 52. YBOCS is the DV. Fill in the model summary table. Use as many random effects as will converge. Which model fits the data best? Interpret the results from that model. Note that the discontinuity is week 16 (post treatment).
 
+**Linear**
+
+```
+MIXED YBOCS WITH condition weekc52
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1)
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0,
+    ABSOLUTE)
+  /FIXED=condition weekc52 condition*weekc52 | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT weekc52 | SUBJECT(Subject#) COVTYPE(UN)
+  /REPEATED=Index1 | SUBJECT(Subject#) COVTYPE(ID).
+```
+
+```{r, echo = FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG_22.png")
+```
+
+**Quadratic**
+
+```
+MIXED YBOCS WITH condition weekc52 weekc52sq
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=condition weekc52 condition*weekc52 weekc52sq | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT weekc52 | SUBJECT(Subject#) COVTYPE(UN)
+  /REPEATED=Index1 | SUBJECT(Subject#) COVTYPE(ID).
+```
+
+```{r, echo = FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG_23.png")
+```
+
+**LN**
+
+```
+COMPUTE weekln=LN(week+1). *ln(week+1) since our coding starts at 0.
+EXECUTE.
+
+COMPUTE weeklnc3.97=weekln-3.97.
+EXECUTE.
+
+MIXED YBOCS WITH condition weeklnc3.97
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=condition weeklnc3.97 condition*weeklnc3.97 | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT weeklnc3.97 | SUBJECT(Subject#) COVTYPE(UN)
+  /REPEATED=Index1 | SUBJECT(Subject#) COVTYPE(ID).
+  
+*Dropped RE for weeklnc3.97 since final Hessian matrix was not positive definite. 
+
+MIXED YBOCS WITH condition weeklnc3.97
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=condition weeklnc3.97 condition*weeklnc3.97 | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT | SUBJECT(Subject#) COVTYPE(UN)
+  /REPEATED=Index1 | SUBJECT(Subject#) COVTYPE(ID).
+```
+
+```{r, echo = FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG_24.png")
+```
+
+**Hyperbolic**
+
+```
+COMPUTE weekhyper=1-(1/(week+1)).
+EXECUTE.
+
+COMPUTE weekhyperc.98=1-(1/(week+1))-.98.
+EXECUTE.
+
+MIXED YBOCS WITH condition weekhyperc.98
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=condition weekhyperc.98 condition*weekhyperc.98 | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT | SUBJECT(Subject#) COVTYPE(UN)
+  /REPEATED=Index1 | SUBJECT(Subject#) COVTYPE(ID).
+```
+
+```{r, echo = FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG_25.png")
+```
+
+**Piecewise**
+
+```
+IF  (week <= 16) wkd16c52p1=week-16.
+EXECUTE.
+
+IF  (week > 16) wkd16c52p1=0.
+EXECUTE.
+
+IF  (week >= 16) wkd16c52p2=weekc52.
+EXECUTE.
+
+RECODE wkd16c52p2 (MISSING=-36).
+EXECUTE.
+
+*Centering at week 52 and choosing discontinuity at week 16. 
+MIXED YBOCS WITH condition wkd16c52p1 wkd16c52p2
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=condition wkd16c52p1 wkd16c52p2 condition*wkd16c52p1 condition*wkd16c52p2 | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT wkd16c52p1 wkd16c52p2 | SUBJECT(Subject#) COVTYPE(UN)
+  /REPEATED=Index1 | SUBJECT(Subject#) COVTYPE(ID).
+  
+  MIXED YBOCS WITH condition wkd16c52p1 wkd16c52p2
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=condition wkd16c52p1 wkd16c52p2 condition*wkd16c52p1 condition*wkd16c52p2 | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT wkd16c52p1 | SUBJECT(Subject#) COVTYPE(UN)
+  /REPEATED=Index1 | SUBJECT(Subject#) COVTYPE(ID).
+  
+  MIXED YBOCS WITH condition wkd16c52p1 wkd16c52p2
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=condition wkd16c52p2 condition*wkd16c52p1 condition*wkd16c52p2 | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT wkd16c52p1 wkd16c52p2 | SUBJECT(Subject#) COVTYPE(UN)
+  /REPEATED=Index1 | SUBJECT(Subject#) COVTYPE(ID).
+
+*Got a positive definite error for both phases having REs, so had to only do random effects for the generic intercept.
+
+MIXED YBOCS WITH condition wkd16c52p1 wkd16c52p2
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=condition wkd16c52p1 wkd16c52p2 condition*wkd16c52p1 condition*wkd16c52p2 | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT | SUBJECT(Subject#) COVTYPE(UN)
+  /REPEATED=Index1 | SUBJECT(Subject#) COVTYPE(ID).
+```
+
+```{r, echo = FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG_26.png")
+```
+
+**Model Summary Table**
+
+```{r, echo = FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG27.png")
+```
+Quadratic GCM had the lowest AIC, so was the best fitting model. 
+
+```{r, echo = FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG28.png")
+```
+
+- `condition`: The difference between the two conditions (BT [0] and CT [1]) on YBOC at week 52 is not significant. 
+- `weekc52`: The effect of time on YBOC is not significant for participants in the BT condition (0) at week 52.
+- `condition*weekc52`: The change in YBOC over time by different conditions is not significant.
+- `weekc52sq`: The effect of time on YBOC is significant for participants in the BT condition (0) at week 52. 
+
+## Homework 7 - 09/26
+
+Use hyperbolic weeks as the time variable (centered at the last assessment) and condition as the group variable. Include the time x condition interaction. The DV is CPSSIE. Run the model with an unstructured (UN) covariance matrix as your full model. Then, fill in the bottom of the table testing the various Covariance matrices and following the guidelines below the table. Which covariance model fits the data best (lowest AIC; or which has the fewest parameters but is not significantly worse than UN)? Use WEEKNEW as the WEEK variable. 
+
+```
+COMPUTE weeknewhyper=1-(1/(1+weeknew)).
+EXECUTE.
+
+COMPUTE weeknewhyperc.99=1-(1/(1+weeknew))-.99.
+EXECUTE.
+```
+
+```
+* Unstructured ECM. 
+
+MIXED CPSSIE WITH weeknewhyperc.99 Condition
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1)
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0,
+    ABSOLUTE)
+  /FIXED=weeknewhyperc.99 Condition weeknewhyperc.99*Condition | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /REPEATED=weeknew | SUBJECT(SubjectID) COVTYPE(UN).
+```
+
+```
+* Toeplitz (Heterogeneous) ECM. 
+
+MIXED CPSSIE WITH weeknewhyperc.99 Condition
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1)
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0,
+    ABSOLUTE)
+  /FIXED=weeknewhyperc.99 Condition weeknewhyperc.99*Condition | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /REPEATED=weeknew | SUBJECT(SubjectID) COVTYPE(TPH).
+```
+
+```
+* Toeplitz ECM. 
+
+MIXED CPSSIE WITH weeknewhyperc.99 Condition
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1)
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0,
+    ABSOLUTE)
+  /FIXED=weeknewhyperc.99 Condition weeknewhyperc.99*Condition | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /REPEATED=weeknew | SUBJECT(SubjectID) COVTYPE(TP).
+```
+
+```
+* AR(1):Heterogeneous ECM. 
+
+MIXED CPSSIE WITH weeknewhyperc.99 Condition
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1)
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0,
+    ABSOLUTE)
+  /FIXED=weeknewhyperc.99 Condition weeknewhyperc.99*Condition | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT weeknewhyperc.99 | SUBJECT(SubjectID) COVTYPE(UN)
+  /REPEATED=weeknew | SUBJECT(SubjectID) COVTYPE(ARH1).
+  
+MIXED CPSSIE WITH weeknewhyperc.99 Condition
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1)
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0,
+    ABSOLUTE)
+  /FIXED=weeknewhyperc.99 Condition weeknewhyperc.99*Condition | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT | SUBJECT(SubjectID) COVTYPE(UN)
+  /REPEATED=weeknew | SUBJECT(SubjectID) COVTYPE(ARH1).
+```
+
+```
+* AR(1) ECM. 
+
+MIXED CPSSIE WITH weeknewhyperc.99 Condition
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1)
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0,
+    ABSOLUTE)
+  /FIXED=weeknewhyperc.99 Condition weeknewhyperc.99*Condition | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT weeknewhyperc.99 | SUBJECT(SubjectID) COVTYPE(UN)
+  /REPEATED=weeknew | SUBJECT(SubjectID) COVTYPE(AR1).
+```
+
+```
+* Compound Symmetry (Heterogeneous) ECM. 
+
+MIXED CPSSIE WITH weeknewhyperc.99 Condition
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1)
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0,
+    ABSOLUTE)
+  /FIXED=weeknewhyperc.99 Condition weeknewhyperc.99*Condition | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT weeknewhyperc.99 | SUBJECT(SubjectID) COVTYPE(UN)
+  /REPEATED=weeknew | SUBJECT(SubjectID) COVTYPE(CSH).
+```
+
+```
+* Compound Symmetry ECM.
+
+MIXED CPSSIE WITH weeknewhyperc.99 Condition
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1)
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0,
+    ABSOLUTE)
+  /FIXED=weeknewhyperc.99 Condition weeknewhyperc.99*Condition | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT weeknewhyperc.99 | SUBJECT(SubjectID) COVTYPE(UN)
+  /REPEATED=weeknew | SUBJECT(SubjectID) COVTYPE(CS).
+
+* RE removed. 
+
+MIXED CPSSIE WITH weeknewhyperc.99 Condition
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1)
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0,
+    ABSOLUTE)
+  /FIXED=weeknewhyperc.99 Condition weeknewhyperc.99*Condition | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /REPEATED=weeknew | SUBJECT(SubjectID) COVTYPE(CS).
+```
+
+```
+* Diagonal ECM. 
+
+MIXED CPSSIE WITH weeknewhyperc.99 Condition
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1)
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0,
+    ABSOLUTE)
+  /FIXED=weeknewhyperc.99 Condition weeknewhyperc.99*Condition | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT weeknewhyperc.99 | SUBJECT(SubjectID) COVTYPE(UN)
+  /REPEATED=weeknew | SUBJECT(SubjectID) COVTYPE(DIAG).
+  
+* RE removed. 
+
+MIXED CPSSIE WITH Condition weeknewhyperc.99
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1)
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0,
+    ABSOLUTE)
+  /FIXED=Condition weeknewhyperc.99 Condition*weeknewhyperc.99 | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT | SUBJECT(SubjectID) COVTYPE(UN)
+  /REPEATED=weeknew | SUBJECT(SubjectID) COVTYPE(DIAG).
+```
+
+```
+* Scaled Identity. 
+
+MIXED CPSSIE WITH Condition weeknewhyperc.99
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1)
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0,
+    ABSOLUTE)
+  /FIXED=Condition weeknewhyperc.99 Condition*weeknewhyperc.99 | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT weeknewhyperc.99 | SUBJECT(SubjectID) COVTYPE(UN)
+  /REPEATED=weeknew | SUBJECT(SubjectID) COVTYPE(ID).
+```
+
+```{r, echo = FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG29.png")
+```
+
+- `condition`: The difference between the two conditions in terms of CPSSIE at week 66 is significant. 
+- `weekhyperc.99`: The effect of time on CPSSIE is significant for participants in condition 0 (PCT).  
+- `weekhyperc.99*condition`: The change in CPSSIE over time is different between the two conditions, since this term is significant. The rate of decrease in symptoms is more negative in condition 1 than in 0 over time.
+
+```{r, echo = FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG30.png")
+```
 
 
 

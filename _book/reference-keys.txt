@@ -47,3 +47,11 @@ covariance-matrices
 ecms-and-growth-curve-models
 random-effects-and-ecms
 comparing-ecms-how-to-select-the-best-ecm
+homework-6---0919
+anova-a-non-growth-curve-growth-curve-model
+anova-as-a-growth-curve-model
+homework-7---0926
+section
+conducting-mlm-anova
+interpreting-mlm-anova-results
+homework-8---103

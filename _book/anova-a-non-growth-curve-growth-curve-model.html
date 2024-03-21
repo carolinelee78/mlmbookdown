@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | MLM Study Guide for Caroline, by Caroline</title>
-  <meta name="description" content="Page not found | MLM Study Guide for Caroline, by Caroline" />
+  <title>Chapter 7 ANOVA: A non-growth curve growth curve model | MLM Study Guide for Caroline, by Caroline</title>
+  <meta name="description" content="Chapter 7 ANOVA: A non-growth curve growth curve model | MLM Study Guide for Caroline, by Caroline" />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | MLM Study Guide for Caroline, by Caroline" />
+  <meta property="og:title" content="Chapter 7 ANOVA: A non-growth curve growth curve model | MLM Study Guide for Caroline, by Caroline" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | MLM Study Guide for Caroline, by Caroline" />
+  <meta name="twitter:title" content="Chapter 7 ANOVA: A non-growth curve growth curve model | MLM Study Guide for Caroline, by Caroline" />
   
   
   
@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
+<link rel="prev" href="specifying-the-error-covariance-matrix.html"/>
 
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -162,18 +162,137 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="page-not-found" class="section level1">
-<h1>Page not found</h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<div id="anova-a-non-growth-curve-growth-curve-model" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Chapter 7</span> ANOVA: A non-growth curve growth curve model<a href="anova-a-non-growth-curve-growth-curve-model.html#anova-a-non-growth-curve-growth-curve-model" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="anova-as-a-growth-curve-model" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> ANOVA as a Growth Curve Model<a href="anova-a-non-growth-curve-growth-curve-model.html#anova-as-a-growth-curve-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Sometimes, the growth curve does not follow a functional form (linear, quadratic, log, or even discontinuous). For example, cortisol increases early in the morning, then decreases, and then levels off. This is hard to model functionally. In such cases, if you don’t have too many assessments, you may consider an ANOVA.</li>
+<li>ANOVA will always give you the best model fit (-2LL) because it estimates each mean at each assessment exactly, but it may not give you the lowest AIC and BIC.
+<ul>
+<li>In other words, ANOVA model estimates each mean separately and independently.</li>
+<li>We need to dummy-code variables for each time point, effectively treating time as a categorical variable as opposed to a continuous variable.
+<ul>
+<li>In this analysis, all “Factor” variables will be dummy coded, with the “highest” category being used as the “reference” category. So a dummy variable will be created for all the other levels of the variable (except the highest level) and every comparison will be to the reference group (the highest level).</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="conducting-mlm-anova" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Conducting MLM ANOVA<a href="anova-a-non-growth-curve-growth-curve-model.html#conducting-mlm-anova" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>ANOVA is performed within SPSS mixed effects by putting your variables in the “Factors” box instead of in the “covariates” box.</li>
+<li>SPSS does an ANOVA treating the variables in the “Factors” box as categorical. (Behind the scenes, it codes TIME as a categorical variable, with k-1 dummy variables for TIME (see below). Thus, don’t put a continuous variable in the “Factors” box in the SPSS routine).</li>
+<li>You can mix and match variables in the fixed box with variables in the covariates box.</li>
+</ul>
+</div>
+<div id="interpreting-mlm-anova-results" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Interpreting MLM ANOVA Results<a href="anova-a-non-growth-curve-growth-curve-model.html#interpreting-mlm-anova-results" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>The results for an MLM ANOVA are very much like that from a regular ANOVA. The main effects are NOT like in regression. In these analyses, the main effects for an interaction are the AVERAGE effects of each variable COLLAPSING OVER THE OTHER VARIABLE. Thus, If you have a treatment x time interaction, the main effect for treatment is the average effect over all the time points (not the effect of treatment at time=0). Similarly, the effect of time is the average effect of time over all conditions, not the effect of time for treatment=0.</li>
+<li>Note that in ANOVA, you get MEANS not SLOPEs.
+<ul>
+<li>You request the means by selecting “EM Means” and selecting the means you want displayed.</li>
+<li>You can also do multiple comparisons for the main effects by selecting comparisons. You should usually select SIDAK, because LSD is too liberal (no correction for the multiple comparisons) and Bonferroni is too conservative (too much correction for the multiple comparisons).</li>
+</ul></li>
+<li>Thus, the main effects are not dependent upon how you center the variables. For example, the main effect of time is the same no matter how treatment is coded.</li>
+<li>If you ask for the parameter estimates under the statistics button you will get a regression analysis for the model.</li>
+<li>All the coefficients in these parameter estimates can be interpreted as they would be in a normal regression with categorical variables that are dummy coded. Note that this does not change the ANOVA table, or the interpretation of the main effects and interactions in the ANOVA table of effects.</li>
+<li>Other variables can go into the “Factors” box besides time.
+<ul>
+<li>For example, you can include potential moderators (like site). Or just use it as a covariate.</li>
+<li>Just remember, don’t put a continuous variable in the “Factors” box.</li>
+</ul></li>
+<li>You can include continuous variables as covariates, and they can interact with your “factor” variables, but don’t put continuous variables in the “Factors” box since it creates a dummy variable for every level of each variable in the “Factors” box.</li>
+<li>You can be completely flexible on your analytical design (main effects and interactions). - If you enter the covariate as a main effect only, you are assuming that the relation between the covariate and outcome is the same across all levels of the other variables.</li>
+<li>When you model interactions between covariates and “factor” variables, SPSS automatically creates dummy variables for the factor variable, and forms interactions between each dummy (for the factor variable) and the covariate.</li>
+</ul>
+</div>
+<div id="homework-8---103" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> Homework 8 - 10/3<a href="anova-a-non-growth-curve-growth-curve-model.html#homework-8---103" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We have assessments at pre, post, and FU for pds (panic disorder symptoms). We have 2 groups (imi=0 is CBT, imi=1 is a drug). Using an unstructured covariance matrix, determine which growth curve model, linear, log or ANOVA, has the best fit. Please include imi, time, and imi x time interaction. Next, as a challenge, dummy variable code your variables so that you can compare pre to post in the CBT condition. Is the -2LL for this model the same as in the ANOVA?</p>
+<pre><code>* LINEAR.
+
+COMPUTE Index1c3=Index1 - 3.
+EXECUTE.
+
+MIXED pds WITH Index1 imi
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0, ABSOLUTE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0.000001, ABSOLUTE)    
+  /FIXED=Index1 imi Index1*imi | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /REPEATED=Index1 | SUBJECT(id_1) COVTYPE(UN).</code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG31.png" /><!-- --></p>
+<pre><code>* LOG. 
+
+COMPUTE Index1LN=LN(Index1).
+EXECUTE.
+
+COMPUTE Index1LNc1.1=LN(Index1)-1.1.
+EXECUTE.
+
+MIXED pds WITH Index1LNc1.1 imi
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0, ABSOLUTE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0.000001, ABSOLUTE)    
+  /FIXED= Index1LNc1.1 imi imi*Index1LNc1.1 | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /REPEATED=Index1 | SUBJECT(id_1) COVTYPE(UN).</code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG32.png" /><!-- --></p>
+<pre><code>* ANOVA (before dummy coding).
+
+MIXED pds BY Index1 imi
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0, ABSOLUTE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0.000001, ABSOLUTE)    
+  /FIXED=Index1 imi Index1*imi | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /REPEATED=Index1 | SUBJECT(id_1) COVTYPE(UN)
+  /EMMEANS=TABLES(Index1*imi) .</code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG33.png" /><!-- --></p>
+<pre><code>*ANOVA (after dummy coding). 
+
+IF  (Index1=1) Time_1=1.
+EXECUTE.
+IF  (Index1=2  | Index1=3) Time_1=0.
+EXECUTE.
+
+IF  (Index1=2) Time_2=1.
+EXECUTE.
+IF  (Index1=1  | Index1=3) Time_2=0.
+EXECUTE.
+
+IF  (Index1=3) Time_3=1.
+EXECUTE.
+IF  (Index1=1  | Index1=2) Time_3=0.
+EXECUTE.
+
+MIXED pds BY imi Time_1 Time_2
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0, ABSOLUTE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0.000001, ABSOLUTE)    
+  /FIXED=imi Time_1 Time_2 imi*Time_1 imi*Time_2 | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /REPEATED=Index1 | SUBJECT(id_1) COVTYPE(UN).</code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG34.png" /><!-- --></p>
+<ul>
+<li><code>IMI</code>: On average PDS is not significantly different across the different conditions (CBT, Drug), averaging across time points.</li>
+<li><code>Time_1*IMI</code>: On average, the effect of time at pre on PDS is not significantly different for the different conditions (CBT, Drug).</li>
+<li><code>Time_2*IMI</code>: On average, the effect of time at post on PDS is not significantly different for the different conditions (CBT, Drug).</li>
+<li><code>Time_1</code>: On average PDS is significantly different at pre, averaging across treatment condition.</li>
+<li><code>Time_2</code>: On average PDS is not significantly different at post, averaging across treatment condition.</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG35.png" /><!-- --></p>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
+<a href="specifying-the-error-covariance-matrix.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>
