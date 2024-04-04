@@ -515,7 +515,7 @@ knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbook
 
 The difference in the TCBCEXTT (child externalizing problems) slopes for the PS and TAU conditions is significant post treatment (at asmt=3), $b$ = 6.359, 95% CI = [0.236, 12.482], $t$(331) = 2.043, $p$ = 0.042. The interaction term does not change when recentering, so the difference in TCBCEXTT slopes for the two conditions is also significant at the final follow-up, $b$ = 6.359, 95% CI = [0.236, 12.482], $t$(331) = 2.043, $p$ = 0.042.
 
-### Question 2
+## Question 2
 
 In the file DD.PSSI.new.sav, the outcome variable is % of days drinking (DDpct). There are 7 assessments, 4 weeks apart from each other (wk 0-24). The study is a randomized controlled trial with a treatment group (PE, for prolonged exposure, coded PBO0=1) and a control group (Placebo, coded PBO0=0). The intervention lasts 12wk, as does the follow-up. Wks 0-12 are during treatment. The follow-up (FU) period begins immediately after wk=12 (i.e., don’t use the jump/phase variable). Wks 16-24 are follow up asmts. Use wk as your Time variable in all analyses. The discontinuity is at end of treatment (wk 12). Answer the same 3 questions in question 1 (for the final, best-fitting model only), and graph your final model. Follow all the other instructions in question 1 also (e.g., describe the significant results, explain your process, fill out the Model Selection Table, and follow any other procedure outlined in Q1).
 
