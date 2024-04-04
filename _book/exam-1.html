@@ -249,7 +249,7 @@ MIXED TCBCEXTT WITH cond10 ASMTHYPER
   /PRINT=SOLUTION TESTCOV 
   /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(UN). </code></pre>
 <p>Piecewise Coding:</p>
-<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG_40.png" /><!-- --></p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG-40.png" /><!-- --></p>
 <pre><code>*PIECEWISE.
 
 IF  (ASMT &lt;  3) ASMTd3c6p1=ASMT-3. 
@@ -258,7 +258,7 @@ EXECUTE.
 IF  (ASMT &gt;= 3) ASMTd3c6p1=0. 
 EXECUTE. 
 
-IF  (ASMT  &lt;=  3) ASMTd3c6p2=-4. 
+IF  (ASMT  &lt;=  3) ASMTd3c6p2=-3. 
 EXECUTE. 
 
 IF  (ASMT &gt; 3) ASMTd3c6p2=ASMT-6. 
@@ -282,7 +282,7 @@ MIXED TCBCEXTT BY ASMT cond10
   /PRINT=SOLUTION TESTCOV
   /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(UN).</code></pre>
 <p>Hyperbolic GCM fit best, AIC = 2297.907, BIC = 2393.111</p>
-<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG41.png" /><!-- --></p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG-41.png" /><!-- --></p>
 <p>Assessing fit of covariance structures:</p>
 <pre><code>*TOEPLITZ: HETEROGENEOUS. 
 
@@ -549,7 +549,7 @@ MIXED TCBCEXTT WITH cond10 ASMTHYPERc.67
   /PRINT=SOLUTION TESTCOV
   /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(AR1).</code></pre>
 <p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG_36.png" /><!-- --></p>
-<p>The difference between the two conditions (PS and TAU) is significant post treatment (at asmt=3), <span class="math inline">\(b\)</span> = 6.359, 95% CI = [0.236, 12.482], <span class="math inline">\(t\)</span>(331) = 2.043, <span class="math inline">\(p\)</span> = 0.042.</p>
+<p>The difference of slope between the two conditions (PS and TAU) is significant, <span class="math inline">\(b\)</span> = 6.359, 95% CI = [0.236, 12.482], <span class="math inline">\(t\)</span>(331) = 2.043, <span class="math inline">\(p\)</span> = 0.042.</p>
 <p><strong>1b. For the final (best-fitting) model only (the final growth model with the final ECM), are the slopes significant in each group?</strong></p>
 <pre><code>MIXED TCBCEXTT WITH cond10 ASMTHYPERc.67
   /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
@@ -687,7 +687,6 @@ MIXED DDpct BY PBO0 wk
   /METHOD=ML
   /PRINT=SOLUTION TESTCOV
   /REPEATED=wk | SUBJECT(id) COVTYPE(UN).</code></pre>
-<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG_45.png" /><!-- --></p>
 <p>Hyperbolic GCM fit best, AIC = 8185.582, BIC = 8342.726</p>
 <p>Assessing fit of covariance structures:</p>
 <pre><code>*TOEPLITZ: HETEROGENEOUS.
@@ -821,6 +820,7 @@ MIXED DDpct WITH PBO0 wkHYPER
   /FIXED=PBO0 wkHYPER PBO0*wkHYPER | SSTYPE(3)
   /METHOD=ML
   /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT | SUBJECT(id) COVTYPE(UN)
   /REPEATED=wk | SUBJECT(id) COVTYPE(CSH).</code></pre>
 <pre><code>*COMPOUND SYMMETRY. 
 
@@ -934,14 +934,14 @@ MIXED DDpct WITH PBO0 wkHYPER
   /PRINT=SOLUTION TESTCOV
   /RANDOM=INTERCEPT | SUBJECT(id) COVTYPE(UN)
   /REPEATED=wk | SUBJECT(id) COVTYPE(ID).</code></pre>
-<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG46.png" /><!-- --></p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG-46.png" /><!-- --></p>
 <p>Unstructured ECM fit best, AIC = 8185.582, BIC = 8342.726</p>
 <p><strong>Graph</strong></p>
 <p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG_47.png" /><!-- --></p>
 <p><strong>2a. For the final (best-fitting) model only (the final growth model with the final ECM), are there differences in the slopes between the groups?</strong></p>
 <p>The final (best-fitting) model (i.e., the final growth model with the final ECM) for Q2 was found to be the hyperbolic growth curve model with unstructured error covariance matrix.</p>
 <p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG_48.png" /><!-- --></p>
-<p>The difference in the DDpct (percentage days of drinking) slopes for the prolonged exposure (PE) and placebo (PBO) conditions is not significant post-treatment (at wk=12), <span class="math inline">\(b\)</span> = 1.849, 95% CI: [-7.047, 10.745], <span class="math inline">\(t\)</span>(1151) = .41, <span class="math inline">\(p\)</span> = .682.</p>
+<p>The difference in the DDpct (percentage days of drinking) slopes for the prolonged exposure (PE) and placebo (PBO) conditions is not significant, <span class="math inline">\(b\)</span> = 1.849, 95% CI: [-7.047, 10.745], <span class="math inline">\(t\)</span>(1151) = .41, <span class="math inline">\(p\)</span> = .682.</p>
 <p><strong>2b. For the final (best-fitting) model only (the final growth model with the final ECM), are the slopes significant in each group?</strong></p>
 <p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG_49.png" /><!-- --></p>
 <p>The slope for DDpct (% days drinking) is significant for the condition coded 0 for PBO0, which is the placebo condition, <span class="math inline">\(b\)</span> = -69.376, 95% CI: [-75.578, -63.173], <span class="math inline">\(t\)</span>(1151) = -22.088, <span class="math inline">\(p\)</span> &lt; .001.</p>
@@ -950,7 +950,7 @@ MIXED DDpct WITH PBO0 wkHYPER
 <p><strong>2c. For the final (best-fitting) model only (the final growth model with the final ECM), are there differences between the groups at post-treatment vs. the final follow-up? </strong></p>
 <p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG_51.png" /><!-- --></p>
 <p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG_52.png" /><!-- --></p>
-<p>The difference in DDpct (% days drinking) slopes for the treatment (prolonged exposure; PE) and placebo (PBO) conditions post-treatment (at wk=12) is not statistically significant as explained in question 2A, <span class="math inline">\(b\)</span>=2.774, 95% CI: [-2.203, 7.751], <span class="math inline">\(t\)</span>(1151)=1.102, <span class="math inline">\(p\)</span>=.272. The difference in DDpct slopes at the final follow-up (at wk=24) is also not significant, <span class="math inline">\(b\)</span> = 2.848, 95% CI: [-2.290, 7.986], <span class="math inline">\(t\)</span>(1151) = 1.096, <span class="math inline">\(p\)</span> = .275.</p>
+<p>The difference in DDpct (% days drinking) for the treatment (prolonged exposure; PE) and placebo (PBO) conditions post-treatment (at wk=12) is not statistically significant as explained in question 2A, <span class="math inline">\(b\)</span>=2.774, 95% CI: [-2.203, 7.751], <span class="math inline">\(t\)</span>(1151)=1.102, <span class="math inline">\(p\)</span>=.272. The difference in DDpct at the final follow-up (at wk=24) is also not significant, <span class="math inline">\(b\)</span> = 2.848, 95% CI: [-2.290, 7.986], <span class="math inline">\(t\)</span>(1151) = 1.096, <span class="math inline">\(p\)</span> = .275.</p>
 
 </div>
 </div>

@@ -84,7 +84,7 @@ MIXED TCBCEXTT WITH cond10 ASMTHYPER
 Piecewise Coding: 
 
 ```{r, echo = FALSE}
-knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG_40.png")
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG-40.png")
 ```
 
 ```
@@ -96,7 +96,7 @@ EXECUTE.
 IF  (ASMT >= 3) ASMTd3c6p1=0. 
 EXECUTE. 
 
-IF  (ASMT  <=  3) ASMTd3c6p2=-4. 
+IF  (ASMT  <=  3) ASMTd3c6p2=-3. 
 EXECUTE. 
 
 IF  (ASMT > 3) ASMTd3c6p2=ASMT-6. 
@@ -127,7 +127,7 @@ MIXED TCBCEXTT BY ASMT cond10
 Hyperbolic GCM fit best, AIC = 2297.907, BIC = 2393.111
 
 ```{r, echo = FALSE}
-knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG41.png")
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG-41.png")
 ```
 
 Assessing fit of covariance structures: 
@@ -437,7 +437,7 @@ MIXED TCBCEXTT WITH cond10 ASMTHYPERc.67
 knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG_36.png")
 ```
 
-The difference between the two conditions (PS and TAU) is significant post treatment (at asmt=3), $b$ = 6.359, 95% CI = [0.236, 12.482], $t$(331) = 2.043, $p$ = 0.042.  
+The difference of slope between the two conditions (PS and TAU) is significant, $b$ = 6.359, 95% CI = [0.236, 12.482], $t$(331) = 2.043, $p$ = 0.042.  
 
 **1b. For the final (best-fitting) model only (the final growth model with the final ECM), are the slopes significant in each group?**
 
@@ -628,10 +628,6 @@ MIXED DDpct BY PBO0 wk
   /REPEATED=wk | SUBJECT(id) COVTYPE(UN).
 ```
 
-```{r, echo = FALSE}
-knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG_45.png")
-```
-
 Hyperbolic GCM fit best, AIC = 8185.582, BIC = 8342.726
 
 Assessing fit of covariance structures: 
@@ -780,6 +776,7 @@ MIXED DDpct WITH PBO0 wkHYPER
   /FIXED=PBO0 wkHYPER PBO0*wkHYPER | SSTYPE(3)
   /METHOD=ML
   /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT | SUBJECT(id) COVTYPE(UN)
   /REPEATED=wk | SUBJECT(id) COVTYPE(CSH).
 ```
 
@@ -905,7 +902,7 @@ MIXED DDpct WITH PBO0 wkHYPER
 ```
 
 ```{r, echo = FALSE}
-knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG46.png")
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG-46.png")
 ```
 
 Unstructured ECM fit best, AIC = 8185.582, BIC = 8342.726
@@ -924,7 +921,7 @@ The final (best-fitting) model (i.e., the final growth model with the final ECM)
 knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG_48.png")
 ```
 
-The difference in the DDpct (percentage days of drinking) slopes for the prolonged exposure (PE) and placebo (PBO) conditions is not significant post-treatment (at wk=12), $b$ = 1.849, 95% CI: [-7.047, 10.745], $t$(1151) = .41, $p$ = .682.
+The difference in the DDpct (percentage days of drinking) slopes for the prolonged exposure (PE) and placebo (PBO) conditions is not significant, $b$ = 1.849, 95% CI: [-7.047, 10.745], $t$(1151) = .41, $p$ = .682.
 
 **2b. For the final (best-fitting) model only (the final growth model with the final ECM), are the slopes significant in each group?**
 
@@ -950,5 +947,5 @@ knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbook
 knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG_52.png")
 ```
 
-The difference in DDpct (% days drinking) slopes for the treatment (prolonged exposure; PE) and placebo (PBO) conditions post-treatment (at wk=12) is not statistically significant as explained in question 2A, $b$=2.774, 95% CI: [-2.203, 7.751], $t$(1151)=1.102, $p$=.272. The difference in DDpct slopes at the final follow-up (at wk=24) is also not significant, $b$ = 2.848, 95% CI: [-2.290, 7.986], $t$(1151) = 1.096, $p$ = .275. 
+The difference in DDpct (% days drinking) for the treatment (prolonged exposure; PE) and placebo (PBO) conditions post-treatment (at wk=12) is not statistically significant as explained in question 2A, $b$=2.774, 95% CI: [-2.203, 7.751], $t$(1151)=1.102, $p$=.272. The difference in DDpct at the final follow-up (at wk=24) is also not significant, $b$ = 2.848, 95% CI: [-2.290, 7.986], $t$(1151) = 1.096, $p$ = .275. 
 
