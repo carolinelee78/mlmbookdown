@@ -1,0 +1,12 @@
+name: mlmbookdown
+title: mlmbookdown
+username: caroline-lee
+account: caroline-lee
+server: posit.cloud
+hostUrl: https://api.posit.cloud/v1
+appId: 7891436
+bundleId: 8427469
+url: https://posit.cloud/content/7891436
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

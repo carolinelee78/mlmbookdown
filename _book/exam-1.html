@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 8 Exam 1 | MLM Study Guide for Caroline, by Caroline</title>
+  <meta name="description" content="Chapter 8 Exam 1 | MLM Study Guide for Caroline, by Caroline" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 8 Exam 1 | MLM Study Guide for Caroline, by Caroline" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 8 Exam 1 | MLM Study Guide for Caroline, by Caroline" />
+  
+  
+  
+
+<meta name="author" content="For doing better, for remediation. Integrating David’s class materials and Hoffman’s (2015) Longitudinal Analysis textbook to learn MLM with both R and SPSS." />
+
+
+<meta name="date" content="2024-04-04" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="anova-a-non-growth-curve-growth-curve-model.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">MLM Study Guide</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> First, why multilevel modeling?</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#disadvantages-of-ranova"><i class="fa fa-check"></i><b>1.1</b> Disadvantages of RANOVA</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#disadvantages-of-locf"><i class="fa fa-check"></i><b>1.2</b> Disadvantages of LOCF</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#disadvantages-of-complex-imputation-e.g.-multiple-imputation"><i class="fa fa-check"></i><b>1.3</b> Disadvantages of complex imputation (e.g., multiple imputation)</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#advantages-of-mlm"><i class="fa fa-check"></i><b>1.4</b> Advantages of MLM</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="what-is-mlm-used-for.html"><a href="what-is-mlm-used-for.html"><i class="fa fa-check"></i><b>2</b> What is MLM used for?</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="what-is-mlm-used-for.html"><a href="what-is-mlm-used-for.html#levels-of-analyses-in-mlm"><i class="fa fa-check"></i><b>2.1</b> Levels of analyses in MLM</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="what-is-mlm-used-for.html"><a href="what-is-mlm-used-for.html#level-1"><i class="fa fa-check"></i><b>2.1.1</b> Level 1</a></li>
+<li class="chapter" data-level="2.1.2" data-path="what-is-mlm-used-for.html"><a href="what-is-mlm-used-for.html#level-2"><i class="fa fa-check"></i><b>2.1.2</b> Level 2</a></li>
+<li class="chapter" data-level="2.1.3" data-path="what-is-mlm-used-for.html"><a href="what-is-mlm-used-for.html#summary"><i class="fa fa-check"></i><b>2.1.3</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="what-is-mlm-used-for.html"><a href="what-is-mlm-used-for.html#homework-1---0829"><i class="fa fa-check"></i><b>2.2</b> Homework 1 - 08/29</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html"><i class="fa fa-check"></i><b>3</b> Applying MLM to Longitudinal Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#overview"><i class="fa fa-check"></i><b>3.1</b> Overview</a></li>
+<li class="chapter" data-level="3.2" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#homework-2---0831"><i class="fa fa-check"></i><b>3.2</b> Homework 2 - 08/31</a></li>
+<li class="chapter" data-level="3.3" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#quadratic-growth-curve-models"><i class="fa fa-check"></i><b>3.3</b> Quadratic Growth Curve Models</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#meaning-of-the-linear-vs.-quadratic-terms"><i class="fa fa-check"></i><b>3.3.1</b> Meaning of the Linear vs. Quadratic Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#homework-3---0905"><i class="fa fa-check"></i><b>3.4</b> Homework 3 - 09/05</a></li>
+<li class="chapter" data-level="3.5" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#homework-3.5---0215"><i class="fa fa-check"></i><b>3.5</b> Homework 3.5 - 02/15</a></li>
+<li class="chapter" data-level="3.6" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#nested-models"><i class="fa fa-check"></i><b>3.6</b> Nested Models</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html"><i class="fa fa-check"></i><b>4</b> Treating Time More Flexibly</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html#ml-vs.-reml"><i class="fa fa-check"></i><b>4.1</b> ML vs. REML</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html#how-do-we-use-ml-methods-to-fit-a-multilevel-model-and-how-does-it-work"><i class="fa fa-check"></i><b>4.1.1</b> How do we use ML methods to fit a multilevel model, and how does it work?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html#aic-vs.-bic"><i class="fa fa-check"></i><b>4.2</b> AIC vs. BIC</a></li>
+<li class="chapter" data-level="4.3" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html#degrees-of-freedom"><i class="fa fa-check"></i><b>4.3</b> Degrees of Freedom</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="non-linear-time.html"><a href="non-linear-time.html"><i class="fa fa-check"></i><b>5</b> Non-linear Time</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="non-linear-time.html"><a href="non-linear-time.html#when-quadratic-models-dont-fit-well"><i class="fa fa-check"></i><b>5.1</b> When Quadratic Models Don’t Fit Well</a></li>
+<li class="chapter" data-level="5.2" data-path="non-linear-time.html"><a href="non-linear-time.html#logarithmic-growth-curve-models"><i class="fa fa-check"></i><b>5.2</b> Logarithmic Growth Curve Models</a></li>
+<li class="chapter" data-level="5.3" data-path="non-linear-time.html"><a href="non-linear-time.html#hyperbolic-growth-curve-models"><i class="fa fa-check"></i><b>5.3</b> Hyperbolic Growth Curve Models</a></li>
+<li class="chapter" data-level="5.4" data-path="non-linear-time.html"><a href="non-linear-time.html#piecewise-growth-curve-models"><i class="fa fa-check"></i><b>5.4</b> Piecewise Growth Curve Models</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="non-linear-time.html"><a href="non-linear-time.html#how-to-code-piecewise-models---jump-or-no-jump"><i class="fa fa-check"></i><b>5.4.1</b> How to Code Piecewise Models - Jump or No Jump?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="non-linear-time.html"><a href="non-linear-time.html#further-notes-on-nonlinear-growth-curves"><i class="fa fa-check"></i><b>5.5</b> Further notes on nonlinear growth curves</a></li>
+<li class="chapter" data-level="5.6" data-path="non-linear-time.html"><a href="non-linear-time.html#homework-4---0912"><i class="fa fa-check"></i><b>5.6</b> Homework 4 - 09/12</a></li>
+<li class="chapter" data-level="5.7" data-path="non-linear-time.html"><a href="non-linear-time.html#homework-5---0914"><i class="fa fa-check"></i><b>5.7</b> Homework 5 - 09/14</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="specifying-the-error-covariance-matrix.html"><a href="specifying-the-error-covariance-matrix.html"><i class="fa fa-check"></i><b>6</b> Specifying the Error Covariance Matrix</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="specifying-the-error-covariance-matrix.html"><a href="specifying-the-error-covariance-matrix.html#why-care-about-error-covariance"><i class="fa fa-check"></i><b>6.1</b> Why care about error covariance?</a></li>
+<li class="chapter" data-level="6.2" data-path="specifying-the-error-covariance-matrix.html"><a href="specifying-the-error-covariance-matrix.html#incorrect-assumptions-about-error-covariance"><i class="fa fa-check"></i><b>6.2</b> Incorrect Assumptions About Error Covariance</a></li>
+<li class="chapter" data-level="6.3" data-path="specifying-the-error-covariance-matrix.html"><a href="specifying-the-error-covariance-matrix.html#random-effects-and-error-covariance"><i class="fa fa-check"></i><b>6.3</b> Random Effects and Error Covariance</a></li>
+<li class="chapter" data-level="6.4" data-path="specifying-the-error-covariance-matrix.html"><a href="specifying-the-error-covariance-matrix.html#covariance-matrices"><i class="fa fa-check"></i><b>6.4</b> Covariance Matrices</a></li>
+<li class="chapter" data-level="6.5" data-path="specifying-the-error-covariance-matrix.html"><a href="specifying-the-error-covariance-matrix.html#comparing-ecms-how-to-select-the-best-ecm"><i class="fa fa-check"></i><b>6.5</b> Comparing ECMs – How to select the best ECM</a></li>
+<li class="chapter" data-level="6.6" data-path="specifying-the-error-covariance-matrix.html"><a href="specifying-the-error-covariance-matrix.html#ecms-and-growth-curve-models"><i class="fa fa-check"></i><b>6.6</b> ECMs and Growth Curve Models</a></li>
+<li class="chapter" data-level="6.7" data-path="specifying-the-error-covariance-matrix.html"><a href="specifying-the-error-covariance-matrix.html#random-effects-and-ecms"><i class="fa fa-check"></i><b>6.7</b> Random Effects and ECMs</a></li>
+<li class="chapter" data-level="6.8" data-path="specifying-the-error-covariance-matrix.html"><a href="specifying-the-error-covariance-matrix.html#homework-6---0919"><i class="fa fa-check"></i><b>6.8</b> Homework 6 - 09/19</a></li>
+<li class="chapter" data-level="6.9" data-path="specifying-the-error-covariance-matrix.html"><a href="specifying-the-error-covariance-matrix.html#homework-7---0926"><i class="fa fa-check"></i><b>6.9</b> Homework 7 - 09/26</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="anova-a-non-growth-curve-growth-curve-model.html"><a href="anova-a-non-growth-curve-growth-curve-model.html"><i class="fa fa-check"></i><b>7</b> ANOVA: A non-growth curve growth curve model</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="anova-a-non-growth-curve-growth-curve-model.html"><a href="anova-a-non-growth-curve-growth-curve-model.html#anova-as-a-growth-curve-model"><i class="fa fa-check"></i><b>7.1</b> ANOVA as a Growth Curve Model</a></li>
+<li class="chapter" data-level="7.2" data-path="anova-a-non-growth-curve-growth-curve-model.html"><a href="anova-a-non-growth-curve-growth-curve-model.html#conducting-mlm-anova"><i class="fa fa-check"></i><b>7.2</b> Conducting MLM ANOVA</a></li>
+<li class="chapter" data-level="7.3" data-path="anova-a-non-growth-curve-growth-curve-model.html"><a href="anova-a-non-growth-curve-growth-curve-model.html#interpreting-mlm-anova-results"><i class="fa fa-check"></i><b>7.3</b> Interpreting MLM ANOVA Results</a></li>
+<li class="chapter" data-level="7.4" data-path="anova-a-non-growth-curve-growth-curve-model.html"><a href="anova-a-non-growth-curve-growth-curve-model.html#homework-8---103"><i class="fa fa-check"></i><b>7.4</b> Homework 8 - 10/3</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="exam-1.html"><a href="exam-1.html"><i class="fa fa-check"></i><b>8</b> Exam 1</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="exam-1.html"><a href="exam-1.html#question-1"><i class="fa fa-check"></i><b>8.1</b> Question 1</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="exam-1.html"><a href="exam-1.html#question-2"><i class="fa fa-check"></i><b>8.1.1</b> Question 2</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">MLM Study Guide for Caroline, by Caroline</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="exam-1" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">Chapter 8</span> Exam 1<a href="exam-1.html#exam-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="question-1" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Question 1<a href="exam-1.html#question-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Use NIMH.sav. The outcome variable is child externalizing problems (TCBCEXTT). There are 6 assessments (asmts), each 4 months apart. The study is a randomized controlled trial with a treatment group (PS, for project support) and a control group (TAU, treatment as usual).</li>
+<li>Treatment condition is coded in variable COND10, such that PS=0 and TAU=1. Asmt=1 is baseline, asmt=2 is during the intervention, and asmt 3 is the posttreatment score (at end of treatment). The follow-up (FU) period begins immediately after asmt 3 (i.e., don’t use a jump or “phase” code, just use 2 slopes in a piecewise analysis). ASMTS 4-6 are follow up asmts. Use asmt number as your Time variable in all analyses.</li>
+<li>Our goal is to select the best growth curve model for TCBCEXTT over time and between groups (use the full model selection table (except discontinuous with jump) with ECMs), and to answer the following questions FOR THE FINAL (best-fitting) MODEL ONLY (the final growth model with the final ECM):
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>Are there differences in the slopes between the groups?</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>Are the slopes significant in each group?</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>Are there differences between groups at post (asmt 3) and at the final FU? (If the best model is piecewise, answer questions 1 and 2 for both phases of the study. If the best model is quadratic, answer questions 1 and 2 for the average linear slope).</li>
+</ol></li>
+</ul></li>
+<li>Graph the final (best fitting) model. Then, in addition, describe/summarize, in real, understandable language, all the results in a, b, and c that are significant. In the file that includes your final model selection table, add a section AFTER the model selection table, that lists any steps taken to exclude random effects and/or to drop interactions (if you do so), both to simplify the model and/or because the model would not converge.</li>
+<li>Use my Model Selection Table that I have provided with the exam to list the details for each final model for each type of growth curve and each covariance matrix of the repeated measures. Highlight the best fitting growth curve model and the best fitting covariance structure in the Model Selection Table.
+<ul>
+<li>If, when using AIC and BIC to decide between models, the AIC and BIC give different recommendations, use the AIC. For piecewise models, we predict treatment condition differences during both the treatment and follow-up phases so do not drop treatment x time interactions for either phase.</li>
+<li>For purposes of this exam, do not use random effects for any unstructured or Toeplitz error covariance matrices. Do use random effects for AR(1), compound symmetry (heterogeneous), diagonal, and scaled identity models. See further instructions in the notes of the Model Selection Table.</li>
+</ul></li>
+</ul>
+<p><strong>Model Selection Table</strong></p>
+<p>Assessing fit of growth curve models:</p>
+<pre><code>*LINEAR. 
+
+MIXED TCBCEXTT WITH cond10 ASMT 
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1)  
+    SINGULAR(0.000000000001) HCONVERGE(0, ABSOLUTE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0.000001, ABSOLUTE)     
+  /FIXED=cond10 ASMT cond10*ASMT | SSTYPE(3) 
+  /METHOD=ML 
+  /PRINT=SOLUTION TESTCOV 
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(UN). </code></pre>
+<pre><code>*QUADRATIC. 
+
+COMPUTE ASMTSQ=ASMT ** 2. 
+EXECUTE. 
+
+MIXED TCBCEXTT WITH cond10 ASMT ASMTSQ 
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1)  
+    SINGULAR(0.000000000001) HCONVERGE(0, ABSOLUTE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0.000001, ABSOLUTE)     
+  /FIXED=cond10 ASMT cond10*ASMT ASMTSQ cond10*ASMTSQ | SSTYPE(3) 
+  /METHOD=ML 
+  /PRINT=SOLUTION TESTCOV 
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(UN). 
+
+* Dropping cond10*ASMTSQ fixed effect since it is not significant per exam instructions.
+MIXED TCBCEXTT WITH cond10 ASMT ASMTSQ 
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1)  
+    SINGULAR(0.000000000001) HCONVERGE(0, ABSOLUTE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0.000001, ABSOLUTE)     
+  /FIXED=cond10 ASMT cond10*ASMT ASMTSQ | SSTYPE(3) 
+  /METHOD=ML 
+  /PRINT=SOLUTION TESTCOV 
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(UN). </code></pre>
+<pre><code>*LOG.
+COMPUTE ASMTLN=LN(ASMT). 
+EXECUTE. 
+
+MIXED TCBCEXTT WITH cond10 ASMTLN 
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1)  
+    SINGULAR(0.000000000001) HCONVERGE(0, ABSOLUTE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0.000001, ABSOLUTE)     
+  /FIXED=cond10 ASMTLN cond10*ASMTLN | SSTYPE(3) 
+  /METHOD=ML 
+  /PRINT=SOLUTION TESTCOV 
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(UN). </code></pre>
+<pre><code>*HYPERBOLIC. 
+
+COMPUTE ASMTHYPER=1-(1/ASMT). 
+EXECUTE. 
+
+MIXED TCBCEXTT WITH cond10 ASMTHYPER 
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1)  
+    SINGULAR(0.000000000001) HCONVERGE(0, ABSOLUTE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0.000001, ABSOLUTE)     
+  /FIXED=cond10 ASMTHYPER cond10*ASMTHYPER | SSTYPE(3) 
+  /METHOD=ML 
+  /PRINT=SOLUTION TESTCOV 
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(UN). </code></pre>
+<p>Piecewise Coding:</p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG_40.png" /><!-- --></p>
+<pre><code>*PIECEWISE.
+
+IF  (ASMT &lt;  3) ASMTd3c6p1=ASMT-3. 
+EXECUTE. 
+
+IF  (ASMT &gt;= 3) ASMTd3c6p1=0. 
+EXECUTE. 
+
+IF  (ASMT  &lt;=  3) ASMTd3c6p2=-4. 
+EXECUTE. 
+
+IF  (ASMT &gt; 3) ASMTd3c6p2=ASMT-6. 
+EXECUTE. 
+
+MIXED TCBCEXTT WITH cond10 ASMTd3c6p1 ASMTd3c6p2 
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1)  
+    SINGULAR(0.000000000001) HCONVERGE(0, ABSOLUTE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0.000001, ABSOLUTE)     
+  /FIXED=cond10 ASMTd3c6p1 ASMTd3c6p2 cond10*ASMTd3c6p1 cond10*ASMTd3c6p2 | SSTYPE(3) 
+  /METHOD=ML 
+  /PRINT=SOLUTION TESTCOV 
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(UN). </code></pre>
+<pre><code>*ANOVA.
+
+MIXED TCBCEXTT BY ASMT cond10
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=ASMT cond10 ASMT*cond10 | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(UN).</code></pre>
+<p>Hyperbolic fit best, AIC = 2297.907, BIC = 2393.111</p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG41.png" /><!-- --></p>
+<p>Assessing fit of covariance structures:</p>
+<pre><code>*TOEPLITZ: HETEROGENEOUS. 
+
+MIXED TCBCEXTT WITH cond10 ASMTHYPER
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=cond10 ASMTHYPER cond10*ASMTHYPER | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(TPH).</code></pre>
+<pre><code>*TOEPLITZ. 
+
+MIXED TCBCEXTT WITH cond10 ASMTHYPER
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=cond10 ASMTHYPER cond10*ASMTHYPER | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(TP).</code></pre>
+<pre><code>*AR(1): HETEROGENEOUS. 
+
+MIXED TCBCEXTT WITH cond10 ASMTHYPER
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=cond10 ASMTHYPER cond10*ASMTHYPER | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT cond10 ASMTHYPER cond10*ASMTHYPER | SUBJECT(SUBJECT) COVTYPE(UN)
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(ARH1).
+
+MIXED TCBCEXTT WITH cond10 ASMTHYPER
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=cond10 ASMTHYPER cond10*ASMTHYPER | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT cond10 ASMTHYPER | SUBJECT(SUBJECT) COVTYPE(UN)
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(ARH1).
+
+MIXED TCBCEXTT WITH cond10 ASMTHYPER
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=cond10 ASMTHYPER cond10*ASMTHYPER | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT cond10 | SUBJECT(SUBJECT) COVTYPE(UN)
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(ARH1).
+
+MIXED TCBCEXTT WITH cond10 ASMTHYPER
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=cond10 ASMTHYPER cond10*ASMTHYPER | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT ASMTHYPER | SUBJECT(SUBJECT) COVTYPE(UN)
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(ARH1).
+
+MIXED TCBCEXTT WITH cond10 ASMTHYPER
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=cond10 ASMTHYPER cond10*ASMTHYPER | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT | SUBJECT(SUBJECT) COVTYPE(UN)
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(ARH1).</code></pre>
+<pre><code>*AR(1). 
+
+MIXED TCBCEXTT WITH cond10 ASMTHYPER
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=cond10 ASMTHYPER cond10*ASMTHYPER | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT cond10 ASMTHYPER cond10*ASMTHYPER | SUBJECT(SUBJECT) COVTYPE(UN)
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(AR1).
+
+MIXED TCBCEXTT WITH cond10 ASMTHYPER
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=cond10 ASMTHYPER cond10*ASMTHYPER | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT cond10 ASMTHYPER | SUBJECT(SUBJECT) COVTYPE(UN)
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(AR1).
+
+MIXED TCBCEXTT WITH cond10 ASMTHYPER
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=cond10 ASMTHYPER cond10*ASMTHYPER | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT cond10 | SUBJECT(SUBJECT) COVTYPE(UN)
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(AR1).
+
+MIXED TCBCEXTT WITH cond10 ASMTHYPER
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=cond10 ASMTHYPER cond10*ASMTHYPER | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT ASMTHYPER | SUBJECT(SUBJECT) COVTYPE(UN)
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(AR1).
+
+MIXED TCBCEXTT WITH cond10 ASMTHYPER
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=cond10 ASMTHYPER cond10*ASMTHYPER | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT | SUBJECT(SUBJECT) COVTYPE(UN)
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(AR1).</code></pre>
+<pre><code>*CS:HETEROGENEOUS. 
+
+MIXED TCBCEXTT WITH cond10 ASMTHYPER
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=cond10 ASMTHYPER cond10*ASMTHYPER | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(CSH).</code></pre>
+<pre><code>*COMPOUND SYMMETRY.
+
+MIXED TCBCEXTT WITH cond10 ASMTHYPER
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=cond10 ASMTHYPER cond10*ASMTHYPER | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(CS).</code></pre>
+<pre><code>*DIAGONAL. 
+
+MIXED TCBCEXTT WITH cond10 ASMTHYPER
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=cond10 ASMTHYPER cond10*ASMTHYPER | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT cond10 ASMTHYPER cond10*ASMTHYPER | SUBJECT(SUBJECT) COVTYPE(UN)
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(DIAG).
+
+MIXED TCBCEXTT WITH cond10 ASMTHYPER
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=cond10 ASMTHYPER cond10*ASMTHYPER | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT cond10 ASMTHYPER | SUBJECT(SUBJECT) COVTYPE(UN)
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(DIAG).
+
+MIXED TCBCEXTT WITH cond10 ASMTHYPER
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=cond10 ASMTHYPER cond10*ASMTHYPER | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT cond10 | SUBJECT(SUBJECT) COVTYPE(UN)
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(DIAG).
+
+MIXED TCBCEXTT WITH cond10 ASMTHYPER
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=cond10 ASMTHYPER cond10*ASMTHYPER | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT ASMTHYPER | SUBJECT(SUBJECT) COVTYPE(UN)
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(DIAG).
+
+MIXED TCBCEXTT WITH cond10 ASMTHYPER
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=cond10 ASMTHYPER cond10*ASMTHYPER | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT | SUBJECT(SUBJECT) COVTYPE(UN)
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(DIAG).</code></pre>
+<pre><code>*SCALED IDENTITY. 
+
+MIXED TCBCEXTT WITH cond10 ASMTHYPER
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=cond10 ASMTHYPER cond10*ASMTHYPER | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT cond10 ASMTHYPER cond10*ASMTHYPER | SUBJECT(SUBJECT) COVTYPE(UN)
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(ID).
+
+MIXED TCBCEXTT WITH cond10 ASMTHYPER
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=cond10 ASMTHYPER cond10*ASMTHYPER | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT cond10 ASMTHYPER | SUBJECT(SUBJECT) COVTYPE(UN)
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(ID).
+
+MIXED TCBCEXTT WITH cond10 ASMTHYPER
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=cond10 ASMTHYPER cond10*ASMTHYPER | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT cond10 | SUBJECT(SUBJECT) COVTYPE(UN)
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(ID).
+
+MIXED TCBCEXTT WITH cond10 ASMTHYPER
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=cond10 ASMTHYPER cond10*ASMTHYPER | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT ASMTHYPER | SUBJECT(SUBJECT) COVTYPE(UN)
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(ID).
+
+MIXED TCBCEXTT WITH cond10 ASMTHYPER
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=cond10 ASMTHYPER cond10*ASMTHYPER | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT | SUBJECT(SUBJECT) COVTYPE(UN)
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(ID).</code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG_42.png" /><!-- --></p>
+<p>AR(1) ECM fit best, AIC = 2291.549, BIC = 2325.822</p>
+<p><strong>Graph</strong></p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG_43.png" /><!-- --></p>
+<p><strong>1a. For the final (best-fitting) model only (the final growth model with the final ECM), are there differences in the slopes between the groups?</strong></p>
+<p>The final (best-fitting) model (i.e., the final growth model with the final ECM) for Q1 was found to be the hyperbolic growth curve model with AR(1) error covariance matrix.</p>
+<pre><code>COMPUTE ASMTHYPER=1-(1/ASMT). 
+EXECUTE. 
+
+COMPUTE ASMTHYPERc.67=ASMTHYPER - 0.67.
+EXECUTE.
+
+MIXED TCBCEXTT WITH cond10 ASMTHYPERc.67
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=cond10 ASMTHYPERc.67 cond10*ASMTHYPERc.67 | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(AR1).</code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG_36.png" /><!-- --></p>
+<p>The difference between the two conditions (PS and TAU) is significant post treatment (at asmt=3), <span class="math inline">\(b\)</span> = 6.359, 95% CI = [0.236, 12.482], <span class="math inline">\(t\)</span>(331) = 2.043, <span class="math inline">\(p\)</span> = 0.042.</p>
+<p><strong>1b. For the final (best-fitting) model only (the final growth model with the final ECM), are the slopes significant in each group?</strong></p>
+<pre><code>MIXED TCBCEXTT WITH cond10 ASMTHYPERc.67
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=cond10 ASMTHYPERc.67 cond10*ASMTHYPERc.67 | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(AR1).</code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG_37.png" /><!-- --></p>
+<p>The slope of decrease in TCBCEXTT (child externalizing problems) is significant for the treatment group (receiving project support, i.e., PS), <span class="math inline">\(b\)</span> = -15.370, 95% CI = [-19.790, -10.951], <span class="math inline">\(t\)</span>(331) = -6.841, <span class="math inline">\(p\)</span> &lt; .001.</p>
+<pre><code>RECODE cond10 (1=0) (0=1) INTO cond01.
+VARIABLE LABELS  cond01 &#39;TAU=0, PS=1&#39;.
+EXECUTE.
+  
+MIXED TCBCEXTT WITH cond01 ASMTHYPERc.67
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=cond01 ASMTHYPERc.67 cond01*ASMTHYPERc.67 | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(AR1).</code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG_38.png" /><!-- -->
+The slope of decrease in TCBCEXTT (child externalizing problems) is also significant for the control group (receiving treatment as usual, i.e., TAU), <span class="math inline">\(b\)</span> = -9.011, 95% CI = [-13.249, -4.774], <span class="math inline">\(t\)</span>(331) = -4.183, <span class="math inline">\(p\)</span> &lt; .001.</p>
+<p><strong>1c. For the final (best-fitting) model only (the final growth model with the final ECM), are there differences between the groups at post-treatment vs. the final follow-up?</strong></p>
+<pre><code>MIXED TCBCEXTT WITH cond10 ASMTHYPERc.67
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=cond10 ASMTHYPERc.67 cond10*ASMTHYPERc.67 | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(AR1).</code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG_36.png" /><!-- --></p>
+<pre><code>COMPUTE ASMTHYPERc.83=ASMTHYPER - 0.83.
+EXECUTE.
+
+MIXED TCBCEXTT WITH cond10 ASMTHYPERc.83
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=cond10 ASMTHYPERc.83 cond10*ASMTHYPERc.83 | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /REPEATED=ASMT | SUBJECT(SUBJECT) COVTYPE(AR1).</code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG_39.png" /><!-- --></p>
+<p>The difference in the TCBCEXTT (child externalizing problems) slopes for the PS and TAU conditions is significant post treatment (at asmt=3), <span class="math inline">\(b\)</span> = 6.359, 95% CI = [0.236, 12.482], <span class="math inline">\(t\)</span>(331) = 2.043, <span class="math inline">\(p\)</span> = 0.042. The interaction term does not change when recentering, so the difference in TCBCEXTT slopes for the two conditions is also significant at the final follow-up, <span class="math inline">\(b\)</span> = 6.359, 95% CI = [0.236, 12.482], <span class="math inline">\(t\)</span>(331) = 2.043, <span class="math inline">\(p\)</span> = 0.042.</p>
+<div id="question-2" class="section level3 hasAnchor" number="8.1.1">
+<h3><span class="header-section-number">8.1.1</span> Question 2<a href="exam-1.html#question-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="anova-a-non-growth-curve-growth-curve-model.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "sepia",
+"family": "serif",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
