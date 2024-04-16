@@ -949,3 +949,52 @@ knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbook
 
 The difference in DDpct (% days drinking) for the treatment (prolonged exposure; PE) and placebo (PBO) conditions post-treatment (at wk=12) is not statistically significant as explained in question 2A, $b$=2.774, 95% CI: [-2.203, 7.751], $t$(1151)=1.102, $p$=.272. The difference in DDpct at the final follow-up (at wk=24) is also not significant, $b$ = 2.848, 95% CI: [-2.290, 7.986], $t$(1151) = 1.096, $p$ = .275. 
 
+## Bonus Question 
+
+**The attached data set are results comparing 2 treatments for PTSD (coded in the variable innovatively named “condition”; person centered therapy=0, prolonged exposure=1). The outcome is CPSSIE, which measures PTSD severity. Use asmt as your time variable. The discontinuity is at asmt=16. Center time at the last assessment (asmt=19).**
+
+```{r, echo = FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG-53.png")
+```
+
+```
+IF  (asmt < 16) asmtd16c19p1=asmt-16.
+EXECUTE.
+
+IF  (asmt >= 16) asmtd16c19p1=0.
+EXECUTE.
+
+IF  (asmt <= 16) asmtd16c19p2=-3.
+EXECUTE.
+
+IF  (asmt > 16) asmtd16c19p2=asmt-19.
+EXECUTE.
+
+MIXED CPSSIE WITH condition asmtd16c19p1 asmtd16c19p2
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=condition asmtd16c19p1 asmtd16c19p2 condition*asmtd16c19p1 condition*asmtd16c19p2 | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /REPEATED=asmt| SUBJECT(SubjectID) COVTYPE(UN).
+```
+
+```{r, echo = FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG_54.png")
+```
+
+Interpretation of fixed effects: 
+
+- `Condition`: The difference between the two conditions (PCT and PE) in terms of CPSSIE is significant at the last assessment (asmt=19). 
+- `asmtd16c19p1`: The slope of decrease in PTSD severity for participants in the person centered therapy condition is significant for phase 1. 
+- `asmtd16c19p2`: Holding all else constant, the slope of increase in PTSD severity for participants is not significant for phase 2. 
+- `Condition*asmtd16c19p1`: The change in CPSSIE over time is significantly different between the two conditions for the first phase of the study, with the rate of decrease in CPSSIE being more negative in PE condition than in the PCT condition for phase 1. 
+- `Condition*asmtd16c19p2`: The change in CPSSIE over time between the two conditions was not significant for the second phase of the study. 
+
+
+
+
+
+
+

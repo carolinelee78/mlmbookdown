@@ -23,7 +23,7 @@
 <meta name="author" content="For doing better, for remediation. Integrating David’s class materials and Hoffman’s (2015) Longitudinal Analysis textbook to learn MLM with both R and SPSS." />
 
 
-<meta name="date" content="2024-04-04" />
+<meta name="date" content="2024-04-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -146,6 +146,7 @@
 <ul>
 <li class="chapter" data-level="8.1" data-path="exam-1.html"><a href="exam-1.html#question-1"><i class="fa fa-check"></i><b>8.1</b> Question 1</a></li>
 <li class="chapter" data-level="8.2" data-path="exam-1.html"><a href="exam-1.html#question-2"><i class="fa fa-check"></i><b>8.2</b> Question 2</a></li>
+<li class="chapter" data-level="8.3" data-path="exam-1.html"><a href="exam-1.html#bonus-question"><i class="fa fa-check"></i><b>8.3</b> Bonus Question</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -951,6 +952,40 @@ MIXED DDpct WITH PBO0 wkHYPER
 <p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG_51.png" /><!-- --></p>
 <p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG_52.png" /><!-- --></p>
 <p>The difference in DDpct (% days drinking) for the treatment (prolonged exposure; PE) and placebo (PBO) conditions post-treatment (at wk=12) is not statistically significant as explained in question 2A, <span class="math inline">\(b\)</span>=2.774, 95% CI: [-2.203, 7.751], <span class="math inline">\(t\)</span>(1151)=1.102, <span class="math inline">\(p\)</span>=.272. The difference in DDpct at the final follow-up (at wk=24) is also not significant, <span class="math inline">\(b\)</span> = 2.848, 95% CI: [-2.290, 7.986], <span class="math inline">\(t\)</span>(1151) = 1.096, <span class="math inline">\(p\)</span> = .275.</p>
+</div>
+<div id="bonus-question" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> Bonus Question<a href="exam-1.html#bonus-question" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>The attached data set are results comparing 2 treatments for PTSD (coded in the variable innovatively named “condition”; person centered therapy=0, prolonged exposure=1). The outcome is CPSSIE, which measures PTSD severity. Use asmt as your time variable. The discontinuity is at asmt=16. Center time at the last assessment (asmt=19).</strong></p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG-53.png" /><!-- --></p>
+<pre><code>IF  (asmt &lt; 16) asmtd16c19p1=asmt-16.
+EXECUTE.
+
+IF  (asmt &gt;= 16) asmtd16c19p1=0.
+EXECUTE.
+
+IF  (asmt &lt;= 16) asmtd16c19p2=-3.
+EXECUTE.
+
+IF  (asmt &gt; 16) asmtd16c19p2=asmt-19.
+EXECUTE.
+
+MIXED CPSSIE WITH condition asmtd16c19p1 asmtd16c19p2
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=condition asmtd16c19p1 asmtd16c19p2 condition*asmtd16c19p1 condition*asmtd16c19p2 | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /REPEATED=asmt| SUBJECT(SubjectID) COVTYPE(UN).</code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG_54.png" /><!-- --></p>
+<p>Interpretation of fixed effects:</p>
+<ul>
+<li><code>Condition</code>: The difference between the two conditions (PCT and PE) in terms of CPSSIE is significant at the last assessment (asmt=19).</li>
+<li><code>asmtd16c19p1</code>: The slope of decrease in PTSD severity for participants in the person centered therapy condition is significant for phase 1.</li>
+<li><code>asmtd16c19p2</code>: Holding all else constant, the slope of increase in PTSD severity for participants is not significant for phase 2.</li>
+<li><code>Condition*asmtd16c19p1</code>: The change in CPSSIE over time is significantly different between the two conditions for the first phase of the study, with the rate of decrease in CPSSIE being more negative in PE condition than in the PCT condition for phase 1.</li>
+<li><code>Condition*asmtd16c19p2</code>: The change in CPSSIE over time between the two conditions was not significant for the second phase of the study.</li>
+</ul>
 
 </div>
 </div>
