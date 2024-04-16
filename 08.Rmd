@@ -1,0 +1,67 @@
+# Time Varying Predictors (TVPs)
+
+In all the examples we have looked at, the predictors did not vary over time. Each individual had only one value for each predictor. Since survival data is the result of follow-up over time, it is possible to have predictors that do vary over time. Also referred to as time varying covariates (TVCs), TVPs are predictors of outcome in repeated assessments that can be other variables _besides_ time, especially when when collecting data over time and not related to an intervention (like in a study of the covariation of variables over time in the natural environment, like stress and psychological symptoms, or mood and lung function, etc.)
+
+- TVPs are variables that you measure at each assessment along with the outcome measures (e.g., you may use daily measures of mood and lung function, all measured each day).  An individual’s assessment is dropped from the analysis if that assessment has missing data for either the outcome of any of the predictors at that assessment. 
+  * To provide another example, in a study of time to heart attack, researchers could record various other conditions’ occurrence over time, such as hypertension or angina. In a study of juvenile recidivism, researchers could record how education or employment status change over time. Cox regression is able to handle such time-varying predictors (also known as “time dependent covariates”).
+  * To provide another example, stress can be a time-varying predictor separating into “trait” (between-person differences) and “state” (within-person deviations) components. Specifically, the daily variable stress is split into two variables: stress_trait can be the sample-mean centered between-person component, and stress_state can be the person-centered within-person component.
+- TVPs are entered as level 1 predictors of outcome. Predictors that are measured at just one timepoint in a study (usually at baseline) are level 2 predictors of outcome and are not TVPs because they do not vary over time.
+
+```{r, echo = FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG55.png")
+```
+
+## Relation Between Two Variables Over Time
+
+- MLM can be used to calculate the relation between 2 variables over time (e.g., the relation between mood and lung function each day in a diary study). Time is often not included in these models when one does not have a treatment or there is no reason to believe that the variables will change systematically over time (like in a short term diary study). However, time can be included as an additional predictor of outcome if the study covers some developmental phases of life so that the outcome is expected to change. 
+
+The model examining whether mood affects lung function over a 30 day diary study would be:
+
+$${FEV}_{ij} = b_{0i}+b_{1i}*Mood_{ij}+\epsilon_{ij}$$
+
+- ${FEV}_{ij}$ is the lung function for individual $i$ at assessment $j$
+- ${Mood}_{ij}$ is the mood for individual $i$ at assessment $j$
+- $b_{0i}$ is the intercept for individual $i$
+- $b_{1i}$ is the relation between mood and $FEV$ for individual $i$ over time 
+
+## More about TVPs
+
+- TVPs can have a random effect, which means that (if it is significant) the relation between the TVP and outcome is different across individuals.
+- The interpretation of regression coefficients for TVPs is “the relation between the TVP and outcome within individuals over time”. These relations may be different than the relation between the TVP and outcome across individual at one time (e.g., intense exercise might be related to a lower chance of a heart attack between subjects, but might be related to a higher chance of heart attack within a subject over time). 
+- And TVPs are generally more easily found to be significant, because you are looking at relations between variables within people over time, so between-subjects differences in other variables do not add extra error variance to the relations.
+- The relation between TVPs and outcome over time can often be predicted by individual differences. 
+  * For example, the relation between combat stressors and psychological symptoms (e.g., anxiety) on the battlefield may be dependent on a person’s ASI. For those with very low ASI, more stress may not be greatly related to more anxiety, but for those with very high ASI, more stress may be highly related to greater anxiety.
+  
+## Repeated Covariance Matrix and TVPs
+
+- When doing a TVP you still need to appropriately model the covariance of the repeated measures and the covariance of the random effects as specified above. 
+- Also, failure to properly model the fixed effects can lead to misleading results (e.g., if you leave out important 3rd variables, your results might be inaccurate, e.g., you might overestimate the relation between the TVP and outcome). 
+
+## Disaggregating TVPs
+
+Time varying predictors (TVPs---the same as TVCs, which are time-varying covariates) inherently conflate between and within effects, especially when there is no random effect. TVPs can be decomposed into a between subjects component and a within subjects component.
+
+$${TVP}_{ij}={TVP}_{{mean}_{i}}+{TVP}_{{deviation}_i}$$
+where $TVP_{mean}$ is the mean of the predictor over all assessments and $TVP_{deviations}$ are the deviations from the mean at each assessment. 
+
+We disaggregate them because, if we don’t, the results we get assume that the between and within effects are equal:
+
+$$Y_{ij}=b_{0i}+b_{1i}*{TVP}_{ij}+e_{ij}$$
+$$Y_{ij}=b_{0i}+b_{1i}*(TVP_{mean_{i}}+TVP_{dev_{ij}})+e_{ij}$$
+$$Y_{ij}=b_{0i}+b_{1i}*TVP_{mean_i}+b_{1i}*TVP_{dev_{ij}}+e_{ij}$$
+If you disaggregate the TVP you have: 
+
+$$Y_{ij}=b_{0i}+b_{1i}*TVP_{mean_i}+b_{2i}*TVP_{dev_{ij}}+e_{ij}$$
+You can often have a case where the between subject effect is significant but the within subject effect is not (especially if it takes a long time for the variable to affect the outcome). That can lead to the within subject effect “washing out” the between subject effect, so it you fail to disaggregate them, you may not find a significant effect (and vice versa). Disaggregating also allows you to compute and understand the between and within effects separately.
+
+
+
+
+
+
+
+
+
+
+
+

@@ -50,3 +50,8 @@ exam-1
 question-1
 question-2
 bonus-question
+time-varying-predictors-tvps
+relation-between-two-variables-over-time
+more-about-tvps
+repeated-covariance-matrix-and-tvps
+disaggregating-tvps
