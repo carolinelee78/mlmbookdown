@@ -23,7 +23,7 @@
 <meta name="author" content="For doing better, for remediation. Integrating David’s class materials and Hoffman’s (2015) Longitudinal Analysis textbook to learn MLM with both R and SPSS." />
 
 
-<meta name="date" content="2024-04-15" />
+<meta name="date" content="2024-04-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="anova-a-non-growth-curve-growth-curve-model.html"/>
-
+<link rel="next" href="time-varying-predictors-tvps.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -147,6 +147,13 @@
 <li class="chapter" data-level="8.1" data-path="exam-1.html"><a href="exam-1.html#question-1"><i class="fa fa-check"></i><b>8.1</b> Question 1</a></li>
 <li class="chapter" data-level="8.2" data-path="exam-1.html"><a href="exam-1.html#question-2"><i class="fa fa-check"></i><b>8.2</b> Question 2</a></li>
 <li class="chapter" data-level="8.3" data-path="exam-1.html"><a href="exam-1.html#bonus-question"><i class="fa fa-check"></i><b>8.3</b> Bonus Question</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="time-varying-predictors-tvps.html"><a href="time-varying-predictors-tvps.html"><i class="fa fa-check"></i><b>9</b> Time Varying Predictors (TVPs)</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="time-varying-predictors-tvps.html"><a href="time-varying-predictors-tvps.html#relation-between-two-variables-over-time"><i class="fa fa-check"></i><b>9.1</b> Relation Between Two Variables Over Time</a></li>
+<li class="chapter" data-level="9.2" data-path="time-varying-predictors-tvps.html"><a href="time-varying-predictors-tvps.html#more-about-tvps"><i class="fa fa-check"></i><b>9.2</b> More about TVPs</a></li>
+<li class="chapter" data-level="9.3" data-path="time-varying-predictors-tvps.html"><a href="time-varying-predictors-tvps.html#repeated-covariance-matrix-and-tvps"><i class="fa fa-check"></i><b>9.3</b> Repeated Covariance Matrix and TVPs</a></li>
+<li class="chapter" data-level="9.4" data-path="time-varying-predictors-tvps.html"><a href="time-varying-predictors-tvps.html#disaggregating-tvps"><i class="fa fa-check"></i><b>9.4</b> Disaggregating TVPs</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -982,9 +989,9 @@ MIXED CPSSIE WITH condition asmtd16c19p1 asmtd16c19p2
 <ul>
 <li><code>Condition</code>: The difference between the two conditions (PCT and PE) in terms of CPSSIE is significant at the last assessment (asmt=19).</li>
 <li><code>asmtd16c19p1</code>: The slope of decrease in PTSD severity for participants in the person centered therapy condition is significant for phase 1.</li>
-<li><code>asmtd16c19p2</code>: Holding all else constant, the slope of increase in PTSD severity for participants is not significant for phase 2.</li>
+<li><code>asmtd16c19p2</code>: Holding all else constant, the slope of decrease in PTSD severity for participants in the person centered therapy condition is not significant for phase 2.</li>
 <li><code>Condition*asmtd16c19p1</code>: The change in CPSSIE over time is significantly different between the two conditions for the first phase of the study, with the rate of decrease in CPSSIE being more negative in PE condition than in the PCT condition for phase 1.</li>
-<li><code>Condition*asmtd16c19p2</code>: The change in CPSSIE over time between the two conditions was not significant for the second phase of the study.</li>
+<li><code>Condition*asmtd16c19p2</code>: The change in CPSSIE over time between the two conditions was not significantly different for the second phase of the study.</li>
 </ul>
 
 </div>
@@ -994,8 +1001,8 @@ MIXED CPSSIE WITH condition asmtd16c19p1 asmtd16c19p2
           </div>
         </div>
       </div>
-<a href="anova-a-non-growth-curve-growth-curve-model.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="anova-a-non-growth-curve-growth-curve-model.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="time-varying-predictors-tvps.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

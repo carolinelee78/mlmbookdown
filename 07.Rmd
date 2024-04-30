@@ -988,9 +988,9 @@ Interpretation of fixed effects:
 
 - `Condition`: The difference between the two conditions (PCT and PE) in terms of CPSSIE is significant at the last assessment (asmt=19). 
 - `asmtd16c19p1`: The slope of decrease in PTSD severity for participants in the person centered therapy condition is significant for phase 1. 
-- `asmtd16c19p2`: Holding all else constant, the slope of increase in PTSD severity for participants is not significant for phase 2. 
+- `asmtd16c19p2`: Holding all else constant, the slope of decrease in PTSD severity for participants in the person centered therapy condition is not significant for phase 2. 
 - `Condition*asmtd16c19p1`: The change in CPSSIE over time is significantly different between the two conditions for the first phase of the study, with the rate of decrease in CPSSIE being more negative in PE condition than in the PCT condition for phase 1. 
-- `Condition*asmtd16c19p2`: The change in CPSSIE over time between the two conditions was not significant for the second phase of the study. 
+- `Condition*asmtd16c19p2`: The change in CPSSIE over time between the two conditions was not significantly different for the second phase of the study. 
 
 
 
