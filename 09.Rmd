@@ -113,6 +113,14 @@ knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbook
 
 Repeat the mediation analysis that we did in class today, except disaggregate Echelle and use both Echelle_mean and Echelle_deviations as mediators. Note that there will NOT be an “a” path from time to Echelle_mean, because Echelle_mean does not vary over time. But there will be a separate “b” path from each component of Echelle and YBOCS. So, you can only test for mediation for the path through Echelle_deviations. Do that test. 
 
+## Homework 10 - 10/24
+
+Calculate all the paths in the mediation model attached and test all the mediated pathways.
+
+```{r, echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG62.png")
+```
+
 ## Homework 10 - 10/26
 
 Use the attached OCD data file (the same data that we have been looking at all semester!) to do a mediation analysis with echelle, avoidance, and BDI as disaggregated mediators. For avoidance, use zavoidln. For BDI, use zbdiln. For Echelle, use Echelle. For time, use LN of time. Use Unstructured covariance matrix for analyses with YBOCS as the DV. Use Ar(1) heterogeneous for analyses with deviations as the DV. Use RMediation to test the significance of all mediated pathways from treatment to YBOCS through each deviation variable. 
