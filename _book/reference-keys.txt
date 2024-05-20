@@ -55,3 +55,7 @@ relation-between-two-variables-over-time
 more-about-tvps
 repeated-covariance-matrix-and-tvps
 disaggregating-tvps
+longitudinal-mediation-analysis
+what-do-the-mlm-models-look-like-in-simple-mediation
+testing-for-significant-mediation
+good-alternatives-for-testing-the-significance-of-ab

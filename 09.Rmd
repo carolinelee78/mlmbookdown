@@ -1,10 +1,50 @@
 # Longitudinal Mediation Analysis 
 
-As in all path diagrams, you write an equation for each “endogenous” variable (ones which have arrows drawn to them), and the predictors in each equation are the variables which have arrows pointing to the endogenous variable. 
-Thus, in the first diagram, DV has one equation, in which the predictors are Mediator and IV, and Mediator has one equation, in which IV is the only predictor.
-In longitudinal mediation, you are looking at mediation over time. Thus, in randomized control trials (RCTs), the IV is often Time and the M and DV are both measured repeatedly over time. 
-The IV could also be treatment condition in RCTs. We will look at this both ways. 
-Usually, the first step in mediation is to establish that the DV changes over time (c path), or more generally, if the IV effects the DV. If it doesn’t change over time, it is often not so interesting to see if something mediates changes. 
-But, this is not always true. Sometimes you may be interested in the mediation of effects even if there is no net change over time. For example, the direct effect of IV on DV (c’) may be positive, while the indirect effect (a*b) through the mediator is negative. The net effect (c) may be near zero.
+- As in all path diagrams, you write an equation for each “endogenous” variable (ones which have arrows drawn to them), and the predictors in each equation are the variables which have arrows pointing to the endogenous variable. 
+- Thus, in the diagram below, DV has one equation, in which the predictors are Mediator and IV, and Mediator has one equation, in which IV is the only predictor.
 
- 
+
+- In longitudinal mediation, you are looking at mediation over time. Thus, in randomized control trials (RCTs), the IV is often Time and the M and DV are both measured repeatedly over time. The IV could also be treatment condition in RCTs. We will look at this both ways. 
+- Usually, the first step in mediation is to establish that the DV changes over time (c path), or more generally, if the IV effects the DV. If it doesn’t change over time, it is often not so interesting to see if something mediates changes. 
+- But, this is not always true. Sometimes you may be interested in the mediation of effects even if there is no net change over time. For example, the direct effect of IV on DV (c’) may be positive, while the indirect effect (a*b) through the mediator is negative. The net effect (c) may be near zero.
+
+## What do the MLM models look like in simple mediation?
+
+1. Generally, we do an MLM analysis to derive the c path (IV predicting DV). The regression coefficient (RC) for IV is path c.
+2. We do another MLM to derive the a path (IV predicting M). The RC for IV is path a.
+3. We do a third MLM to get the b and c’ paths (the IV and M are modeled as 2 simultaneous predictors of DV). The RC for M is the b path, the RC for IV is the c’ path. 
+4. You should find the optimal GCM for the effect of the IV on the DV. This means optimizing the structural growth curve (if you have one) and optimizing the ECM (error covariance matrix).
+5. You use the same GCM for Time for all analyses using time. You optimize the ECM for each model so that you get the most accurate estimates of the regression coefficient (RCs) and the SD of the RCs. 
+
+## Testing for significant mediation 
+
+- The classical approach to mediation was proposed by Baron and Kenny (1986). For mediation to occur, you must meet the following criteria:
+	1. c is significant
+	2. a and b are significant
+	3. c’ is smaller than c (if c’ is non significant, they called it full mediation. But that is not true).
+- MacKinnon et al. (2002) showed that this “causal steps” approach is very conservative, with very low Type 1 error rates (.0025 instead of .05) and very low power. And, it is not a direct test of mediation. 
+- The more accepted approach to testing for mediation is a direct test of the significance of the mediated pathway, a*b (in path analysis, this is called an “indirect path”). 
+- However, this is not simple because even though a and b are normally distributed (it can be shown that if you meet the assumptions of your regression analysis, the RCs are normally distributed), the product of $a*b$ is not normally distributed. 
+- Thus, you cannot do a simple t test or z test for $a*b$.
+
+## 2 good alternatives for testing the significance of a*b
+
+- Distribution of products test using RMediation (an internet app). 
+  * This program uses calculus and numerical integration to calculate the exact distribution of your $a*b$, given your a and b paths and their SDs. 
+  * The primary disadvantage to this approach is that it assumes that both a and b are normally distributed, even though this is may be not true, especially in small samples.
+  * RMediation provide the 95% CI for $a*b$. If it does not include 0, then $a*b$ is considered significant. 
+- A better approach to testing mediation is a bootstrap approach, in which 1000 or more bootstrap samples of your data are taken from your data. 
+  * The program does the MLM analysis to derive the a and b path for each sample, and calculates the $a*b$ for each sample. 
+  * From that you can tell the exact distribution of $a*b$ without assumptions about the distribution of a or b. If more than 97.5% of the $a*b$’s are on one side of 0, then $a*b$ is significantly different from 0, with a probability of greater than 95% (i.e., the probability that a*b is 0 is less than 5%). 
+  * MPLUS offers bootstrap mediation tests, and it is possible to program such a thing in R. But right now you can’t do it in SPSS or HLM7.0
+
+- A better approach to testing mediation is a bootstrap approach, in which 1000 or more bootstrap samples of your data are taken from your data. 
+      a. The program does the MLM analysis to derive the a and b path for each sample, and calculates the a*b for each sample. 
+      b. From that you can tell the exact distribution of $a*b$ without assumptions about the distribution of a or b. If more than 97.5% of the $a*b$’s are on one side of 0, then $a*b$ is significantly different from 0, with a probability of greater than 95% (i.e., the probability that $a*b$ is 0 is less than 5%). 
+      c. MPLUS offers bootstrap mediation tests, and it is possible to program such a thing in R. But right now you can’t do it in SPSS or HLM7.0
+
+
+
+
+
+
