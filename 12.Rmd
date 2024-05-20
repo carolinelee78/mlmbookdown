@@ -1,0 +1,52 @@
+# Multivariate MLM (MMLM)
+
+- MMLM is used when you have multiple outcome measures that you do not want to combine into a single score. No correction for multiple tests is needed, therefore increasing power. 
+- Example of data for MMLM: 
+  * Example: Breathing  training to treat asthma and anxiety/depressive symptoms in people with Asthma.
+  * RCT: Treatment group received breathing training treatment with biofeedback to lower pCO2 (CART). Placebo group received sham breathing training to simply slow respiration (PBO). 
+  * Psychological DVs: HADS-A, ASI, HADS-D, and PANAS-N
+  * Assessment: baseline, posttreatment, 3MFU, 6MFU
+
+## Preparing Your Data for MMLM 
+
+- Create a unique ID for each assessment at which the multiple DVs are assessed. This is often formed by computing a new ID variable called something like IDindex1=ID$*$10+index1 (note, if there are more than 9 levels of the index, you will need to do IDindex1=ID*100+index1).
+- Z score each individual DV so that the DVs are all on the same scale.
+- Restructure the dataset so that each DV is on a separate line within each asmt. I recommend calling the new composite outcome column (variable) with the name of your multiple DVs in the order in which they appear in the file.
+- When you get to the index name in the restructuring procedure, call it something different from index1 since you probably have index1 in your data file (I called it indexDV).
+- The new stacked data file will be x times longer than the original data file, where x is the number of DVs (2 in this case).
+
+## More Interpretation of MMLM 
+
+- One additional cool thing you can do with MMLM is determine whether the DVs are all affected in the same way by the IVs. To do this, you create dummy variables for the DVs. You select one of your DVs as the “reference DV”, and create a dummy code for the other DVs.
+- DUMPANASN is coded from indexDV so that PANASN=1, and all others are =0.
+- You then use the Dummy variables as a moderator of all the IVs in your original model.
+- If any of the interactions between DUMDVs and an IV are significant, you know that the effect of that variable on one variable is significantly different than for the reference DV. If HADS-A was the reference, the main effects of that IV are the effect for HADS-A.
+
+## How to Execute MMLM in SPSS 
+
+- Under the subjects box, first list IDindex1, and then below that, put ID. Then, in repeated put IndexDV, and select an unstructured covariance matrix. This nests repeated DVs within each IDindex1, which is nested within students.
+- Your composite DV variable is the DV. Then put whatever predictors you want into the factors or covariates. If it is a growth curve model, just put you normal growth curve parameters in the model as you normally would (e.g., timec4 and CART0).
+- Fill in fixed as you normally would, as well as ML and stats. But the RANDOM box is different.
+- In RANDOM, first move over IDindex1. Then, to be able to add another level, you will have to check the intercept box. Then move over ID. You will usually want an intercept, but you don’t HAVE to include an intercept. You can also include other student level random effects if you want, like timec5. Then go back to the previous level (IDindex1 level) by hitting the “previous” button in the upper left corner of the random pop-up menu. Take out the intercept for that level (if you use unstructured at level 1, you can’t have any REs at level 1).
+
+## Interpretation of MMLM
+
+- After you run the model, you interpret effects just like you would for any model. The only difference is that the effects are for the group of DVs, not for individual DVs.
+- You can use the same MMLM approach for models other than growth curve models, like TVPs and baseline covariate models.
+- You can also use any kind of growth curve model, including ANOVA.
+- But, MMLM assumes that all variables are affected in the same way by the predictors. Don’t include variables that are coded in the opposite directions (e.g., school performance, and classroom misbehaviors).
+
+## Homework 14 - 11/14 
+
+In the attached data set, people with panic disorder get 10 weekly treatments (session = 1-10) and a final post treatment assessment 1 week after the last treatment (session=11). There is only one group. There are multiple DVs: ASI, ACQ, FFMQ, and PDSStot. Do an MMLM. DO a simple linear model for Time. Do patients improve over time on the group of the 4 DVs in your MMLM? 
+
+## Homework 15 - 11/14 
+
+In the attached file, high school students are given an intervention to increase their bystander behavior to intervene when witnessing situations that might lead to sexual abuse in dating/hanging out. Then, 2 months later, their bystander behavior is measured over the last 2 months since the intervention. (BBS4itemRECODED). Those getting the intervention are in takecare0=0, and those receiving the placebo are in takecare0=1. They are male (male0=0) or female(male0=1). We also measured baseline bystander behavior, which should be used as a covariate (BBS4itemRECODED_first). We expect a TakeCARE x male0 interaction. The student were given the intervention in their different groups and scores are correlated within groups. So group# is our grouping variable. Use baseline BBS (BBS4itemrecoded_first) only as a covariate, not as a repeated measure. So this is a non-longitudinal MLM with BBS4itemrecoded as the DV. What effects are significant? How do you interpret them? Which predictors can have random effects? Include all the random effects that you can. 
+
+## Homework 16 - 11/21
+
+In the attached data, the 4 DVS are HADSA, HADSD, ASI, and PANASneg. They are measured at 4 time points, index1=1,7,8,9. Convert index1 to time=1,2,3,4. CART0 is the treatment group variable: CART0=0 is CART breathing training, and CART0=1 is the slow breathing control condition. Do an MMLM. Use a linear growth curve model as your growth model (treatment, time, and treatment x time). Center time at the last outcome. We expect the effect of treatment (the CART0 main effect at time 4) to be greater for the anxiety outcomes (HADSA and ASI) than for the mood outcomes (HADSD, PANASneg). See if you can figure out how you can code a single dummy variable for the repeated outcome measures (indexed by their DV number 1-4) to code anxiety or depressive symptoms. Then have that dummy code interact with CART0, Timec4, and CART0 x Timec4. Interpret the interactions. You can email me for hints. 
+
+
+

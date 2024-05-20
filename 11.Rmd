@@ -1,0 +1,19 @@
+# Non-Longitudinal MLM
+
+## What is Non-Longitudinal MLM?
+
+- Mixed effects models like MLM are useful for any type of correlated data, not just longitudinal data. - Examples include student test scores within classrooms and psyc test scores for participants participating in an experiment as a group. 
+- In these cases, the basic assumption of independence of the scores is violated, and traditional methods for estimating variances and errors are biased (usually biased downward) which means that the significance tests are biased and have increased type 1 error.
+- So we use MLM to account for the correlation of the data among participants whose scores might be correlated because they are in some way "grouped" together.
+
+## Covariances 
+
+- The level 2 grouping variable can be a grouping like classroom, or family, or treatment cohort, etc.
+- In this case, people are nested within the grouping variable, as opposed to repeated measures being nested within groups.
+- In this case, there are no "repeated" measures, so nothing goes into the "repeated" box in SPSS
+- Thus, scaled identity becomes the covariance matrix since the different measures within the group (like classroom) will not be correlated in a specific way
+
+## Homework 13 - 11/9 
+
+In the complete school data file, predict grade 3 math scores (g3sprng_m) using child sex (male0), public vs private school (public0), percent of student in the school on free lunch (pcnt_flu), and poverty status of the individual student (poverty, coded 1=below poverty threshold, 2=at or above the poverty threshold). Also include the male0 x pcnt_flu interaction. Include a random effect for every level-1 variable (except male0). Interpret main effects, interaction, and random effects. 
+
