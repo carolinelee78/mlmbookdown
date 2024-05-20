@@ -1,0 +1,62 @@
+# Generalized Linear Mixed Models 
+
+Generalized Linear Mixed Models (GLMMs) are used when the DV is not normally distributed. GLMM is MLM with non-normally distributed DVs. They are most often used for DVs that are dichotomous or count variables, but also can be used for skewed DVs or for ordinal data.
+
+## How to do GLMM in SPSS
+
+- GLMM is performed using the mixed models dropdown menu, selecting "Generalized linear mixed models"
+- The first pop-up box defines the data organization
+- Identify the subjects variable and drag it over under the "Subjects" box and then drop it. Note that the variable must be defined as a "nominal" variable in the dataset.
+- Then drag and drop your variable that indexes the repeated data into the "repeated" column (typically "index1").
+- You can specify your error covariance matrix by clicking on the "more" arrow. The default is diagonal. Often, GLMM will not converge with more complex covariance matrices, and sometimes you need to specify scaled identity to get it to converge.
+
+## Specifying the Target (Your DV)
+
+- If it is dichotomous, you can click on the "more" arrow and specify that 0 is your reference category. Otherwise, 1 will be your reference category, which will mess up all your interpretations.
+- Underneath that you will need to specify the distribution of the target and the linking function.
+  * Specify binary logistic for dichotomous outcomes (the logistic link function is LN(p/[1-p]), where p is he probability of a 1 on the outcome).
+  * Specify either loglinear (Poisson with a log link) or negative binomial with a log link for count outcomes
+  * Gamma regression is for positively skewed DVs
+  * Or you can do a regular linear mixed model if you want.
+
+## Converting Back to Original Scale
+
+- Remember, most GLMMs use a linking function (except the Linear model, which is the same as MLM)
+- Thus, the outcome that is predicted has to be converted back into the original data scale (i.e., use EXP to reverse the log link back into the original scale). 
+- To convert the logistic link function back to reflect the probability use this transformation:
+  * Probability (DV) = exp(x)/(1+exp(x))
+
+## Specifying the Fixed Effects in SPSS 
+
+- Click on "Fixed Effects" in the left column. 
+- Adding fixed effects is accomplished by dragging and dropping your effects into the appropriate column. 
+- For main effects, drag over the main effect into the "main" column. 
+- For 2 way interactions, highlight the 2 variables in the interaction (using "control click") and drag into the 2-way column, etc.
+- Note that SPSS will treat your variables according to how they are specified in your data file. So, if a variable is specified as "nominal" then it will automatically treat it as a categorical variable and dummy code ALL the levels of the variable, with the highest level being the reference group. 
+- Thus, unless you specifically WANT a variable to be regarded as a "factor" (categorical variable), be sure that it is coded as a "scale" in the spss file.
+
+## Random Effects 
+
+- To add random effects, click on "Random Effects" in the left column and then click on "add block" near the bottom. 
+- In the pop up box, click on "include intercept" to add an RE for the intercept. Then click on the drop down menu "subject combinations" and select your subjects variable. 
+- Finally click on the OK button at the bottom to add the random effect.
+
+## Other Options
+
+- For Robust Estimations, you can then click on the "build Options" tab at the top of the pop-up to specify "use robust estimation…". 
+- This option calculates "robust standard errors", which are robust to violations of multivariate normality. This option does not change the regression coefficients at all, but changes the estimate of the standard errors of the regression coefficients.
+- If you have categorical variables, and you want the means for those categorical variables, you can click on "Model options" and then click on the variables for which you want the means (as in an ANOVA). These means are in the original data scale, not the linking function scale.
+- Hit "Run" (near the bottom of the pop-up) to run the analysis.
+
+## Getting the right "look" for your output
+
+- You may only get graphs in your output (no tables). 
+- To get to the tables you need to double click on the boxes that pop up in your output file to actually see the output. 
+- For coefficient rather than graphs, you need to find the little drop-down menu near the bottom of each pop-up and change it from "figure" to "table".
+- A better option is to change your output format under Edit, options, output, and then click on pivot tables.
+
+## Homework 12 - 11/2
+
+The DV is severe sev_cold.final (number of severe cold symptoms) which is measured at 5 points during the fall semester, ending 10 days after finals. The IVs are lnfeNO1.1 (NO in the airways blocks pathogens from getting into the bloodstream, and it is measured at the beginning of the semester) and time (index1). Use a linear model of change over time. Include lnfeNO1.1, time (Centered at 5), and lnfeNO1.1 x time for your growth model. Do a Poisson GLMM regression (Poisson distribution, Log linking function), and graph the change over time for sev_cold for people with low (1SD below the mean) and High (1SD above the mean) levels of lnfeno1.1 for the RAW sev_cold.final data by centering lnfeNO1.1 at those particular values. (Convert from log(sev_cold.final) back to raw). 
+ 
+ 

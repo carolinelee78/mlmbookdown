@@ -3,7 +3,7 @@
 - As in all path diagrams, you write an equation for each "endogenous" variable (ones which have arrows drawn to them), and the predictors in each equation are the variables which have arrows pointing to the endogenous variable. 
 - Thus, in the diagram below, DV has one equation, in which the predictors are Mediator and IV, and Mediator has one equation, in which IV is the only predictor.
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, fig.align='center'}
 knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG57.png")
 ```
 
@@ -25,8 +25,8 @@ knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbook
 	1. c is significant
 	2. a and b are significant
 	3. c’ is smaller than c (if c’ is non significant, they called it full mediation. But that is not true).
-- MacKinnon et al. (2002) showed that this “causal steps” approach is very conservative, with very low Type 1 error rates (.0025 instead of .05) and very low power. And, it is not a direct test of mediation. 
-- The more accepted approach to testing for mediation is a direct test of the significance of the mediated pathway, a*b (in path analysis, this is called an “indirect path”). 
+- MacKinnon et al. (2002) showed that this "causal steps" approach is very conservative, with very low Type 1 error rates (.0025 instead of .05) and very low power. And, it is not a direct test of mediation. 
+- The more accepted approach to testing for mediation is a direct test of the significance of the mediated pathway, a*b (in path analysis, this is called an "indirect path"). 
 - However, this is not simple because even though a and b are normally distributed (it can be shown that if you meet the assumptions of your regression analysis, the RCs are normally distributed), the product of $a*b$ is not normally distributed. 
 - Thus, you cannot do a simple t test or z test for $a*b$.
 
@@ -48,9 +48,77 @@ knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbook
 - In longitudinal mediation, you often have these 3 effects (treatment, time, and treatment x time) and these can be treated like 3 separate Ivs.
 - If time is centered at baseline, you should not have any effects of condition to mediate. So usually you center time at either post or FU so that the cond main effect represents treatment condition differences at post or FU, respectively.
 
+```{r, echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG58.png")
+```
 
+## C Paths and A Paths 
 
+- Your growth curve model provides you with the "c" paths for each of your IVs in your GCM (usually treatment, time, and treatment x time). 
+- To test for mediation, you add the mediator (or mediators if you have more than 1) to the GCM. The coefficient for the mediator becomes the "b" path in the mediation model, and the coefficients for the other GCM predictors are the "c’s". 
+- To get the "a" paths, you use the same GCM but with the mediator as the outcome. You will have a separate "a" path for each GC predictor (e.g., treatment, time, and treatment x time gives you paths a1, a2, and a3). 
+- Be sure that your models optimize the ECM so that your estimates for all your parameters are as exact as possible.
+- Then test the significance of each mediated pathway (from each predictor (treatment, time, treatment x time) to the mediator to the DV) by testing each "a" path through the "b" paths (the "b" paths in each mediated pathway is the same). Use RMediation to test the significance of the mediated pathway. If your b path or your "a" paths do not have a random effect, you can assume the correlation between the "a" and "b" paths are 0. 
+  * Example: a*b=.098, 95% CI: [-.187, -.018], p<.05, Pm=.18
 
+## Other GCMs
 
+- This same mediation procedure is used regardless of the growth curve model.
+- For example, if you have a discontinuous GCM that is 2 phases, you should have a time variable that reflect the slope in phase 1 (TPH1) and one for the slope in phase 2 (TPH2). Your GCM then has 5 predictors (treatment, TPH1, TPH2, treatment x TPH1, treatment x TPH2) and you have 5 potential mediated pathways. 
+- You calculate the b path simply by adding your mediator to the final GCM. Then you have a potential of 5 mediated pathways! 
+
+## Disaggregating the Mediator 
+
+- For accurate estimates of the "b" path, the Mediator must be disaggregated into its between- and within-subjects components (Mean and deviations).
+- You estimate separate mediation pathways through each component.
+- Usually, only the "deviations" component is worthwhile interpreting.
+
+```{r, echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG59.png")
+```
+
+## Multiple Mediators 
+
+- If you have more than one mediator (which is always a good idea since otherwise you don’t know if your mediator is merely a proxy for another variable), you should add them all to the final GCM and then calculate RMEDIATION for each mediated pathway that goes from each IV through each mediator to the outcome. 
+- Note: Multiple mediators are preferred because you can better claim that the effect is due to your mediator if you control for other plausible mediators. If you don’t control for them, your mediator may just be a "proxy" for the other plausible mediators (i.e., it may be related to outcome merely because it is related to another plausible mediator which is actually related to outcome).
+
+```{r, echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG60.png")
+```
+
+## Cross Lag Mediation 
+
+- Controlling for other mediators can help you establish causality in your mediation analysis, but the relation between the mediator and outcome could still be due to the outcome causing the mediator rather than the mediator causing the outcome (reverse mediation). 
+- To eliminate this possibility, we do cross lag mediation, in which we have the outcome at time "t" being predicted by the mediator at time "t-1" (and by the outcome at time "t-1"). 
+- To do this, we need to "shift" the values of the outcome up 1 line in our MLM data file. This is done in the Transform dropdown menu, selecting "create a time series". You create a time series for the outcome using a "lead" of "order" 1. 
+- Note that the last asmt for each subject now has the outcome at the first asmt of the next subject on its line. Thus, when doing your MLM analyses, you have to select cases such that you do not include the last asmt for each subject in the data analysis.
+- If your data set does not have the same number of assessments for every subject, it is also a good idea to form a "lead" variable for subject number, and use "select cases" also to make sure that "subject=subject_lead1".
+- When predicting outcome at t+1, you also have to create your time variable for t+1 to reflect the correct timepoints, so do lead for your time variable also.
+
+### Cross Lag Mediation Details 
+
+- Since cross lags involve variables at time t and time t+1, you always lose the last data point (last asmt) of predictors since there is no outcome at t+1 for the last asmt. Therefore, in the analyses predicting outcome in the cross lag analysis, you only have k-1 timepoints, if k is the number of asmts. Thus, when doing the actual cross lag analysis, you have to select asmts NOT to include the last asmt. This can be accomplished by technique 3 below.
+- You need to "lead" the outcome variable (using "create a time series" under "compute" menu) so that you have time t variables predicting time t+1 outcome.
+- Also, you need to "lead" the subject variable and select only cases where ID=ID_lead1.
+- Finally, you need to "lead" the "time" variable (just like you "lead" the outcome and ID) for the cross lag analysis predicting the outcome (e.g., YBOCS) so that the value of time corresponds to the asmt of the DV which is the "lead" version of the outcome variable (see 2 above). In these analyses, you need to select only the cases where ID=ID_lead1.
+- When calculating the "a" paths and the "c" paths, the time variable already corresponds to the asmts of the mediators and outcome since the a and c paths do not predict "lead" (next session) outcomes, so you use the existing time variable as it is (or, if it was transformed, use the existing transformed variable). Use the full sample (do not use the "select cases; use "all cases").
+- Mean and deviation scores for mediators should be calculated on the full sample.
+- For calculating the "a" paths and "c" paths, you use all timepoints since more timepoints give you better estimates of the path coefficients (i.e., you do not select cases where ID=ID_lead1).
+
+```{r, echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG61.png")
+```
+
+## Homework 9 - 10/19
+
+Repeat the mediation analysis that we did in class today, except disaggregate Echelle and use both Echelle_mean and Echelle_deviations as mediators. Note that there will NOT be an “a” path from time to Echelle_mean, because Echelle_mean does not vary over time. But there will be a separate “b” path from each component of Echelle and YBOCS. So, you can only test for mediation for the path through Echelle_deviations. Do that test. 
+
+## Homework 10 - 10/26
+
+Use the attached OCD data file (the same data that we have been looking at all semester!) to do a mediation analysis with echelle, avoidance, and BDI as disaggregated mediators. For avoidance, use zavoidln. For BDI, use zbdiln. For Echelle, use Echelle. For time, use LN of time. Use Unstructured covariance matrix for analyses with YBOCS as the DV. Use Ar(1) heterogeneous for analyses with deviations as the DV. Use RMediation to test the significance of all mediated pathways from treatment to YBOCS through each deviation variable. 
+
+## Homework 11 - 10/31
+
+Use the attached OCD data file (the same data that we have been looking at all semester!) to do a CROSS LAG multimediator analysis, using zavoidln and zBDIln as the mediators. For time, use LN of time. Use Unstructured covariance matrix for analyses with YBOCS as the DV. Use Ar(1) heterogeneous for analyses with deviations as the DV. You don’t need to test for mediation using RMediation since we have done that many times already. 
 
 
