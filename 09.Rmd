@@ -1,12 +1,15 @@
 # Longitudinal Mediation Analysis 
 
-- As in all path diagrams, you write an equation for each “endogenous” variable (ones which have arrows drawn to them), and the predictors in each equation are the variables which have arrows pointing to the endogenous variable. 
+- As in all path diagrams, you write an equation for each "endogenous" variable (ones which have arrows drawn to them), and the predictors in each equation are the variables which have arrows pointing to the endogenous variable. 
 - Thus, in the diagram below, DV has one equation, in which the predictors are Mediator and IV, and Mediator has one equation, in which IV is the only predictor.
 
+```{r, echo = FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG57.png")
+```
 
 - In longitudinal mediation, you are looking at mediation over time. Thus, in randomized control trials (RCTs), the IV is often Time and the M and DV are both measured repeatedly over time. The IV could also be treatment condition in RCTs. We will look at this both ways. 
 - Usually, the first step in mediation is to establish that the DV changes over time (c path), or more generally, if the IV effects the DV. If it doesn’t change over time, it is often not so interesting to see if something mediates changes. 
-- But, this is not always true. Sometimes you may be interested in the mediation of effects even if there is no net change over time. For example, the direct effect of IV on DV (c’) may be positive, while the indirect effect (a*b) through the mediator is negative. The net effect (c) may be near zero.
+- But, this is not always true. Sometimes you may be interested in the mediation of effects even if there is no net change over time. For example, the direct effect of IV on DV (c') may be positive, while the indirect effect ($a*b$) through the mediator is negative. The net effect (c) may be near zero.
 
 ## What do the MLM models look like in simple mediation?
 
@@ -37,11 +40,14 @@
   * The program does the MLM analysis to derive the a and b path for each sample, and calculates the $a*b$ for each sample. 
   * From that you can tell the exact distribution of $a*b$ without assumptions about the distribution of a or b. If more than 97.5% of the $a*b$’s are on one side of 0, then $a*b$ is significantly different from 0, with a probability of greater than 95% (i.e., the probability that a*b is 0 is less than 5%). 
   * MPLUS offers bootstrap mediation tests, and it is possible to program such a thing in R. But right now you can’t do it in SPSS or HLM7.0
+  
+## Multiple IVs in Longitudinal Mediation
 
-- A better approach to testing mediation is a bootstrap approach, in which 1000 or more bootstrap samples of your data are taken from your data. 
-      a. The program does the MLM analysis to derive the a and b path for each sample, and calculates the a*b for each sample. 
-      b. From that you can tell the exact distribution of $a*b$ without assumptions about the distribution of a or b. If more than 97.5% of the $a*b$’s are on one side of 0, then $a*b$ is significantly different from 0, with a probability of greater than 95% (i.e., the probability that $a*b$ is 0 is less than 5%). 
-      c. MPLUS offers bootstrap mediation tests, and it is possible to program such a thing in R. But right now you can’t do it in SPSS or HLM7.0
+- In longitudinal intervention studies, you have more than 1 effect (more than one IV) that you might be interested in testing for mediation. 
+- For example, if you have a linear growth curve model, your main focus may be mediators of the condition x Time interaction, which may be your primary result. However, you may also want to know what mediates condition differences at post (or FU), and/or the effect of the change over Time (as in our first example of simple longitudinal mediation). 
+- In longitudinal mediation, you often have these 3 effects (treatment, time, and treatment x time) and these can be treated like 3 separate Ivs.
+- If time is centered at baseline, you should not have any effects of condition to mediate. So usually you center time at either post or FU so that the cond main effect represents treatment condition differences at post or FU, respectively.
+
 
 
 

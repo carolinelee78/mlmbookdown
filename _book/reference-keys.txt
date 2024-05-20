@@ -59,3 +59,4 @@ longitudinal-mediation-analysis
 what-do-the-mlm-models-look-like-in-simple-mediation
 testing-for-significant-mediation
 good-alternatives-for-testing-the-significance-of-ab
+multiple-ivs-in-longitudinal-mediation

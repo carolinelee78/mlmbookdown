@@ -164,6 +164,7 @@
 <li class="chapter" data-level="10.1" data-path="longitudinal-mediation-analysis.html"><a href="longitudinal-mediation-analysis.html#what-do-the-mlm-models-look-like-in-simple-mediation"><i class="fa fa-check"></i><b>10.1</b> What do the MLM models look like in simple mediation?</a></li>
 <li class="chapter" data-level="10.2" data-path="longitudinal-mediation-analysis.html"><a href="longitudinal-mediation-analysis.html#testing-for-significant-mediation"><i class="fa fa-check"></i><b>10.2</b> Testing for significant mediation</a></li>
 <li class="chapter" data-level="10.3" data-path="longitudinal-mediation-analysis.html"><a href="longitudinal-mediation-analysis.html#good-alternatives-for-testing-the-significance-of-ab"><i class="fa fa-check"></i><b>10.3</b> 2 good alternatives for testing the significance of a*b</a></li>
+<li class="chapter" data-level="10.4" data-path="longitudinal-mediation-analysis.html"><a href="longitudinal-mediation-analysis.html#multiple-ivs-in-longitudinal-mediation"><i class="fa fa-check"></i><b>10.4</b> Multiple IVs in Longitudinal Mediation</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -188,11 +189,14 @@
 <div id="longitudinal-mediation-analysis" class="section level1 hasAnchor" number="10">
 <h1><span class="header-section-number">Chapter 10</span> Longitudinal Mediation Analysis<a href="longitudinal-mediation-analysis.html#longitudinal-mediation-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <ul>
-<li><p>As in all path diagrams, you write an equation for each “endogenous” variable (ones which have arrows drawn to them), and the predictors in each equation are the variables which have arrows pointing to the endogenous variable.</p></li>
-<li><p>Thus, in the diagram below, DV has one equation, in which the predictors are Mediator and IV, and Mediator has one equation, in which IV is the only predictor.</p></li>
-<li><p>In longitudinal mediation, you are looking at mediation over time. Thus, in randomized control trials (RCTs), the IV is often Time and the M and DV are both measured repeatedly over time. The IV could also be treatment condition in RCTs. We will look at this both ways.</p></li>
-<li><p>Usually, the first step in mediation is to establish that the DV changes over time (c path), or more generally, if the IV effects the DV. If it doesn’t change over time, it is often not so interesting to see if something mediates changes.</p></li>
-<li><p>But, this is not always true. Sometimes you may be interested in the mediation of effects even if there is no net change over time. For example, the direct effect of IV on DV (c’) may be positive, while the indirect effect (a*b) through the mediator is negative. The net effect (c) may be near zero.</p></li>
+<li>As in all path diagrams, you write an equation for each “endogenous” variable (ones which have arrows drawn to them), and the predictors in each equation are the variables which have arrows pointing to the endogenous variable.</li>
+<li>Thus, in the diagram below, DV has one equation, in which the predictors are Mediator and IV, and Mediator has one equation, in which IV is the only predictor.</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG57.png" /><!-- --></p>
+<ul>
+<li>In longitudinal mediation, you are looking at mediation over time. Thus, in randomized control trials (RCTs), the IV is often Time and the M and DV are both measured repeatedly over time. The IV could also be treatment condition in RCTs. We will look at this both ways.</li>
+<li>Usually, the first step in mediation is to establish that the DV changes over time (c path), or more generally, if the IV effects the DV. If it doesn’t change over time, it is often not so interesting to see if something mediates changes.</li>
+<li>But, this is not always true. Sometimes you may be interested in the mediation of effects even if there is no net change over time. For example, the direct effect of IV on DV (c’) may be positive, while the indirect effect (<span class="math inline">\(a*b\)</span>) through the mediator is negative. The net effect (c) may be near zero.</li>
 </ul>
 <div id="what-do-the-mlm-models-look-like-in-simple-mediation" class="section level2 hasAnchor" number="10.1">
 <h2><span class="header-section-number">10.1</span> What do the MLM models look like in simple mediation?<a href="longitudinal-mediation-analysis.html#what-do-the-mlm-models-look-like-in-simple-mediation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -234,10 +238,15 @@
 <li>From that you can tell the exact distribution of <span class="math inline">\(a*b\)</span> without assumptions about the distribution of a or b. If more than 97.5% of the <span class="math inline">\(a*b\)</span>’s are on one side of 0, then <span class="math inline">\(a*b\)</span> is significantly different from 0, with a probability of greater than 95% (i.e., the probability that a*b is 0 is less than 5%).</li>
 <li>MPLUS offers bootstrap mediation tests, and it is possible to program such a thing in R. But right now you can’t do it in SPSS or HLM7.0</li>
 </ul></li>
-<li>A better approach to testing mediation is a bootstrap approach, in which 1000 or more bootstrap samples of your data are taken from your data.
-a. The program does the MLM analysis to derive the a and b path for each sample, and calculates the a*b for each sample.
-b. From that you can tell the exact distribution of <span class="math inline">\(a*b\)</span> without assumptions about the distribution of a or b. If more than 97.5% of the <span class="math inline">\(a*b\)</span>’s are on one side of 0, then <span class="math inline">\(a*b\)</span> is significantly different from 0, with a probability of greater than 95% (i.e., the probability that <span class="math inline">\(a*b\)</span> is 0 is less than 5%).
-c. MPLUS offers bootstrap mediation tests, and it is possible to program such a thing in R. But right now you can’t do it in SPSS or HLM7.0</li>
+</ul>
+</div>
+<div id="multiple-ivs-in-longitudinal-mediation" class="section level2 hasAnchor" number="10.4">
+<h2><span class="header-section-number">10.4</span> Multiple IVs in Longitudinal Mediation<a href="longitudinal-mediation-analysis.html#multiple-ivs-in-longitudinal-mediation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>In longitudinal intervention studies, you have more than 1 effect (more than one IV) that you might be interested in testing for mediation.</li>
+<li>For example, if you have a linear growth curve model, your main focus may be mediators of the condition x Time interaction, which may be your primary result. However, you may also want to know what mediates condition differences at post (or FU), and/or the effect of the change over Time (as in our first example of simple longitudinal mediation).</li>
+<li>In longitudinal mediation, you often have these 3 effects (treatment, time, and treatment x time) and these can be treated like 3 separate Ivs.</li>
+<li>If time is centered at baseline, you should not have any effects of condition to mediate. So usually you center time at either post or FU so that the cond main effect represents treatment condition differences at post or FU, respectively.</li>
 </ul>
 
 </div>
