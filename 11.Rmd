@@ -13,7 +13,7 @@
 - In this case, there are no "repeated" measures, so nothing goes into the "repeated" box in SPSS
 - Thus, scaled identity becomes the covariance matrix since the different measures within the group (like classroom) will not be correlated in a specific way
 
-## Homework 13 - 11/9 
+## Homework 14 - 11/9 
 
 In the complete school data file, predict grade 3 math scores (g3sprng_m) using child sex (male0), public vs private school (public0), percent of student in the school on free lunch (pcnt_flu), and poverty status of the individual student (poverty, coded 1=below poverty threshold, 2=at or above the poverty threshold). Also include the male0 x pcnt_flu interaction. Include a random effect for every level-1 variable (except male0). Interpret main effects, interaction, and random effects. 
 

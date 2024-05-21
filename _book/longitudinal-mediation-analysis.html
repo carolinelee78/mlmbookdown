@@ -23,7 +23,7 @@
 <meta name="author" content="For doing better, for remediation. Integrating David’s class materials and Hoffman’s (2015) Longitudinal Analysis textbook to learn MLM with both R and SPSS." />
 
 
-<meta name="date" content="2024-05-20" />
+<meta name="date" content="2024-05-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -245,11 +245,11 @@
 <div id="good-alternatives-for-testing-the-significance-of-ab" class="section level2 hasAnchor" number="10.3">
 <h2><span class="header-section-number">10.3</span> 2 good alternatives for testing the significance of a*b<a href="longitudinal-mediation-analysis.html#good-alternatives-for-testing-the-significance-of-ab" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li>Distribution of products test using RMediation (an internet app).
+<li>Distribution of products test using <a href="https://amplab.shinyapps.io/MEDCI/">RMediation</a> (an internet app).
 <ul>
 <li>This program uses calculus and numerical integration to calculate the exact distribution of your <span class="math inline">\(a*b\)</span>, given your a and b paths and their SDs.</li>
 <li>The primary disadvantage to this approach is that it assumes that both a and b are normally distributed, even though this is may be not true, especially in small samples.</li>
-<li>RMediation provide the 95% CI for <span class="math inline">\(a*b\)</span>. If it does not include 0, then <span class="math inline">\(a*b\)</span> is considered significant.</li>
+<li><a href="https://amplab.shinyapps.io/MEDCI/">RMediation</a> provide the 95% CI for <span class="math inline">\(a*b\)</span>. If it does not include 0, then <span class="math inline">\(a*b\)</span> is considered significant.</li>
 </ul></li>
 <li>A better approach to testing mediation is a bootstrap approach, in which 1000 or more bootstrap samples of your data are taken from your data.
 <ul>
@@ -276,7 +276,7 @@
 <li>To test for mediation, you add the mediator (or mediators if you have more than 1) to the GCM. The coefficient for the mediator becomes the “b” path in the mediation model, and the coefficients for the other GCM predictors are the “c’s”.</li>
 <li>To get the “a” paths, you use the same GCM but with the mediator as the outcome. You will have a separate “a” path for each GC predictor (e.g., treatment, time, and treatment x time gives you paths a1, a2, and a3).</li>
 <li>Be sure that your models optimize the ECM so that your estimates for all your parameters are as exact as possible.</li>
-<li>Then test the significance of each mediated pathway (from each predictor (treatment, time, treatment x time) to the mediator to the DV) by testing each “a” path through the “b” paths (the “b” paths in each mediated pathway is the same). Use RMediation to test the significance of the mediated pathway. If your b path or your “a” paths do not have a random effect, you can assume the correlation between the “a” and “b” paths are 0.
+<li>Then test the significance of each mediated pathway (from each predictor (treatment, time, treatment x time) to the mediator to the DV) by testing each “a” path through the “b” paths (the “b” paths in each mediated pathway is the same). Use <a href="https://amplab.shinyapps.io/MEDCI/">RMediation</a> to test the significance of the mediated pathway. If your b path or your “a” paths do not have a random effect, you can assume the correlation between the “a” and “b” paths are 0.
 <ul>
 <li>Example: a*b=.098, 95% CI: [-.187, -.018], p&lt;.05, Pm=.18</li>
 </ul></li>
@@ -302,7 +302,7 @@
 <div id="multiple-mediators" class="section level2 hasAnchor" number="10.8">
 <h2><span class="header-section-number">10.8</span> Multiple Mediators<a href="longitudinal-mediation-analysis.html#multiple-mediators" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li>If you have more than one mediator (which is always a good idea since otherwise you don’t know if your mediator is merely a proxy for another variable), you should add them all to the final GCM and then calculate RMEDIATION for each mediated pathway that goes from each IV through each mediator to the outcome.</li>
+<li>If you have more than one mediator (which is always a good idea since otherwise you don’t know if your mediator is merely a proxy for another variable), you should add them all to the final GCM and then calculate <a href="https://amplab.shinyapps.io/MEDCI/">[RMediation](https://amplab.shinyapps.io/MEDCI/)</a> for each mediated pathway that goes from each IV through each mediator to the outcome.</li>
 <li>Note: Multiple mediators are preferred because you can better claim that the effect is due to your mediator if you control for other plausible mediators. If you don’t control for them, your mediator may just be a “proxy” for the other plausible mediators (i.e., it may be related to outcome merely because it is related to another plausible mediator which is actually related to outcome).</li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG60.png" style="display: block; margin: auto;" /></p>
@@ -333,7 +333,54 @@
 </div>
 <div id="homework-9---1019" class="section level2 hasAnchor" number="10.10">
 <h2><span class="header-section-number">10.10</span> Homework 9 - 10/19<a href="longitudinal-mediation-analysis.html#homework-9---1019" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Repeat the mediation analysis that we did in class today, except disaggregate Echelle and use both Echelle_mean and Echelle_deviations as mediators. Note that there will NOT be an “a” path from time to Echelle_mean, because Echelle_mean does not vary over time. But there will be a separate “b” path from each component of Echelle and YBOCS. So, you can only test for mediation for the path through Echelle_deviations. Do that test.</p>
+<p>Repeat the mediation analysis that we did in class today, except disaggregate Echelle and use both Echelle_mean and Echelle_deviations as mediators. Note that there will NOT be an “a” path from time to Echelle_mean, because Echelle_mean does not vary over time. But there will be a separate “b” path from each component of Echelle and YBOCS. So, you can only test for mediation for the path through Echelle_deviations. Try AR homogeneous only if Unstructured doesn’t work (UN often does not work for the “a” path from Time to deviations).</p>
+<pre><code>AGGREGATE
+  /OUTFILE=* MODE=ADDVARIABLES
+  /BREAK=Subject#
+  /ECHELLE_mean=MEAN(ECHELLE).
+
+COMPUTE echelle_dev=ECHELLE-ECHELLE_mean.
+EXECUTE.
+
+COMPUTE TimeLN=LN(TIME+1).
+EXECUTE.
+
+MIXED echelle_dev WITH TimeLN
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=TimeLN | SSTYPE(3)
+  /METHOD=REML
+  /PRINT=SOLUTION TESTCOV
+  /REPEATED=TIME | SUBJECT(Subject#) COVTYPE(AR1).</code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG64.png" style="display: block; margin: auto;" /></p>
+<p><span class="math inline">\(a = -11.203\)</span></p>
+<pre><code>MIXED YBOCS WITH TimeLN ECHELLE_mean echelle_dev
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=TimeLN ECHELLE_mean echelle_dev | SSTYPE(3)
+  /METHOD=REML
+  /PRINT=SOLUTION TESTCOV
+  /REPEATED=TIME | SUBJECT(Subject#) COVTYPE(UN).</code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG65.png" style="display: block; margin: auto;" /></p>
+<p><span class="math inline">\(b_1 = .081\)</span></p>
+<p><span class="math inline">\(b_2 = .102\)</span></p>
+<p><span class="math inline">\(c&#39; = -8.389\)</span></p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG66.png" style="display: block; margin: auto;" /></p>
+<p><span class="math inline">\(\mu = a*b = -1.445\)</span></p>
+<p>Since 95% CI does not include 0, the indirect effect is significant.</p>
+<pre><code>MIXED echelle_dev WITH TimeLN
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=TimeLN | SSTYPE(3)
+  /METHOD=REML
+  /PRINT=SOLUTION TESTCOV
+  /REPEATED=TIME | SUBJECT(Subject#) COVTYPE(AR1).</code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG67.png" style="display: block; margin: auto;" /></p>
+<p>Direct effect is also significant.</p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG63_.png" style="display: block; margin: auto;" /></p>
 </div>
 <div id="homework-10---1024" class="section level2 hasAnchor" number="10.11">
 <h2><span class="header-section-number">10.11</span> Homework 10 - 10/24<a href="longitudinal-mediation-analysis.html#homework-10---1024" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -342,11 +389,11 @@
 </div>
 <div id="homework-10---1026" class="section level2 hasAnchor" number="10.12">
 <h2><span class="header-section-number">10.12</span> Homework 10 - 10/26<a href="longitudinal-mediation-analysis.html#homework-10---1026" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Use the attached OCD data file (the same data that we have been looking at all semester!) to do a mediation analysis with echelle, avoidance, and BDI as disaggregated mediators. For avoidance, use zavoidln. For BDI, use zbdiln. For Echelle, use Echelle. For time, use LN of time. Use Unstructured covariance matrix for analyses with YBOCS as the DV. Use Ar(1) heterogeneous for analyses with deviations as the DV. Use RMediation to test the significance of all mediated pathways from treatment to YBOCS through each deviation variable.</p>
+<p>Use the attached OCD data file (the same data that we have been looking at all semester!) to do a mediation analysis with echelle, avoidance, and BDI as disaggregated mediators. For avoidance, use zavoidln. For BDI, use zbdiln. For Echelle, use Echelle. For time, use LN of time. Use Unstructured covariance matrix for analyses with YBOCS as the DV. Use Ar(1) heterogeneous for analyses with deviations as the DV. Use <a href="https://amplab.shinyapps.io/MEDCI/">RMediation</a> to test the significance of all mediated pathways from treatment to YBOCS through each deviation variable.</p>
 </div>
 <div id="homework-11---1031" class="section level2 hasAnchor" number="10.13">
 <h2><span class="header-section-number">10.13</span> Homework 11 - 10/31<a href="longitudinal-mediation-analysis.html#homework-11---1031" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Use the attached OCD data file (the same data that we have been looking at all semester!) to do a CROSS LAG multimediator analysis, using zavoidln and zBDIln as the mediators. For time, use LN of time. Use Unstructured covariance matrix for analyses with YBOCS as the DV. Use Ar(1) heterogeneous for analyses with deviations as the DV. You don’t need to test for mediation using RMediation since we have done that many times already.</p>
+<p>Use the attached OCD data file (the same data that we have been looking at all semester!) to do a CROSS LAG multimediator analysis, using zavoidln and zBDIln as the mediators. For time, use LN of time. Use Unstructured covariance matrix for analyses with YBOCS as the DV. Use Ar(1) heterogeneous for analyses with deviations as the DV. You don’t need to test for mediation using <a href="https://amplab.shinyapps.io/MEDCI/">RMediation</a> since we have done that many times already.</p>
 
 </div>
 </div>

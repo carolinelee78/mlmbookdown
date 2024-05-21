@@ -55,7 +55,7 @@ Generalized Linear Mixed Models (GLMMs) are used when the DV is not normally dis
 - For coefficient rather than graphs, you need to find the little drop-down menu near the bottom of each pop-up and change it from "figure" to "table".
 - A better option is to change your output format under Edit, options, output, and then click on pivot tables.
 
-## Homework 12 - 11/2
+## Homework 13 - 11/2
 
 The DV is severe sev_cold.final (number of severe cold symptoms) which is measured at 5 points during the fall semester, ending 10 days after finals. The IVs are lnfeNO1.1 (NO in the airways blocks pathogens from getting into the bloodstream, and it is measured at the beginning of the semester) and time (index1). Use a linear model of change over time. Include lnfeNO1.1, time (Centered at 5), and lnfeNO1.1 x time for your growth model. Do a Poisson GLMM regression (Poisson distribution, Log linking function), and graph the change over time for sev_cold for people with low (1SD below the mean) and High (1SD above the mean) levels of lnfeno1.1 for the RAW sev_cold.final data by centering lnfeNO1.1 at those particular values. (Convert from log(sev_cold.final) back to raw). 
  
