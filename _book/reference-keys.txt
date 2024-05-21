@@ -79,3 +79,6 @@ other-options
 getting-the-right-look-for-your-output
 homework-12---112
 homework-10---1024
+homework-11---1026
+homework-12---1031
+homework-13---112
