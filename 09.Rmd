@@ -380,6 +380,10 @@ MIXED zavoidln_dev WITH lntimec1.61 BT0
 knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG82.png") 
 ```
 
+- `lntimec1.61`: The slope of decrease in avoidance symptoms for participants in the BT condition is significant. 
+- `BT0`: The difference between the two conditions in terms of avoidance symptoms is not significant at the last timepoint. 
+- `lntimec1.61*BT0`: The change in avoidance symptoms over time is not significantly different between conditions BT and CT.
+
 ```
 MIXED zbdiln_dev WITH lntimec1.61 BT0 
   /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1) 
@@ -394,6 +398,11 @@ MIXED zbdiln_dev WITH lntimec1.61 BT0
 ```{r, echo = FALSE, fig.align='center'}
 knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG83.png") 
 ```
+
+- `lntimec1.61`: The slope of decrease in depression symptoms for participants in the BT condition is significant. 
+- `BT0`: The difference between the two conditions in terms of depression symptoms is not significant at the last timepoint. 
+- `lntimec1.61*BT0`: The change in depression symptoms over time is not significantly different between conditions BT and CT.
+
 
 ```
 USE ALL. 

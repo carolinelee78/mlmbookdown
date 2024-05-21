@@ -522,6 +522,11 @@ MIXED zavoidln_dev WITH lntimec1.61 BT0
   /PRINT=SOLUTION TESTCOV 
   /REPEATED=TIME | SUBJECT(Subject#) COVTYPE(ARH1)</code></pre>
 <p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG82.png" style="display: block; margin: auto;" /></p>
+<ul>
+<li><code>lntimec1.61</code>: The slope of decrease in avoidance symptoms for participants in the BT condition is significant.</li>
+<li><code>BT0</code>: The difference between the two conditions in terms of avoidance symptoms is not significant at the last timepoint.</li>
+<li><code>lntimec1.61*BT0</code>: The change in avoidance symptoms over time is not significantly different between conditions BT and CT.</li>
+</ul>
 <pre><code>MIXED zbdiln_dev WITH lntimec1.61 BT0 
   /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1) 
     SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
@@ -531,6 +536,11 @@ MIXED zavoidln_dev WITH lntimec1.61 BT0
   /PRINT=SOLUTION TESTCOV 
   /REPEATED=TIME | SUBJECT(Subject#) COVTYPE(ARH1).</code></pre>
 <p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG83.png" style="display: block; margin: auto;" /></p>
+<ul>
+<li><code>lntimec1.61</code>: The slope of decrease in depression symptoms for participants in the BT condition is significant.</li>
+<li><code>BT0</code>: The difference between the two conditions in terms of depression symptoms is not significant at the last timepoint.</li>
+<li><code>lntimec1.61*BT0</code>: The change in depression symptoms over time is not significantly different between conditions BT and CT.</li>
+</ul>
 <pre><code>USE ALL. 
 COMPUTE filter_$=(TIME=0). 
 VARIABLE LABELS filter_$ &#39;TIME=0 (FILTER)&#39;. 
