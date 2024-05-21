@@ -86,25 +86,6 @@ knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbook
 knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG60.png")
 ```
 
-## Cross Lag Mediation 
-
-- Controlling for other mediators can help you establish causality in your mediation analysis, but the relation between the mediator and outcome could still be due to the outcome causing the mediator rather than the mediator causing the outcome (reverse mediation). 
-- To eliminate this possibility, we do cross lag mediation, in which we have the outcome at time "t" being predicted by the mediator at time "t-1" (and by the outcome at time "t-1"). 
-- To do this, we need to "shift" the values of the outcome up 1 line in our MLM data file. This is done in the Transform dropdown menu, selecting "create a time series". You create a time series for the outcome using a "lead" of "order" 1. 
-- Note that the last asmt for each subject now has the outcome at the first asmt of the next subject on its line. Thus, when doing your MLM analyses, you have to select cases such that you do not include the last asmt for each subject in the data analysis.
-- If your data set does not have the same number of assessments for every subject, it is also a good idea to form a "lead" variable for subject number, and use "select cases" also to make sure that "subject=subject_lead1".
-- When predicting outcome at t+1, you also have to create your time variable for t+1 to reflect the correct timepoints, so do lead for your time variable also.
-
-### Cross Lag Mediation Details 
-
-- Since cross lags involve variables at time t and time t+1, you always lose the last data point (last asmt) of predictors since there is no outcome at t+1 for the last asmt. Therefore, in the analyses predicting outcome in the cross lag analysis, you only have k-1 timepoints, if k is the number of asmts. Thus, when doing the actual cross lag analysis, you have to select asmts NOT to include the last asmt. This can be accomplished by technique 3 below.
-- You need to "lead" the outcome variable (using "create a time series" under "compute" menu) so that you have time t variables predicting time t+1 outcome.
-- Also, you need to "lead" the subject variable and select only cases where ID=ID_lead1.
-- Finally, you need to "lead" the "time" variable (just like you "lead" the outcome and ID) for the cross lag analysis predicting the outcome (e.g., YBOCS) so that the value of time corresponds to the asmt of the DV which is the "lead" version of the outcome variable (see 2 above). In these analyses, you need to select only the cases where ID=ID_lead1.
-- When calculating the "a" paths and the "c" paths, the time variable already corresponds to the asmts of the mediators and outcome since the a and c paths do not predict "lead" (next session) outcomes, so you use the existing time variable as it is (or, if it was transformed, use the existing transformed variable). Use the full sample (do not use the "select cases; use "all cases").
-- Mean and deviation scores for mediators should be calculated on the full sample.
-- For calculating the "a" paths and "c" paths, you use all timepoints since more timepoints give you better estimates of the path coefficients (i.e., you do not select cases where ID=ID_lead1).
-
 ```{r, echo = FALSE, fig.align='center'}
 knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG61.png")
 ```
@@ -181,11 +162,11 @@ MIXED echelle_dev WITH TimeLN
   /REPEATED=TIME | SUBJECT(Subject#) COVTYPE(AR1).
 ```
 
-```{r, echo = FALSE, fig.align='center'}
-knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG67.png")
-```
-
 Direct effect is also significant. 
+
+```{r, echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG68.png")
+```
 
 ```{r, echo = FALSE, fig.align='center'}
 knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG63_.png")
@@ -195,16 +176,296 @@ knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbook
 
 Calculate all the paths in the mediation model attached and test all the mediated pathways.
 
-```{r, echo = FALSE, fig.align='center'}
-knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG62.png")
+```
+DATASET ACTIVATE DataSet1. 
+AGGREGATE 
+  /OUTFILE=* MODE=ADDVARIABLES 
+  /BREAK=Subject# 
+  /ECHELLE_mean=MEAN(ECHELLE). 
+
+COMPUTE echelle_dev=ECHELLE-ECHELLE_mean. 
+EXECUTE. 
+
+COMPUTE TImeLN=LN(time+1). 
+EXECUTE. 
+
+RECODE condition (MISSING=SYSMIS) (0=1) (1=0) INTO CT0. 
+EXECUTE. 
+
+COMPUTE TImeLNc1.61=LN(time+1)-1.61. 
+EXECUTE. 
+
+MIXED echelle_dev WITH TImeLNc1.61 BT0 
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE) 
+  /FIXED=TImeLNc1.61 BT0 TImeLNc1.61*BT0 | SSTYPE(3) 
+  /METHOD=REML 
+  /PRINT=SOLUTION TESTCOV 
+  /REPEATED=TIME | SUBJECT(Subject#) COVTYPE(AR1).
+
+MIXED echelle_dev WITH TImeLNc1.61 CT0 
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE) 
+  /FIXED=TImeLNc1.61 CT0 TImeLNc1.61*CT0 | SSTYPE(3) 
+  /METHOD=REML 
+  /PRINT=SOLUTION TESTCOV 
+  /REPEATED=TIME | SUBJECT(Subject#) COVTYPE(AR1).
 ```
 
-## Homework 11 - 10/26
+```{r, echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG69.png")
+```
 
-Use the attached OCD data file (the same data that we have been looking at all semester!) to do a mediation analysis with echelle, avoidance, and BDI as disaggregated mediators. For avoidance, use zavoidln. For BDI, use zbdiln. For Echelle, use Echelle. For time, use LN of time. Use Unstructured covariance matrix for analyses with YBOCS as the DV. Use Ar(1) heterogeneous for analyses with deviations as the DV. Use [RMediation](https://amplab.shinyapps.io/MEDCI/) to test the significance of all mediated pathways from treatment to YBOCS through each deviation variable. 
+- $a_{1(BT)}$: -10.67 (1.50)
+- $a_2$: -1.09 (2.12)
+- $a_3$: -.37 (1.90)
 
-## Homework 12 - 10/31
+```{r, echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG70.png")
+```
+
+- $a_{1(CT)}$: -11.8 (1.50)
+- $a_2$: -1.09 (2.12)
+- $a_3$: -.37 (1.90)
+
+```
+MIXED ZYBOCS WITH TImeLNc1.61 BT0 echelle_dev ECHELLE_mean 
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE) 
+  /FIXED=TImeLNc1.61 BT0 TImeLNc1.61*BT0 echelle_dev ECHELLE_mean | SSTYPE(3) 
+  /METHOD=REML 
+  /PRINT=SOLUTION TESTCOV 
+  /REPEATED=TIME | SUBJECT(Subject#) COVTYPE(UN).
+```
+
+```{r, echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG71.png")
+```
+
+- $b_1$ = .010 (.003)
+- $c'1$ = -.92 (.10)
+- $c'2$ = .14 (.13)
+- $c'3$ = .21 (.20)
+- $b_2$ = .008 (.003)
+
+```
+REGRESSION 
+  /DESCRIPTIVES MEAN STDDEV CORR SIG N 
+  /MISSING LISTWISE 
+  /STATISTICS COEFF OUTS CI(95) R ANOVA ZPP 
+  /CRITERIA=PIN(.05) POUT(.10) 
+  /NOORIGIN 
+  /DEPENDENT ECHELLE_mean 
+  /METHOD=ENTER BT0.
+```
+
+```{r, echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG72.png")
+```
+
+- $a_4$ = .01 (2.39)
+
+_**Mediated pathways**_
+
+```{r, echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/_IMG67.png")
+```
+
+(1) **Time** --$a_{11}$ (i.e., $a_{1(BT)}$) --> **Echelle_dev** --$b_1$--> **YBOCS**
+
+```{r, echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG76.png")
+```
+
+(2) **Time** --$a_{12}$ (i.e., $a_{1(CT)}$) --> **Echelle_dev** --$b_1$--> **YBOCS**
+
+```{r, echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG77.png")
+```
+
+```{r, echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG73_.png")
+```
+
+(3) **Treatment x Time** --$a_{2}$ --> **Echelle_dev** --$b_1$--> **YBOCS**
+
+```{r, echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG78.png") 
+```
+
+```{r, echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG74_.png") 
+```
+
+(4) **Treatment** --$a_{3}$ --> **Echelle_dev** --$b_1$--> **YBOCS**
+
+```{r, echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG79.png") 
+```
+
+```{r, echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG75_.png")
+```
+
+(5) **Treatment** --$a_{4}$ --> **Echelle_dev** --$b_2$--> **YBOCS**
+
+```{r, echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG80.png") 
+```
+
+
+## Cross Lag Mediation 
+
+- Controlling for other mediators can help you establish causality in your mediation analysis, but the relation between the mediator and outcome could still be due to the outcome causing the mediator rather than the mediator causing the outcome (reverse mediation). 
+- To eliminate this possibility, we do cross lag mediation, in which we have the outcome at time "t" being predicted by the mediator at time "t-1" (and by the outcome at time "t-1"). 
+- To do this, we need to "shift" the values of the outcome up 1 line in our MLM data file. This is done in the Transform dropdown menu, selecting "create a time series". You create a time series for the outcome using a "lead" of "order" 1. 
+- Note that the last asmt for each subject now has the outcome at the first asmt of the next subject on its line. Thus, when doing your MLM analyses, you have to select cases such that you do not include the last asmt for each subject in the data analysis.
+- If your data set does not have the same number of assessments for every subject, it is also a good idea to form a "lead" variable for subject number, and use "select cases" also to make sure that "subject=subject_lead1".
+- When predicting outcome at t+1, you also have to create your time variable for t+1 to reflect the correct timepoints, so do lead for your time variable also.
+
+### Cross Lag Mediation Details 
+
+- Since cross lags involve variables at time t and time t+1, you always lose the last data point (last asmt) of predictors since there is no outcome at t+1 for the last asmt. Therefore, in the analyses predicting outcome in the cross lag analysis, you only have k-1 timepoints, if k is the number of asmts. Thus, when doing the actual cross lag analysis, you have to select asmts NOT to include the last asmt. This can be accomplished by technique 3 below.
+- You need to "lead" the outcome variable (using "create a time series" under "compute" menu) so that you have time t variables predicting time t+1 outcome.
+- Also, you need to "lead" the subject variable and select only cases where ID=ID_lead1.
+- Finally, you need to "lead" the "time" variable (just like you "lead" the outcome and ID) for the cross lag analysis predicting the outcome (e.g., YBOCS) so that the value of time corresponds to the asmt of the DV which is the "lead" version of the outcome variable (see 2 above). In these analyses, you need to select only the cases where ID=ID_lead1.
+- When calculating the "a" paths and the "c" paths, the time variable already corresponds to the asmts of the mediators and outcome since the a and c paths do not predict "lead" (next session) outcomes, so you use the existing time variable as it is (or, if it was transformed, use the existing transformed variable). Use the full sample (do not use the "select cases; use "all cases").
+- Mean and deviation scores for mediators should be calculated on the full sample.
+- For calculating the "a" paths and "c" paths, you use all timepoints since more timepoints give you better estimates of the path coefficients (i.e., you do not select cases where ID=ID_lead1).
+
+## Homework 11 - 10/31
 
 Use the attached OCD data file (the same data that we have been looking at all semester!) to do a CROSS LAG multimediator analysis, using zavoidln and zBDIln as the mediators. For time, use LN of time. Use Unstructured covariance matrix for analyses with YBOCS as the DV. Use Ar(1) heterogeneous for analyses with deviations as the DV. You don’t need to test for mediation using [RMediation](https://amplab.shinyapps.io/MEDCI/) since we have done that many times already. 
+
+```
+AGGREGATE 
+  /OUTFILE=* MODE=ADDVARIABLES 
+  /BREAK=Subject# 
+  /Zavoidln_mean=MEAN(Zavoidln) 
+  /ZBDIln_mean=MEAN(ZBDIln) 
+  /YBOCS_mean=MEAN(YBOCS). 
+ 
+COMPUTE zbdiln_dev=ZBDIln - ZBDIln_mean. 
+EXECUTE. 
+ 
+COMPUTE zavoidln_dev=Zavoidln - Zavoidln_mean. 
+EXECUTE. 
+ 
+COMPUTE YBOCS_dev=YBOCS - YBOCS_mean. 
+EXECUTE. 
+ 
+COMPUTE lntimec1.61=LN(TIME+1)-1.61. 
+EXECUTE. 
+ 
+CREATE 
+  /lntime_lead1=LEAD(lntimec1.61 1)/YBOCS_lead1=LEAD(YBOCS 1).
+  
+IF  (TIME < 4) lntimec1.61miss_lead1=lntime_lead1. 
+EXECUTE. 
+ 
+MIXED zavoidln_dev WITH lntimec1.61 BT0 
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE) 
+  /FIXED=lntimec1.61 BT0 lntimec1.61*BT0 | SSTYPE(3) 
+  /METHOD=REML 
+  /PRINT=SOLUTION TESTCOV 
+  /REPEATED=TIME | SUBJECT(Subject#) COVTYPE(ARH1)
+```
+
+```{r, echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG82.png") 
+```
+
+```
+MIXED zbdiln_dev WITH lntimec1.61 BT0 
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE) 
+  /FIXED=lntimec1.61 BT0 lntimec1.61*BT0 | SSTYPE(3) 
+  /METHOD=REML 
+  /PRINT=SOLUTION TESTCOV 
+  /REPEATED=TIME | SUBJECT(Subject#) COVTYPE(ARH1).
+```
+
+```{r, echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG83.png") 
+```
+
+```
+USE ALL. 
+COMPUTE filter_$=(TIME=0). 
+VARIABLE LABELS filter_$ 'TIME=0 (FILTER)'. 
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'. 
+FORMATS filter_$ (f1.0). 
+FILTER BY filter_$. 
+EXECUTE. 
+ 
+FILTER OFF. 
+USE ALL. 
+EXECUTE. 
+ 
+REGRESSION 
+  /SELECT=TIME EQ 0 
+  /MISSING LISTWISE 
+  /STATISTICS COEFF OUTS R ANOVA 
+  /CRITERIA=PIN(.05) POUT(.10) 
+  /NOORIGIN 
+  /DEPENDENT ZBDIln_mean 
+  /METHOD=ENTER BT0.
+```
+
+```{r, echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG84.png") 
+```
+
+`BT0`: Holding all else constant, the effect of condition on zbdiln_mean (mean level of depression) is not significant. 
+
+```
+REGRESSION 
+  /SELECT=TIME EQ 0 
+  /MISSING LISTWISE 
+  /STATISTICS COEFF OUTS R ANOVA 
+  /CRITERIA=PIN(.05) POUT(.10) 
+  /NOORIGIN 
+  /DEPENDENT Zavoidln_mean 
+  /METHOD=ENTER BT0.
+```
+
+```{r, echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG85.png") 
+```
+
+`BT0`: Holding all else constant, the effect of condition on zavoidln_mean (mean level of avoidance) is significant.
+
+```
+MIXED YBOCS_lead1 WITH zavoidln_dev zbdiln_dev lntimec1.61miss_lead1 ZBDIln_mean Zavoidln_mean 
+    YBOCS_dev YBOCS_mean BT0 
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE) 
+  /FIXED=zavoidln_dev zbdiln_dev lntimec1.61miss_lead1 ZBDIln_mean Zavoidln_mean YBOCS_dev 
+    YBOCS_mean BT0 lntimec1.61miss_lead1*BT0 | SSTYPE(3) 
+  /METHOD=REML 
+  /PRINT=SOLUTION TESTCOV 
+  /REPEATED=TIME | SUBJECT(Subject#) COVTYPE(UN).
+```
+
+```{r, echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG86.png") 
+```
+
+- `lntime_lead`: The slope of decrease in YBOCS for participants in the BT condition is significant. 
+- `condition`: The difference of YBOCS between the two conditions (BT vs. CT) at the last assessment is not significant. 
+- `lntime_lead*condition`: The change in YBOCS is not significantly different between conditions at the last assessment. 
+- `zavoidln_mean`: The effect of mean level of avoidance on YBOCS score is not significant. 
+- `zavoidln_dev`: When individuals have higher than average level of avoidance, they tend to have higher YBOCS scores. 
+- `zbdiln_mean`: The effect of mean level of depression on YBOCS score is not significant. 
+- `zbdiln_dev`: Individuals with different degrees of deviations from the average in terms of their average BDI score do not significantly differ in their YBOCS scores. 
+
+
 
 

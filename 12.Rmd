@@ -36,15 +36,15 @@
 - You can also use any kind of growth curve model, including ANOVA.
 - But, MMLM assumes that all variables are affected in the same way by the predictors. Don’t include variables that are coded in the opposite directions (e.g., school performance, and classroom misbehaviors).
 
-## Homework 15 - 11/14 
+## Homework 14 - 11/14 
 
 In the attached data set, people with panic disorder get 10 weekly treatments (session = 1-10) and a final post treatment assessment 1 week after the last treatment (session=11). There is only one group. There are multiple DVs: ASI, ACQ, FFMQ, and PDSStot. Do an MMLM. DO a simple linear model for Time. Do patients improve over time on the group of the 4 DVs in your MMLM? 
 
-## Homework 16 - 11/14 
+## Homework 15 - 11/14 
 
 In the attached file, high school students are given an intervention to increase their bystander behavior to intervene when witnessing situations that might lead to sexual abuse in dating/hanging out. Then, 2 months later, their bystander behavior is measured over the last 2 months since the intervention. (BBS4itemRECODED). Those getting the intervention are in takecare0=0, and those receiving the placebo are in takecare0=1. They are male (male0=0) or female(male0=1). We also measured baseline bystander behavior, which should be used as a covariate (BBS4itemRECODED_first). We expect a TakeCARE x male0 interaction. The student were given the intervention in their different groups and scores are correlated within groups. So group# is our grouping variable. Use baseline BBS (BBS4itemrecoded_first) only as a covariate, not as a repeated measure. So this is a non-longitudinal MLM with BBS4itemrecoded as the DV. What effects are significant? How do you interpret them? Which predictors can have random effects? Include all the random effects that you can. 
 
-## Homework 17 - 11/21
+## Homework 16 - 11/21
 
 In the attached data, the 4 DVS are HADSA, HADSD, ASI, and PANASneg. They are measured at 4 time points, index1=1,7,8,9. Convert index1 to time=1,2,3,4. CART0 is the treatment group variable: CART0=0 is CART breathing training, and CART0=1 is the slow breathing control condition. Do an MMLM. Use a linear growth curve model as your growth model (treatment, time, and treatment x time). Center time at the last outcome. We expect the effect of treatment (the CART0 main effect at time 4) to be greater for the anxiety outcomes (HADSA and ASI) than for the mood outcomes (HADSD, PANASneg). See if you can figure out how you can code a single dummy variable for the repeated outcome measures (indexed by their DV number 1-4) to code anxiety or depressive symptoms. Then have that dummy code interact with CART0, Timec4, and CART0 x Timec4. Interpret the interactions. You can email me for hints. 
 

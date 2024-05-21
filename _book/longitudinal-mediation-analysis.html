@@ -165,14 +165,13 @@
 <li class="chapter" data-level="10.6" data-path="longitudinal-mediation-analysis.html"><a href="longitudinal-mediation-analysis.html#other-gcms"><i class="fa fa-check"></i><b>10.6</b> Other GCMs</a></li>
 <li class="chapter" data-level="10.7" data-path="longitudinal-mediation-analysis.html"><a href="longitudinal-mediation-analysis.html#disaggregating-the-mediator"><i class="fa fa-check"></i><b>10.7</b> Disaggregating the Mediator</a></li>
 <li class="chapter" data-level="10.8" data-path="longitudinal-mediation-analysis.html"><a href="longitudinal-mediation-analysis.html#multiple-mediators"><i class="fa fa-check"></i><b>10.8</b> Multiple Mediators</a></li>
-<li class="chapter" data-level="10.9" data-path="longitudinal-mediation-analysis.html"><a href="longitudinal-mediation-analysis.html#cross-lag-mediation"><i class="fa fa-check"></i><b>10.9</b> Cross Lag Mediation</a>
+<li class="chapter" data-level="10.9" data-path="longitudinal-mediation-analysis.html"><a href="longitudinal-mediation-analysis.html#homework-9---1019"><i class="fa fa-check"></i><b>10.9</b> Homework 9 - 10/19</a></li>
+<li class="chapter" data-level="10.10" data-path="longitudinal-mediation-analysis.html"><a href="longitudinal-mediation-analysis.html#homework-10---1024"><i class="fa fa-check"></i><b>10.10</b> Homework 10 - 10/24</a></li>
+<li class="chapter" data-level="10.11" data-path="longitudinal-mediation-analysis.html"><a href="longitudinal-mediation-analysis.html#cross-lag-mediation"><i class="fa fa-check"></i><b>10.11</b> Cross Lag Mediation</a>
 <ul>
-<li class="chapter" data-level="10.9.1" data-path="longitudinal-mediation-analysis.html"><a href="longitudinal-mediation-analysis.html#cross-lag-mediation-details"><i class="fa fa-check"></i><b>10.9.1</b> Cross Lag Mediation Details</a></li>
+<li class="chapter" data-level="10.11.1" data-path="longitudinal-mediation-analysis.html"><a href="longitudinal-mediation-analysis.html#cross-lag-mediation-details"><i class="fa fa-check"></i><b>10.11.1</b> Cross Lag Mediation Details</a></li>
 </ul></li>
-<li class="chapter" data-level="10.10" data-path="longitudinal-mediation-analysis.html"><a href="longitudinal-mediation-analysis.html#homework-9---1019"><i class="fa fa-check"></i><b>10.10</b> Homework 9 - 10/19</a></li>
-<li class="chapter" data-level="10.11" data-path="longitudinal-mediation-analysis.html"><a href="longitudinal-mediation-analysis.html#homework-10---1024"><i class="fa fa-check"></i><b>10.11</b> Homework 10 - 10/24</a></li>
-<li class="chapter" data-level="10.12" data-path="longitudinal-mediation-analysis.html"><a href="longitudinal-mediation-analysis.html#homework-11---1026"><i class="fa fa-check"></i><b>10.12</b> Homework 11 - 10/26</a></li>
-<li class="chapter" data-level="10.13" data-path="longitudinal-mediation-analysis.html"><a href="longitudinal-mediation-analysis.html#homework-12---1031"><i class="fa fa-check"></i><b>10.13</b> Homework 12 - 10/31</a></li>
+<li class="chapter" data-level="10.12" data-path="longitudinal-mediation-analysis.html"><a href="longitudinal-mediation-analysis.html#homework-11---1031"><i class="fa fa-check"></i><b>10.12</b> Homework 11 - 10/31</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="generalized-linear-mixed-models.html"><a href="generalized-linear-mixed-models.html"><i class="fa fa-check"></i><b>11</b> Generalized Linear Mixed Models</a>
 <ul>
@@ -183,7 +182,7 @@
 <li class="chapter" data-level="11.5" data-path="generalized-linear-mixed-models.html"><a href="generalized-linear-mixed-models.html#random-effects"><i class="fa fa-check"></i><b>11.5</b> Random Effects</a></li>
 <li class="chapter" data-level="11.6" data-path="generalized-linear-mixed-models.html"><a href="generalized-linear-mixed-models.html#other-options"><i class="fa fa-check"></i><b>11.6</b> Other Options</a></li>
 <li class="chapter" data-level="11.7" data-path="generalized-linear-mixed-models.html"><a href="generalized-linear-mixed-models.html#getting-the-right-look-for-your-output"><i class="fa fa-check"></i><b>11.7</b> Getting the right “look” for your output</a></li>
-<li class="chapter" data-level="11.8" data-path="generalized-linear-mixed-models.html"><a href="generalized-linear-mixed-models.html#homework-13---112"><i class="fa fa-check"></i><b>11.8</b> Homework 13 - 11/2</a></li>
+<li class="chapter" data-level="11.8" data-path="generalized-linear-mixed-models.html"><a href="generalized-linear-mixed-models.html#homework-12---112"><i class="fa fa-check"></i><b>11.8</b> Homework 12 - 11/2</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -306,33 +305,10 @@
 <li>Note: Multiple mediators are preferred because you can better claim that the effect is due to your mediator if you control for other plausible mediators. If you don’t control for them, your mediator may just be a “proxy” for the other plausible mediators (i.e., it may be related to outcome merely because it is related to another plausible mediator which is actually related to outcome).</li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG60.png" style="display: block; margin: auto;" /></p>
-</div>
-<div id="cross-lag-mediation" class="section level2 hasAnchor" number="10.9">
-<h2><span class="header-section-number">10.9</span> Cross Lag Mediation<a href="longitudinal-mediation-analysis.html#cross-lag-mediation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li>Controlling for other mediators can help you establish causality in your mediation analysis, but the relation between the mediator and outcome could still be due to the outcome causing the mediator rather than the mediator causing the outcome (reverse mediation).</li>
-<li>To eliminate this possibility, we do cross lag mediation, in which we have the outcome at time “t” being predicted by the mediator at time “t-1” (and by the outcome at time “t-1”).</li>
-<li>To do this, we need to “shift” the values of the outcome up 1 line in our MLM data file. This is done in the Transform dropdown menu, selecting “create a time series”. You create a time series for the outcome using a “lead” of “order” 1.</li>
-<li>Note that the last asmt for each subject now has the outcome at the first asmt of the next subject on its line. Thus, when doing your MLM analyses, you have to select cases such that you do not include the last asmt for each subject in the data analysis.</li>
-<li>If your data set does not have the same number of assessments for every subject, it is also a good idea to form a “lead” variable for subject number, and use “select cases” also to make sure that “subject=subject_lead1”.</li>
-<li>When predicting outcome at t+1, you also have to create your time variable for t+1 to reflect the correct timepoints, so do lead for your time variable also.</li>
-</ul>
-<div id="cross-lag-mediation-details" class="section level3 hasAnchor" number="10.9.1">
-<h3><span class="header-section-number">10.9.1</span> Cross Lag Mediation Details<a href="longitudinal-mediation-analysis.html#cross-lag-mediation-details" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>Since cross lags involve variables at time t and time t+1, you always lose the last data point (last asmt) of predictors since there is no outcome at t+1 for the last asmt. Therefore, in the analyses predicting outcome in the cross lag analysis, you only have k-1 timepoints, if k is the number of asmts. Thus, when doing the actual cross lag analysis, you have to select asmts NOT to include the last asmt. This can be accomplished by technique 3 below.</li>
-<li>You need to “lead” the outcome variable (using “create a time series” under “compute” menu) so that you have time t variables predicting time t+1 outcome.</li>
-<li>Also, you need to “lead” the subject variable and select only cases where ID=ID_lead1.</li>
-<li>Finally, you need to “lead” the “time” variable (just like you “lead” the outcome and ID) for the cross lag analysis predicting the outcome (e.g., YBOCS) so that the value of time corresponds to the asmt of the DV which is the “lead” version of the outcome variable (see 2 above). In these analyses, you need to select only the cases where ID=ID_lead1.</li>
-<li>When calculating the “a” paths and the “c” paths, the time variable already corresponds to the asmts of the mediators and outcome since the a and c paths do not predict “lead” (next session) outcomes, so you use the existing time variable as it is (or, if it was transformed, use the existing transformed variable). Use the full sample (do not use the “select cases; use”all cases”).</li>
-<li>Mean and deviation scores for mediators should be calculated on the full sample.</li>
-<li>For calculating the “a” paths and “c” paths, you use all timepoints since more timepoints give you better estimates of the path coefficients (i.e., you do not select cases where ID=ID_lead1).</li>
-</ul>
 <p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG61.png" style="display: block; margin: auto;" /></p>
 </div>
-</div>
-<div id="homework-9---1019" class="section level2 hasAnchor" number="10.10">
-<h2><span class="header-section-number">10.10</span> Homework 9 - 10/19<a href="longitudinal-mediation-analysis.html#homework-9---1019" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="homework-9---1019" class="section level2 hasAnchor" number="10.9">
+<h2><span class="header-section-number">10.9</span> Homework 9 - 10/19<a href="longitudinal-mediation-analysis.html#homework-9---1019" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Repeat the mediation analysis that we did in class today, except disaggregate Echelle and use both Echelle_mean and Echelle_deviations as mediators. Note that there will NOT be an “a” path from time to Echelle_mean, because Echelle_mean does not vary over time. But there will be a separate “b” path from each component of Echelle and YBOCS. So, you can only test for mediation for the path through Echelle_deviations. Try AR homogeneous only if Unstructured doesn’t work (UN often does not work for the “a” path from Time to deviations).</p>
 <pre><code>AGGREGATE
   /OUTFILE=* MODE=ADDVARIABLES
@@ -378,22 +354,235 @@ MIXED echelle_dev WITH TimeLN
   /METHOD=REML
   /PRINT=SOLUTION TESTCOV
   /REPEATED=TIME | SUBJECT(Subject#) COVTYPE(AR1).</code></pre>
-<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG67.png" style="display: block; margin: auto;" /></p>
 <p>Direct effect is also significant.</p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG68.png" style="display: block; margin: auto;" /></p>
 <p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG63_.png" style="display: block; margin: auto;" /></p>
 </div>
-<div id="homework-10---1024" class="section level2 hasAnchor" number="10.11">
-<h2><span class="header-section-number">10.11</span> Homework 10 - 10/24<a href="longitudinal-mediation-analysis.html#homework-10---1024" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="homework-10---1024" class="section level2 hasAnchor" number="10.10">
+<h2><span class="header-section-number">10.10</span> Homework 10 - 10/24<a href="longitudinal-mediation-analysis.html#homework-10---1024" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Calculate all the paths in the mediation model attached and test all the mediated pathways.</p>
-<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG62.png" style="display: block; margin: auto;" /></p>
+<pre><code>DATASET ACTIVATE DataSet1. 
+AGGREGATE 
+  /OUTFILE=* MODE=ADDVARIABLES 
+  /BREAK=Subject# 
+  /ECHELLE_mean=MEAN(ECHELLE). 
+
+COMPUTE echelle_dev=ECHELLE-ECHELLE_mean. 
+EXECUTE. 
+
+COMPUTE TImeLN=LN(time+1). 
+EXECUTE. 
+
+RECODE condition (MISSING=SYSMIS) (0=1) (1=0) INTO CT0. 
+EXECUTE. 
+
+COMPUTE TImeLNc1.61=LN(time+1)-1.61. 
+EXECUTE. 
+
+MIXED echelle_dev WITH TImeLNc1.61 BT0 
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE) 
+  /FIXED=TImeLNc1.61 BT0 TImeLNc1.61*BT0 | SSTYPE(3) 
+  /METHOD=REML 
+  /PRINT=SOLUTION TESTCOV 
+  /REPEATED=TIME | SUBJECT(Subject#) COVTYPE(AR1).
+
+MIXED echelle_dev WITH TImeLNc1.61 CT0 
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE) 
+  /FIXED=TImeLNc1.61 CT0 TImeLNc1.61*CT0 | SSTYPE(3) 
+  /METHOD=REML 
+  /PRINT=SOLUTION TESTCOV 
+  /REPEATED=TIME | SUBJECT(Subject#) COVTYPE(AR1).</code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG69.png" style="display: block; margin: auto;" /></p>
+<ul>
+<li><span class="math inline">\(a_{1(BT)}\)</span>: -10.67 (1.50)</li>
+<li><span class="math inline">\(a_2\)</span>: -1.09 (2.12)</li>
+<li><span class="math inline">\(a_3\)</span>: -.37 (1.90)</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG70.png" style="display: block; margin: auto;" /></p>
+<ul>
+<li><span class="math inline">\(a_{1(CT)}\)</span>: -11.8 (1.50)</li>
+<li><span class="math inline">\(a_2\)</span>: -1.09 (2.12)</li>
+<li><span class="math inline">\(a_3\)</span>: -.37 (1.90)</li>
+</ul>
+<pre><code>MIXED ZYBOCS WITH TImeLNc1.61 BT0 echelle_dev ECHELLE_mean 
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE) 
+  /FIXED=TImeLNc1.61 BT0 TImeLNc1.61*BT0 echelle_dev ECHELLE_mean | SSTYPE(3) 
+  /METHOD=REML 
+  /PRINT=SOLUTION TESTCOV 
+  /REPEATED=TIME | SUBJECT(Subject#) COVTYPE(UN).</code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG71.png" style="display: block; margin: auto;" /></p>
+<ul>
+<li><span class="math inline">\(b_1\)</span> = .010 (.003)</li>
+<li><span class="math inline">\(c&#39;1\)</span> = -.92 (.10)</li>
+<li><span class="math inline">\(c&#39;2\)</span> = .14 (.13)</li>
+<li><span class="math inline">\(c&#39;3\)</span> = .21 (.20)</li>
+<li><span class="math inline">\(b_2\)</span> = .008 (.003)</li>
+</ul>
+<pre><code>REGRESSION 
+  /DESCRIPTIVES MEAN STDDEV CORR SIG N 
+  /MISSING LISTWISE 
+  /STATISTICS COEFF OUTS CI(95) R ANOVA ZPP 
+  /CRITERIA=PIN(.05) POUT(.10) 
+  /NOORIGIN 
+  /DEPENDENT ECHELLE_mean 
+  /METHOD=ENTER BT0.</code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG72.png" style="display: block; margin: auto;" /></p>
+<ul>
+<li><span class="math inline">\(a_4\)</span> = .01 (2.39)</li>
+</ul>
+<p><em><strong>Mediated pathways</strong></em></p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/_IMG67.png" style="display: block; margin: auto;" /></p>
+<ol style="list-style-type: decimal">
+<li><strong>Time</strong> –<span class="math inline">\(a_{11}\)</span> (i.e., <span class="math inline">\(a_{1(BT)}\)</span>) –&gt; <strong>Echelle_dev</strong> –<span class="math inline">\(b_1\)</span>–&gt; <strong>YBOCS</strong></li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG76.png" style="display: block; margin: auto;" /></p>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>Time</strong> –<span class="math inline">\(a_{12}\)</span> (i.e., <span class="math inline">\(a_{1(CT)}\)</span>) –&gt; <strong>Echelle_dev</strong> –<span class="math inline">\(b_1\)</span>–&gt; <strong>YBOCS</strong></li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG77.png" style="display: block; margin: auto;" /></p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG73_.png" style="display: block; margin: auto;" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li><strong>Treatment x Time</strong> –<span class="math inline">\(a_{2}\)</span> –&gt; <strong>Echelle_dev</strong> –<span class="math inline">\(b_1\)</span>–&gt; <strong>YBOCS</strong></li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG78.png" style="display: block; margin: auto;" /></p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG74_.png" style="display: block; margin: auto;" /></p>
+<ol start="4" style="list-style-type: decimal">
+<li><strong>Treatment</strong> –<span class="math inline">\(a_{3}\)</span> –&gt; <strong>Echelle_dev</strong> –<span class="math inline">\(b_1\)</span>–&gt; <strong>YBOCS</strong></li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG79.png" style="display: block; margin: auto;" /></p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG75_.png" style="display: block; margin: auto;" /></p>
+<ol start="5" style="list-style-type: decimal">
+<li><strong>Treatment</strong> –<span class="math inline">\(a_{4}\)</span> –&gt; <strong>Echelle_dev</strong> –<span class="math inline">\(b_2\)</span>–&gt; <strong>YBOCS</strong></li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG80.png" style="display: block; margin: auto;" /></p>
 </div>
-<div id="homework-11---1026" class="section level2 hasAnchor" number="10.12">
-<h2><span class="header-section-number">10.12</span> Homework 11 - 10/26<a href="longitudinal-mediation-analysis.html#homework-11---1026" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Use the attached OCD data file (the same data that we have been looking at all semester!) to do a mediation analysis with echelle, avoidance, and BDI as disaggregated mediators. For avoidance, use zavoidln. For BDI, use zbdiln. For Echelle, use Echelle. For time, use LN of time. Use Unstructured covariance matrix for analyses with YBOCS as the DV. Use Ar(1) heterogeneous for analyses with deviations as the DV. Use <a href="https://amplab.shinyapps.io/MEDCI/">RMediation</a> to test the significance of all mediated pathways from treatment to YBOCS through each deviation variable.</p>
+<div id="cross-lag-mediation" class="section level2 hasAnchor" number="10.11">
+<h2><span class="header-section-number">10.11</span> Cross Lag Mediation<a href="longitudinal-mediation-analysis.html#cross-lag-mediation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Controlling for other mediators can help you establish causality in your mediation analysis, but the relation between the mediator and outcome could still be due to the outcome causing the mediator rather than the mediator causing the outcome (reverse mediation).</li>
+<li>To eliminate this possibility, we do cross lag mediation, in which we have the outcome at time “t” being predicted by the mediator at time “t-1” (and by the outcome at time “t-1”).</li>
+<li>To do this, we need to “shift” the values of the outcome up 1 line in our MLM data file. This is done in the Transform dropdown menu, selecting “create a time series”. You create a time series for the outcome using a “lead” of “order” 1.</li>
+<li>Note that the last asmt for each subject now has the outcome at the first asmt of the next subject on its line. Thus, when doing your MLM analyses, you have to select cases such that you do not include the last asmt for each subject in the data analysis.</li>
+<li>If your data set does not have the same number of assessments for every subject, it is also a good idea to form a “lead” variable for subject number, and use “select cases” also to make sure that “subject=subject_lead1”.</li>
+<li>When predicting outcome at t+1, you also have to create your time variable for t+1 to reflect the correct timepoints, so do lead for your time variable also.</li>
+</ul>
+<div id="cross-lag-mediation-details" class="section level3 hasAnchor" number="10.11.1">
+<h3><span class="header-section-number">10.11.1</span> Cross Lag Mediation Details<a href="longitudinal-mediation-analysis.html#cross-lag-mediation-details" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Since cross lags involve variables at time t and time t+1, you always lose the last data point (last asmt) of predictors since there is no outcome at t+1 for the last asmt. Therefore, in the analyses predicting outcome in the cross lag analysis, you only have k-1 timepoints, if k is the number of asmts. Thus, when doing the actual cross lag analysis, you have to select asmts NOT to include the last asmt. This can be accomplished by technique 3 below.</li>
+<li>You need to “lead” the outcome variable (using “create a time series” under “compute” menu) so that you have time t variables predicting time t+1 outcome.</li>
+<li>Also, you need to “lead” the subject variable and select only cases where ID=ID_lead1.</li>
+<li>Finally, you need to “lead” the “time” variable (just like you “lead” the outcome and ID) for the cross lag analysis predicting the outcome (e.g., YBOCS) so that the value of time corresponds to the asmt of the DV which is the “lead” version of the outcome variable (see 2 above). In these analyses, you need to select only the cases where ID=ID_lead1.</li>
+<li>When calculating the “a” paths and the “c” paths, the time variable already corresponds to the asmts of the mediators and outcome since the a and c paths do not predict “lead” (next session) outcomes, so you use the existing time variable as it is (or, if it was transformed, use the existing transformed variable). Use the full sample (do not use the “select cases; use”all cases”).</li>
+<li>Mean and deviation scores for mediators should be calculated on the full sample.</li>
+<li>For calculating the “a” paths and “c” paths, you use all timepoints since more timepoints give you better estimates of the path coefficients (i.e., you do not select cases where ID=ID_lead1).</li>
+</ul>
 </div>
-<div id="homework-12---1031" class="section level2 hasAnchor" number="10.13">
-<h2><span class="header-section-number">10.13</span> Homework 12 - 10/31<a href="longitudinal-mediation-analysis.html#homework-12---1031" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="homework-11---1031" class="section level2 hasAnchor" number="10.12">
+<h2><span class="header-section-number">10.12</span> Homework 11 - 10/31<a href="longitudinal-mediation-analysis.html#homework-11---1031" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Use the attached OCD data file (the same data that we have been looking at all semester!) to do a CROSS LAG multimediator analysis, using zavoidln and zBDIln as the mediators. For time, use LN of time. Use Unstructured covariance matrix for analyses with YBOCS as the DV. Use Ar(1) heterogeneous for analyses with deviations as the DV. You don’t need to test for mediation using <a href="https://amplab.shinyapps.io/MEDCI/">RMediation</a> since we have done that many times already.</p>
+<pre><code>AGGREGATE 
+  /OUTFILE=* MODE=ADDVARIABLES 
+  /BREAK=Subject# 
+  /Zavoidln_mean=MEAN(Zavoidln) 
+  /ZBDIln_mean=MEAN(ZBDIln) 
+  /YBOCS_mean=MEAN(YBOCS). 
+ 
+COMPUTE zbdiln_dev=ZBDIln - ZBDIln_mean. 
+EXECUTE. 
+ 
+COMPUTE zavoidln_dev=Zavoidln - Zavoidln_mean. 
+EXECUTE. 
+ 
+COMPUTE YBOCS_dev=YBOCS - YBOCS_mean. 
+EXECUTE. 
+ 
+COMPUTE lntimec1.61=LN(TIME+1)-1.61. 
+EXECUTE. 
+ 
+CREATE 
+  /lntime_lead1=LEAD(lntimec1.61 1)/YBOCS_lead1=LEAD(YBOCS 1).
+  
+IF  (TIME &lt; 4) lntimec1.61miss_lead1=lntime_lead1. 
+EXECUTE. 
+ 
+MIXED zavoidln_dev WITH lntimec1.61 BT0 
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE) 
+  /FIXED=lntimec1.61 BT0 lntimec1.61*BT0 | SSTYPE(3) 
+  /METHOD=REML 
+  /PRINT=SOLUTION TESTCOV 
+  /REPEATED=TIME | SUBJECT(Subject#) COVTYPE(ARH1)</code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG82.png" style="display: block; margin: auto;" /></p>
+<pre><code>MIXED zbdiln_dev WITH lntimec1.61 BT0 
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE) 
+  /FIXED=lntimec1.61 BT0 lntimec1.61*BT0 | SSTYPE(3) 
+  /METHOD=REML 
+  /PRINT=SOLUTION TESTCOV 
+  /REPEATED=TIME | SUBJECT(Subject#) COVTYPE(ARH1).</code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG83.png" style="display: block; margin: auto;" /></p>
+<pre><code>USE ALL. 
+COMPUTE filter_$=(TIME=0). 
+VARIABLE LABELS filter_$ &#39;TIME=0 (FILTER)&#39;. 
+VALUE LABELS filter_$ 0 &#39;Not Selected&#39; 1 &#39;Selected&#39;. 
+FORMATS filter_$ (f1.0). 
+FILTER BY filter_$. 
+EXECUTE. 
+ 
+FILTER OFF. 
+USE ALL. 
+EXECUTE. 
+ 
+REGRESSION 
+  /SELECT=TIME EQ 0 
+  /MISSING LISTWISE 
+  /STATISTICS COEFF OUTS R ANOVA 
+  /CRITERIA=PIN(.05) POUT(.10) 
+  /NOORIGIN 
+  /DEPENDENT ZBDIln_mean 
+  /METHOD=ENTER BT0.</code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG84.png" style="display: block; margin: auto;" /></p>
+<p><code>BT0</code>: Holding all else constant, the effect of condition on zbdiln_mean (mean level of depression) is not significant.</p>
+<pre><code>REGRESSION 
+  /SELECT=TIME EQ 0 
+  /MISSING LISTWISE 
+  /STATISTICS COEFF OUTS R ANOVA 
+  /CRITERIA=PIN(.05) POUT(.10) 
+  /NOORIGIN 
+  /DEPENDENT Zavoidln_mean 
+  /METHOD=ENTER BT0.</code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG85.png" style="display: block; margin: auto;" /></p>
+<p><code>BT0</code>: Holding all else constant, the effect of condition on zavoidln_mean (mean level of avoidance) is significant.</p>
+<pre><code>MIXED YBOCS_lead1 WITH zavoidln_dev zbdiln_dev lntimec1.61miss_lead1 ZBDIln_mean Zavoidln_mean 
+    YBOCS_dev YBOCS_mean BT0 
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE) 
+  /FIXED=zavoidln_dev zbdiln_dev lntimec1.61miss_lead1 ZBDIln_mean Zavoidln_mean YBOCS_dev 
+    YBOCS_mean BT0 lntimec1.61miss_lead1*BT0 | SSTYPE(3) 
+  /METHOD=REML 
+  /PRINT=SOLUTION TESTCOV 
+  /REPEATED=TIME | SUBJECT(Subject#) COVTYPE(UN).</code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG86.png" style="display: block; margin: auto;" /></p>
+<ul>
+<li><code>lntime_lead</code>: The slope of decrease in YBOCS for participants in the BT condition is significant.</li>
+<li><code>condition</code>: The difference of YBOCS between the two conditions (BT vs. CT) at the last assessment is not significant.</li>
+<li><code>lntime_lead*condition</code>: The change in YBOCS is not significantly different between conditions at the last assessment.</li>
+<li><code>zavoidln_mean</code>: The effect of mean level of avoidance on YBOCS score is not significant.</li>
+<li><code>zavoidln_dev</code>: When individuals have higher than average level of avoidance, they tend to have higher YBOCS scores.</li>
+<li><code>zbdiln_mean</code>: The effect of mean level of depression on YBOCS score is not significant.</li>
+<li><code>zbdiln_dev</code>: Individuals with different degrees of deviations from the average in terms of their average BDI score do not significantly differ in their YBOCS scores.</li>
+</ul>
 
 </div>
 </div>
