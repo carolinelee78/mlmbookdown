@@ -602,6 +602,54 @@ REGRESSION
 <div id="homework-11.5" class="section level2 hasAnchor" number="10.13">
 <h2><span class="header-section-number">10.13</span> Homework 11.5<a href="longitudinal-mediation-analysis.html#homework-11.5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>IN the attached data set, we have 2 treatment conditions, PAT (coded PAT0=0) and NAT (coded PAT0=1). There are 18 asmts (index=0 to 17). Center time at index=17. The DV is PANAS_NEG. We think changes in PANAS_POS causes changes in PANAS_NEG. Include PAT0, Index, and PAT0 x index in your model.</p>
+<pre><code>*Creating mean and deviation variables for mediator and outcome.
+
+AGGREGATE
+  /OUTFILE=* MODE=ADDVARIABLES
+  /BREAK=ID
+  /PANASP_mean=MEAN(PANAS_POS) 
+  /PANASN_mean=MEAN(PANAS_NEG).
+
+COMPUTE PANASP_dev=PANAS_POS - PANASP_mean.
+EXECUTE.
+
+COMPUTE PANASN_dev=PANAS_NEG - PANASN_mean.
+EXECUTE.
+
+*Centering time. 
+
+COMPUTE Indexc17=Index - 17.
+EXECUTE.
+
+*Creating lead variable for outcome, time, and ID. 
+
+CREATE
+    /PANASN_LEAD1 = LEAD(PANAS_NEG 1)/ID_LEAD1=LEAD(ID 1)/Indexc17_LEAD1=LEAD(Indexc17 1).
+
+*Selecting cases where ID = IDLEAD1 before running B and C&#39; paths. 
+
+MIXED PANASN_LEAD1 WITH Indexc17_LEAD1 PAT0 PANASP_dev PANASP_mean PANASN_dev PANASN_mean
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0, ABSOLUTE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0.000001, ABSOLUTE)    
+  /FIXED=Indexc17_LEAD1 PAT0 Indexc17_LEAD1*PAT0 PANASP_dev PANASP_mean PANASN_dev PANASN_mean | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /REPEATED=TIME | SUBJECT(Subject#) COVTYPE(UN). 
+
+* Turning off filter. 
+
+FILTER OFF.
+USE ALL.
+EXECUTE.
+
+MIXED PANASP_dev WITH Indexc17 PAT0 
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0, ABSOLUTE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0.000001, ABSOLUTE)    
+  /FIXED=Indexc17 PAT0 Indexc17*PAT0 | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /REPEATED=Index | SUBJECT(ID) COVTYPE(ARH1). </code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG_87.png" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>

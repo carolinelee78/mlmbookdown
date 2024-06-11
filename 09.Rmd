@@ -527,10 +527,17 @@ MIXED PANASP_dev WITH Indexc17 PAT0
   /METHOD=ML
   /PRINT=SOLUTION TESTCOV
   /REPEATED=Index | SUBJECT(ID) COVTYPE(ARH1). 
+  
+REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS CI(95) R ANOVA CHANGE
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN 
+  /DEPENDENT PANASP_mean 
+  /METHOD=ENTER PAT0 Indexc17 Indexc17*PAT0.
+
 ```
 
-```{r, echo = FALSE, fig.align='center'}
-knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG_87.png") 
-```
+ 
 
 
