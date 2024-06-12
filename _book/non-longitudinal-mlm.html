@@ -194,6 +194,7 @@
 <li class="chapter" data-level="12.1" data-path="non-longitudinal-mlm.html"><a href="non-longitudinal-mlm.html#what-is-non-longitudinal-mlm"><i class="fa fa-check"></i><b>12.1</b> What is Non-Longitudinal MLM?</a></li>
 <li class="chapter" data-level="12.2" data-path="non-longitudinal-mlm.html"><a href="non-longitudinal-mlm.html#covariances"><i class="fa fa-check"></i><b>12.2</b> Covariances</a></li>
 <li class="chapter" data-level="12.3" data-path="non-longitudinal-mlm.html"><a href="non-longitudinal-mlm.html#homework-13---119"><i class="fa fa-check"></i><b>12.3</b> Homework 13 - 11/9</a></li>
+<li class="chapter" data-level="12.4" data-path="non-longitudinal-mlm.html"><a href="non-longitudinal-mlm.html#homework-14---1114"><i class="fa fa-check"></i><b>12.4</b> Homework 14 - 11/14</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html"><i class="fa fa-check"></i><b>13</b> Multivariate MLM (MMLM)</a>
 <ul>
@@ -201,9 +202,8 @@
 <li class="chapter" data-level="13.2" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#more-interpretation-of-mmlm"><i class="fa fa-check"></i><b>13.2</b> More Interpretation of MMLM</a></li>
 <li class="chapter" data-level="13.3" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#how-to-execute-mmlm-in-spss"><i class="fa fa-check"></i><b>13.3</b> How to Execute MMLM in SPSS</a></li>
 <li class="chapter" data-level="13.4" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#interpretation-of-mmlm"><i class="fa fa-check"></i><b>13.4</b> Interpretation of MMLM</a></li>
-<li class="chapter" data-level="13.5" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#homework-14---1114"><i class="fa fa-check"></i><b>13.5</b> Homework 14 - 11/14</a></li>
-<li class="chapter" data-level="13.6" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#homework-15---1114"><i class="fa fa-check"></i><b>13.6</b> Homework 15 - 11/14</a></li>
-<li class="chapter" data-level="13.7" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#homework-16---1121"><i class="fa fa-check"></i><b>13.7</b> Homework 16 - 11/21</a></li>
+<li class="chapter" data-level="13.5" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#homework-15---1116"><i class="fa fa-check"></i><b>13.5</b> Homework 15 - 11/16</a></li>
+<li class="chapter" data-level="13.6" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#homework-16---1121"><i class="fa fa-check"></i><b>13.6</b> Homework 16 - 11/21</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -273,6 +273,53 @@ MIXED g3sprng_m WITH male0 public0 pcnt_flu povbelow0
 <li>(1,1): Not significant variability between schools in their math grade scores after accounting for sex, public, percent free lunch, and poverty.</li>
 <li>(2,1): There is not significant variability regarding the deviation between the average slope/intercept and the individual slopes/intercepts for math scores after accounting for poverty status. People with higher intercepts (math scores) have lower relationships between schools that have higher levels of math scores. In those schools, the relationship between poverty and math scores is lower.</li>
 <li>(2,2): There is not significant variability in the relationship between poverty and math scores between schools. If positive and significant, on average there’s a positive relationship between poverty and math scores.</li>
+</ul>
+</div>
+<div id="homework-14---1114" class="section level2 hasAnchor" number="12.4">
+<h2><span class="header-section-number">12.4</span> Homework 14 - 11/14<a href="non-longitudinal-mlm.html#homework-14---1114" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In the attached file, high school students are given an intervention to increase their bystander behavior to intervene when witnessing situations that might lead to sexual abuse in dating/hanging out. Then, 2 months later, their bystander behavior is measured over the last 2 months since the intervention (BBS4itemRECODED). Those getting the intervention are in takecare0=0, and those receiving the placebo are in takecare0=1. They are male (male0=0) or female(male0=1). We also measured baseline bystander behavior, which should be used as a covariate (BBS4itemRECODED_first). We expect a TakeCARE x male0 interaction. The student were given the intervention in their different groups and scores are correlated within groups. So group# is our grouping variable. Use baseline BBS (BBS4itemrecoded_first) only as a covariate, not as a repeated measure. So this is a non-longitudinal MLM with BBS4itemrecoded as the DV. What effects are significant? How do you interpret them? Which predictors can have random effects? Include all the random effects that you can.</p>
+<pre><code>* Did not converge 
+
+MIXED BBS4itemRECODED WITH BBS4itemRECODED_first takecare0 male0
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=BBS4itemRECODED_first male0 takecare0 male0*takecare0 | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT male0 BBS4itemRECODED_first | SUBJECT(Group#) COVTYPE(UN).
+  
+* Did not converge 
+
+MIXED BBS4itemRECODED WITH BBS4itemRECODED_first takecare0 male0
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=BBS4itemRECODED_first male0 takecare0 male0*takecare0 | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT male0 | SUBJECT(Group#) COVTYPE(UN).
+  
+* Converged! 
+
+MIXED BBS4itemRECODED WITH BBS4itemRECODED_first takecare0 male0 
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(1000) MXSTEP(100) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE) 
+  /FIXED=BBS4itemRECODED_first male0 takecare0 male0*takecare0 | SSTYPE(3) 
+  /METHOD=ML 
+  /PRINT=SOLUTION TESTCOV 
+  /RANDOM=INTERCEPT | SUBJECT(Group#) COVTYPE(UN).</code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG95.png" style="display: block; margin: auto;" /></p>
+<ul>
+<li><code>BBS4itemRECODED_first</code>: Higher baseline bystander behavior scores is related to higher bystander behavior scores after intervention.</li>
+<li><code>male0</code>: Females who are in the intervention group with zero baseline bystander behavior scores do not have significantly different baseline bystander behavior scores.</li>
+<li><code>takecare0</code>: Males who are in the placebo group with zero baseline bystander behavior scores have significantly lower baseline bystander behavior scores. The people in the placebo group have less BBS.</li>
+<li><code>male0*takecare0</code>: Bystander behavior scores are significantly dependent on the placebo/intervention group and sex combination. The effect of takecare on bystander behavior at 2 months is affected by sex.</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG96.png" style="display: block; margin: auto;" /></p>
+<ul>
+<li>(1,1): Not significant variability between groups in their bystander behavior scores after accounting for sex, placebo/intervention group, and baseline bystander behavior scores.</li>
 </ul>
 
 </div>
