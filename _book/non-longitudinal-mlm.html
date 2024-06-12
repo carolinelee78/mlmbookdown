@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 11 Generalized Linear Mixed Models | MLM Study Guide for Caroline, by Caroline</title>
-  <meta name="description" content="Chapter 11 Generalized Linear Mixed Models | MLM Study Guide for Caroline, by Caroline" />
+  <title>Chapter 12 Non-Longitudinal MLM | MLM Study Guide for Caroline, by Caroline</title>
+  <meta name="description" content="Chapter 12 Non-Longitudinal MLM | MLM Study Guide for Caroline, by Caroline" />
   <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 11 Generalized Linear Mixed Models | MLM Study Guide for Caroline, by Caroline" />
+  <meta property="og:title" content="Chapter 12 Non-Longitudinal MLM | MLM Study Guide for Caroline, by Caroline" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 11 Generalized Linear Mixed Models | MLM Study Guide for Caroline, by Caroline" />
+  <meta name="twitter:title" content="Chapter 12 Non-Longitudinal MLM | MLM Study Guide for Caroline, by Caroline" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="longitudinal-mediation-analysis.html"/>
-
+<link rel="prev" href="generalized-linear-mixed-models.html"/>
+<link rel="next" href="multivariate-mlm-mmlm.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -189,6 +189,22 @@
 <li class="chapter" data-level="11.7" data-path="generalized-linear-mixed-models.html"><a href="generalized-linear-mixed-models.html#getting-the-right-look-for-your-output"><i class="fa fa-check"></i><b>11.7</b> Getting the right “look” for your output</a></li>
 <li class="chapter" data-level="11.8" data-path="generalized-linear-mixed-models.html"><a href="generalized-linear-mixed-models.html#homework-12---112"><i class="fa fa-check"></i><b>11.8</b> Homework 12 - 11/2</a></li>
 </ul></li>
+<li class="chapter" data-level="12" data-path="non-longitudinal-mlm.html"><a href="non-longitudinal-mlm.html"><i class="fa fa-check"></i><b>12</b> Non-Longitudinal MLM</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="non-longitudinal-mlm.html"><a href="non-longitudinal-mlm.html#what-is-non-longitudinal-mlm"><i class="fa fa-check"></i><b>12.1</b> What is Non-Longitudinal MLM?</a></li>
+<li class="chapter" data-level="12.2" data-path="non-longitudinal-mlm.html"><a href="non-longitudinal-mlm.html#covariances"><i class="fa fa-check"></i><b>12.2</b> Covariances</a></li>
+<li class="chapter" data-level="12.3" data-path="non-longitudinal-mlm.html"><a href="non-longitudinal-mlm.html#homework-13---119"><i class="fa fa-check"></i><b>12.3</b> Homework 13 - 11/9</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html"><i class="fa fa-check"></i><b>13</b> Multivariate MLM (MMLM)</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#preparing-your-data-for-mmlm"><i class="fa fa-check"></i><b>13.1</b> Preparing Your Data for MMLM</a></li>
+<li class="chapter" data-level="13.2" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#more-interpretation-of-mmlm"><i class="fa fa-check"></i><b>13.2</b> More Interpretation of MMLM</a></li>
+<li class="chapter" data-level="13.3" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#how-to-execute-mmlm-in-spss"><i class="fa fa-check"></i><b>13.3</b> How to Execute MMLM in SPSS</a></li>
+<li class="chapter" data-level="13.4" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#interpretation-of-mmlm"><i class="fa fa-check"></i><b>13.4</b> Interpretation of MMLM</a></li>
+<li class="chapter" data-level="13.5" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#homework-14---1114"><i class="fa fa-check"></i><b>13.5</b> Homework 14 - 11/14</a></li>
+<li class="chapter" data-level="13.6" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#homework-15---1114"><i class="fa fa-check"></i><b>13.6</b> Homework 15 - 11/14</a></li>
+<li class="chapter" data-level="13.7" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#homework-16---1121"><i class="fa fa-check"></i><b>13.7</b> Homework 16 - 11/21</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -209,106 +225,55 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="generalized-linear-mixed-models" class="section level1 hasAnchor" number="11">
-<h1><span class="header-section-number">Chapter 11</span> Generalized Linear Mixed Models<a href="generalized-linear-mixed-models.html#generalized-linear-mixed-models" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Generalized Linear Mixed Models (GLMMs) are used when the DV is not normally distributed. GLMM is MLM with non-normally distributed DVs. They are most often used for DVs that are dichotomous or count variables, but also can be used for skewed DVs or for ordinal data.</p>
-<div id="how-to-do-glmm-in-spss" class="section level2 hasAnchor" number="11.1">
-<h2><span class="header-section-number">11.1</span> How to do GLMM in SPSS<a href="generalized-linear-mixed-models.html#how-to-do-glmm-in-spss" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="non-longitudinal-mlm" class="section level1 hasAnchor" number="12">
+<h1><span class="header-section-number">Chapter 12</span> Non-Longitudinal MLM<a href="non-longitudinal-mlm.html#non-longitudinal-mlm" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="what-is-non-longitudinal-mlm" class="section level2 hasAnchor" number="12.1">
+<h2><span class="header-section-number">12.1</span> What is Non-Longitudinal MLM?<a href="non-longitudinal-mlm.html#what-is-non-longitudinal-mlm" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li>GLMM is performed using the mixed models dropdown menu, selecting “Generalized linear mixed models”</li>
-<li>The first pop-up box defines the data organization</li>
-<li>Identify the subjects variable and drag it over under the “Subjects” box and then drop it. Note that the variable must be defined as a “nominal” variable in the dataset.</li>
-<li>Then drag and drop your variable that indexes the repeated data into the “repeated” column (typically “index1”).</li>
-<li>You can specify your error covariance matrix by clicking on the “more” arrow. The default is diagonal. Often, GLMM will not converge with more complex covariance matrices, and sometimes you need to specify scaled identity to get it to converge.</li>
+<li>Mixed effects models like MLM are useful for any type of correlated data, not just longitudinal data. - Examples include student test scores within classrooms and psyc test scores for participants participating in an experiment as a group.</li>
+<li>In these cases, the basic assumption of independence of the scores is violated, and traditional methods for estimating variances and errors are biased (usually biased downward) which means that the significance tests are biased and have increased type 1 error.</li>
+<li>So we use MLM to account for the correlation of the data among participants whose scores might be correlated because they are in some way “grouped” together.</li>
 </ul>
 </div>
-<div id="specifying-the-target-your-dv" class="section level2 hasAnchor" number="11.2">
-<h2><span class="header-section-number">11.2</span> Specifying the Target (Your DV)<a href="generalized-linear-mixed-models.html#specifying-the-target-your-dv" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="covariances" class="section level2 hasAnchor" number="12.2">
+<h2><span class="header-section-number">12.2</span> Covariances<a href="non-longitudinal-mlm.html#covariances" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li>If it is dichotomous, you can click on the “more” arrow and specify that 0 is your reference category. Otherwise, 1 will be your reference category, which will mess up all your interpretations.</li>
-<li>Underneath that you will need to specify the distribution of the target and the linking function.
-<ul>
-<li>Specify binary logistic for dichotomous outcomes (the logistic link function is LN(p/[1-p]), where p is he probability of a 1 on the outcome).</li>
-<li>Specify either loglinear (Poisson with a log link) or negative binomial with a log link for count outcomes</li>
-<li>Gamma regression is for positively skewed DVs</li>
-<li>Or you can do a regular linear mixed model if you want.</li>
-</ul></li>
+<li>The level 2 grouping variable can be a grouping like classroom, or family, or treatment cohort, etc.</li>
+<li>In this case, people are nested within the grouping variable, as opposed to repeated measures being nested within groups.</li>
+<li>In this case, there are no “repeated” measures, so nothing goes into the “repeated” box in SPSS</li>
+<li>Thus, scaled identity becomes the covariance matrix since the different measures within the group (like classroom) will not be correlated in a specific way</li>
+<li>Only level 1 variables have a random effect because only level 1 variables can vary between individuals. These random effects are the difference between an individual’s intercept or slope, and the average intercept and slope.</li>
 </ul>
 </div>
-<div id="converting-back-to-original-scale" class="section level2 hasAnchor" number="11.3">
-<h2><span class="header-section-number">11.3</span> Converting Back to Original Scale<a href="generalized-linear-mixed-models.html#converting-back-to-original-scale" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li>Remember, most GLMMs use a linking function (except the Linear model, which is the same as MLM)</li>
-<li>Thus, the outcome that is predicted has to be converted back into the original data scale (i.e., use EXP to reverse the log link back into the original scale).</li>
-<li>To convert the logistic link function back to reflect the probability use this transformation:
-<ul>
-<li>Probability (DV) = exp(x)/(1+exp(x))</li>
-</ul></li>
-</ul>
-</div>
-<div id="specifying-the-fixed-effects-in-spss" class="section level2 hasAnchor" number="11.4">
-<h2><span class="header-section-number">11.4</span> Specifying the Fixed Effects in SPSS<a href="generalized-linear-mixed-models.html#specifying-the-fixed-effects-in-spss" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li>Click on “Fixed Effects” in the left column.</li>
-<li>Adding fixed effects is accomplished by dragging and dropping your effects into the appropriate column.</li>
-<li>For main effects, drag over the main effect into the “main” column.</li>
-<li>For 2 way interactions, highlight the 2 variables in the interaction (using “control click”) and drag into the 2-way column, etc.</li>
-<li>Note that SPSS will treat your variables according to how they are specified in your data file. So, if a variable is specified as “nominal” then it will automatically treat it as a categorical variable and dummy code ALL the levels of the variable, with the highest level being the reference group.</li>
-<li>Thus, unless you specifically WANT a variable to be regarded as a “factor” (categorical variable), be sure that it is coded as a “scale” in the spss file.</li>
-</ul>
-</div>
-<div id="random-effects" class="section level2 hasAnchor" number="11.5">
-<h2><span class="header-section-number">11.5</span> Random Effects<a href="generalized-linear-mixed-models.html#random-effects" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li>To add random effects, click on “Random Effects” in the left column and then click on “add block” near the bottom.</li>
-<li>In the pop up box, click on “include intercept” to add an RE for the intercept. Then click on the drop down menu “subject combinations” and select your subjects variable.</li>
-<li>Finally click on the OK button at the bottom to add the random effect.</li>
-</ul>
-</div>
-<div id="other-options" class="section level2 hasAnchor" number="11.6">
-<h2><span class="header-section-number">11.6</span> Other Options<a href="generalized-linear-mixed-models.html#other-options" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li>For Robust Estimations, you can then click on the “build Options” tab at the top of the pop-up to specify “use robust estimation…”.</li>
-<li>This option calculates “robust standard errors”, which are robust to violations of multivariate normality. This option does not change the regression coefficients at all, but changes the estimate of the standard errors of the regression coefficients.</li>
-<li>If you have categorical variables, and you want the means for those categorical variables, you can click on “Model options” and then click on the variables for which you want the means (as in an ANOVA). These means are in the original data scale, not the linking function scale.</li>
-<li>Hit “Run” (near the bottom of the pop-up) to run the analysis.</li>
-</ul>
-</div>
-<div id="getting-the-right-look-for-your-output" class="section level2 hasAnchor" number="11.7">
-<h2><span class="header-section-number">11.7</span> Getting the right “look” for your output<a href="generalized-linear-mixed-models.html#getting-the-right-look-for-your-output" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li>You may only get graphs in your output (no tables).</li>
-<li>To get to the tables you need to double click on the boxes that pop up in your output file to actually see the output.</li>
-<li>For coefficient rather than graphs, you need to find the little drop-down menu near the bottom of each pop-up and change it from “figure” to “table”.</li>
-<li>A better option is to change your output format under Edit, options, output, and then click on pivot tables.</li>
-</ul>
-</div>
-<div id="homework-12---112" class="section level2 hasAnchor" number="11.8">
-<h2><span class="header-section-number">11.8</span> Homework 12 - 11/2<a href="generalized-linear-mixed-models.html#homework-12---112" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The DV is severe sev_cold.final (number of severe cold symptoms) which is measured at 5 points during the fall semester, ending 10 days after finals. The IVs are lnfeNO1.1 (NO in the airways blocks pathogens from getting into the bloodstream, and it is measured at the beginning of the semester) and time (index1). Use a linear model of change over time. Include lnfeNO1.1, time (Centered at 5), and lnfeNO1.1 x time for your growth model. Do a Poisson GLMM regression (Poisson distribution, Log linking function), and graph the change over time for sev_cold for people with low (1SD below the mean) and High (1SD above the mean) levels of lnfeno1.1 for the RAW sev_cold.final data by centering lnfeNO1.1 at those particular values. (Convert from log(sev_cold.final) back to raw).</p>
-<pre><code>COMPUTE timec5=index1-5.
+<div id="homework-13---119" class="section level2 hasAnchor" number="12.3">
+<h2><span class="header-section-number">12.3</span> Homework 13 - 11/9<a href="non-longitudinal-mlm.html#homework-13---119" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In the complete school data file, predict grade 3 math scores (g3sprng_m) using child sex (male0), public vs private school (public0), percent of student in the school on free lunch (pcnt_flu), and poverty status of the individual student (poverty, coded 1=below poverty threshold, 2=at or above the poverty threshold). Also include the male0 x pcnt_flu interaction. Include a random effect for every level-1 variable (except male0). Interpret main effects, interaction, and random effects.</p>
+<pre><code>COMPUTE povbelow0=poverty-1.
 EXECUTE.
- 
-GENLINMIXED
-  /DATA_STRUCTURE SUBJECTS=pt REPEATED_MEASURES=Index1 COVARIANCE_TYPE=IDENTITY
-  /FIELDS TARGET=Sev_cold.final TRIALS=NONE OFFSET=NONE
-  /TARGET_OPTIONS DISTRIBUTION=POISSON LINK=LOG
-  /FIXED  EFFECTS=lnfeno1.1 timec5 lnfeno1.1*timec5 USE_INTERCEPT=TRUE
-  /RANDOM USE_INTERCEPT=TRUE SUBJECTS=pt COVARIANCE_TYPE=VARIANCE_COMPONENTS SOLUTION=FALSE
-  /BUILD_OPTIONS TARGET_CATEGORY_ORDER=ASCENDING INPUTS_CATEGORY_ORDER=ASCENDING
-    HCONVERGE=0.00000001(RELATIVE) MAX_ITERATIONS=100 CONFIDENCE_LEVEL=95 DF_METHOD=RESIDUAL COVB=MODEL
-    SCORING=0 SINGULAR=0.000000000001
-  /EMMEANS_OPTIONS SCALE=ORIGINAL PADJUST=LSD.
-  
-DESCRIPTIVES VARIABLES=lnfeno1.1
-  /STATISTICS=MEAN STDDEV MIN MAX KURTOSIS SKEWNESS.</code></pre>
-<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG91.png" style="display: block; margin: auto;" /></p>
+
+MIXED g3sprng_m WITH male0 public0 pcnt_flu povbelow0
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=male0 public0 pcnt_flu male0*pcnt_flu povbelow0 | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT povbelow0 | SUBJECT(schl_id) COVTYPE(UN).</code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG93.png" style="display: block; margin: auto;" /></p>
 <ul>
-<li><code>Infeno1.1</code>: At the last timepoint (10 days after the final), there is a significant negative association between NO and number of cold symptoms, where people with greater levels of NO in their airways reported a fewer number of cold symptoms.</li>
-<li><code>Index1c5</code>: There was no significant change in cold symptoms over time for those with no NO in their airways.</li>
-<li><code>Infeno1.1*Index1c5</code>: There was no significant interaction between NO levels and time, meaning changes in cold symptoms over time do not vary based on NO levels.</li>
+<li><code>Male0</code>: Female students who are in public schools with zero percent free lunches and living below the poverty line have significantly lower math scores.</li>
+<li><code>Public0</code>: Students in public schools do not have significantly different math scores than those in private schools on average.</li>
+<li><code>Pcnt_flu</code>: There is a significant decrease in math scores as the percent of free lunches for male students in public school who are below the poverty line increases.<br />
+</li>
+<li><code>Male0*pcnt_flu</code>: Math score is not significantly dependent on the combination of a student’s sex with their respective school’s percent of free lunches.</li>
+<li><code>Povbelow0</code>: On average across schools, students above the poverty line have significantly higher math scores.</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG92.png" style="display: block; margin: auto;" /></p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG94.png" style="display: block; margin: auto;" /></p>
+<ul>
+<li>(1,1): Not significant variability between schools in their math grade scores after accounting for sex, public, percent free lunch, and poverty.</li>
+<li>(2,1): There is not significant variability regarding the deviation between the average slope/intercept and the individual slopes/intercepts for math scores after accounting for poverty status. People with higher intercepts (math scores) have lower relationships between schools that have higher levels of math scores. In those schools, the relationship between poverty and math scores is lower.</li>
+<li>(2,2): There is not significant variability in the relationship between poverty and math scores between schools. If positive and significant, on average there’s a positive relationship between poverty and math scores.</li>
+</ul>
 
 </div>
 </div>
@@ -317,8 +282,8 @@ DESCRIPTIVES VARIABLES=lnfeno1.1
           </div>
         </div>
       </div>
-<a href="longitudinal-mediation-analysis.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="generalized-linear-mixed-models.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="multivariate-mlm-mmlm.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

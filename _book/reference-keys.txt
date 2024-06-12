@@ -83,3 +83,15 @@ homework-11---1026
 homework-12---1031
 homework-13---112
 homework-11.5
+non-longitudinal-mlm
+what-is-non-longitudinal-mlm
+covariances
+homework-13---119
+multivariate-mlm-mmlm
+preparing-your-data-for-mmlm
+more-interpretation-of-mmlm
+how-to-execute-mmlm-in-spss
+interpretation-of-mmlm
+homework-14---1114
+homework-15---1114
+homework-16---1121

@@ -12,8 +12,46 @@
 - In this case, people are nested within the grouping variable, as opposed to repeated measures being nested within groups.
 - In this case, there are no "repeated" measures, so nothing goes into the "repeated" box in SPSS
 - Thus, scaled identity becomes the covariance matrix since the different measures within the group (like classroom) will not be correlated in a specific way
+- Only level 1 variables have a random effect because only level 1 variables can vary between individuals. These random effects are the difference between an individual’s intercept or slope, and the average intercept and slope.
 
 ## Homework 13 - 11/9 
 
 In the complete school data file, predict grade 3 math scores (g3sprng_m) using child sex (male0), public vs private school (public0), percent of student in the school on free lunch (pcnt_flu), and poverty status of the individual student (poverty, coded 1=below poverty threshold, 2=at or above the poverty threshold). Also include the male0 x pcnt_flu interaction. Include a random effect for every level-1 variable (except male0). Interpret main effects, interaction, and random effects. 
+
+```
+COMPUTE povbelow0=poverty-1.
+EXECUTE.
+
+MIXED g3sprng_m WITH male0 public0 pcnt_flu povbelow0
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=male0 public0 pcnt_flu male0*pcnt_flu povbelow0 | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT povbelow0 | SUBJECT(schl_id) COVTYPE(UN).
+```
+
+```{r, echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG93.png") 
+```
+
+
+- `Male0`: Female students who are in public schools with zero percent free lunches and living below the poverty line have significantly lower math scores. 
+- `Public0`: Students in public schools do not have significantly different math scores than those in private schools on average.
+- `Pcnt_flu`: There is a significant decrease in math scores as the percent of free lunches for male students in public school who are below the poverty line increases.  
+- `Male0*pcnt_flu`: Math score is not significantly dependent on the combination of a student’s sex with their respective school’s percent of free lunches. 
+- `Povbelow0`: On average across schools, students above the poverty line have significantly higher math scores. 
+
+
+```{r, echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG94.png") 
+```
+
+- (1,1): Not significant variability between schools in their math grade scores after accounting for sex, public, percent free lunch, and poverty. 
+- (2,1): There is not significant variability regarding the deviation between the average slope/intercept and the individual slopes/intercepts for math scores after accounting for poverty status.  People with higher intercepts (math scores) have lower relationships between schools that have higher levels of math scores. In those schools, the relationship between poverty and math scores is lower.
+- (2,2): There is not significant variability in the relationship between poverty and math scores between schools. If positive and significant, on average there’s a positive relationship between poverty and math scores. 
+
+
+ 
 
