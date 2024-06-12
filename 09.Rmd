@@ -549,10 +549,10 @@ MIXED PANASP_dev WITH Indexc17 PAT0
 knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG89.png") 
 ```
 
-- `Indexc17`: The slope of increase in PANAS_NEG for participants in the PAT condition is significant.
+- `Indexc17`: The slope of increase in PANASP_dev for participants in the PAT condition is significant.
   * Interaction is significant!
-- `PAT0`: The difference between the two conditions in terms of PANAS_NEG is significant at the last assessment.  
-- `Indexc17*PAT0`: The change in PANAS_NEG over time is significantly different between conditions, such that the rate of decrease in PANAS_NEG in the NAT condition is faster than the rate of decrease in PANAS_NEG in the PAT condition.
+- `PAT0`: The difference between the two conditions in terms of PANASP_dev is significant at the last assessment.  
+- `Indexc17*PAT0`: The change in PANASP_dev over time is significantly different between conditions, such that the rate of decrease in PANASP_dev in the NAT condition is faster than the rate of decrease in PANASP_dev in the PAT condition.
 
 ```
 REGRESSION

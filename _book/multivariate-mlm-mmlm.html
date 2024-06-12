@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 13 Multivariate MLM (MMLM) | MLM Study Guide for Caroline, by Caroline</title>
+  <meta name="description" content="Chapter 13 Multivariate MLM (MMLM) | MLM Study Guide for Caroline, by Caroline" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 13 Multivariate MLM (MMLM) | MLM Study Guide for Caroline, by Caroline" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 13 Multivariate MLM (MMLM) | MLM Study Guide for Caroline, by Caroline" />
+  
+  
+  
+
+<meta name="author" content="For doing better, for remediation. Integrating David’s class materials and Hoffman’s (2015) Longitudinal Analysis textbook to learn MLM with both R and SPSS." />
+
+
+<meta name="date" content="2024-06-12" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="non-longitudinal-mlm.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">MLM Study Guide</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> First, why multilevel modeling?</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#disadvantages-of-ranova"><i class="fa fa-check"></i><b>1.1</b> Disadvantages of RANOVA</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#disadvantages-of-locf"><i class="fa fa-check"></i><b>1.2</b> Disadvantages of LOCF</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#disadvantages-of-complex-imputation-e.g.-multiple-imputation"><i class="fa fa-check"></i><b>1.3</b> Disadvantages of complex imputation (e.g., multiple imputation)</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#advantages-of-mlm"><i class="fa fa-check"></i><b>1.4</b> Advantages of MLM</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="what-is-mlm-used-for.html"><a href="what-is-mlm-used-for.html"><i class="fa fa-check"></i><b>2</b> What is MLM used for?</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="what-is-mlm-used-for.html"><a href="what-is-mlm-used-for.html#levels-of-analyses-in-mlm"><i class="fa fa-check"></i><b>2.1</b> Levels of analyses in MLM</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="what-is-mlm-used-for.html"><a href="what-is-mlm-used-for.html#level-1"><i class="fa fa-check"></i><b>2.1.1</b> Level 1</a></li>
+<li class="chapter" data-level="2.1.2" data-path="what-is-mlm-used-for.html"><a href="what-is-mlm-used-for.html#level-2"><i class="fa fa-check"></i><b>2.1.2</b> Level 2</a></li>
+<li class="chapter" data-level="2.1.3" data-path="what-is-mlm-used-for.html"><a href="what-is-mlm-used-for.html#summary"><i class="fa fa-check"></i><b>2.1.3</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="what-is-mlm-used-for.html"><a href="what-is-mlm-used-for.html#homework-1---0829"><i class="fa fa-check"></i><b>2.2</b> Homework 1 - 08/29</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html"><i class="fa fa-check"></i><b>3</b> Applying MLM to Longitudinal Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#overview"><i class="fa fa-check"></i><b>3.1</b> Overview</a></li>
+<li class="chapter" data-level="3.2" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#homework-2---0831"><i class="fa fa-check"></i><b>3.2</b> Homework 2 - 08/31</a></li>
+<li class="chapter" data-level="3.3" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#quadratic-growth-curve-models"><i class="fa fa-check"></i><b>3.3</b> Quadratic Growth Curve Models</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#meaning-of-the-linear-vs.-quadratic-terms"><i class="fa fa-check"></i><b>3.3.1</b> Meaning of the Linear vs. Quadratic Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#homework-3---0905"><i class="fa fa-check"></i><b>3.4</b> Homework 3 - 09/05</a></li>
+<li class="chapter" data-level="3.5" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#homework-3.5---0215"><i class="fa fa-check"></i><b>3.5</b> Homework 3.5 - 02/15</a></li>
+<li class="chapter" data-level="3.6" data-path="applying-mlm-to-longitudinal-data.html"><a href="applying-mlm-to-longitudinal-data.html#nested-models"><i class="fa fa-check"></i><b>3.6</b> Nested Models</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html"><i class="fa fa-check"></i><b>4</b> Treating Time More Flexibly</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html#ml-vs.-reml"><i class="fa fa-check"></i><b>4.1</b> ML vs. REML</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html#how-do-we-use-ml-methods-to-fit-a-multilevel-model-and-how-does-it-work"><i class="fa fa-check"></i><b>4.1.1</b> How do we use ML methods to fit a multilevel model, and how does it work?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html#aic-vs.-bic"><i class="fa fa-check"></i><b>4.2</b> AIC vs. BIC</a></li>
+<li class="chapter" data-level="4.3" data-path="treating-time-more-flexibly.html"><a href="treating-time-more-flexibly.html#degrees-of-freedom"><i class="fa fa-check"></i><b>4.3</b> Degrees of Freedom</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="non-linear-time.html"><a href="non-linear-time.html"><i class="fa fa-check"></i><b>5</b> Non-linear Time</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="non-linear-time.html"><a href="non-linear-time.html#when-quadratic-models-dont-fit-well"><i class="fa fa-check"></i><b>5.1</b> When Quadratic Models Don’t Fit Well</a></li>
+<li class="chapter" data-level="5.2" data-path="non-linear-time.html"><a href="non-linear-time.html#logarithmic-growth-curve-models"><i class="fa fa-check"></i><b>5.2</b> Logarithmic Growth Curve Models</a></li>
+<li class="chapter" data-level="5.3" data-path="non-linear-time.html"><a href="non-linear-time.html#hyperbolic-growth-curve-models"><i class="fa fa-check"></i><b>5.3</b> Hyperbolic Growth Curve Models</a></li>
+<li class="chapter" data-level="5.4" data-path="non-linear-time.html"><a href="non-linear-time.html#piecewise-growth-curve-models"><i class="fa fa-check"></i><b>5.4</b> Piecewise Growth Curve Models</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="non-linear-time.html"><a href="non-linear-time.html#how-to-code-piecewise-models---jump-or-no-jump"><i class="fa fa-check"></i><b>5.4.1</b> How to Code Piecewise Models - Jump or No Jump?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="non-linear-time.html"><a href="non-linear-time.html#further-notes-on-nonlinear-growth-curves"><i class="fa fa-check"></i><b>5.5</b> Further notes on nonlinear growth curves</a></li>
+<li class="chapter" data-level="5.6" data-path="non-linear-time.html"><a href="non-linear-time.html#homework-4---0912"><i class="fa fa-check"></i><b>5.6</b> Homework 4 - 09/12</a></li>
+<li class="chapter" data-level="5.7" data-path="non-linear-time.html"><a href="non-linear-time.html#homework-5---0914"><i class="fa fa-check"></i><b>5.7</b> Homework 5 - 09/14</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="specifying-the-error-covariance-matrix.html"><a href="specifying-the-error-covariance-matrix.html"><i class="fa fa-check"></i><b>6</b> Specifying the Error Covariance Matrix</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="specifying-the-error-covariance-matrix.html"><a href="specifying-the-error-covariance-matrix.html#why-care-about-error-covariance"><i class="fa fa-check"></i><b>6.1</b> Why care about error covariance?</a></li>
+<li class="chapter" data-level="6.2" data-path="specifying-the-error-covariance-matrix.html"><a href="specifying-the-error-covariance-matrix.html#incorrect-assumptions-about-error-covariance"><i class="fa fa-check"></i><b>6.2</b> Incorrect Assumptions About Error Covariance</a></li>
+<li class="chapter" data-level="6.3" data-path="specifying-the-error-covariance-matrix.html"><a href="specifying-the-error-covariance-matrix.html#random-effects-and-error-covariance"><i class="fa fa-check"></i><b>6.3</b> Random Effects and Error Covariance</a></li>
+<li class="chapter" data-level="6.4" data-path="specifying-the-error-covariance-matrix.html"><a href="specifying-the-error-covariance-matrix.html#covariance-matrices"><i class="fa fa-check"></i><b>6.4</b> Covariance Matrices</a></li>
+<li class="chapter" data-level="6.5" data-path="specifying-the-error-covariance-matrix.html"><a href="specifying-the-error-covariance-matrix.html#comparing-ecms-how-to-select-the-best-ecm"><i class="fa fa-check"></i><b>6.5</b> Comparing ECMs – How to select the best ECM</a></li>
+<li class="chapter" data-level="6.6" data-path="specifying-the-error-covariance-matrix.html"><a href="specifying-the-error-covariance-matrix.html#ecms-and-growth-curve-models"><i class="fa fa-check"></i><b>6.6</b> ECMs and Growth Curve Models</a></li>
+<li class="chapter" data-level="6.7" data-path="specifying-the-error-covariance-matrix.html"><a href="specifying-the-error-covariance-matrix.html#random-effects-and-ecms"><i class="fa fa-check"></i><b>6.7</b> Random Effects and ECMs</a></li>
+<li class="chapter" data-level="6.8" data-path="specifying-the-error-covariance-matrix.html"><a href="specifying-the-error-covariance-matrix.html#homework-6---0919"><i class="fa fa-check"></i><b>6.8</b> Homework 6 - 09/19</a></li>
+<li class="chapter" data-level="6.9" data-path="specifying-the-error-covariance-matrix.html"><a href="specifying-the-error-covariance-matrix.html#homework-7---0926"><i class="fa fa-check"></i><b>6.9</b> Homework 7 - 09/26</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="anova-a-non-growth-curve-growth-curve-model.html"><a href="anova-a-non-growth-curve-growth-curve-model.html"><i class="fa fa-check"></i><b>7</b> ANOVA: A non-growth curve growth curve model</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="anova-a-non-growth-curve-growth-curve-model.html"><a href="anova-a-non-growth-curve-growth-curve-model.html#anova-as-a-growth-curve-model"><i class="fa fa-check"></i><b>7.1</b> ANOVA as a Growth Curve Model</a></li>
+<li class="chapter" data-level="7.2" data-path="anova-a-non-growth-curve-growth-curve-model.html"><a href="anova-a-non-growth-curve-growth-curve-model.html#conducting-mlm-anova"><i class="fa fa-check"></i><b>7.2</b> Conducting MLM ANOVA</a></li>
+<li class="chapter" data-level="7.3" data-path="anova-a-non-growth-curve-growth-curve-model.html"><a href="anova-a-non-growth-curve-growth-curve-model.html#interpreting-mlm-anova-results"><i class="fa fa-check"></i><b>7.3</b> Interpreting MLM ANOVA Results</a></li>
+<li class="chapter" data-level="7.4" data-path="anova-a-non-growth-curve-growth-curve-model.html"><a href="anova-a-non-growth-curve-growth-curve-model.html#homework-8---103"><i class="fa fa-check"></i><b>7.4</b> Homework 8 - 10/3</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="exam-1.html"><a href="exam-1.html"><i class="fa fa-check"></i><b>8</b> Exam 1</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="exam-1.html"><a href="exam-1.html#question-1"><i class="fa fa-check"></i><b>8.1</b> Question 1</a></li>
+<li class="chapter" data-level="8.2" data-path="exam-1.html"><a href="exam-1.html#question-2"><i class="fa fa-check"></i><b>8.2</b> Question 2</a></li>
+<li class="chapter" data-level="8.3" data-path="exam-1.html"><a href="exam-1.html#bonus-question"><i class="fa fa-check"></i><b>8.3</b> Bonus Question</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="time-varying-predictors-tvps.html"><a href="time-varying-predictors-tvps.html"><i class="fa fa-check"></i><b>9</b> Time Varying Predictors (TVPs)</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="time-varying-predictors-tvps.html"><a href="time-varying-predictors-tvps.html#relation-between-two-variables-over-time"><i class="fa fa-check"></i><b>9.1</b> Relation Between Two Variables Over Time</a></li>
+<li class="chapter" data-level="9.2" data-path="time-varying-predictors-tvps.html"><a href="time-varying-predictors-tvps.html#more-about-tvps"><i class="fa fa-check"></i><b>9.2</b> More about TVPs</a></li>
+<li class="chapter" data-level="9.3" data-path="time-varying-predictors-tvps.html"><a href="time-varying-predictors-tvps.html#repeated-covariance-matrix-and-tvps"><i class="fa fa-check"></i><b>9.3</b> Repeated Covariance Matrix and TVPs</a></li>
+<li class="chapter" data-level="9.4" data-path="time-varying-predictors-tvps.html"><a href="time-varying-predictors-tvps.html#disaggregating-tvps"><i class="fa fa-check"></i><b>9.4</b> Disaggregating TVPs</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="longitudinal-mediation-analysis.html"><a href="longitudinal-mediation-analysis.html"><i class="fa fa-check"></i><b>10</b> Longitudinal Mediation Analysis</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="longitudinal-mediation-analysis.html"><a href="longitudinal-mediation-analysis.html#what-do-the-mlm-models-look-like-in-simple-mediation"><i class="fa fa-check"></i><b>10.1</b> What do the MLM models look like in simple mediation?</a></li>
+<li class="chapter" data-level="10.2" data-path="longitudinal-mediation-analysis.html"><a href="longitudinal-mediation-analysis.html#testing-for-significant-mediation"><i class="fa fa-check"></i><b>10.2</b> Testing for significant mediation</a></li>
+<li class="chapter" data-level="10.3" data-path="longitudinal-mediation-analysis.html"><a href="longitudinal-mediation-analysis.html#good-alternatives-for-testing-the-significance-of-ab"><i class="fa fa-check"></i><b>10.3</b> 2 good alternatives for testing the significance of a*b</a></li>
+<li class="chapter" data-level="10.4" data-path="longitudinal-mediation-analysis.html"><a href="longitudinal-mediation-analysis.html#multiple-ivs-in-longitudinal-mediation"><i class="fa fa-check"></i><b>10.4</b> Multiple IVs in Longitudinal Mediation</a></li>
+<li class="chapter" data-level="10.5" data-path="longitudinal-mediation-analysis.html"><a href="longitudinal-mediation-analysis.html#c-paths-and-a-paths"><i class="fa fa-check"></i><b>10.5</b> C Paths and A Paths</a></li>
+<li class="chapter" data-level="10.6" data-path="longitudinal-mediation-analysis.html"><a href="longitudinal-mediation-analysis.html#other-gcms"><i class="fa fa-check"></i><b>10.6</b> Other GCMs</a></li>
+<li class="chapter" data-level="10.7" data-path="longitudinal-mediation-analysis.html"><a href="longitudinal-mediation-analysis.html#disaggregating-the-mediator"><i class="fa fa-check"></i><b>10.7</b> Disaggregating the Mediator</a></li>
+<li class="chapter" data-level="10.8" data-path="longitudinal-mediation-analysis.html"><a href="longitudinal-mediation-analysis.html#multiple-mediators"><i class="fa fa-check"></i><b>10.8</b> Multiple Mediators</a></li>
+<li class="chapter" data-level="10.9" data-path="longitudinal-mediation-analysis.html"><a href="longitudinal-mediation-analysis.html#homework-9---1019"><i class="fa fa-check"></i><b>10.9</b> Homework 9 - 10/19</a></li>
+<li class="chapter" data-level="10.10" data-path="longitudinal-mediation-analysis.html"><a href="longitudinal-mediation-analysis.html#homework-10---1024"><i class="fa fa-check"></i><b>10.10</b> Homework 10 - 10/24</a></li>
+<li class="chapter" data-level="10.11" data-path="longitudinal-mediation-analysis.html"><a href="longitudinal-mediation-analysis.html#cross-lag-mediation"><i class="fa fa-check"></i><b>10.11</b> Cross Lag Mediation</a>
+<ul>
+<li class="chapter" data-level="10.11.1" data-path="longitudinal-mediation-analysis.html"><a href="longitudinal-mediation-analysis.html#cross-lag-mediation-details"><i class="fa fa-check"></i><b>10.11.1</b> Cross Lag Mediation Details</a></li>
+</ul></li>
+<li class="chapter" data-level="10.12" data-path="longitudinal-mediation-analysis.html"><a href="longitudinal-mediation-analysis.html#homework-11---1031"><i class="fa fa-check"></i><b>10.12</b> Homework 11 - 10/31</a></li>
+<li class="chapter" data-level="10.13" data-path="longitudinal-mediation-analysis.html"><a href="longitudinal-mediation-analysis.html#homework-11.5"><i class="fa fa-check"></i><b>10.13</b> Homework 11.5</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="generalized-linear-mixed-models.html"><a href="generalized-linear-mixed-models.html"><i class="fa fa-check"></i><b>11</b> Generalized Linear Mixed Models</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="generalized-linear-mixed-models.html"><a href="generalized-linear-mixed-models.html#how-to-do-glmm-in-spss"><i class="fa fa-check"></i><b>11.1</b> How to do GLMM in SPSS</a></li>
+<li class="chapter" data-level="11.2" data-path="generalized-linear-mixed-models.html"><a href="generalized-linear-mixed-models.html#specifying-the-target-your-dv"><i class="fa fa-check"></i><b>11.2</b> Specifying the Target (Your DV)</a></li>
+<li class="chapter" data-level="11.3" data-path="generalized-linear-mixed-models.html"><a href="generalized-linear-mixed-models.html#converting-back-to-original-scale"><i class="fa fa-check"></i><b>11.3</b> Converting Back to Original Scale</a></li>
+<li class="chapter" data-level="11.4" data-path="generalized-linear-mixed-models.html"><a href="generalized-linear-mixed-models.html#specifying-the-fixed-effects-in-spss"><i class="fa fa-check"></i><b>11.4</b> Specifying the Fixed Effects in SPSS</a></li>
+<li class="chapter" data-level="11.5" data-path="generalized-linear-mixed-models.html"><a href="generalized-linear-mixed-models.html#random-effects"><i class="fa fa-check"></i><b>11.5</b> Random Effects</a></li>
+<li class="chapter" data-level="11.6" data-path="generalized-linear-mixed-models.html"><a href="generalized-linear-mixed-models.html#other-options"><i class="fa fa-check"></i><b>11.6</b> Other Options</a></li>
+<li class="chapter" data-level="11.7" data-path="generalized-linear-mixed-models.html"><a href="generalized-linear-mixed-models.html#getting-the-right-look-for-your-output"><i class="fa fa-check"></i><b>11.7</b> Getting the right “look” for your output</a></li>
+<li class="chapter" data-level="11.8" data-path="generalized-linear-mixed-models.html"><a href="generalized-linear-mixed-models.html#homework-12---112"><i class="fa fa-check"></i><b>11.8</b> Homework 12 - 11/2</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="non-longitudinal-mlm.html"><a href="non-longitudinal-mlm.html"><i class="fa fa-check"></i><b>12</b> Non-Longitudinal MLM</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="non-longitudinal-mlm.html"><a href="non-longitudinal-mlm.html#what-is-non-longitudinal-mlm"><i class="fa fa-check"></i><b>12.1</b> What is Non-Longitudinal MLM?</a></li>
+<li class="chapter" data-level="12.2" data-path="non-longitudinal-mlm.html"><a href="non-longitudinal-mlm.html#covariances"><i class="fa fa-check"></i><b>12.2</b> Covariances</a></li>
+<li class="chapter" data-level="12.3" data-path="non-longitudinal-mlm.html"><a href="non-longitudinal-mlm.html#homework-13---119"><i class="fa fa-check"></i><b>12.3</b> Homework 13 - 11/9</a></li>
+<li class="chapter" data-level="12.4" data-path="non-longitudinal-mlm.html"><a href="non-longitudinal-mlm.html#homework-14---1114"><i class="fa fa-check"></i><b>12.4</b> Homework 14 - 11/14</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html"><i class="fa fa-check"></i><b>13</b> Multivariate MLM (MMLM)</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#preparing-your-data-for-mmlm"><i class="fa fa-check"></i><b>13.1</b> Preparing Your Data for MMLM</a></li>
+<li class="chapter" data-level="13.2" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#more-interpretation-of-mmlm"><i class="fa fa-check"></i><b>13.2</b> More Interpretation of MMLM</a></li>
+<li class="chapter" data-level="13.3" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#how-to-execute-mmlm-in-spss"><i class="fa fa-check"></i><b>13.3</b> How to Execute MMLM in SPSS</a></li>
+<li class="chapter" data-level="13.4" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#interpretation-of-mmlm"><i class="fa fa-check"></i><b>13.4</b> Interpretation of MMLM</a></li>
+<li class="chapter" data-level="13.5" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#homework-15---1116"><i class="fa fa-check"></i><b>13.5</b> Homework 15 - 11/16</a></li>
+<li class="chapter" data-level="13.6" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#homework-16---1121"><i class="fa fa-check"></i><b>13.6</b> Homework 16 - 11/21</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">MLM Study Guide for Caroline, by Caroline</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="multivariate-mlm-mmlm" class="section level1 hasAnchor" number="13">
+<h1><span class="header-section-number">Chapter 13</span> Multivariate MLM (MMLM)<a href="multivariate-mlm-mmlm.html#multivariate-mlm-mmlm" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<ul>
+<li>MMLM is used when you have multiple outcome measures that you do not want to combine into a single score. No correction for multiple tests is needed, therefore increasing power.</li>
+<li>Example of data for MMLM:
+<ul>
+<li>Example: Breathing training to treat asthma and anxiety/depressive symptoms in people with Asthma.</li>
+<li>RCT: Treatment group received breathing training treatment with biofeedback to lower pCO2 (CART). Placebo group received sham breathing training to simply slow respiration (PBO).</li>
+<li>Psychological DVs: HADS-A, ASI, HADS-D, and PANAS-N</li>
+<li>Assessment: baseline, posttreatment, 3MFU, 6MFU</li>
+</ul></li>
+</ul>
+<div id="preparing-your-data-for-mmlm" class="section level2 hasAnchor" number="13.1">
+<h2><span class="header-section-number">13.1</span> Preparing Your Data for MMLM<a href="multivariate-mlm-mmlm.html#preparing-your-data-for-mmlm" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Create a unique ID for each assessment at which the multiple DVs are assessed. This is often formed by computing a new ID variable called something like IDindex1=ID$<em>$10+index1 (note, if there are more than 9 levels of the index, you will need to do IDindex1=ID</em>100+index1).</li>
+<li>Z score each individual DV so that the DVs are all on the same scale.</li>
+<li>Restructure the dataset so that each DV is on a separate line within each asmt. I recommend calling the new composite outcome column (variable) with the name of your multiple DVs in the order in which they appear in the file.</li>
+<li>When you get to the index name in the restructuring procedure, call it something different from index1 since you probably have index1 in your data file (I called it indexDV).</li>
+<li>The new stacked data file will be x times longer than the original data file, where x is the number of DVs (2 in this case).</li>
+</ul>
+</div>
+<div id="more-interpretation-of-mmlm" class="section level2 hasAnchor" number="13.2">
+<h2><span class="header-section-number">13.2</span> More Interpretation of MMLM<a href="multivariate-mlm-mmlm.html#more-interpretation-of-mmlm" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>One additional cool thing you can do with MMLM is determine whether the DVs are all affected in the same way by the IVs. To do this, you create dummy variables for the DVs. You select one of your DVs as the “reference DV”, and create a dummy code for the other DVs.</li>
+<li>DUMPANASN is coded from indexDV so that PANASN=1, and all others are =0.</li>
+<li>You then use the Dummy variables as a moderator of all the IVs in your original model.</li>
+<li>If any of the interactions between DUMDVs and an IV are significant, you know that the effect of that variable on one variable is significantly different than for the reference DV. If HADS-A was the reference, the main effects of that IV are the effect for HADS-A.</li>
+</ul>
+</div>
+<div id="how-to-execute-mmlm-in-spss" class="section level2 hasAnchor" number="13.3">
+<h2><span class="header-section-number">13.3</span> How to Execute MMLM in SPSS<a href="multivariate-mlm-mmlm.html#how-to-execute-mmlm-in-spss" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Under the subjects box, first list IDindex1, and then below that, put ID. Then, in repeated put IndexDV, and select an unstructured covariance matrix. This nests repeated DVs within each IDindex1, which is nested within students.</li>
+<li>Your composite DV variable is the DV. Then put whatever predictors you want into the factors or covariates. If it is a growth curve model, just put you normal growth curve parameters in the model as you normally would (e.g., timec4 and CART0).</li>
+<li>Fill in fixed as you normally would, as well as ML and stats. But the RANDOM box is different.</li>
+<li>In RANDOM, first move over IDindex1. Then, to be able to add another level, you will have to check the intercept box. Then move over ID. You will usually want an intercept, but you don’t HAVE to include an intercept. You can also include other student level random effects if you want, like timec5. Then go back to the previous level (IDindex1 level) by hitting the “previous” button in the upper left corner of the random pop-up menu. Take out the intercept for that level (if you use unstructured at level 1, you can’t have any REs at level 1).</li>
+</ul>
+</div>
+<div id="interpretation-of-mmlm" class="section level2 hasAnchor" number="13.4">
+<h2><span class="header-section-number">13.4</span> Interpretation of MMLM<a href="multivariate-mlm-mmlm.html#interpretation-of-mmlm" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>After you run the model, you interpret effects just like you would for any model. The only difference is that the effects are for the group of DVs, not for individual DVs.</li>
+<li>You can use the same MMLM approach for models other than growth curve models, like TVPs and baseline covariate models.</li>
+<li>You can also use any kind of growth curve model, including ANOVA.</li>
+<li>But, MMLM assumes that all variables are affected in the same way by the predictors. Don’t include variables that are coded in the opposite directions (e.g., school performance, and classroom misbehaviors).</li>
+</ul>
+</div>
+<div id="homework-15---1116" class="section level2 hasAnchor" number="13.5">
+<h2><span class="header-section-number">13.5</span> Homework 15 - 11/16<a href="multivariate-mlm-mmlm.html#homework-15---1116" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In the attached data set, people with panic disorder get 10 weekly treatments (session = 1-10) and a final post treatment assessment 1 week after the last treatment (session=11). There is only one group. There are multiple DVs: ASI, ACQ, FFMQ, and PDSStot. Do an MMLM. DO a simple linear model for Time. Do patients improve over time on the group of the 4 DVs in your MMLM?</p>
+</div>
+<div id="homework-16---1121" class="section level2 hasAnchor" number="13.6">
+<h2><span class="header-section-number">13.6</span> Homework 16 - 11/21<a href="multivariate-mlm-mmlm.html#homework-16---1121" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In the attached data, the 4 DVS are HADSA, HADSD, ASI, and PANASneg. They are measured at 4 time points, index1=1,7,8,9. Convert index1 to time=1,2,3,4. CART0 is the treatment group variable: CART0=0 is CART breathing training, and CART0=1 is the slow breathing control condition. Do an MMLM. Use a linear growth curve model as your growth model (treatment, time, and treatment x time). Center time at the last outcome. We expect the effect of treatment (the CART0 main effect at time 4) to be greater for the anxiety outcomes (HADSA and ASI) than for the mood outcomes (HADSD, PANASneg). See if you can figure out how you can code a single dummy variable for the repeated outcome measures (indexed by their DV number 1-4) to code anxiety or depressive symptoms. Then have that dummy code interact with CART0, Timec4, and CART0 x Timec4. Interpret the interactions. You can email me for hints.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="non-longitudinal-mlm.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "sepia",
+"family": "serif",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

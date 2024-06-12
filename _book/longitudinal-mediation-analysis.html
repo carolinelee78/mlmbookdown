@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 10 Longitudinal Mediation Analysis | MLM Study Guide for Caroline, by Caroline</title>
   <meta name="description" content="Chapter 10 Longitudinal Mediation Analysis | MLM Study Guide for Caroline, by Caroline" />
-  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 10 Longitudinal Mediation Analysis | MLM Study Guide for Caroline, by Caroline" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="For doing better, for remediation. Integrating David’s class materials and Hoffman’s (2015) Longitudinal Analysis textbook to learn MLM with both R and SPSS." />
 
 
-<meta name="date" content="2024-06-11" />
+<meta name="date" content="2024-06-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -55,6 +55,10 @@
 
 
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -184,6 +188,22 @@
 <li class="chapter" data-level="11.6" data-path="generalized-linear-mixed-models.html"><a href="generalized-linear-mixed-models.html#other-options"><i class="fa fa-check"></i><b>11.6</b> Other Options</a></li>
 <li class="chapter" data-level="11.7" data-path="generalized-linear-mixed-models.html"><a href="generalized-linear-mixed-models.html#getting-the-right-look-for-your-output"><i class="fa fa-check"></i><b>11.7</b> Getting the right “look” for your output</a></li>
 <li class="chapter" data-level="11.8" data-path="generalized-linear-mixed-models.html"><a href="generalized-linear-mixed-models.html#homework-12---112"><i class="fa fa-check"></i><b>11.8</b> Homework 12 - 11/2</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="non-longitudinal-mlm.html"><a href="non-longitudinal-mlm.html"><i class="fa fa-check"></i><b>12</b> Non-Longitudinal MLM</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="non-longitudinal-mlm.html"><a href="non-longitudinal-mlm.html#what-is-non-longitudinal-mlm"><i class="fa fa-check"></i><b>12.1</b> What is Non-Longitudinal MLM?</a></li>
+<li class="chapter" data-level="12.2" data-path="non-longitudinal-mlm.html"><a href="non-longitudinal-mlm.html#covariances"><i class="fa fa-check"></i><b>12.2</b> Covariances</a></li>
+<li class="chapter" data-level="12.3" data-path="non-longitudinal-mlm.html"><a href="non-longitudinal-mlm.html#homework-13---119"><i class="fa fa-check"></i><b>12.3</b> Homework 13 - 11/9</a></li>
+<li class="chapter" data-level="12.4" data-path="non-longitudinal-mlm.html"><a href="non-longitudinal-mlm.html#homework-14---1114"><i class="fa fa-check"></i><b>12.4</b> Homework 14 - 11/14</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html"><i class="fa fa-check"></i><b>13</b> Multivariate MLM (MMLM)</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#preparing-your-data-for-mmlm"><i class="fa fa-check"></i><b>13.1</b> Preparing Your Data for MMLM</a></li>
+<li class="chapter" data-level="13.2" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#more-interpretation-of-mmlm"><i class="fa fa-check"></i><b>13.2</b> More Interpretation of MMLM</a></li>
+<li class="chapter" data-level="13.3" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#how-to-execute-mmlm-in-spss"><i class="fa fa-check"></i><b>13.3</b> How to Execute MMLM in SPSS</a></li>
+<li class="chapter" data-level="13.4" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#interpretation-of-mmlm"><i class="fa fa-check"></i><b>13.4</b> Interpretation of MMLM</a></li>
+<li class="chapter" data-level="13.5" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#homework-15---1116"><i class="fa fa-check"></i><b>13.5</b> Homework 15 - 11/16</a></li>
+<li class="chapter" data-level="13.6" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#homework-16---1121"><i class="fa fa-check"></i><b>13.6</b> Homework 16 - 11/21</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -598,6 +618,7 @@ REGRESSION
 <div id="homework-11.5" class="section level2 hasAnchor" number="10.13">
 <h2><span class="header-section-number">10.13</span> Homework 11.5<a href="longitudinal-mediation-analysis.html#homework-11.5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>IN the attached data set, we have 2 treatment conditions, PAT (coded PAT0=0) and NAT (coded PAT0=1). There are 18 asmts (index=0 to 17). Center time at index=17. The DV is PANAS_NEG. We think changes in PANAS_POS causes changes in PANAS_NEG. Include PAT0, Index, and PAT0 x index in your model.</p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG87.png" style="display: block; margin: auto;" /></p>
 <pre><code>*Creating mean and deviation variables for mediator and outcome.
 
 AGGREGATE
@@ -632,6 +653,13 @@ MIXED PANASN_LEAD1 WITH Indexc17_LEAD1 PAT0 PANASP_dev PANASP_mean PANASN_dev PA
   /PRINT=SOLUTION TESTCOV
   /REPEATED=Index | SUBJECT(ID) COVTYPE(UN). </code></pre>
 <p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG88.png" style="display: block; margin: auto;" /></p>
+<ul>
+<li><code>Indexc17_LEAD1</code>: Holding all else constant (since the time*condition interaction is not significant), the slope of decrease in PANAS_NEG is significant.</li>
+<li><code>PAT0</code>: The diffference of PANAS_NEG between the two conditions (PAT vs. NAT) at the last assessment is not significant.</li>
+<li><code>Indexc17_LEAD1*PAT0</code>: The change in PANAS_NEG is not significantly different between the conditions at the last assessment.</li>
+<li><code>PANASP_dev</code>: When individuals have higher than average level of PANAS_POS, they tend to have lower PANAS_NEG scores.</li>
+<li><code>PANASP_mean</code>: The effect of mean level of PANAS_POS on PANAS_NEG is significant.</li>
+</ul>
 <pre><code>* Turning off filter. 
 
 FILTER OFF.
@@ -646,6 +674,15 @@ MIXED PANASP_dev WITH Indexc17 PAT0
   /PRINT=SOLUTION TESTCOV
   /REPEATED=Index | SUBJECT(ID) COVTYPE(ARH1). </code></pre>
 <p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG89.png" style="display: block; margin: auto;" /></p>
+<ul>
+<li><code>Indexc17</code>: The slope of increase in PANAS_NEG for participants in the PAT condition is significant.
+<ul>
+<li>Interaction is significant!</li>
+</ul></li>
+<li><code>PAT0</code>: The difference between the two conditions in terms of PANAS_NEG is significant at the last assessment.<br />
+</li>
+<li><code>Indexc17*PAT0</code>: The change in PANAS_NEG over time is significantly different between conditions, such that the rate of decrease in PANAS_NEG in the NAT condition is faster than the rate of decrease in PANAS_NEG in the PAT condition.</li>
+</ul>
 <pre><code>REGRESSION
   /MISSING LISTWISE
   /STATISTICS COEFF OUTS CI(95) R ANOVA CHANGE
@@ -655,7 +692,9 @@ MIXED PANASP_dev WITH Indexc17 PAT0
   /METHOD=ENTER PAT0.
 </code></pre>
 <p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG90.png" style="display: block; margin: auto;" /></p>
-<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG87.png" style="display: block; margin: auto;" /></p>
+<ul>
+<li><code>PAT0</code>: Holding all else constant, the effect of condition on the mean level of PANAS_POS is significant.</li>
+</ul>
 
 </div>
 </div>
