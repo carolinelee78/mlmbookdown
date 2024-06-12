@@ -59,9 +59,7 @@ Generalized Linear Mixed Models (GLMMs) are used when the DV is not normally dis
 
 The DV is severe sev_cold.final (number of severe cold symptoms) which is measured at 5 points during the fall semester, ending 10 days after finals. The IVs are lnfeNO1.1 (NO in the airways blocks pathogens from getting into the bloodstream, and it is measured at the beginning of the semester) and time (index1). Use a linear model of change over time. Include lnfeNO1.1, time (Centered at 5), and lnfeNO1.1 x time for your growth model. Do a Poisson GLMM regression (Poisson distribution, Log linking function), and graph the change over time for sev_cold for people with low (1SD below the mean) and High (1SD above the mean) levels of lnfeno1.1 for the RAW sev_cold.final data by centering lnfeNO1.1 at those particular values. (Convert from log(sev_cold.final) back to raw). 
 
- 
 ```
-* Center time 
 COMPUTE timec5=index1-5.
 EXECUTE.
  
@@ -75,7 +73,23 @@ GENLINMIXED
     HCONVERGE=0.00000001(RELATIVE) MAX_ITERATIONS=100 CONFIDENCE_LEVEL=95 DF_METHOD=RESIDUAL COVB=MODEL
     SCORING=0 SINGULAR=0.000000000001
   /EMMEANS_OPTIONS SCALE=ORIGINAL PADJUST=LSD.
+  
+DESCRIPTIVES VARIABLES=lnfeno1.1
+  /STATISTICS=MEAN STDDEV MIN MAX KURTOSIS SKEWNESS.
 ```
+
+```{r, echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG91.png") 
+```
+
+- `Infeno1.1`: At the last timepoint (10 days after the final), there is a significant negative association between NO and number of cold symptoms, where people with greater levels of NO in their airways reported a fewer number of cold symptoms.
+- `Index1c5`: There was no significant change in cold symptoms over time for those with no NO in their airways.
+- `Infeno1.1*Index1c5`: There was no significant interaction between NO levels and time, meaning changes in cold symptoms over time do not vary based on NO levels.
+
+```{r, echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG92.png") 
+```
+
 
  
 
