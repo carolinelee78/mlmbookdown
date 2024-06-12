@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 10 Longitudinal Mediation Analysis | MLM Study Guide for Caroline, by Caroline</title>
   <meta name="description" content="Chapter 10 Longitudinal Mediation Analysis | MLM Study Guide for Caroline, by Caroline" />
-  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 10 Longitudinal Mediation Analysis | MLM Study Guide for Caroline, by Caroline" />
   <meta property="og:type" content="book" />
@@ -55,10 +55,6 @@
 
 
 
-<style type="text/css">
-  
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -634,9 +630,9 @@ MIXED PANASN_LEAD1 WITH Indexc17_LEAD1 PAT0 PANASP_dev PANASP_mean PANASN_dev PA
   /FIXED=Indexc17_LEAD1 PAT0 Indexc17_LEAD1*PAT0 PANASP_dev PANASP_mean PANASN_dev PANASN_mean | SSTYPE(3)
   /METHOD=ML
   /PRINT=SOLUTION TESTCOV
-  /REPEATED=TIME | SUBJECT(Subject#) COVTYPE(UN). 
-
-* Turning off filter. 
+  /REPEATED=Index | SUBJECT(ID) COVTYPE(UN). </code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG88.png" style="display: block; margin: auto;" /></p>
+<pre><code>* Turning off filter. 
 
 FILTER OFF.
 USE ALL.
@@ -649,7 +645,17 @@ MIXED PANASP_dev WITH Indexc17 PAT0
   /METHOD=ML
   /PRINT=SOLUTION TESTCOV
   /REPEATED=Index | SUBJECT(ID) COVTYPE(ARH1). </code></pre>
-<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG_87.png" style="display: block; margin: auto;" /></p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG89.png" style="display: block; margin: auto;" /></p>
+<pre><code>REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS CI(95) R ANOVA CHANGE
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN 
+  /DEPENDENT PANASP_mean 
+  /METHOD=ENTER PAT0.
+</code></pre>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG90.png" style="display: block; margin: auto;" /></p>
+<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG87.png" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>
