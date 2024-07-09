@@ -36,13 +36,105 @@
 - You can also use any kind of growth curve model, including ANOVA.
 - But, MMLM assumes that all variables are affected in the same way by the predictors. Don’t include variables that are coded in the opposite directions (e.g., school performance, and classroom misbehaviors).
 
-## Homework 15 - 11/16
+## Homework 15 - 11/14
 
 In the attached data set, people with panic disorder get 10 weekly treatments (session = 1-10) and a final post treatment assessment 1 week after the last treatment (session=11). There is only one group. There are multiple DVs: ASI, ACQ, FFMQ, and PDSStot. Do an MMLM. DO a simple linear model for Time. Do patients improve over time on the group of the 4 DVs in your MMLM? 
+
+```
+COMPUTE idindex1=subject*100+time.
+EXECUTE.
+
+DESCRIPTIVES VARIABLES=ASI ACQ FFMQ PDSS_Tot
+  /SAVE
+  /STATISTICS=MEAN STDDEV MIN MAX.
+
+*Data -> Restructure -> Resturcture selected variables into cases -> Next -> One -> For case group identification, Use selected variable -> IDindex1 -> Target variable is FFMQASIACQPDSStot -> Drag in all 4 z scores -> How many index variables do you want to create? One -> Edit the Index name to be IndexDV -> Next -> Finish.
+
+VARSTOCASES
+  /MAKE z.asiacqfmqpdss FROM ZASI ZACQ ZFFMQ ZPDSS_Tot
+  /INDEX=indexDV(4)
+  /KEEP=site subject time ACQ ASI non nonreact FFMQ PDSS_Tot SESSION phase timeexposure timeact timec12 filter_$ timec2 weeksph1 weekph1 weekph2 ffmq_first asi_first acq_first PDSS_Tot_first Zffmqfirst Zasifirst Zacqfirst ZPDSSfirst timepdss PDSS idindex1
+  /NULL=KEEP.
+  
+COMPUTE timec12=time-12.
+EXECUTE.
+
+MIXED z.asiacqfmqpdss WITH timec12
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1)
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0,
+    ABSOLUTE)
+  /FIXED=timec12 | SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT timec12 | SUBJECT(subject) COVTYPE(UN)
+  /REPEATED=indexDV | SUBJECT(time*subject) COVTYPE(UN).
+```
+
+```{r, echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG-97.png") 
+```
+
+Yes, patients do appear to improve significantly over time on the 4 DVs.
+
+Intercept + timec12 Interpretations:
+
+UN(1,1): There is not a significant difference in their level of outcomes/symptoms between subjects at posttreatment. There is not significant variability in their overall symptoms across the four variables at posttreatment.
+
+UN(2,1): There is no relationship between their level at the end (intercept/symptoms at posttreatement) and their rate of improvement.
+
+UN(2,2): There is not significant variability between subjects in their change of the 4 DVs over time.
+
 
 ## Homework 16 - 11/21
 
 In the attached data, the 4 DVS are HADSA, HADSD, ASI, and PANASneg. They are measured at 4 time points, index1=1,7,8,9. Convert index1 to time=1,2,3,4. CART0 is the treatment group variable: CART0=0 is CART breathing training, and CART0=1 is the slow breathing control condition. Do an MMLM. Use a linear growth curve model as your growth model (treatment, time, and treatment x time). Center time at the last outcome. We expect the effect of treatment (the CART0 main effect at time 4) to be greater for the anxiety outcomes (HADSA and ASI) than for the mood outcomes (HADSD, PANASneg). See if you can figure out how you can code a single dummy variable for the repeated outcome measures (indexed by their DV number 1-4) to code anxiety or depressive symptoms. Then have that dummy code interact with CART0, Timec4, and CART0 x Timec4. Interpret the interactions. You can email me for hints. 
 
+```
+RECODE Index1 (MISSING=SYSMIS) (1=1) (7=2) (8=3) (9=4) INTO asmt.
+EXECUTE.
 
+COMPUTE timec4=asmt-4.
+EXECUTE.
+
+VARSTOCASES
+  /MAKE HADSAASIPANASnegHADSD FROM ZHADSA ZHADSD ZASI ZPANASneg
+  /INDEX=IndexDV(4)
+  /KEEP=ID StudyID GroupID Gender Mar_stat Kids Kids_# Hhld_# Per_cauc Per_afri Per_asia Per_paci Per_natv Per_oth Spcfyoth Prim_rac Sec_rac Per_his Per_non Prim_eth Edu_yrs High_edu cur_work cur_occ income current_axis1_Diagnosis current_anxiety_Diagnosis current_moodDisorder_Diagnosis past_axis1_Diagnosis past_anxiety_Diagnosis past_moodDisorder_Diagnosis Lifetime_dx axis1_dx1_severity axis1_dx1_nos axis1_dx1 axis1_dx2 axis1_dx2_nos axis1_dx2_severity axis1_dx3 axis1_dx3_nos axis1_dx3_severity axis1_dx4
+axis1_dx4_nos axis1_dx4_severity axis1_dx5 axis1_dx5_nos axis1_dx5_severity axis1_dx6 axis1_dx6_nos axis1_dx6_severity past_dx1 past_dx2 past_dx3 past_dx4 past_hosp past_hosp_number past_suic_att past_suic_number past_pa number_pa Add_Com Age_st ChiSu_d ChiSu_c ChiSu_h Asth_fh P_ast P_all B_ast B_all G_ast G_all ASP_fr ASP_af ASP_ni ASPd_mo ASPd_da ASPd_ev ASPd_ni ASPd_no ASPy_sp ASPy_su ASPy_fa ASPy_wi ASPy_no GPvisit GPinfo Intrnet Emerg_l Emerg_12 IntensC Ster_day Psychoth Alltest All_res Physnorm
+Profnorm Brodil_ex Med_sob Med_coug Med_whe ATIpsyc ATIanimal ATIpollen ATIgeneral ATIexercise ATIirritants ATIinfections Index1 ACT ASQfreq ASQdist ASCfear ASChyper ASCdysp ASCirritability ASCfatigue ASCcongest PCAQ asmt asmtwk filter_$ asmt4 asmt4c1.5 asmt4c1.5sq ACT_first ASQfreq_first ASQdist_first ASCfear_first ASChyper_first ASCdysp_first ASCirritability_first ASCfatigue_first ASCcongest_first PCAQ_first IDindex1 C1_2 C2_2 R1_2 R2_2 C1_9 C2_9 R1_9 R2_9 num_2 num_9 sectrem_2 secterm_9 PC20_2 PC20_9
+PANASpos PANASneg ASI PHYS.12 Mental.12 PhysSK.12 MentalSK.12 HADSA HADSD MAAS PSS KASE ROTQ Waltsk Walbnd WAIgl CO2 RR O2 HR PEF FVC FEV VT Z5hz R5hz R20hz X5hz RESNfreq NO SDSattribut SDSdenial SDStotal SWLStotal STAItotal credibility expectancy PEFpred FVCpred FEVpred Cortico_flag Montel_dose Temp BMI Age COLD FLU Beclom_dose Beclom_freq Montel_freq FEVER BronchoUse daysfrompre ZASQfreq_first ZASQfreq PEFper FVCper FEVper HADSAge8 HADSAlt8 ASQfreqln ASChyperln PANASnegln CO2_first ZCO2_first zco2firstsq
+ZCO2 ACThi0 Beclom_dose_sum Beclomdose_sumgt0 HADSA_first HADSD_first ZHADSA_first CART0 ZHADSA_firstc1 hadsage9 HADSA_firstge9 HADSAfirstGE8 dyschg dosedys distchg dosedist SK12Phys SK12Ment posmeth actge19 FEVsalineperc FEVdistperc FEVdysperc index pefsd pefvar PC20 reverseindex CART1 Awareness1 ACT1 ACT2 ACT3 ACT4 ACT5 ACTmean BroncoUse_3 bronchoUseNEW PEFmean PEFvariabilityper mornPEFper aschyper_first01 aschyper_first01new PEFper100 FEVper100 aschyperfirstge70 aschyperfirstge80 ASChyperln_first
+CO2_firstsq ACT_firstsq SF12phys SFmen CO2first36 ASCtot ZASCfear ZASChyper ZASCdysp ZASCirritability ZASCfatigue ZASCcongest ASCtotz ZhadsA_firstcm1 ZACT exclude cart.5 d2 d3 d4 cartc.52 wk wkc4 wkc4p1 wkc4p2 wkc4p2sq SFphysREV SFmenREV SFmenREVln SFphysREVln ZSFphysREV ZSFmenREV wknew WKnHyper WKnHyperc.97 wkHyperc.97 wknln wknlnc3.43 wknp1c6 wknp2c30 SFtot ZSFtot ASI_first ZASI_first white1 black1 other1 HADSAbaseline HADSAbaselineGE8 PANASneg_firstclass ASI_firstclass HADSD_firstclass asmtc4
+  /NULL=KEEP.
+  
+RECODE IndexDV (MISSING=SYSMIS) (1=1) (2=0) (3=1) (4=0) INTO AnxietyIndex.
+EXECUTE.
+
+MIXED HADSAASIPANASnegHADSD WITH timec4 CART0 AnxietyIndex
+  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1) 
+    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
+    ABSOLUTE)
+  /FIXED=timec4 CART0 timec4*CART0 AnxietyIndex CART0*AnxietyIndex timec4*AnxietyIndex timec4*CART0*AnxietyIndex | 
+    SSTYPE(3)
+  /METHOD=ML
+  /PRINT=SOLUTION TESTCOV
+  /RANDOM=INTERCEPT | SUBJECT(ID) COVTYPE(VC)
+  /REPEATED=IndexDV | SUBJECT(Index1*ID) COVTYPE(UN).
+```
+  
+```{r, echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG-98.png") 
+```
+
+`timec4`:Patients’ symptoms do appear to improve significantly over time in the CART=0 group over the group of the 4 DVs. 
+
+`CART0`: The effect of treatment is not significantly greater for the anxiety outcomes (HADSA and ASI) than for the mood outcomes (HADSD, PANASneg).
+
+`AnxietyIndex`: The difference between the anxiety and depression when everything else is 0. At time point 4, for the CART group, the different between anxiety and depression scores. Anxiety has slightly higher scores than depression scores since positive (pretending it’s significant).
+
+`timec4*AnxietyIndex`: The amount anxiety versus depression changes over time for the CART group. The effect of our IV and the DV depends on our moderator. The effect of time on our outcomes depend on whether it’s anxiety or depression. If it was significant. 
+
+`CART0*AnxietyIndex`: The amount of anxiety versus depression at the last assessment between conditions is not significant.
+
+`CART0*AnxietyIndex*timec4`: The difference between groups and change over time does not depend on whether it’s an anxiety or depressive symptom. 
 
