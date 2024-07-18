@@ -1,0 +1,37 @@
+# Power Analysis for MLM 
+
+## RMASS
+
+- RMASS3 can be accessed here: [rmass.org](http://www.rmass.org)
+  * Link for RMASS manual: [http://www.rmass.org/RMASS_Manual.pdf](http://www.rmass.org/RMASS_Manual.pdf)
+- Randomization 
+  * First specify whether randomization has happened either at the subject-level or study (center)-level for MLM power analysis for intervention studies, specify 2-sided test with .05 alpha and .8 power 
+- Attrition 
+  * Specify attrition rate over time, account for attrition over time 
+- Random effects 
+  * Think of things as if they were z-scored, variance of 1 and mean of 0 $\rightarrow$ .5 as we usually want enough power to be able to detect mean difference of medium effect size at last timepoint
+  * Zeros for covariance matrix 
+  * If time is log-transformed, you would specify that in the design matrix column 
+- Correlation 
+  * Start out with compound symmetry ECM by setting all correlations as equal, 0.7 correlation terms, 1.0 error variance 
+  * Could also do toeplitz (most similar to unstructured), or autoregressive (AR1)
+
+## PINT 
+
+- PINT (power analysis in two-level designs) is another power analysis program that can be used for determination of standard errors and optimal sample sizes in multilevel designs with 2 levels
+  * Need to download the software here: [https://www.stats.ox.ac.uk/~snijders/multilevel.htm](https://www.stats.ox.ac.uk/~snijders/multilevel.htm)
+  * Can download PINT manual here: [https://www.stats.ox.ac.uk/~snijders/Pint21_UsersManual.pdf](https://www.stats.ox.ac.uk/~snijders/Pint21_UsersManual.pdf)
+  * Can rename parameter file (.dat) as well as the output file (.out)
+- PINT figures out what the standard errors of your coefficients are going to be, then we can figure out how small the SE are going to be for us to detect a certain effect size, which tells us how big the sample size needs to be
+  * Need to z-score everything that we can for us to input the parameters more easily and for easier interpretation 
+- The relation between effect size, power, significance level, and sample size can be presented in one formula. This formula is an approximation that is valid for practical use when the test in question is a one-sided t-test with a reasonably large number of degrees of freedom (say, df ≥ 10). We suppose that the effect size is expressed by a parameter that we can estimate with a certain standard error. Bear in mind that the size of the standard error is a monotone decreasing function of the sample size: the larger the sample size the smaller the standard error! 
+  * Formula would be (effect size / standard error) $\approx (z_{1-\alpha} + z_{1-\beta}) = (z_{1-\alpha}-z_\beta)$ where $z_\alpha$, $z_\beta$, and $z_{1-\beta}$ are the z-scores (values from the standard normal distribution) associated with the indicated $\alpha$ and $\beta$ values. 
+    - If, for instance, $\alpha$ is chosen at .05 and 1-$\beta$ at .80 (\beta thus being .20), and a medium effect size of .50 is what we expect, then we can derive that we are searching for a minimum sample size that satisfies standard error $\leq [.50 / (1.64 + 0.84)] {\Leftrightarrow}$ standard error $\leq$ .20. 
+- For the purposes of calculating standard errors, three categories of predictor variables must be distinguished:
+  (1) micro level variables with only a fixed effect;
+  (2) micro level variables with a fixed and a random effect;
+  (3) macro level variables explaining between-group variability.
+  * Within subjects deviation = micro, between subjects = macro 
+  * e.g., time can be 1 or 2
+
+  

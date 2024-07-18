@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 12 Non-Longitudinal MLM | MLM Study Guide for Caroline, by Caroline</title>
   <meta name="description" content="Chapter 12 Non-Longitudinal MLM | MLM Study Guide for Caroline, by Caroline" />
-  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 12 Non-Longitudinal MLM | MLM Study Guide for Caroline, by Caroline" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="For doing better, for remediation. Integrating David’s class materials and Hoffman’s (2015) Longitudinal Analysis textbook to learn MLM with both R and SPSS." />
 
 
-<meta name="date" content="2024-06-12" />
+<meta name="date" content="2024-07-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -55,10 +55,6 @@
 
 
 
-<style type="text/css">
-  
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -202,7 +198,7 @@
 <li class="chapter" data-level="13.2" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#more-interpretation-of-mmlm"><i class="fa fa-check"></i><b>13.2</b> More Interpretation of MMLM</a></li>
 <li class="chapter" data-level="13.3" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#how-to-execute-mmlm-in-spss"><i class="fa fa-check"></i><b>13.3</b> How to Execute MMLM in SPSS</a></li>
 <li class="chapter" data-level="13.4" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#interpretation-of-mmlm"><i class="fa fa-check"></i><b>13.4</b> Interpretation of MMLM</a></li>
-<li class="chapter" data-level="13.5" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#homework-15---1116"><i class="fa fa-check"></i><b>13.5</b> Homework 15 - 11/16</a></li>
+<li class="chapter" data-level="13.5" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#homework-15---1114"><i class="fa fa-check"></i><b>13.5</b> Homework 15 - 11/14</a></li>
 <li class="chapter" data-level="13.6" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#homework-16---1121"><i class="fa fa-check"></i><b>13.6</b> Homework 16 - 11/21</a></li>
 </ul></li>
 <li class="divider"></li>
@@ -312,16 +308,14 @@ MIXED BBS4itemRECODED WITH BBS4itemRECODED_first takecare0 male0
   /RANDOM=INTERCEPT | SUBJECT(Group#) COVTYPE(UN).</code></pre>
 <p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG95.png" style="display: block; margin: auto;" /></p>
 <ul>
-<li><code>BBS4itemRECODED_first</code>:<br />
-</li>
-<li><code>male0</code>:</li>
-<li><code>takecare0</code>:<br />
-</li>
-<li><code>male0*takecare0</code>:</li>
+<li><code>BBS4itemRECODED_first</code>: The effect of baseline bystander behavior on bystander behavior scores was significant.</li>
+<li><code>male0</code>: Holding all else constant, the effect of sex on bystander behavior scores was not significant for individuals in the takecare condition.</li>
+<li><code>takecare0</code>: Holding all else constant, the effect of condition on bystander behavior scores was significant for male individuals.</li>
+<li><code>male0*takecare0</code>: Bystander behavior scores were significantly dependent on the interaction between sex and condition.</li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG96.png" style="display: block; margin: auto;" /></p>
 <ul>
-<li>(1,1): Not significant variability between groups in their bystander behavior scores after accounting for sex, placebo/intervention group, and baseline bystander behavior scores.</li>
+<li>(1,1): Not significant variability between groups (homerooms) in their bystander behavior scores after accounting for sex, placebo/intervention group, and baseline bystander behavior scores.</li>
 </ul>
 
 </div>

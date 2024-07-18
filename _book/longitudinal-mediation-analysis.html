@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 10 Longitudinal Mediation Analysis | MLM Study Guide for Caroline, by Caroline</title>
   <meta name="description" content="Chapter 10 Longitudinal Mediation Analysis | MLM Study Guide for Caroline, by Caroline" />
-  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 10 Longitudinal Mediation Analysis | MLM Study Guide for Caroline, by Caroline" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="For doing better, for remediation. Integrating David’s class materials and Hoffman’s (2015) Longitudinal Analysis textbook to learn MLM with both R and SPSS." />
 
 
-<meta name="date" content="2024-06-12" />
+<meta name="date" content="2024-07-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -55,10 +55,6 @@
 
 
 
-<style type="text/css">
-  
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -202,7 +198,7 @@
 <li class="chapter" data-level="13.2" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#more-interpretation-of-mmlm"><i class="fa fa-check"></i><b>13.2</b> More Interpretation of MMLM</a></li>
 <li class="chapter" data-level="13.3" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#how-to-execute-mmlm-in-spss"><i class="fa fa-check"></i><b>13.3</b> How to Execute MMLM in SPSS</a></li>
 <li class="chapter" data-level="13.4" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#interpretation-of-mmlm"><i class="fa fa-check"></i><b>13.4</b> Interpretation of MMLM</a></li>
-<li class="chapter" data-level="13.5" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#homework-15---1116"><i class="fa fa-check"></i><b>13.5</b> Homework 15 - 11/16</a></li>
+<li class="chapter" data-level="13.5" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#homework-15---1114"><i class="fa fa-check"></i><b>13.5</b> Homework 15 - 11/14</a></li>
 <li class="chapter" data-level="13.6" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#homework-16---1121"><i class="fa fa-check"></i><b>13.6</b> Homework 16 - 11/21</a></li>
 </ul></li>
 <li class="divider"></li>
@@ -675,13 +671,13 @@ MIXED PANASP_dev WITH Indexc17 PAT0
   /REPEATED=Index | SUBJECT(ID) COVTYPE(ARH1). </code></pre>
 <p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG89.png" style="display: block; margin: auto;" /></p>
 <ul>
-<li><code>Indexc17</code>: The slope of increase in PANAS_NEG for participants in the PAT condition is significant.
+<li><code>Indexc17</code>: The slope of increase in PANASP_dev for participants in the PAT condition is significant.
 <ul>
 <li>Interaction is significant!</li>
 </ul></li>
-<li><code>PAT0</code>: The difference between the two conditions in terms of PANAS_NEG is significant at the last assessment.<br />
+<li><code>PAT0</code>: The difference between the two conditions in terms of PANASP_dev is significant at the last assessment.<br />
 </li>
-<li><code>Indexc17*PAT0</code>: The change in PANAS_NEG over time is significantly different between conditions, such that the rate of decrease in PANAS_NEG in the NAT condition is faster than the rate of decrease in PANAS_NEG in the PAT condition.</li>
+<li><code>Indexc17*PAT0</code>: The change in PANASP_dev over time is significantly different between conditions, such that the rate of decrease in PANASP_dev in the NAT condition is faster than the rate of decrease in PANASP_dev in the PAT condition.</li>
 </ul>
 <pre><code>REGRESSION
   /MISSING LISTWISE

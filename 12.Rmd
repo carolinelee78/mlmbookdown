@@ -126,15 +126,18 @@ MIXED HADSAASIPANASnegHADSD WITH timec4 CART0 AnxietyIndex
 knitr::include_graphics("https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG-98.png") 
 ```
 
-`timec4`:Patients’ symptoms do appear to improve significantly over time in the CART=0 group over the group of the 4 DVs. 
+`timec4` main effect: The slope of decrease in mood symptoms (HADSD, PANASneg; AnxietyIndex=0) for participants in the breathing training (CART0=0) condition was significant.
 
-`CART0`: The effect of treatment is not significantly greater for the anxiety outcomes (HADSA and ASI) than for the mood outcomes (HADSD, PANASneg).
+`CART0` main effect: The difference between the two conditions (CART0=0 vs. CART0=1; treatment vs. control) in terms of the mood symptoms was not significant at the last timepoint.
 
-`AnxietyIndex`: The difference between the anxiety and depression when everything else is 0. At time point 4, for the CART group, the different between anxiety and depression scores. Anxiety has slightly higher scores than depression scores since positive (pretending it’s significant).
+`AnxietyIndex` main effect: The difference in levels of mood and anxiety symptoms (AnxietyIndex=0 vs. AnxietyIndex=1; mood vs. anxiety) for participants in the treatment condition (CART0=0; breathing training) at the last timepoint was not significant. 
 
-`timec4*AnxietyIndex`: The amount anxiety versus depression changes over time for the CART group. The effect of our IV and the DV depends on our moderator. The effect of time on our outcomes depend on whether it’s anxiety or depression. If it was significant. 
+`timec4*CART0` interaction effect: The slope of decrease in mood symptoms over time was not significantly moderated by condition (CART0=0 vs. CART0=1).
 
-`CART0*AnxietyIndex`: The amount of anxiety versus depression at the last assessment between conditions is not significant.
+`CART0*AnxietyIndex` interaction effect: The difference in the effect of condition (CART0=0 vs. CART0=1) on mood vs. anxiety symptoms was not significant at the last timepoint (timec4=0).
 
-`CART0*AnxietyIndex*timec4`: The difference between groups and change over time does not depend on whether it’s an anxiety or depressive symptom. 
+`timec4*AnxietyIndex` interaction effect: The difference in the effect of time on mood vs. anxiety symptoms was not significant for individuals in the treatment (CART0=0) condition.
+
+`timec4*CART0*AnxietyIndex` interaction effect: The slope of decrease in symptoms over time was not significantly moderated by condition regardless of whether they were anxiety or mood symptoms.
+
 

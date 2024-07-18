@@ -96,3 +96,6 @@ homework-14---1114
 homework-15---1114
 homework-16---1121
 homework-15---1116
+power-analysis-for-mlm
+rmass
+pint

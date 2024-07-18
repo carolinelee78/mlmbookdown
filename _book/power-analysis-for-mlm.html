@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 13 Multivariate MLM (MMLM) | MLM Study Guide for Caroline, by Caroline</title>
-  <meta name="description" content="Chapter 13 Multivariate MLM (MMLM) | MLM Study Guide for Caroline, by Caroline" />
+  <title>Chapter 14 Power Analysis for MLM | MLM Study Guide for Caroline, by Caroline</title>
+  <meta name="description" content="Chapter 14 Power Analysis for MLM | MLM Study Guide for Caroline, by Caroline" />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 13 Multivariate MLM (MMLM) | MLM Study Guide for Caroline, by Caroline" />
+  <meta property="og:title" content="Chapter 14 Power Analysis for MLM | MLM Study Guide for Caroline, by Caroline" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 13 Multivariate MLM (MMLM) | MLM Study Guide for Caroline, by Caroline" />
+  <meta name="twitter:title" content="Chapter 14 Power Analysis for MLM | MLM Study Guide for Caroline, by Caroline" />
   
   
   
@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="non-longitudinal-mlm.html"/>
+<link rel="prev" href="multivariate-mlm-mmlm.html"/>
 
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -201,6 +201,11 @@
 <li class="chapter" data-level="13.5" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#homework-15---1114"><i class="fa fa-check"></i><b>13.5</b> Homework 15 - 11/14</a></li>
 <li class="chapter" data-level="13.6" data-path="multivariate-mlm-mmlm.html"><a href="multivariate-mlm-mmlm.html#homework-16---1121"><i class="fa fa-check"></i><b>13.6</b> Homework 16 - 11/21</a></li>
 </ul></li>
+<li class="chapter" data-level="14" data-path="power-analysis-for-mlm.html"><a href="power-analysis-for-mlm.html"><i class="fa fa-check"></i><b>14</b> Power Analysis for MLM</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="power-analysis-for-mlm.html"><a href="power-analysis-for-mlm.html#rmass"><i class="fa fa-check"></i><b>14.1</b> RMASS</a></li>
+<li class="chapter" data-level="14.2" data-path="power-analysis-for-mlm.html"><a href="power-analysis-for-mlm.html#pint"><i class="fa fa-check"></i><b>14.2</b> PINT</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -221,133 +226,67 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="multivariate-mlm-mmlm" class="section level1 hasAnchor" number="13">
-<h1><span class="header-section-number">Chapter 13</span> Multivariate MLM (MMLM)<a href="multivariate-mlm-mmlm.html#multivariate-mlm-mmlm" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="power-analysis-for-mlm" class="section level1 hasAnchor" number="14">
+<h1><span class="header-section-number">Chapter 14</span> Power Analysis for MLM<a href="power-analysis-for-mlm.html#power-analysis-for-mlm" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="rmass" class="section level2 hasAnchor" number="14.1">
+<h2><span class="header-section-number">14.1</span> RMASS<a href="power-analysis-for-mlm.html#rmass" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li>MMLM is used when you have multiple outcome measures that you do not want to combine into a single score. No correction for multiple tests is needed, therefore increasing power.</li>
-<li>Example of data for MMLM:
+<li>RMASS3 can be accessed here: <a href="http://www.rmass.org">rmass.org</a>
 <ul>
-<li>Example: Breathing training to treat asthma and anxiety/depressive symptoms in people with Asthma.</li>
-<li>RCT: Treatment group received breathing training treatment with biofeedback to lower pCO2 (CART). Placebo group received sham breathing training to simply slow respiration (PBO).</li>
-<li>Psychological DVs: HADS-A, ASI, HADS-D, and PANAS-N</li>
-<li>Assessment: baseline, posttreatment, 3MFU, 6MFU</li>
+<li>Link for RMASS manual: <a href="http://www.rmass.org/RMASS_Manual.pdf">http://www.rmass.org/RMASS_Manual.pdf</a></li>
+</ul></li>
+<li>Randomization
+<ul>
+<li>First specify whether randomization has happened either at the subject-level or study (center)-level for MLM power analysis for intervention studies, specify 2-sided test with .05 alpha and .8 power</li>
+</ul></li>
+<li>Attrition
+<ul>
+<li>Specify attrition rate over time, account for attrition over time</li>
+</ul></li>
+<li>Random effects
+<ul>
+<li>Think of things as if they were z-scored, variance of 1 and mean of 0 <span class="math inline">\(\rightarrow\)</span> .5 as we usually want enough power to be able to detect mean difference of medium effect size at last timepoint</li>
+<li>Zeros for covariance matrix</li>
+<li>If time is log-transformed, you would specify that in the design matrix column</li>
+</ul></li>
+<li>Correlation
+<ul>
+<li>Start out with compound symmetry ECM by setting all correlations as equal, 0.7 correlation terms, 1.0 error variance</li>
+<li>Could also do toeplitz (most similar to unstructured), or autoregressive (AR1)</li>
 </ul></li>
 </ul>
-<div id="preparing-your-data-for-mmlm" class="section level2 hasAnchor" number="13.1">
-<h2><span class="header-section-number">13.1</span> Preparing Your Data for MMLM<a href="multivariate-mlm-mmlm.html#preparing-your-data-for-mmlm" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="pint" class="section level2 hasAnchor" number="14.2">
+<h2><span class="header-section-number">14.2</span> PINT<a href="power-analysis-for-mlm.html#pint" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li>Create a unique ID for each assessment at which the multiple DVs are assessed. This is often formed by computing a new ID variable called something like IDindex1=ID$<em>$10+index1 (note, if there are more than 9 levels of the index, you will need to do IDindex1=ID</em>100+index1).</li>
-<li>Z score each individual DV so that the DVs are all on the same scale.</li>
-<li>Restructure the dataset so that each DV is on a separate line within each asmt. I recommend calling the new composite outcome column (variable) with the name of your multiple DVs in the order in which they appear in the file.</li>
-<li>When you get to the index name in the restructuring procedure, call it something different from index1 since you probably have index1 in your data file (I called it indexDV).</li>
-<li>The new stacked data file will be x times longer than the original data file, where x is the number of DVs (2 in this case).</li>
-</ul>
-</div>
-<div id="more-interpretation-of-mmlm" class="section level2 hasAnchor" number="13.2">
-<h2><span class="header-section-number">13.2</span> More Interpretation of MMLM<a href="multivariate-mlm-mmlm.html#more-interpretation-of-mmlm" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<li>PINT (power analysis in two-level designs) is another power analysis program that can be used for determination of standard errors and optimal sample sizes in multilevel designs with 2 levels
 <ul>
-<li>One additional cool thing you can do with MMLM is determine whether the DVs are all affected in the same way by the IVs. To do this, you create dummy variables for the DVs. You select one of your DVs as the “reference DV”, and create a dummy code for the other DVs.</li>
-<li>DUMPANASN is coded from indexDV so that PANASN=1, and all others are =0.</li>
-<li>You then use the Dummy variables as a moderator of all the IVs in your original model.</li>
-<li>If any of the interactions between DUMDVs and an IV are significant, you know that the effect of that variable on one variable is significantly different than for the reference DV. If HADS-A was the reference, the main effects of that IV are the effect for HADS-A.</li>
-</ul>
-</div>
-<div id="how-to-execute-mmlm-in-spss" class="section level2 hasAnchor" number="13.3">
-<h2><span class="header-section-number">13.3</span> How to Execute MMLM in SPSS<a href="multivariate-mlm-mmlm.html#how-to-execute-mmlm-in-spss" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<li>Need to download the software here: <a href="https://www.stats.ox.ac.uk/~snijders/multilevel.htm">https://www.stats.ox.ac.uk/~snijders/multilevel.htm</a></li>
+<li>Can download PINT manual here: <a href="https://www.stats.ox.ac.uk/~snijders/Pint21_UsersManual.pdf">https://www.stats.ox.ac.uk/~snijders/Pint21_UsersManual.pdf</a></li>
+<li>Can rename parameter file (.dat) as well as the output file (.out)</li>
+</ul></li>
+<li>PINT figures out what the standard errors of your coefficients are going to be, then we can figure out how small the SE are going to be for us to detect a certain effect size, which tells us how big the sample size needs to be
 <ul>
-<li>Under the subjects box, first list IDindex1, and then below that, put ID. Then, in repeated put IndexDV, and select an unstructured covariance matrix. This nests repeated DVs within each IDindex1, which is nested within students.</li>
-<li>Your composite DV variable is the DV. Then put whatever predictors you want into the factors or covariates. If it is a growth curve model, just put you normal growth curve parameters in the model as you normally would (e.g., timec4 and CART0).</li>
-<li>Fill in fixed as you normally would, as well as ML and stats. But the RANDOM box is different.</li>
-<li>In RANDOM, first move over IDindex1. Then, to be able to add another level, you will have to check the intercept box. Then move over ID. You will usually want an intercept, but you don’t HAVE to include an intercept. You can also include other student level random effects if you want, like timec5. Then go back to the previous level (IDindex1 level) by hitting the “previous” button in the upper left corner of the random pop-up menu. Take out the intercept for that level (if you use unstructured at level 1, you can’t have any REs at level 1).</li>
-</ul>
-</div>
-<div id="interpretation-of-mmlm" class="section level2 hasAnchor" number="13.4">
-<h2><span class="header-section-number">13.4</span> Interpretation of MMLM<a href="multivariate-mlm-mmlm.html#interpretation-of-mmlm" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<li>Need to z-score everything that we can for us to input the parameters more easily and for easier interpretation</li>
+</ul></li>
+<li>The relation between effect size, power, significance level, and sample size can be presented in one formula. This formula is an approximation that is valid for practical use when the test in question is a one-sided t-test with a reasonably large number of degrees of freedom (say, df ≥ 10). We suppose that the effect size is expressed by a parameter that we can estimate with a certain standard error. Bear in mind that the size of the standard error is a monotone decreasing function of the sample size: the larger the sample size the smaller the standard error!
 <ul>
-<li>After you run the model, you interpret effects just like you would for any model. The only difference is that the effects are for the group of DVs, not for individual DVs.</li>
-<li>You can use the same MMLM approach for models other than growth curve models, like TVPs and baseline covariate models.</li>
-<li>You can also use any kind of growth curve model, including ANOVA.</li>
-<li>But, MMLM assumes that all variables are affected in the same way by the predictors. Don’t include variables that are coded in the opposite directions (e.g., school performance, and classroom misbehaviors).</li>
+<li>Formula would be (effect size / standard error) <span class="math inline">\(\approx (z_{1-\alpha} + z_{1-\beta}) = (z_{1-\alpha}-z_\beta)\)</span> where <span class="math inline">\(z_\alpha\)</span>, <span class="math inline">\(z_\beta\)</span>, and <span class="math inline">\(z_{1-\beta}\)</span> are the z-scores (values from the standard normal distribution) associated with the indicated <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> values.
+<ul>
+<li>If, for instance, <span class="math inline">\(\alpha\)</span> is chosen at .05 and 1-<span class="math inline">\(\beta\)</span> at .80 (thus being .20), and a medium effect size of .50 is what we expect, then we can derive that we are searching for a minimum sample size that satisfies standard error <span class="math inline">\(\leq [.50 / (1.64 + 0.84)] {\Leftrightarrow}\)</span> standard error <span class="math inline">\(\leq\)</span> .20.</li>
+</ul></li>
+</ul></li>
+<li>For the purposes of calculating standard errors, three categories of predictor variables must be distinguished:
+<ol style="list-style-type: decimal">
+<li>micro level variables with only a fixed effect;</li>
+<li>micro level variables with a fixed and a random effect;</li>
+<li>macro level variables explaining between-group variability.</li>
+</ol>
+<ul>
+<li>Within subjects deviation = micro, between subjects = macro</li>
+<li>e.g., time can be 1 or 2</li>
+</ul></li>
 </ul>
-</div>
-<div id="homework-15---1114" class="section level2 hasAnchor" number="13.5">
-<h2><span class="header-section-number">13.5</span> Homework 15 - 11/14<a href="multivariate-mlm-mmlm.html#homework-15---1114" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In the attached data set, people with panic disorder get 10 weekly treatments (session = 1-10) and a final post treatment assessment 1 week after the last treatment (session=11). There is only one group. There are multiple DVs: ASI, ACQ, FFMQ, and PDSStot. Do an MMLM. DO a simple linear model for Time. Do patients improve over time on the group of the 4 DVs in your MMLM?</p>
-<pre><code>COMPUTE idindex1=subject*100+time.
-EXECUTE.
-
-DESCRIPTIVES VARIABLES=ASI ACQ FFMQ PDSS_Tot
-  /SAVE
-  /STATISTICS=MEAN STDDEV MIN MAX.
-
-*Data -&gt; Restructure -&gt; Resturcture selected variables into cases -&gt; Next -&gt; One -&gt; For case group identification, Use selected variable -&gt; IDindex1 -&gt; Target variable is FFMQASIACQPDSStot -&gt; Drag in all 4 z scores -&gt; How many index variables do you want to create? One -&gt; Edit the Index name to be IndexDV -&gt; Next -&gt; Finish.
-
-VARSTOCASES
-  /MAKE z.asiacqfmqpdss FROM ZASI ZACQ ZFFMQ ZPDSS_Tot
-  /INDEX=indexDV(4)
-  /KEEP=site subject time ACQ ASI non nonreact FFMQ PDSS_Tot SESSION phase timeexposure timeact timec12 filter_$ timec2 weeksph1 weekph1 weekph2 ffmq_first asi_first acq_first PDSS_Tot_first Zffmqfirst Zasifirst Zacqfirst ZPDSSfirst timepdss PDSS idindex1
-  /NULL=KEEP.
-  
-COMPUTE timec12=time-12.
-EXECUTE.
-
-MIXED z.asiacqfmqpdss WITH timec12
-  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1)
-    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0,
-    ABSOLUTE)
-  /FIXED=timec12 | SSTYPE(3)
-  /METHOD=ML
-  /PRINT=SOLUTION TESTCOV
-  /RANDOM=INTERCEPT timec12 | SUBJECT(subject) COVTYPE(UN)
-  /REPEATED=indexDV | SUBJECT(time*subject) COVTYPE(UN).</code></pre>
-<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG-97.png" style="display: block; margin: auto;" /></p>
-<p>Yes, patients do appear to improve significantly over time on the 4 DVs.</p>
-<p>Intercept + timec12 Interpretations:</p>
-<p>UN(1,1): There is not a significant difference in their level of outcomes/symptoms between subjects at posttreatment. There is not significant variability in their overall symptoms across the four variables at posttreatment.</p>
-<p>UN(2,1): There is no relationship between their level at the end (intercept/symptoms at posttreatement) and their rate of improvement.</p>
-<p>UN(2,2): There is not significant variability between subjects in their change of the 4 DVs over time.</p>
-</div>
-<div id="homework-16---1121" class="section level2 hasAnchor" number="13.6">
-<h2><span class="header-section-number">13.6</span> Homework 16 - 11/21<a href="multivariate-mlm-mmlm.html#homework-16---1121" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In the attached data, the 4 DVS are HADSA, HADSD, ASI, and PANASneg. They are measured at 4 time points, index1=1,7,8,9. Convert index1 to time=1,2,3,4. CART0 is the treatment group variable: CART0=0 is CART breathing training, and CART0=1 is the slow breathing control condition. Do an MMLM. Use a linear growth curve model as your growth model (treatment, time, and treatment x time). Center time at the last outcome. We expect the effect of treatment (the CART0 main effect at time 4) to be greater for the anxiety outcomes (HADSA and ASI) than for the mood outcomes (HADSD, PANASneg). See if you can figure out how you can code a single dummy variable for the repeated outcome measures (indexed by their DV number 1-4) to code anxiety or depressive symptoms. Then have that dummy code interact with CART0, Timec4, and CART0 x Timec4. Interpret the interactions. You can email me for hints.</p>
-<pre><code>RECODE Index1 (MISSING=SYSMIS) (1=1) (7=2) (8=3) (9=4) INTO asmt.
-EXECUTE.
-
-COMPUTE timec4=asmt-4.
-EXECUTE.
-
-VARSTOCASES
-  /MAKE HADSAASIPANASnegHADSD FROM ZHADSA ZHADSD ZASI ZPANASneg
-  /INDEX=IndexDV(4)
-  /KEEP=ID StudyID GroupID Gender Mar_stat Kids Kids_# Hhld_# Per_cauc Per_afri Per_asia Per_paci Per_natv Per_oth Spcfyoth Prim_rac Sec_rac Per_his Per_non Prim_eth Edu_yrs High_edu cur_work cur_occ income current_axis1_Diagnosis current_anxiety_Diagnosis current_moodDisorder_Diagnosis past_axis1_Diagnosis past_anxiety_Diagnosis past_moodDisorder_Diagnosis Lifetime_dx axis1_dx1_severity axis1_dx1_nos axis1_dx1 axis1_dx2 axis1_dx2_nos axis1_dx2_severity axis1_dx3 axis1_dx3_nos axis1_dx3_severity axis1_dx4
-axis1_dx4_nos axis1_dx4_severity axis1_dx5 axis1_dx5_nos axis1_dx5_severity axis1_dx6 axis1_dx6_nos axis1_dx6_severity past_dx1 past_dx2 past_dx3 past_dx4 past_hosp past_hosp_number past_suic_att past_suic_number past_pa number_pa Add_Com Age_st ChiSu_d ChiSu_c ChiSu_h Asth_fh P_ast P_all B_ast B_all G_ast G_all ASP_fr ASP_af ASP_ni ASPd_mo ASPd_da ASPd_ev ASPd_ni ASPd_no ASPy_sp ASPy_su ASPy_fa ASPy_wi ASPy_no GPvisit GPinfo Intrnet Emerg_l Emerg_12 IntensC Ster_day Psychoth Alltest All_res Physnorm
-Profnorm Brodil_ex Med_sob Med_coug Med_whe ATIpsyc ATIanimal ATIpollen ATIgeneral ATIexercise ATIirritants ATIinfections Index1 ACT ASQfreq ASQdist ASCfear ASChyper ASCdysp ASCirritability ASCfatigue ASCcongest PCAQ asmt asmtwk filter_$ asmt4 asmt4c1.5 asmt4c1.5sq ACT_first ASQfreq_first ASQdist_first ASCfear_first ASChyper_first ASCdysp_first ASCirritability_first ASCfatigue_first ASCcongest_first PCAQ_first IDindex1 C1_2 C2_2 R1_2 R2_2 C1_9 C2_9 R1_9 R2_9 num_2 num_9 sectrem_2 secterm_9 PC20_2 PC20_9
-PANASpos PANASneg ASI PHYS.12 Mental.12 PhysSK.12 MentalSK.12 HADSA HADSD MAAS PSS KASE ROTQ Waltsk Walbnd WAIgl CO2 RR O2 HR PEF FVC FEV VT Z5hz R5hz R20hz X5hz RESNfreq NO SDSattribut SDSdenial SDStotal SWLStotal STAItotal credibility expectancy PEFpred FVCpred FEVpred Cortico_flag Montel_dose Temp BMI Age COLD FLU Beclom_dose Beclom_freq Montel_freq FEVER BronchoUse daysfrompre ZASQfreq_first ZASQfreq PEFper FVCper FEVper HADSAge8 HADSAlt8 ASQfreqln ASChyperln PANASnegln CO2_first ZCO2_first zco2firstsq
-ZCO2 ACThi0 Beclom_dose_sum Beclomdose_sumgt0 HADSA_first HADSD_first ZHADSA_first CART0 ZHADSA_firstc1 hadsage9 HADSA_firstge9 HADSAfirstGE8 dyschg dosedys distchg dosedist SK12Phys SK12Ment posmeth actge19 FEVsalineperc FEVdistperc FEVdysperc index pefsd pefvar PC20 reverseindex CART1 Awareness1 ACT1 ACT2 ACT3 ACT4 ACT5 ACTmean BroncoUse_3 bronchoUseNEW PEFmean PEFvariabilityper mornPEFper aschyper_first01 aschyper_first01new PEFper100 FEVper100 aschyperfirstge70 aschyperfirstge80 ASChyperln_first
-CO2_firstsq ACT_firstsq SF12phys SFmen CO2first36 ASCtot ZASCfear ZASChyper ZASCdysp ZASCirritability ZASCfatigue ZASCcongest ASCtotz ZhadsA_firstcm1 ZACT exclude cart.5 d2 d3 d4 cartc.52 wk wkc4 wkc4p1 wkc4p2 wkc4p2sq SFphysREV SFmenREV SFmenREVln SFphysREVln ZSFphysREV ZSFmenREV wknew WKnHyper WKnHyperc.97 wkHyperc.97 wknln wknlnc3.43 wknp1c6 wknp2c30 SFtot ZSFtot ASI_first ZASI_first white1 black1 other1 HADSAbaseline HADSAbaselineGE8 PANASneg_firstclass ASI_firstclass HADSD_firstclass asmtc4
-  /NULL=KEEP.
-  
-RECODE IndexDV (MISSING=SYSMIS) (1=1) (2=0) (3=1) (4=0) INTO AnxietyIndex.
-EXECUTE.
-
-MIXED HADSAASIPANASnegHADSD WITH timec4 CART0 AnxietyIndex
-  /CRITERIA=DFMETHOD(SATTERTHWAITE) CIN(95) MXITER(100) MXSTEP(10) SCORING(1) 
-    SINGULAR(0.000000000001) HCONVERGE(0.00000001, RELATIVE) LCONVERGE(0, ABSOLUTE) PCONVERGE(0, 
-    ABSOLUTE)
-  /FIXED=timec4 CART0 timec4*CART0 AnxietyIndex CART0*AnxietyIndex timec4*AnxietyIndex timec4*CART0*AnxietyIndex | 
-    SSTYPE(3)
-  /METHOD=ML
-  /PRINT=SOLUTION TESTCOV
-  /RANDOM=INTERCEPT | SUBJECT(ID) COVTYPE(VC)
-  /REPEATED=IndexDV | SUBJECT(Index1*ID) COVTYPE(UN).</code></pre>
-<p><img src="https://raw.githubusercontent.com/carolinelee78/mlmbookdown/main/_figures/IMG-98.png" style="display: block; margin: auto;" /></p>
-<p><code>timec4</code> main effect: The slope of decrease in mood symptoms (HADSD, PANASneg; AnxietyIndex=0) for participants in the breathing training (CART0=0) condition was significant.</p>
-<p><code>CART0</code> main effect: The difference between the two conditions (CART0=0 vs. CART0=1; treatment vs. control) in terms of the mood symptoms was not significant at the last timepoint.</p>
-<p><code>AnxietyIndex</code> main effect: The difference in levels of mood and anxiety symptoms (AnxietyIndex=0 vs. AnxietyIndex=1; mood vs. anxiety) for participants in the treatment condition (CART0=0; breathing training) at the last timepoint was not significant.</p>
-<p><code>timec4*CART0</code> interaction effect: The slope of decrease in mood symptoms over time was not significantly moderated by condition (CART0=0 vs. CART0=1).</p>
-<p><code>CART0*AnxietyIndex</code> interaction effect: The difference in the effect of condition (CART0=0 vs. CART0=1) on mood vs. anxiety symptoms was not significant at the last timepoint (timec4=0).</p>
-<p><code>timec4*AnxietyIndex</code> interaction effect: The difference in the effect of time on mood vs. anxiety symptoms was not significant for individuals in the treatment (CART0=0) condition.</p>
-<p><code>timec4*CART0*AnxietyIndex</code> interaction effect: The slope of decrease in symptoms over time was not significantly moderated by condition regardless of whether they were anxiety or mood symptoms.</p>
 
 </div>
 </div>
@@ -356,7 +295,7 @@ MIXED HADSAASIPANASnegHADSD WITH timec4 CART0 AnxietyIndex
           </div>
         </div>
       </div>
-<a href="non-longitudinal-mlm.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="multivariate-mlm-mmlm.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>
@@ -411,6 +350,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
